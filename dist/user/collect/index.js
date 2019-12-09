@@ -16,7 +16,17 @@ Page({
     capsules: app.data.capsule,
     codeText: '获取验证码',
     tnIndex: 0,
-    tnArr: ['发布的帖子', '收藏的帖子', '收藏的碑帖'],
+    tnArr: [{
+      t: '社区帖子',
+      url: '/hundred/detail/index?from=main&id='
+    }, {
+      t: '百家争鸣帖子',
+      url: '/hundred/detail/index?from=nav&id='
+    }, {
+      t: '收藏的碑帖',
+      url: '/stele/detail/index?id='
+    }],
+    // tnArr: ['发布的帖子', '收藏的帖子', '收藏的碑帖'],
     list: [],
     page: 0,
     more: true

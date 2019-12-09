@@ -6,4 +6,4 @@ function getCodeUrl (url) {
   }
   console.log(num)
 }
-getCodeUrl('/user/posts-release')
+getCodeUrl('/user/fans')

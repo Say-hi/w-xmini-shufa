@@ -3,13 +3,13 @@
 </jwqcapsule>
 <!--发布&收藏 -s-->
 <view wx:if="{{ options.type != 'zan' }}" class="bd1 topNav bgfff lh60 f29 c646464">
-  <view catchtap="_tnChoose" wx:for="{{ tnArr }}" wx:key="item" data-index="{{ index }}" class="flex1 tac tnItem {{ tnIndex == index ? 'active' : '' }}">{{ item }}</view>
+  <view catchtap="_tnChoose" wx:for="{{ tnArr }}" wx:key="item" data-index="{{ index }}" class="flex1 tac tnItem {{ tnIndex == index ? 'active' : '' }}">{{ item.t }}</view>
 </view>
 <!--发布&收藏 -e-->
 <!--列表 -s-->
 <view class="hundredListItem bgfff" wx:for="{{list}}" wx:key="item">
 <view class="df dfb">
-  <jwqnav url="/hundred/userHomePage/index?id={{ item.uid }}">
+  <view url="/hundred/userHomePage/index?id={{ item.uid }}">
     <view class="hliTop">
       <image class="br hliTopImg" lazy-load="true" mode="aspectFill" src="{{item.avatar_url}}"></image>
       <view class="hliTopName f21 c323232">
@@ -17,10 +17,10 @@
         <text class="f18 c646464 mt10">{{item.create_at}}</text>
       </view>
     </view>
-  </jwqnav>
+  </view>
 </view>
-<jwqnav url="/hundred/detail/index?id={{ item.id }}&from=collect" >
-  <view wx:if="{{ index < 1 }}">
+<jwqnav url="{{tnArr[tnIndex].url}}{{item.id}}" >
+  <view wx:if="{{!item.cover_url || item.cover_url.length < 10}}">
     <view class="hliTitle mt20 f30 c323232">
       <image class="hlitImg" mode="widthFix" wx:if="{{ item.label.length }}" src="https://c.jiangwenqiang.com/lqsy/essence.png"></image>
       <text>{{ item.title }}</text>
@@ -33,7 +33,7 @@
     </view>
   </view>
   <view class="mt20 pr" wx:else>
-    <image class="videoImg" mode="widthFix" lazy-load="1" src="https://c.jiangwenqiang.com/api/logo.jpg"></image>
+    <image class="videoImg" mode="widthFix" lazy-load="1" src="{{item.cover_url}}"></image>
     <view class="playIcon pa cfff"></view>
   </view>
 </jwqnav>

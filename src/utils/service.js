@@ -221,6 +221,8 @@ const serviceUrl = {
   userFriend: lqsyBaseDomain + '/user/friend', // 我的师友
   userPostsRelease: lqsyBaseDomain + '/user/posts-release', // 我发布的帖子
   userSign: lqsyBaseDomain + '/user/sign', // 修改签名
+  userDiscuss: lqsyBaseDomain + '/user/discuss', // 我的评论
+  userFans: lqsyBaseDomain + '/user/fans', // 我的粉丝
   communityList: lqsyBaseDomain + '/community/list', // 社区帖子获取
   communityPostsSub: lqsyBaseDomain + '/community/posts-sub', // 插入一条社区帖子
   communityDetail: lqsyBaseDomain + '/community/detail', // 帖子详情

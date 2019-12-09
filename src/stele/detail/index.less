@@ -1,5 +1,3 @@
-
-
 page {
   background: #fff;
 }
@@ -7,6 +5,7 @@ page {
 .topNav {
   .tac {
     line-height: 60rpx;
+
     &:nth-child(1) {
       &:before {
         content: '';
@@ -20,25 +19,28 @@ page {
       }
     }
   }
- .active {
-   color: #ff362c;
-   &:after {
-     content: '';
-     position: absolute;
-     bottom: 0;
-     left: 50%;
-     transform: translateX(-50%);
-     width: 50%;
-     height: 4rpx;
-     background: #ff362c;
-   }
- }
+
+  .active {
+    color: #ff362c;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 4rpx;
+      background: #ff362c;
+    }
+  }
 }
 
 .opus {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
   image {
     margin: 5rpx 5rpx 0 0;
     width: 232rpx;
@@ -49,29 +51,34 @@ page {
 .comment {
   border-top: 10rpx solid #f2f2f2;
   background-color: #fff;
-  .commentTop {
 
-  }
+  .commentTop {}
+
   .commentItem {
     display: flex;
     align-items: flex-start;
     padding: 14rpx 41rpx 31rpx 45rpx;
   }
+
   .ciImg {
     width: 95rpx;
     height: 95rpx;
     margin-right: 20rpx;
   }
+
   .ciRight {
     display: flex;
     flex-direction: column;
+
     .ciReply {
       background-color: #e5e5e5;
     }
   }
+
   .ciBottom {
     display: flex;
     align-items: center;
+
     .jwqpinglun {
       margin-right: 30rpx;
       display: inline-block;
@@ -88,16 +95,18 @@ page {
   padding: 22rpx 10rpx 15rpx 17rpx;
   display: flex;
   align-items: center;
+
   .dbInput {
     background-color: #dcdcdc;
     border-radius: 50rpx;
     font-size: 25rpx;
     padding-left: 20rpx;
     color: #646464;
-    width: 416rpx;
+    width: 410rpx;
     height: 70rpx;
     line-height: 68rpx;
   }
+
   .dbSend {
     padding: 10rpx 30rpx;
     background-color: #0068b7;
@@ -108,24 +117,29 @@ page {
     margin-right: 20rpx;
     font-size: 28rpx;
   }
+
   .dbRight {
     flex: 1;
     display: flex;
     justify-content: space-around;
   }
+
   .dbShareBtn {
     width: 68rpx;
     height: 75rpx;
   }
+
   .jwqfont {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 16rpx;
+
     &:before {
       font-size: 50rpx;
     }
   }
+
   .hasCollection {
     color: #f00;
     transition: all 0.5s;
@@ -140,12 +154,14 @@ page {
   bottom: -30rpx;
   left: 0;
   padding: 30rpx 0;
+
   .bottom-share {
     display: flex;
     align-items: center;
     justify-content: space-around;
     padding: 10rpx 0;
   }
+
   image {
     width: 150rpx;
     height: 150rpx;
