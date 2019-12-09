@@ -1,7 +1,7 @@
 'use strict';
 
 // 获取全局应用程序实例对象
-// const app = getApp()
+var app = getApp();
 // const bmap = require('../../utils/bmap-wx')
 // 创建页面实例对象
 Page({
@@ -11,8 +11,61 @@ Page({
   data: {
     capsule: {
       bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
-    }
+    },
+    list: [],
+    page: 0,
+    more: true
   },
+  goodsOperation: function goodsOperation(e) {
+    var _this = this;
+
+    if (e.currentTarget.dataset.type === 'edit') {
+      return app.toast({
+        content: '跳转编辑中~'
+      });
+    }
+    app.wxrequest({
+      url: app.getUrl().sellChange,
+      data: {
+        uid: app.gs('userInfoAll').uid,
+        pid: this.data.list[e.currentTarget.dataset.index].id,
+        state: e.currentTarget.dataset.type === 'del' ? 1 : e.currentTarget.dataset.type === 'up' ? 2 : 3
+      }
+    }).then(function (res) {
+      app.toast({
+        content: '\u4EA7\u54C1\u5DF2' + (e.currentTarget.dataset.type === 'del' ? '删除' : e.currentTarget.dataset.type === 'up' ? '上架' : '下架')
+      });
+      _this.data.list.splice(e.currentTarget.dataset.index, 1);
+      _this.setData({
+        list: _this.data.list
+      });
+    });
+  },
+  getlist: function getlist() {
+    var _this2 = this;
+
+    app.wxrequest({
+      url: app.getUrl(),
+      data: {
+        uid: app.gs('userInfoAll').uid,
+        page: ++this.data.page
+      }
+    }).then(function (res) {
+      _this2.setData({
+        list: _this2.data.list.concat(res.lists)
+      });
+      _this2.data.more = res.lists.length >= res.pre_page;
+    });
+  },
+  onReachBottom: function onReachBottom() {
+    if (!this.data.more) {
+      return app.toast({
+        content: '没有更多内容了'
+      });
+    }
+    this.getlist();
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -20,6 +73,7 @@ Page({
     this.setData({
       op: options
     });
+    this.getlist();
   },
 
   /**

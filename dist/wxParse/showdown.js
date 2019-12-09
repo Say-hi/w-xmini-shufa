@@ -1184,9 +1184,9 @@ showdown.subParser('anchors', function (text, options, globals) {
    )*
    )
    \]
-     [ ]?					// one optional space
+    [ ]?					// one optional space
    (?:\n[ ]*)?				// one optional newline followed by spaces
-     \[
+    \[
    (.*?)					// id = $3
    \]
    )()()()()					// pad remaining backreferences

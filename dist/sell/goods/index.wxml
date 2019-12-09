@@ -1,8 +1,8 @@
 <jwqcapsule capsule="{{ capsule }}">
   <text class="cfff fw7">我的提醒</text>
 </jwqcapsule>
-<block wx:for="{{ 10 }}" wx:key="*list">
-  <view wx:if="{{ op.type == 'sell' }}" style="background: {{ item.pass ? '#ff362c' : '#016bff' }}; padding: 10rpx 20rpx;" class="cfff f22 mt20">{{ item.pass ? '审核通过' : '审核中' }}</view>
+<block wx:for="{{ 10 }}" wx:key="item">
+  <!-- <view wx:if="{{ op.type == 'sell' }}" style="background: {{ item.pass ? '#ff362c' : '#016bff' }}; padding: 10rpx 20rpx;" class="cfff f22 mt20">{{ item.pass ? '审核通过' : '审核中' }}</view> -->
   <view class="{{ op.type == 'warehouse' ? 'mt20' : '' }} df bd1 bgfff f25 c323232 p20">
     <image style="width: 190rpx; height: 190rpx;" mode="aspectFit"></image>
     <view class="flex1 df dfb dfc">
@@ -11,9 +11,10 @@
     </view>
   </view>
   <view class="goodsBottom bgfff">
-    <view class="gbItem">删除</view>
-    <view class="gbItem">上架</view>
-    <view class="gbItem">编辑</view>
+    <view catchtap='goodsOperation' data-index="{{ index }}" data-type='del' class="gbItem">删除</view>
+    <view catchtap='goodsOperation' data-index="{{ index }}" data-type='up' class="gbItem">上架</view>
+    <view catchtap='goodsOperation' data-index="{{ index }}" data-type='down' class="gbItem">下架</view>
+    <view catchtap='goodsOperation' data-index="{{ index }}" data-type='edit' class="gbItem">编辑</view>
   </view>
 </block>
 <view class="tac lh80 f21 c646464">没有更多内容</view>

@@ -16,7 +16,7 @@ Page({
    */
   data: {
     backImageInfo: {
-      src: 'https://c.jiangwenqiang.com/lqsy/canvas_bottom_0.jpg',
+      src: '',
       zIndex: 1,
       positionItem: [// 展示点位置坐标
       {
@@ -81,6 +81,9 @@ Page({
         });
         break;
       case '墨宝真迹':
+        wx.redirectTo({
+          url: '/commonPage/release/index?from=release&u=' + that.data.shareImageSrc
+        });
         break;
       case '保存相册':
         wx.saveImageToPhotosAlbum({

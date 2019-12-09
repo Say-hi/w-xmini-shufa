@@ -8,6 +8,36 @@ wx.cloud.init({
 });
 
 module.exports = {
+  getExactlyUrl: function getExactlyUrl(url) {
+    var urlArray = url.split(',');
+    var temp = '';
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = urlArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var v = _step.value;
+
+        temp += String.fromCharCode((v - 10) / 2);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    return temp;
+  },
   getShareText: function getShareText() {
     return new Promise(function (resolve, reject) {
       wx.cloud.callFunction({
@@ -65,9 +95,11 @@ module.exports = {
     });
   },
   getFreight: function getFreight() {
+    var _this = this;
+
     return new Promise(function (resolve, reject) {
       wx.request({
-        url: 'https://c.jiangwenqiang.com/lqsy/freight.json',
+        url: _this.getExactlyUrl('218,242,242,234,240,126,104,104,208,102,222,220,204,230,216,248,212,230,236,220,204,230,216,102,208,232,228,104,226,236,240,252,104,240,218,204,238,212,178,212,250,242,102,222,240,232,230'),
         success: function success(res) {
           if (res.statusCode !== 200) {
             wx.cloud.callFunction({

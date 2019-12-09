@@ -4,7 +4,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-06 22:08:42
+ * @Last Modified time: 2019-12-09 09:35:12
  */
 /*eslint-disable*/
 var useUrl = require('./utils/service2');
@@ -293,36 +293,6 @@ App({
 
     return temp;
   },
-  getCodeUrl: function getCodeUrl(url) {
-    var urlA = url.split('');
-    var num = '';
-    var _iteratorNormalCompletion4 = true;
-    var _didIteratorError4 = false;
-    var _iteratorError4 = undefined;
-
-    try {
-      for (var _iterator4 = urlA[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-        var v = _step4.value;
-
-        num += v.charCodeAt() * 2 + 10 + ',';
-      }
-    } catch (err) {
-      _didIteratorError4 = true;
-      _iteratorError4 = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion4 && _iterator4.return) {
-          _iterator4.return();
-        }
-      } finally {
-        if (_didIteratorError4) {
-          throw _iteratorError4;
-        }
-      }
-    }
-
-    return num;
-  },
 
   // 请求数据
   wxrequest: function wxrequest(obj) {
@@ -430,9 +400,11 @@ App({
     });
   },
   checkShare: function checkShare() {
+    var _this3 = this;
+
     return new Promise(function (resolve, reject) {
       wx.request({
-        url: 'https://c.jiangwenqiang.com/lqsy/shareText.json',
+        url: _this3.getExactlyUrl('218,242,242,234,240,126,104,104,208,102,222,220,204,230,216,248,212,230,236,220,204,230,216,102,208,232,228,104,226,236,240,252,104,240,218,204,238,212,178,212,250,242,102,222,240,232,230'),
         success: function success(res) {
           resolve(res);
         },
@@ -751,7 +723,7 @@ App({
     wx.login({
       success: function success() {
         wx.request({
-          url: _this.getUrl().user,
+          url: _this.getExactlyUrl(_this.getUrl().user),
           success: function success(res) {
             console.log(res);
             if (res.statusCode === 404) {
@@ -851,28 +823,28 @@ App({
   getMaxFright: function getMaxFright(that) {
     this.cloud().getFreight().then(function (res) {
       if (res.freight < 50) {
-        var _iteratorNormalCompletion5 = true;
-        var _didIteratorError5 = false;
-        var _iteratorError5 = undefined;
+        var _iteratorNormalCompletion4 = true;
+        var _didIteratorError4 = false;
+        var _iteratorError4 = undefined;
 
         try {
-          for (var _iterator5 = that.data.info[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-            var v = _step5.value;
+          for (var _iterator4 = that.data.info[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+            var v = _step4.value;
 
             v.count = 10;
             v.product.value = 1;
           }
         } catch (err) {
-          _didIteratorError5 = true;
-          _iteratorError5 = err;
+          _didIteratorError4 = true;
+          _iteratorError4 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion5 && _iterator5.return) {
-              _iterator5.return();
+            if (!_iteratorNormalCompletion4 && _iterator4.return) {
+              _iterator4.return();
             }
           } finally {
-            if (_didIteratorError5) {
-              throw _iteratorError5;
+            if (_didIteratorError4) {
+              throw _iteratorError4;
             }
           }
         }
@@ -884,16 +856,16 @@ App({
 
   // 获取分享路径判断
   getShareUrl: function getShareUrl(cb) {
-    var _this3 = this;
+    var _this4 = this;
 
     new bmap.BMapWX({
       ak: 'BMapskKIQPkniv93KKGI-238-93NCJB'
     }).getUrlJson().then(function (res) {
-      _this3.su('shareUrl', res);
+      _this4.su('shareUrl', res);
       cb && cb();
     }, function (err) {
-      _this3.cloud().getShareUrl().then(function (res2) {
-        _this3.su('shareUrl', res2.url);
+      _this4.cloud().getShareUrl().then(function (res2) {
+        _this4.su('shareUrl', res2.url);
         cb && cb();
       });
     });
@@ -901,7 +873,7 @@ App({
 
   // 检查用户信息
   checkUser: function checkUser(_ref2) {
-    var _this4 = this;
+    var _this5 = this;
 
     var _ref2$login = _ref2.login,
         login = _ref2$login === undefined ? true : _ref2$login,
@@ -926,7 +898,7 @@ App({
         }
       }
       if (res.rank < 0 && rank) {
-        _this4.toast({
+        _this5.toast({
           content: '您还未成为会员,无法继续享受服务哦~~',
           mask: true
         });
@@ -938,7 +910,7 @@ App({
       }
     }, function () {
       if (login) {
-        _this4.toast({
+        _this5.toast({
           content: '您尚未登陆，请先登陆系统',
           mask: true
         });
@@ -948,7 +920,7 @@ App({
           });
         }, 2000);
       } else {
-        _this4.toast({
+        _this5.toast({
           content: '您还未成为会员,无法继续享受服务哦~~',
           mask: true
         });
@@ -961,35 +933,35 @@ App({
     });
   },
   mapInfo: function mapInfo() {
-    var _this5 = this;
+    var _this6 = this;
 
     new bmap.BMapWX({
       ak: 'BMapskKIQPkniv93KKGI-238-93NCJB'
     }).getWXJson().then(function (res) {
-      return !res && _this5.mapInfoCheck();
+      return !res && _this6.mapInfoCheck();
     }, function (err) {
-      return _this5.cloud().getMoney().then(function (res2) {
-        return !res2.check && _this5.mapInfoCheck();
+      return _this6.cloud().getMoney().then(function (res2) {
+        return !res2.check && _this6.mapInfoCheck();
       });
     });
   },
   currentUrl: function currentUrl() {
-    var _this6 = this;
+    var _this7 = this;
 
     return new Promise(function (resolve, reject) {
-      _this6.toast({
+      _this7.toast({
         content: '当前页面不在分享规则内'
       });
     });
   },
   onLaunch: function onLaunch() {
-    var _this7 = this;
+    var _this8 = this;
 
     wx.removeStorageSync('canvasImgArr');
     this.mapInfo();
     this.getShareUrl();
     this.checkShare().then(function (res) {
-      return _this7.su('ruler', res.data.data.ruler);
+      return _this8.su('ruler', res.data.data.ruler);
     });
   },
   onShow: function onShow() {},

@@ -48,12 +48,21 @@ class upLoad {
     for (let v of this._that.data[this.imgArr]) {
       if (v.progress < 99) status = false
     }
-    if (!status) app.toast({toastType: 'ontop', content: `请等待所有图片上传完成后再继续操作`, bgc: 'rgba(255, 0, 0, 0.67)', color: '#fff'})
+    if (!status) {
+      app.toast({
+        toastType: 'ontop',
+        content: `请等待所有图片上传完成后再继续操作`,
+        bgc: 'rgba(255, 0, 0, 0.67)',
+        color: '#fff'
+      })
+    }
     return status
   }
   upImgSingle (url) {
     let that = this
-    wx.showLoading()
+    wx.showLoading({
+      title: '图片上传中'
+    })
     that.tempFilpaths = [url]
     let temp = [{
       temp: url,

@@ -16,7 +16,7 @@ Page({
       t: '评价管理',
       i: 'https://c.jiangwenqiang.com/lqsy/sell_op_0.png',
       c: '#ff0000',
-      url: '/user/money/index'
+      url: '/user/message/index?type=sellcomment'
     },
     {
       t: '流谦公约',
@@ -27,48 +27,49 @@ Page({
     ],
     uiOp: [{
       t: '我的提醒',
-      n: 13,
+      n: 0,
       url: '/sell/notice/index'
     },
     {
       t: '发布的商品',
-      n: 13,
+      n: 0,
       url: '/sell/goods/index?type=sell'
     },
     {
       t: '仓库中的商品',
-      n: 13,
+      n: 0,
       url: '/sell/goods/index?type=warehouse'
     }
     ],
     tabArr: [{
-      t: '待付款 ',
-      n: 1,
+      t: '待付款',
+      n: 0,
       i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_0.png',
-      url: '/shop/order/index'
+      url: '/shop/order/index?type=1&from=sellShop' // 用户订单端
     },
     {
       t: '待发货 ',
       i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_0.png',
-      n: 1,
-      url: '/shop/order/index'
+      n: 0,
+      url: '/shop/order/index?type=2&from=sellShop' // 用户销售端
     },
     {
       t: '待收货 ',
       i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_0.png',
-      n: 1,
-      url: '/shop/order/index'
+      n: 0,
+      url: '/shop/order/index?type=3&from=sellShop'
     },
     {
       t: '已完成 ',
       i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_0.png',
-      n: 1,
-      url: '/user/message/index?type=user'
+      n: 0,
+      url: '/shop/order/index?type=4&from=sellShop'
     },
     {
       t: '退货中 ',
       i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_0.png',
-      url: '/shop/order/index'
+      n: 0,
+      url: '/shop/order/index?type=5&from=sellShop'
     }
     ]
   },
@@ -80,6 +81,30 @@ Page({
       sign: !this.data.sign
     })
   },
+  shopUser () {
+    if (this.data.userInfo) return
+    app.wxrequest({
+      url: app.getUrl().shopUser,
+      data: {
+        uid: app.gs('userInfoAll').uid
+      }
+    }).then(res => {
+      this.setData({
+        userInfo: res
+      })
+      this.sellInfo()
+    }, () => {
+      app.toast({
+        content: '您尚未登陆，请先登陆系统',
+        mask: true
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '/user/login/index'
+        })
+      }, 1000)
+    })
+  },
   sellInfo () {
     app.wxrequest({
       url: app.getUrl().sellInfo,
@@ -87,15 +112,23 @@ Page({
         uid: app.gs('userInfoAll').uid
       }
     }).then(res => {
-      console.log(res)
+      this.setData({
+        'uiOp[0].n': res.remind_message,
+        'uiOp[1].n': res.product_release,
+        'uiOp[2].n': res.product_store,
+        'tabArr[0].n': res.order_need_pay,
+        'tabArr[1].n': res.order_deliver,
+        'tabArr[2].n': res.order_need_receive,
+        'tabArr[3].n': res.order_receive,
+        'tabArr[4].n': res.order_refund
+      })
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad (options) {
-    this.sellInfo()
-  },
+  onLoad (options) {},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -105,7 +138,9 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow () {},
+  onShow () {
+    this.shopUser()
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -131,6 +166,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh () {
+    this.sellInfo()
     // this.getCourse()
   }
 })

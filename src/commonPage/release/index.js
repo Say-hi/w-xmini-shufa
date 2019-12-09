@@ -12,6 +12,7 @@ Page({
       bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
     },
     now: true,
+    upImgType: 'img',
     swiperImg: [],
     desImg: [],
     derationImg: [
@@ -143,12 +144,28 @@ Page({
         delivery: this.data.wareHouse || '广东省 广州市 海珠区',
         imgs_url: JSON.stringify(imgsUrl)
       }
+    }).then(() => {
+      app.toast({
+        content: '添加成功',
+        image: '',
+        mask: true
+      })
+      setTimeout(() => {
+        wx.navigateBack()
+      }, 1500)
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad (options) {},
+  onLoad (options) {
+    this.setData({
+      options
+    })
+    if (options.u && options.u.length > 10) {
+      this.uploadSingleImg(options.u)
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

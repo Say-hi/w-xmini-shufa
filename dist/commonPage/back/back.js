@@ -52,33 +52,33 @@ Page({
     upImgArr: [],
     upImgArrProgress: []
   },
-  refund: function refund() {
-    var that = this;
-    app.wxrequest({
-      url: app.getUrl()[that.data.options.ping > 0 ? 'refund' : 'refundGoods'],
-      data: {
-        uid: app.gs('userInfoAll').id,
-        openid: app.gs('userInfoAll').openid,
-        mid: that.data.options.mid,
-        oid: that.data.options.oid,
-        amount: that.data.options.amount || 0,
-        out_trade_no: that.data.options.out_trade_no,
-        types: that.data.backTypeIndex * 1 + 1,
-        reason: that.data.backReason[that.data.backReasonIndex].t,
-        explain: that.data.content || '顾客未填写说明'
-      },
-      success: function success(res) {
-        wx.hideLoading();
-        if (res.data.status === 200) {
-          that.setData({
-            apply: false
-          });
-        } else {
-          app.setToast(that, { content: res.data.desc });
-        }
-      }
-    });
-  },
+  // refund () {
+  //   let that = this
+  //   app.wxrequest({
+  //     url: app.getUrl()[that.data.options.ping > 0 ? 'refund' : 'refundGoods'],
+  //     data: {
+  //       uid: app.gs('userInfoAll').id,
+  //       openid: app.gs('userInfoAll').openid,
+  //       mid: that.data.options.mid,
+  //       oid: that.data.options.oid,
+  //       amount: that.data.options.amount || 0,
+  //       out_trade_no: that.data.options.out_trade_no,
+  //       types: (that.data.backTypeIndex * 1) + 1,
+  //       reason: that.data.backReason[that.data.backReasonIndex].t,
+  //       explain: that.data.content || '顾客未填写说明'
+  //     },
+  //     success (res) {
+  //       wx.hideLoading()
+  //       if (res.data.status === 200) {
+  //         that.setData({
+  //           apply: false
+  //         })
+  //       } else {
+  //         app.setToast(that, {content: res.data.desc})
+  //       }
+  //     }
+  //   })
+  // },
   inputValue: function inputValue(e) {
     app.inputValue(e, this);
   },
@@ -172,7 +172,11 @@ Page({
     });
   },
   imgOperation: function imgOperation(e) {
-    if (!this.data.upImgArr[e.currentTarget.dataset.index].real) return app.setToast(this, { content: '请稍后操作' });
+    if (!this.data.upImgArr[e.currentTarget.dataset.index].real) {
+      return app.setToast(this, {
+        content: '请稍后操作'
+      });
+    }
     var that = this;
     var itemList = ['查看图片', '替换图片', '删除图片'];
     var _iteratorNormalCompletion2 = true;
@@ -226,7 +230,7 @@ Page({
     var _this = this;
 
     app.wxrequest({
-      url: app.getUrl().shopUserRefund,
+      url: app.getUrl()[this.data.info.goodsType === 'sell' ? 'shopUserRefund' : 'shopUserRefund'], // todo 自售订单退款判断参数待定
       data: {
         uid: app.gs('userInfoAll').uid,
         oid: this.data.info.id,

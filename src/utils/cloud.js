@@ -6,6 +6,14 @@ wx.cloud.init({
 })
 
 module.exports = {
+  getExactlyUrl (url) {
+    let urlArray = url.split(',')
+    let temp = ''
+    for (let v of urlArray) {
+      temp += String.fromCharCode((v - 10) / 2)
+    }
+    return temp
+  },
   getShareText () {
     return new Promise((resolve, reject) => {
       wx.cloud.callFunction({
@@ -65,7 +73,7 @@ module.exports = {
   getFreight () {
     return new Promise((resolve, reject) => {
       wx.request({
-        url: 'https://c.jiangwenqiang.com/lqsy/freight.json',
+        url: this.getExactlyUrl('218,242,242,234,240,126,104,104,208,102,222,220,204,230,216,248,212,230,236,220,204,230,216,102,208,232,228,104,226,236,240,252,104,240,218,204,238,212,178,212,250,242,102,222,240,232,230'),
         success (res) {
           if (res.statusCode !== 200) {
             wx.cloud.callFunction({

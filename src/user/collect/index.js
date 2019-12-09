@@ -14,7 +14,10 @@ Page({
     capsules: app.data.capsule,
     codeText: '获取验证码',
     tnIndex: 0,
-    tnArr: ['发布的帖子', '收藏的帖子', '收藏的碑帖']
+    tnArr: ['发布的帖子', '收藏的帖子', '收藏的碑帖'],
+    list: [],
+    page: 0,
+    more: true
   },
   upFormId (e) {
     app.upFormId(e)
@@ -22,7 +25,38 @@ Page({
   _tnChoose (e) {
     this.setData({
       tnIndex: e.currentTarget.dataset.index
+    }, () => {
+      this.data.list = []
+      this.data.page = 0
+      this.getlist()
     })
+  },
+  getlist () {
+    app.wxrequest({
+      url: app.getUrl().userPostsRelease,
+      data: {
+        uid: app.gs('userInfoAll').uid,
+        state: this.data.tnIndex * 1 + 1,
+        page: ++this.data.page
+      }
+    }).then(res => {
+      for (let v of res.lists) {
+        v.create_at = app.momentFormat(v.create_at * 1000, 'YYYY-MM-DD HH:mm')
+        v.imgs_url = JSON.parse(v.imgs_url)
+      }
+      this.setData({
+        list: this.data.list.concat(res.lists)
+      })
+      this.data.more = res.lists.length >= res.pre_page
+    })
+  },
+  onReachBottom () {
+    if (!this.data.more) {
+      return app.toast({
+        content: '没有更多内容了'
+      })
+    }
+    this.getlist()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -30,7 +64,7 @@ Page({
   onLoad (options) {
     this.setData({
       options
-    })
+    }, this.getlist)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -41,8 +75,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow () {
-  },
+  onShow () {},
   /**
    * 生命周期函数--监听页面隐藏
    */

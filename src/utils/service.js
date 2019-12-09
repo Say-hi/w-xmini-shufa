@@ -159,10 +159,18 @@ const serviceUrl = {
   wechatOpenid: lqsyBaseDomain + '/wechat/openid', // 小程序授权|获取用户小程序openid
   rankCard: lqsyBaseDomain + '/rank/card', // rank
   userInfo: lqsyBaseDomain + '/user/info', // 获取用户基本信息
+  sellRemind: lqsyBaseDomain + '/sell/remind', // 消息通知
   sellInfo: lqsyBaseDomain + '/sell/info', // 获取统计数据
+  sellDiscussSub: lqsyBaseDomain + '/sell/discuss-sub', // 买后评论
+  sellRead: lqsyBaseDomain + '/sell/read', // 将消息变为已读
+  sellRefund: lqsyBaseDomain + '/sell/refund', // 用户申请退款
+  sellDiscuss: lqsyBaseDomain + '/sell/discuss', // 获取用户评论
+  sellChange: lqsyBaseDomain + '/sell/change', // 售卖产品的删除，上架
+  sellOrderList: lqsyBaseDomain + '/sell/order-list', // 获取用户订单
   sellProductSub: lqsyBaseDomain + '/sell/product-sub', // 上传一条墨宝产品
   payRank: lqsyBaseDomain + '/pay/rank', // 购买会员
   payShop: lqsyBaseDomain + '/pay/shop', // 商城购买产品
+  paySell: lqsyBaseDomain + '/pay/sell', // 墨宝真迹购买
   shopCategory: lqsyBaseDomain + '/shop/category', // 获取商城菜单分类
   shopTeamList: lqsyBaseDomain + '/shop/team-list', // 我的团队列表
   shopShow: lqsyBaseDomain + '/shop/show', // 获取热销and人气产品
@@ -210,6 +218,8 @@ const serviceUrl = {
   dayDiscussSub: lqsyBaseDomain + '/day/discuss-sub', // 提交每日一字的字帖评论
   userToken: lqsyBaseDomain + '/user/token', // 点击登录获取token
   userCode: lqsyBaseDomain + '/user/code', // 发送验证码
+  userFriend: lqsyBaseDomain + '/user/friend', // 我的师友
+  userPostsRelease: lqsyBaseDomain + '/user/posts-release', // 我发布的帖子
   userSign: lqsyBaseDomain + '/user/sign', // 修改签名
   communityList: lqsyBaseDomain + '/community/list', // 社区帖子获取
   communityPostsSub: lqsyBaseDomain + '/community/posts-sub', // 插入一条社区帖子

@@ -6,4 +6,4 @@ function getCodeUrl (url) {
   }
   console.log(num)
 }
-getCodeUrl('https://c.jiangwenqiang.com/lqsy/shareText.json')
+getCodeUrl('/user/posts-release')

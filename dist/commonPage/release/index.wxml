@@ -3,7 +3,7 @@
 </jwqcapsule>
 <view style="height: {{ swiperImg.length >= 1 ? 540 : 300 }}rpx;" class="pr">
   <swiper hidden="{{ swiperImg.length < 1 }}" class="swiperArea">
-    <swiper-item wx:for="{{ swiperImg }}" wx:key="*swiper">
+    <swiper-item wx:for="{{ swiperImg }}" wx:key="item">
       <image mode="aspectFill" src="{{ item.temp }}"></image>
     </swiper-item>
   </swiper>

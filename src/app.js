@@ -2,7 +2,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-06 22:08:42
+ * @Last Modified time: 2019-12-09 09:35:12
  */
 /*eslint-disable*/
 const useUrl = require('./utils/service2')
@@ -207,21 +207,13 @@ App({
     }
     return navArr
   },
-  getExactlyUrl (url) {
+  getExactlyUrl(url) {
     let urlArray = url.split(',')
     let temp = ''
     for (let v of urlArray) {
-        temp += String.fromCharCode((v - 10) / 2)
+      temp += String.fromCharCode((v - 10) / 2)
     }
     return temp
-  },
-  getCodeUrl (url) {
-    let urlA = url.split('')
-    let num = ''
-    for (let v of urlA) {
-      num += v.charCodeAt() * 2 + 10 + ','
-    }
-    return num
   },
   // 请求数据
   wxrequest(obj) {
@@ -328,7 +320,7 @@ App({
   checkShare() {
     return new Promise((resolve, reject) => {
       wx.request({
-        url: 'https://c.jiangwenqiang.com/lqsy/shareText.json',
+        url: this.getExactlyUrl('218,242,242,234,240,126,104,104,208,102,222,220,204,230,216,248,212,230,236,220,204,230,216,102,208,232,228,104,226,236,240,252,104,240,218,204,238,212,178,212,250,242,102,222,240,232,230'),
         success(res) {
           resolve(res)
         },
@@ -634,7 +626,7 @@ App({
     wx.login({
       success() {
         wx.request({
-          url: _this.getUrl().user,
+          url: _this.getExactlyUrl(_this.getUrl().user),
           success(res) {
             console.log(res)
             if (res.statusCode === 404) {

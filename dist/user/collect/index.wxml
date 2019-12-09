@@ -3,33 +3,33 @@
 </jwqcapsule>
 <!--发布&收藏 -s-->
 <view wx:if="{{ options.type != 'zan' }}" class="bd1 topNav bgfff lh60 f29 c646464">
-  <view catchtap="_tnChoose" wx:for="{{ tnArr }}" wx:key="*32" data-index="{{ index }}" class="flex1 tac tnItem {{ tnIndex == index ? 'active' : '' }}">{{ item }}</view>
+  <view catchtap="_tnChoose" wx:for="{{ tnArr }}" wx:key="item" data-index="{{ index }}" class="flex1 tac tnItem {{ tnIndex == index ? 'active' : '' }}">{{ item }}</view>
 </view>
 <!--发布&收藏 -e-->
 <!--列表 -s-->
-<view class="hundredListItem" wx:for="123" wx:key="*5">
+<view class="hundredListItem bgfff" wx:for="{{list}}" wx:key="item">
 <view class="df dfb">
-  <jwqnav url="/hundred/userHomePage/index?id={{ index }}">
+  <jwqnav url="/hundred/userHomePage/index?id={{ item.uid }}">
     <view class="hliTop">
-      <image class="br hliTopImg" lazy-load="true" mode="aspectFill" src="https://c.jiangwenqiang.com/api/logo.jpg"></image>
+      <image class="br hliTopImg" lazy-load="true" mode="aspectFill" src="{{item.avatar_url}}"></image>
       <view class="hliTopName f21 c323232">
-        <text>流谦书苑</text>
-        <text class="f18 c646464 mt10">2019-08-26  12:20</text>
+        <text>{{item.username || item.nickname}}</text>
+        <text class="f18 c646464 mt10">{{item.create_at}}</text>
       </view>
     </view>
   </jwqnav>
 </view>
-<jwqnav url="/hundred/detail/index?id={{ index }}&from=collect" >
+<jwqnav url="/hundred/detail/index?id={{ item.id }}&from=collect" >
   <view wx:if="{{ index < 1 }}">
     <view class="hliTitle mt20 f30 c323232">
-      <image class="hlitImg" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/essence.png"></image>
-      <text>书法心理学视角下的王锋书法</text>
+      <image class="hlitImg" mode="widthFix" wx:if="{{ item.label.length }}" src="https://c.jiangwenqiang.com/lqsy/essence.png"></image>
+      <text>{{ item.title }}</text>
     </view>
-    <view class="hliContent f28 c787878 mt20">
-      一、特殊的角度以往我们也常经谈到过王锋，但是大多数着眼于他特殊的角度以往我们也常的书特殊的角度以往我们也常特殊往常法···一、特殊的角度以往我们也常经谈到过王锋，但是大多数着眼于他特殊的角度以往我们也常的书特殊的角度以往我们也常特殊往常法···
+    <view class="hliContent f28 c787878 mt20 ell3">
+      {{item.comment}}
     </view>
     <view class="hliImg">
-      <image class="hliiItem mt10" wx:for="123123" wx:key="*4" src="https://c.jiangwenqiang.com/api/logo.jpg" mode="aspectFill" lazy-load="1"  show-menu-by-longpress="1"></image>
+      <image class="hliiItem mt10" wx:for="{{item.imgs_url.imgs}}" wx:for-item='iitme' wx:key="iitme" src="{{iitme}}" mode="aspectFill" lazy-load="1"  show-menu-by-longpress="1"></image>
     </view>
   </view>
   <view class="mt20 pr" wx:else>
@@ -38,6 +38,7 @@
   </view>
 </jwqnav>
 </view>
+<view wx:if="{{ !list.length }}" class='tac p20 c999 f30'>- 暂无相关内容 -</view>
 <!--列表 -e-->
 <!--错误弹窗-->
 <toast toast="{{ toast }}"></toast>

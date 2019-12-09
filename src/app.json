@@ -1,14 +1,13 @@
 {
-//  群信息小程序页面分布
+  //  群信息小程序页面分布
   "pages": [
     "pages/index/index" // 首页
   ],
-  "subPackages": [
-    {
+  "subPackages": [{
       "root": "hundred", // 百家争鸣
       "name": "hundred",
       "pages": [
-        "index/index",  // 百家 & 社区 from=main
+        "index/index", // 百家 & 社区 from=main
         "userHomePage/index",
         "detail/index"
       ]
@@ -35,10 +34,10 @@
       "pages": [
         "index/index",
         "login/index",
-        "comment/index",  // 评论 & 粉丝
+        "comment/index", // 评论 & 粉丝
         "team/index",
         "tnext/index",
-        "message/index",   // type=user 用户信息 & type=shop 来自商城的信息 & type=shopcomment 我的评价
+        "message/index", // type=user 用户信息 & type=shop 来自商城的信息 & type=shopcomment 我的评价 & type=sellcomment 销售评价
         "detail/index",
         "money/index",
         "profit/index",
@@ -64,19 +63,19 @@
     {
       "root": "camera", // 叠影
       "name": "camera",
-      "pages":[
+      "pages": [
         "index/index",
         "detail/index"
       ]
     },
-//    {
-//      "root": "video", // 视频
-//      "name": "video",
-//      "pages": [
-//        "index/index",
-//        "detail/index"
-//      ]
-//    },
+    //    {
+    //      "root": "video", // 视频
+    //      "name": "video",
+    //      "pages": [
+    //        "index/index",
+    //        "detail/index"
+    //      ]
+    //    },
     {
       "root": "stele", // 碑体
       "name": "stele",
@@ -148,7 +147,7 @@
   // Window configuration
   "window": {
     // 顶部导航栏
-//    "navigationStyle": "custom",
+    //    "navigationStyle": "custom",
     // 类型：HexColor；默认值：#000000
     // 导航栏背景颜色，如"#000000"
     "navigationBarBackgroundColor": "#ffffff",
@@ -164,22 +163,22 @@
     // 类型：String；默认值：dark
     // 下拉背景字体、loading 图的样式，仅支持 dark/light
     "backgroundTextStyle": "light",
-//    "navigationStyle": "custom",
+    //    "navigationStyle": "custom",
     // 类型：Boolean；默认值：false
     // 是否开启下拉刷新，详见页面相关事件处理函数。
     // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/page.html?t=1476197491005#页面相关事件处理函数
     "enablePullDownRefresh": false
   },
   "usingComponents": {
-//    "my-add": "/components/my-add/add",
-//    "my-tip": "/components/my-tip/my-tip",
-//    "my-login": "/components/my-login/my-login",
-//    "my-express": "/components/my-express/my-express",
+    //    "my-add": "/components/my-add/add",
+    //    "my-tip": "/components/my-tip/my-tip",
+    //    "my-login": "/components/my-login/my-login",
+    //    "my-express": "/components/my-express/my-express",
     "my-navigator-tab": "/components/my-navigator-tab/my-navigator-tab",
-//    "canvasdrawer": "/components/canvasdrawer/canvasdrawer",
-//    "my-back": "/components/my-back/back",
-//    "my-ng": "/components/my-ng/ng",
-//    "my-top-tab": "/components/my-top-tab/my-top-tab",
+    //    "canvasdrawer": "/components/canvasdrawer/canvasdrawer",
+    //    "my-back": "/components/my-back/back",
+    //    "my-ng": "/components/my-ng/ng",
+    //    "my-top-tab": "/components/my-top-tab/my-top-tab",
     "jwqcapsule": "/components/capsule/index",
     "jwqfoot": "/components/foot/index",
     "uparea": "/components/uparea/index",

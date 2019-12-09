@@ -13,6 +13,7 @@ Page({
     capsules: app.data.capsule,
     page: 0,
     more: true,
+    textArr: ['未评价', '非常差', '差', '一般', '好', '非常好'],
     list: []
   },
   upFormId (e) {
@@ -27,7 +28,7 @@ Page({
       }
     }).then(res => {
       for (let v of res.lists) {
-        v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, 'YYYY-MM-DD') : '时间不详'
+        v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, 'YYYY-MM-DD HH:mm') : '时间不详'
         v.imgs_url = JSON.parse(v.imgs_url)
       }
       this.setData({
@@ -63,10 +64,35 @@ Page({
       case 'shop':
         this.shopNotice()
         break
+      case 'sellcomment':
+        this.sellcomment()
+        break
     }
   },
+  sellcomment () {
+    app.wxrequest({
+      url: app.getUrl().sellDiscuss,
+      data: {
+        uid: app.gs('userInfoAll').uid,
+        page: ++this.data.page
+      }
+    }).then(res => {
+      for (let v of res.lists) {
+        v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, 'YYYY-MM-DD') : '时间不详'
+        v.imgs_url = JSON.parse(v.imgs_url)
+      }
+      this.setData({
+        list: this.data.list.concat(res.lists)
+      })
+      this.data.more = res.lists.length >= res.pre_page
+    })
+  },
   onReachBottom () {
-    if (!this.data.more) return app.toast({content: '没有更多内容了'})
+    if (!this.data.more) {
+      return app.toast({
+        content: '没有更多内容了'
+      })
+    }
     this.getList()
   },
   /**
@@ -75,7 +101,7 @@ Page({
   onLoad (options) {
     this.setData({
       options,
-      theme: options.type === 'user' ? '我的帖子' : options.type === 'shop' ? '我的消息' : '我的评价'
+      theme: options.type === 'sellcomment' ? '评论管理' : options.type === 'user' ? '我的帖子' : options.type === 'shop' ? '我的消息' : '我的评价'
     }, this.getList)
   },
   /**
@@ -87,8 +113,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow () {
-  },
+  onShow () {},
   /**
    * 生命周期函数--监听页面隐藏
    */

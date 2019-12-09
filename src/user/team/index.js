@@ -31,10 +31,14 @@ Page({
   },
   shopTeamList () {
     app.wxrequest({
-      url: app.getUrl().shopTeamList,
-      data: {
+      url: app.getUrl()[this.data.options.type === 'shop' ? 'shopTeamList' : 'userFriend'],
+      data: this.data.options.type === 'shop' ? {
         uid: app.gs('userInfoAll').uid,
         rank: this.data.right ? 2 : 1,
+        page: ++this.data.page
+      } : {
+        uid: app.gs('userInfoAll').uid,
+        state: this.data.right ? 2 : 1,
         page: ++this.data.page
       }
     }).then(res => {

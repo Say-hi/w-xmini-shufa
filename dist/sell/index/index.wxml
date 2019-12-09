@@ -8,10 +8,10 @@
 <view class="eaves"></view>
 <!--屋檐 e-->
 <view class="userTop p2030 df dfac">
-  <image mode="aspectFill" class="br" src="https://c.jiangwenqiang.com/api/logo.jpg"></image>
+  <image mode="aspectFill" class="br" src="{{userInfo.avatar_url}}"></image>
   <view class="utName flex1">
-    <view class="f28 cfff">cm厘米</view>
-    <view class="f22 cece696 mt10">终身会员</view>
+    <view class="f28 cfff">{{userInfo.nickname}}</view>
+    <view class="f22 cece696 mt10">{{ userInfo.rank > 0 ? '会员' : '非会员' }}</view>
   </view>
   <navigator url="/commonPage/release/index?from=release" class="f21 df dfac c006bff jwqfont jwqzhifeiji tal">　发布商品</navigator>
 </view>
@@ -26,7 +26,7 @@
 <!--导航 -s-->
 <view class="lh80 mt20 bd1 f25 c323232 p030 bgfff">卖在流谦</view>
 <view class="userTab tac f23 c787878 bgfff">
-  <navigator url="{{ item.url }}" wx:for="{{ tabArr }}" wx:key="index">
+  <navigator hidden="{{ item.t === '待付款' }}" url="{{ item.url }}" wx:for="{{ tabArr }}" wx:key="index">
     <image mode="widthFix" src="{{ item.i || 'https://c.jiangwenqiang.com/api/logo.jpg' }}"></image>
     <view>{{ item.t }}{{ item.n }}</view>
   </navigator>

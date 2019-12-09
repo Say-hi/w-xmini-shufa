@@ -15,6 +15,7 @@ Page({
     capsules: app.data.capsule,
     page: 0,
     more: true,
+    textArr: ['未评价', '非常差', '差', '一般', '好', '非常好'],
     list: []
   },
   upFormId: function upFormId(e) {
@@ -38,7 +39,7 @@ Page({
         for (var _iterator = res.lists[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var v = _step.value;
 
-          v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, 'YYYY-MM-DD') : '时间不详';
+          v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, 'YYYY-MM-DD HH:mm') : '时间不详';
           v.imgs_url = JSON.parse(v.imgs_url);
         }
       } catch (err) {
@@ -113,10 +114,59 @@ Page({
       case 'shop':
         this.shopNotice();
         break;
+      case 'sellcomment':
+        this.sellcomment();
+        break;
     }
   },
+  sellcomment: function sellcomment() {
+    var _this3 = this;
+
+    app.wxrequest({
+      url: app.getUrl().sellDiscuss,
+      data: {
+        uid: app.gs('userInfoAll').uid,
+        page: ++this.data.page
+      }
+    }).then(function (res) {
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = res.lists[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var v = _step3.value;
+
+          v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, 'YYYY-MM-DD') : '时间不详';
+          v.imgs_url = JSON.parse(v.imgs_url);
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
+      }
+
+      _this3.setData({
+        list: _this3.data.list.concat(res.lists)
+      });
+      _this3.data.more = res.lists.length >= res.pre_page;
+    });
+  },
   onReachBottom: function onReachBottom() {
-    if (!this.data.more) return app.toast({ content: '没有更多内容了' });
+    if (!this.data.more) {
+      return app.toast({
+        content: '没有更多内容了'
+      });
+    }
     this.getList();
   },
 
@@ -126,7 +176,7 @@ Page({
   onLoad: function onLoad(options) {
     this.setData({
       options: options,
-      theme: options.type === 'user' ? '我的帖子' : options.type === 'shop' ? '我的消息' : '我的评价'
+      theme: options.type === 'sellcomment' ? '评论管理' : options.type === 'user' ? '我的帖子' : options.type === 'shop' ? '我的消息' : '我的评价'
     }, this.getList);
   },
 

@@ -39,16 +39,25 @@ Page({
     })
   },
   upImgSingle (src) {
-    new UpLoad({imgArr: 'imgArr'}).upImgSingle(src)
+    new UpLoad({
+      imgArr: 'imgArr'
+    }).upImgSingle(src)
   },
   upload () {
-    new UpLoad({imgArr: 'imgArr'}).chooseImage()
+    new UpLoad({
+      imgArr: 'imgArr'
+    }).chooseImage()
   },
   checkAll () {
-    return new UpLoad({imgArr: 'imgArr'}).checkAll()
+    return new UpLoad({
+      imgArr: 'imgArr'
+    }).checkAll()
   },
   imgOp (e) {
-    new UpLoad({imgArr: e.currentTarget.dataset.img, index: e.currentTarget.dataset.index}).imgOp()
+    new UpLoad({
+      imgArr: e.currentTarget.dataset.img,
+      index: e.currentTarget.dataset.index
+    }).imgOp()
   },
   getRealUrl () {
     let url = []
@@ -61,28 +70,52 @@ Page({
     let that = this
     switch (this.data.options.type) {
       case 'hundred':
-        if (!e.detail.value.title.trim()) return app.toast({content: '标题不能为空'})
-        else if (!e.detail.value.comment.trim()) return app.toast({content: '内容不能为空'})
-        if (!new UpLoad({imgArr: 'imgArr'}).checkAll()) return
+        if (!e.detail.value.title.trim()) {
+          return app.toast({
+            content: '标题不能为空'
+          })
+        } else if (!e.detail.value.comment.trim()) {
+          return app.toast({
+            content: '内容不能为空'
+          })
+        }
+        if (!new UpLoad({
+          imgArr: 'imgArr'
+        }).checkAll()) return
         app.wxrequest({
           url: app.getUrl().hundredPostsSub,
           data: {
             uid: app.gs('userInfoAll').uid || 10000,
             title: e.detail.value.title.trim(),
             comment: e.detail.value.comment.trim(),
-            imgs_url: JSON.stringify({'imgs': that.getRealUrl()})
+            imgs_url: JSON.stringify({
+              'imgs': that.getRealUrl()
+            })
           }
         }).then(res => {
-          app.toast({content: '发布成功', image: '', mask: true})
+          app.toast({
+            content: '发布成功',
+            image: '',
+            mask: true
+          })
           setTimeout(() => {
             wx.navigateBack()
           }, 1000)
         })
         break
       case 'community':
-        if (!e.detail.value.title.trim()) return app.toast({content: '标题不能为空'})
-        else if (!e.detail.value.comment.trim()) return app.toast({content: '内容不能为空'})
-        if (!new UpLoad({imgArr: 'imgArr'}).checkAll()) return
+        if (!e.detail.value.title.trim()) {
+          return app.toast({
+            content: '标题不能为空'
+          })
+        } else if (!e.detail.value.comment.trim()) {
+          return app.toast({
+            content: '内容不能为空'
+          })
+        }
+        if (!new UpLoad({
+          imgArr: 'imgArr'
+        }).checkAll()) return
         app.wxrequest({
           url: app.getUrl().communityPostsSub,
           data: {
@@ -90,21 +123,46 @@ Page({
             is_video: -1,
             title: e.detail.value.title.trim(),
             comment: e.detail.value.comment.trim(),
-            imgs_url: JSON.stringify({'imgs': that.getRealUrl()})
+            imgs_url: JSON.stringify({
+              'imgs': that.getRealUrl()
+            })
           }
         }).then(res => {
-          app.toast({content: '发布成功', image: '', mask: true})
+          app.toast({
+            content: '发布成功',
+            image: '',
+            mask: true
+          })
           setTimeout(() => {
             wx.navigateBack()
           }, 1000)
         })
         break
       case 'comment':
-        if (!e.detail.value.comment.trim()) return app.toast({content: '评价内容不能为空'})
-        if (!new UpLoad({imgArr: 'imgArr'}).checkAll()) return app.toast({content: '请等待图片上传完成后继续操作'})
+        if (!e.detail.value.comment.trim()) {
+          return app.toast({
+            content: '评价内容不能为空'
+          })
+        }
+        if (!new UpLoad({
+          imgArr: 'imgArr'
+        }).checkAll()) {
+          return app.toast({
+            content: '请等待图片上传完成后继续操作'
+          })
+        }
         app.wxrequest({
-          url: app.getUrl().shopDiscussSub,
-          data: {
+          url: app.getUrl()[this.data.info.goodsType === 'sell' ? 'sellDiscussSub' : 'shopDiscussSub'],
+          data: this.data.info.goodsType === 'sell' ? {
+            uid: app.gs('userInfoAll').uid || 10000,
+            pid: this.data.info.id,
+            out_trade_no: this.data.info.out_trade_no,
+            star: this.data.commentLV * 1 + 1,
+            comment: e.detail.value.comment.trim(),
+            imgs_url: JSON.stringify({
+              'imgs': that.getRealUrl()
+            })
+          } : {
             uid: app.gs('userInfoAll').uid || 10000,
             pid: this.data.info.id,
             sku_id: this.data.info.list[0].id,
@@ -112,17 +170,24 @@ Page({
             out_trade_no: this.data.info.out_trade_no,
             star: this.data.commentLV * 1 + 1,
             comment: e.detail.value.comment.trim(),
-            imgs_url: JSON.stringify({'imgs': that.getRealUrl()})
+            imgs_url: JSON.stringify({
+              'imgs': that.getRealUrl()
+            })
           }
         }).then(res => {
-          app.toast({content: '评价成功', mask: true})
+          app.toast({
+            content: '评价成功',
+            mask: true
+          })
           setTimeout(() => {
             wx.navigateBack()
           }, 1000)
         })
         break
       default:
-        return app.toast({content: '错误！！请返回上一页重新进入'})
+        return app.toast({
+          content: '错误！！请返回上一页重新进入'
+        })
     }
   },
   /**

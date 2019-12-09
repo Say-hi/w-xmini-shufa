@@ -1,5 +1,5 @@
 <jwqcapsule capsule="{{ capsule }}">
-  <text class="cfff">我的订单</text>
+  <text class="cfff">{{ options.from === 'sellShop' ? '订单列表' : '我的订单' }}</text>
 </jwqcapsule>
 <!--分类 -s-->
 <scroll-view class="tab-scroll"
@@ -9,23 +9,24 @@
 <view class="tab-inside">
   <button hover-class="none" class="tab-item f25 cfff {{ tabIndex == index ? 'active' : '' }}"
           id="tab{{ index }}"
+          hidden="{{ item.t === '待付款' && options.from === 'sellShop' }}"
           catchtap="chooseIndex"
           data-index="{{ index }}"
-          wx:key="{{index}}"
-          wx:for="{{ tabArr }}">{{ item.t }}</button>
+          wx:key="item"
+          wx:for="{{ options.from === 'sellShop' ? tabArrSell : tabArr }}">{{ item.t }}</button>
 </view>
 </scroll-view>
 <!--分类 -e-->
 
 <!--订单 -s-->
-<block wx:for="{{list}}" wx:key="{{index}}">
+<block wx:for="{{list}}" wx:key="item" wx:if="{{ options.from !== 'sellShop' }}">
   <view class="tac lh60 f23 c787878">{{item.create_at}}</view>
   <view class="bgfff">
     <view class="f25 df dfb c787878 p020 lh60">
       <text>订单编号： {{item.out_trade_no}}</text>
       <text class="cff362c">{{item.status}}</text>
     </view>
-    <navigator url="/shop/detail/index?id={{iitem.id}}" wx:for-item="iitem" wx:for-index="iindex" wx:for="{{item.list}}" wx:key="{{index}}" class="goodsItem df">
+    <navigator wx:if="{{ options.from !== 'sell' }}" url="/shop/detail/index?id={{iitem.id}}" wx:for-item="iitem" wx:for-index="iindex" wx:for="{{item.list}}" wx:key="item" class="goodsItem df">
       <image mode="aspectFill" lazy-load="1" src='{{iitem.img_url}}'></image>
       <view class="ml20 flex1">
         <view class="ell2 f25 c323232">{{iitem.title}}</view>
@@ -34,6 +35,17 @@
       <view class="f22 c323232 tar ">
         <view>￥ {{iitem.price}}</view>
         <view>x{{iitem.count}}</view>
+      </view>
+    </navigator>
+    <navigator wx:if="{{ options.from === 'sell' }}" url="/shop/detail/index?id={{item.pid}}" class="goodsItem df">
+      <image mode="aspectFill" lazy-load="1" src='{{item.imgs_url}}'></image>
+      <view class="ml20 flex1">
+        <view class="ell2 f25 c323232">{{item.title}}</view>
+        <!-- <view class="f22 c646464 mt10">{{item.value}}</view> -->
+      </view>
+      <view class="f22 c323232 tar ">
+        <view>￥ {{item.price}}</view>
+        <view>x{{item.count}}</view>
       </view>
     </navigator>
     <view class="f25 c323232 tar p020 bd1 lh50">共{{ item.all_count }}件商品实付：¥{{item.total_fee}}</view>
@@ -50,6 +62,43 @@
     </view>
   </view>
 </block>
+<block wx:for="{{list}}" wx:key="item" wx:if="{{ options.from === 'sellShop' }}">
+  <view class="tac lh60 f23 c787878">{{item.create_at}}</view>
+  <view class="bgfff">
+    <view class="f25 df dfb c787878 p020 lh60">
+      <text>订单编号： {{item.out_trade_no}}</text>
+      <text class="cff362c">{{item.status}}</text>
+    </view>
+    <navigator url="/shop/detail/index?id={{item.pid}}" class="goodsItem df">
+      <image mode="aspectFill" lazy-load="1" src='{{item.imgs_url}}'></image>
+      <view class="ml20 flex1">
+        <view class="ell2 f25 c323232">{{item.title}}</view>
+        <view class="f22 c646464 mt10">{{item.price}}</view>
+      </view>
+      <!-- <view class="f22 c323232 tar ">
+        <view>￥ {{item.price}}</view>
+        <view>x{{item.count}}</view>
+      </view> -->
+    </navigator>
+    <view class="f25 c323232 tar p020 bd1 lh50">共{{ item.count }}件 快递费：{{ item.freight || 0 }}元 商品实付：¥{{item.total_fee}}</view>
+    <view class="f25 p20" style="padding-bottom: 0;">
+      <view class='mt10'>买家：{{ item.name }}</view>
+      <view class='mt10'>收货地址：{{ item.address }}</view>
+      <view class='mt10'>联系电话：{{ item.phone }}</view>
+    </view>
+    <view class="df goodsOp p20">
+      <!-- <view catchtap="goPJ" data-index="{{index}}" wx:if="{{ item.statuss == 3 }}" class="f25 c787878 goI">评价</view> -->
+      <!-- <view wx:if="{{ item.statuss == 1 && item.is_change != 1 }}" catchtap="_toggleMask" data-index="{{ index }}" data-type="changeAdd" class="f25 c787878 goI">修改地址</view> -->
+      <view wx:if="{{ item.statuss == -2 }}" catchtap="_toggleMask" data-op="cancel" data-index="{{index}}" data-type="cancelOrder" class="f25 c787878 goI">查看详情</view>
+      <view wx:if="{{ item.statuss == 2 || item.statuss == 3  }}" class="f25 c787878 goI">查看物流</view>
+      <!-- <view wx:if="{{ item.statuss == 3 }}" catchtap="_buyAgain" class="f25 c787878 goI">再次购买</view> -->
+      <view wx:if="{{ item.statuss == 1 }}" catchtap="orderOperate" data-op="sendGoods" data-index="{{index}}" data-type="confirmOrder" class="f25 c787878 goI goIB">点击发货</view>
+      <!-- <view wx:if="{{ item.statuss == -1 }}" class="f25 c787878 goI goIB">付款</view> -->
+      <!-- <view wx:if="{{ item.statuss == 1 || item.statuss == 2 || item.statuss == 3}}" catchtap="backMoney" data-index="{{index}}" class="f25 c787878 goI">申请退款</view> -->
+      <!-- <view wx:if="{{ item.statuss == 1 }}" data-id="{{item.id}}" catchtap="_remind" class="f25 c787878 goI">提醒发货</view> -->
+    </view>
+  </view>
+</block>
 <!--订单 -e-->
 <view wx:if="{{ !list.length }}" class="tac p20 f30 c999">暂无相关订单</view>
 <!--取消订单 -s-->
@@ -58,7 +107,7 @@
     <view class="f40 c323232 tac fw7 mt20">请选择原因</view>
     <view class="f30 c323232 tac mt10">订单一旦取消。无法恢复，优惠券将原路返回</view>
     <view class="f30 c323232 tac mt10">收货地址填错了</view>
-    <view class="p2030 df dfb bt1 {{ index < 1 ? 'mt10' : '' }}" catchtap="_cancelChoose" data-index="{{ index }}" wx:for="{{ cancelArr }}" wx:key="{{index}}" ><text>{{ item }}</text><text class="jwqfont cff362c {{ cancelIndex == index ? 'jwqgouxuan' : 'jwqwxz' }}"></text></view>
+    <view class="p2030 df dfb bt1 {{ index < 1 ? 'mt10' : '' }}" catchtap="_cancelChoose" data-index="{{ index }}" wx:for="{{ cancelArr }}" wx:key="item" ><text>{{ item }}</text><text class="jwqfont cff362c {{ cancelIndex == index ? 'jwqgouxuan' : 'jwqwxz' }}"></text></view>
     <view class="f33 cfff cancelBtn df dfac">
       <view catchtap="_toggleMask" data-type="cancelOrder" class="flex1 tac lh60 btnItem btnCancel">暂不取消</view>
       <view catchtap="orderOperate" data-op="cancel" data-type="cancelOrder" class="flex1 tac lh60 btnItem btnConfirm">确定取消</view>

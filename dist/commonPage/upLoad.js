@@ -84,14 +84,23 @@ var upLoad = function () {
         }
       }
 
-      if (!status) app.toast({ toastType: 'ontop', content: '\u8BF7\u7B49\u5F85\u6240\u6709\u56FE\u7247\u4E0A\u4F20\u5B8C\u6210\u540E\u518D\u7EE7\u7EED\u64CD\u4F5C', bgc: 'rgba(255, 0, 0, 0.67)', color: '#fff' });
+      if (!status) {
+        app.toast({
+          toastType: 'ontop',
+          content: '\u8BF7\u7B49\u5F85\u6240\u6709\u56FE\u7247\u4E0A\u4F20\u5B8C\u6210\u540E\u518D\u7EE7\u7EED\u64CD\u4F5C',
+          bgc: 'rgba(255, 0, 0, 0.67)',
+          color: '#fff'
+        });
+      }
       return status;
     }
   }, {
     key: 'upImgSingle',
     value: function upImgSingle(url) {
       var that = this;
-      wx.showLoading();
+      wx.showLoading({
+        title: '图片上传中'
+      });
       that.tempFilpaths = [url];
       var temp = [{
         temp: url,

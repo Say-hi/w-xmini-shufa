@@ -34,6 +34,25 @@ Page({
       t: '待评价',
       s: 3
     }],
+    tabArrSell: [{
+      t: '全部',
+      s: 0
+    }, {
+      t: '待付款',
+      s: -1
+    }, {
+      t: '待发货',
+      s: 1
+    }, {
+      t: '待收货',
+      s: 2
+    }, {
+      t: '已完成',
+      s: 3
+    }, {
+      t: '退货中',
+      s: -2
+    }],
     cancelArr: ['收货地址填错了', '忘记支付密码／余额不足', '无法正常支付', '不想购买', '其他原因'],
     cancelIndex: 0,
     page: 0,
@@ -138,7 +157,9 @@ Page({
               that.setData({
                 needSetting: true
               });
-              app.toast({ content: '需授权获取地址信息' });
+              app.toast({
+                content: '需授权获取地址信息'
+              });
             }
           }
         });
@@ -168,22 +189,28 @@ Page({
         uid: app.gs('userInfoAll').uid
       }
     }).then(function () {
-      app.toast({ content: '提醒商家发货成功', image: '' });
+      app.toast({
+        content: '提醒商家发货成功',
+        image: ''
+      });
     });
   },
   _buyAgain: function _buyAgain() {
-    app.toast({ content: '商品已添加到您的购物车中', image: '' });
+    app.toast({
+      content: '商品已添加到您的购物车中',
+      image: ''
+    });
   },
   shopOrderList: function shopOrderList() {
     var _this4 = this;
 
     app.wxrequest({
-      url: app.getUrl().shopOrderList,
+      url: app.getUrl()[this.data.options.from === 'sellShop' ? 'sellOrderList' : 'shopOrderList'],
       data: {
         page: ++this.data.page,
         uid: app.gs('userInfoAll').uid,
         // 0获取全部 -1未支付 1已支付准备发货 2已发货 3已收货 4收货后删除订单 -2申请退款 -3 退款成功 -4 未支付删除 -5 退款并删除订单 -6拒绝退款
-        status: this.data.tabArr[this.data.tabIndex].s
+        status: this.data[this.data.options.from === 'sell' ? 'tabArrSell' : 'tabArr'][this.data.tabIndex].s
       }
     }).then(function (res) {
       var _iteratorNormalCompletion = true;
@@ -194,7 +221,7 @@ Page({
         for (var _iterator = res.lists[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var v = _step.value;
 
-          v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, 'YYYY-MM-DD HH:mm') : '时间不详';
+          v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, _this4.data.options.from === 'sell' ? 'MM月DD日 HH:mm' : 'YYYY-MM-DD HH:mm') : '时间不详';
           v.statuss = v.status;
           switch (v.status * 1) {
             case 0:
@@ -231,28 +258,30 @@ Page({
               v.status = '退款失败';
               break;
           }
-          v.all_count = 0;
-          var _iteratorNormalCompletion2 = true;
-          var _didIteratorError2 = false;
-          var _iteratorError2 = undefined;
+          if (_this4.data.options.from !== 'sellShop') {
+            v.all_count = 0;
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
 
-          try {
-            for (var _iterator2 = v.list[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-              var s = _step2.value;
-
-              v.all_count += s.count * 1;
-            }
-          } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-          } finally {
             try {
-              if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                _iterator2.return();
+              for (var _iterator2 = v.list[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var s = _step2.value;
+
+                v.all_count += s.count * 1;
               }
+            } catch (err) {
+              _didIteratorError2 = true;
+              _iteratorError2 = err;
             } finally {
-              if (_didIteratorError2) {
-                throw _iteratorError2;
+              try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                  _iterator2.return();
+                }
+              } finally {
+                if (_didIteratorError2) {
+                  throw _iteratorError2;
+                }
               }
             }
           }
@@ -298,13 +327,17 @@ Page({
     });
   },
   backMoney: function backMoney(e) {
-    app.su('backInfo', this.data.list[e.currentTarget.dataset.index]);
+    app.su('backInfo', this.data.options.from === 'sell' ? Object.assign(this.data.list[e.currentTarget.dataset.index], {
+      goodsType: 'sell' // 自售订单用户退款增加类型检测
+    }) : this.data.list[e.currentTarget.dataset.index]);
     wx.navigateTo({
       url: '/commonPage/back/back'
     });
   },
   goPJ: function goPJ(e) {
-    app.su('pjInfo', this.data.list[e.currentTarget.dataset.index]);
+    app.su('pjInfo', this.data.options.from === 'sell' ? Object.assign(this.data.list[e.currentTarget.dataset.index], {
+      goodsType: 'sell' // 自售订单用户退款增加类型检测
+    }) : this.data.list[e.currentTarget.dataset.index]);
     wx.navigateTo({
       url: '/commonPage/talk/index?type=comment'
     });
