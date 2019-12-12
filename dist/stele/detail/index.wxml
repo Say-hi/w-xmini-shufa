@@ -57,10 +57,10 @@
   <!--底部评论发表区域 -e-->
 </view>
 <view wx:if="{{ leftChoose == 1 }}" class="opus p20">
-  <image wx:for="{{ section }}" wx:key="index" lazy-load="1" src="{{item.img_name}}"></image>
+  <image wx:for="{{ section }}" catchtap='showasdf' data-index="{{index}}" wx:key="index" lazy-load="1" src="{{item.img_name}}"></image>
 </view>
 <view wx:if="{{ leftChoose == 2 }}" class="opus p20">
-  <navigator url="/camera/detail/index?id=1" wx:for="{{ piece }}" wx:key="index" class="tac">
+  <navigator url="/camera/detail/index?wid={{item.wid}}&oid={{item.id}}" wx:for="{{ piece }}" wx:key="index" class="tac">
     <image mode="aspectFit" lazy-load="1" src="{{ item.img_name }}"></image>
     <text>{{item.word}}</text>
   </navigator>

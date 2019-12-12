@@ -18,24 +18,24 @@ Page({
     capsule: {
       bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
     },
-    bottomImg: [
-      {
-        i: '',
-        t: '无'
-      },
-      {
-        i: 'https://c.jiangwenqiang.com/lqsy/camera_mi.png',
-        t: '米字格'
-      },
-      {
-        i: 'https://c.jiangwenqiang.com/lqsy/camera_hui.png',
-        t: '回字格'
-      },
-      {
-        i: 'https://c.jiangwenqiang.com/lqsy/camera_jiu.png',
-        t: '九宫格'
-      }
+    bottomImg: [{
+      i: '',
+      t: '无'
+    },
+    {
+      i: 'https://c.jiangwenqiang.com/lqsy/camera_mi.png',
+      t: '米字格'
+    },
+    {
+      i: 'https://c.jiangwenqiang.com/lqsy/camera_hui.png',
+      t: '回字格'
+    },
+    {
+      i: 'https://c.jiangwenqiang.com/lqsy/camera_jiu.png',
+      t: '九宫格'
+    }
     ],
+    painting: {},
     bottomIndex: 0,
     rotate: 0,
     scale: 1,
@@ -44,19 +44,18 @@ Page({
     height: app.data.height,
     main: app.gs('alphaImg'),
     bgImg: app.gs('alphaImg2'),
-    cameraType: [
-      {
-        i: 'jwqshequ',
-        t: '社区'
-      },
-      {
-        i: 'jwqweixin',
-        t: '微信好友'
-      },
-      {
-        i: 'jwqpengyouquan',
-        t: '朋友圈'
-      }
+    cameraType: [{
+      i: 'jwqshequ',
+      t: '社区'
+    },
+    {
+      i: 'jwqweixin',
+      t: '微信好友'
+    },
+    {
+      i: 'jwqpengyouquan',
+      t: '朋友圈'
+    }
     ]
   },
   touchStart (e) {
@@ -69,7 +68,9 @@ Page({
     } else if (e.touches.length <= 2) {
       start = e.touches
     } else {
-      app.toast({content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'})
+      app.toast({
+        content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'
+      })
     }
   },
   touchMove (e) {
@@ -115,19 +116,32 @@ Page({
     })
   },
   upload () {
-    new UpLoad({imgArr: 'imgArr'}).chooseImage()
+    new UpLoad({
+      imgArr: 'imgArr'
+    }).chooseImage()
   },
   checkAll () {
-    if (new UpLoad({imgArr: 'imgArr'}).checkAll()) {
-    }
+    if (new UpLoad({
+      imgArr: 'imgArr'
+    }).checkAll()) {}
   },
   imgOp (e) {
-    new UpLoad({imgArr: e.currentTarget.dataset.img, index: e.currentTarget.dataset.index}).imgOp()
+    new UpLoad({
+      imgArr: e.currentTarget.dataset.img,
+      index: e.currentTarget.dataset.index
+    }).imgOp()
   },
   choosePhoto () {
     if (this.data.options.type > 1) {
       let that = this
-      if (!app.gs('firstCamera')) app.toast({content: '建议您选取图片后通过【预览】--【编辑】将图片裁剪为【正方形】以体验更佳的对比效果', image: '', time: 5000, mask: true})
+      if (!app.gs('firstCamera')) {
+        app.toast({
+          content: '建议您选取图片后通过【预览】--【编辑】将图片裁剪为【正方形】以体验更佳的对比效果',
+          image: '',
+          time: 5000,
+          mask: true
+        })
+      }
       setTimeout(() => {
         app.su('firstCamera', true)
         wx.chooseImage({
@@ -138,7 +152,7 @@ Page({
               title: '图片上传处理中'
             })
             wx.uploadFile({
-              url: app.getUrl().stackingImg,
+              url: app.getExactlyUrl(app.getUrl().stackingImg),
               filePath: res1.tempFilePaths[0],
               name: 'file',
               formData: {
@@ -148,6 +162,13 @@ Page({
               success (res) {
                 wx.hideLoading()
                 // let data = JSON.parse(res.data).data
+                wx.getImageInfo({
+                  src: JSON.parse(res.data).data,
+                  success (res2) {
+                    that.data.imageWidth = 165.5
+                    that.data.imageHeight = 165.5 * res2.height / res2.width
+                  }
+                })
                 that.setData({
                   main: JSON.parse(res.data).data
                 })
@@ -155,7 +176,9 @@ Page({
             })
           },
           fail () {
-            app.toast({content: '您取消了操作~~'})
+            app.toast({
+              content: '您取消了操作~~'
+            })
             setTimeout(() => {
               wx.navigateBack()
             }, 1000)
@@ -261,6 +284,60 @@ Page({
   //     }, this)
   //   }, 100)
   // },
+  eventDraw (e) {
+    wx.showLoading({
+      title: '图片生成中',
+      mask: true
+    })
+    // let that = this
+    let views = [{
+      type: 'image',
+      url: this.data.bgImg,
+      top: 0,
+      left: 0,
+      width: 331,
+      height: 331
+    },
+    {
+      type: 'image',
+      url: this.data.main,
+      top: this.data.moveY / app.data.fixPxToRpx,
+      left: this.data.moveX / app.data.fixPxToRpx,
+      width: this.data.imageWidth,
+      height: this.data.imageHeight.toFixed(2) * 1
+    }
+    ]
+    if (this.data.bottomIndex > 0) {
+      views.push({
+        type: 'image',
+        url: this.data.bottomImg[this.data.bottomIndex].i,
+        top: 0,
+        left: 0,
+        width: 331,
+        height: 331
+      })
+    }
+    this.setData({
+      painting: {
+        width: 331,
+        height: 331,
+        clear: true,
+        views
+      }
+    })
+    this._toggleMask(e)
+  },
+  eventGetImage (event) {
+    console.log(1)
+    wx.hideLoading()
+    const {
+      tempFilePath
+    } = event.detail
+    this.setData({
+      SteleShareImage: tempFilePath
+    })
+    // app.data['SteleShareImage'] = tempFilePath
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -302,7 +379,17 @@ Page({
   },
   onShareAppMessage (e) {
     if (e.from === 'button') {
-      console.log(1)
+      let temps = app.gs('shareUrl')
+      let url = 'camera/detail/index'
+      for (let i in temps) {
+        if (temps[i].indexOf(url) >= 0) {
+          return {
+            title: `我正在学习【${this.data.options.word}】字`,
+            imageUrl: this.data.SteleShareImage,
+            path: `/openShare/index/index?url=${i}&q=${this.data.options.wid},${this.data.options.oid}`
+          }
+        }
+      }
     }
   },
   /**

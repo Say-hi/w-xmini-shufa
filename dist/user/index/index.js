@@ -59,7 +59,7 @@ Page({
     }, {
       t: '我的消息',
       i: 'https://c.jiangwenqiang.com/lqsy/user4.png',
-      url: '/user/message/index?type=user'
+      url: '/user/message/index?type=shop'
     }]
   },
   upFormId: function upFormId(e) {
@@ -72,7 +72,11 @@ Page({
   },
   _sign: function _sign(e) {
     var that = this;
-    if (!e.detail.value.sign.trim()) return app.toast({ content: '请输入内容' });
+    if (!e.detail.value.sign.trim()) {
+      return app.toast({
+        content: '请输入内容'
+      });
+    }
     app.wxrequest({
       url: app.getUrl().userSign,
       data: {
@@ -80,7 +84,10 @@ Page({
         sign: e.detail.value.sign.trim()
       }
     }).then(function () {
-      app.toast({ content: '修改成功', image: '' });
+      app.toast({
+        content: '修改成功',
+        image: ''
+      });
       that.userInfo();
       that._toggleSign();
     });
@@ -88,7 +95,9 @@ Page({
   _getUserInfo: function _getUserInfo(e) {
     var that = this;
     if (!app.gs('access_token')) {
-      app.toast({ content: '请先登录再进行此操作' });
+      app.toast({
+        content: '请先登录再进行此操作'
+      });
       wx.navigateTo({
         url: '/user/login/index'
       });
@@ -106,7 +115,10 @@ Page({
             phone: app.gs('userInfoAll').phone || ''
           }
         }).then(function (res) {
-          app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res, { avatar_url: e.detail.userInfo.avatarUrl, nickname: e.detail.userInfo.nickName }));
+          app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res, {
+            avatar_url: e.detail.userInfo.avatarUrl,
+            nickname: e.detail.userInfo.nickName
+          }));
           that.setData({
             userInfoAll: app.gs('userInfoAll')
           });
@@ -127,7 +139,11 @@ Page({
   userInfo: function userInfo() {
     var _this2 = this;
 
-    if (!app.gs('userInfoAll').uid) return app.toast({ content: '您尚未登录哦' });
+    if (!app.gs('userInfoAll').uid) {
+      return app.toast({
+        content: '您尚未登录哦'
+      });
+    }
     app.wxrequest({
       url: app.getUrl().userInfo,
       data: {

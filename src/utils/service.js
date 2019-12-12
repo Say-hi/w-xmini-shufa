@@ -156,7 +156,8 @@ const serviceUrl = {
   // scDetail: shopBaseDomain + '/material/detail',
   // 书法api
   homeConfig: lqsyBaseDomain + '/home/config', // 获取全局变量+首页广告
-  logistic: lqsyBaseDomain + '/commen/logistic', // 快递信息查询
+  logistic: lqsyBaseDomain + '/common/logistic', // 快递信息查询
+  mounting: lqsyBaseDomain + '/sell/mounting', // 装裱背景图获取
   wechatOpenid: lqsyBaseDomain + '/wechat/openid', // 小程序授权|获取用户小程序openid
   rankCard: lqsyBaseDomain + '/rank/card', // rank
   userInfo: lqsyBaseDomain + '/user/info', // 获取用户基本信息

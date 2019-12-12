@@ -7,27 +7,37 @@
   <view class="f30 cfff">可提现收益（元）</view>
   <view class="f36 cfceaa2">
     <text>¥</text>
-    <text class="f65">60000.00</text>
+    <text class="f65">{{userInfo.appear_money}}</text>
     <text>元</text>
   </view>
-  <navigator url="/user/cashdraw/index" class="f40 c033d68">提 现</navigator>
+  <navigator url="/user/cashdraw/index?type=shop" class="f40 c033d68">提 现</navigator>
 </view>
 <view class="mt20 df dfb">
-  <navigator url="/user/profit/index?type=3" class="moneyLeft tac df dfc cfff f26">
-    <view class="f36 mt20">14.56<text class="f22">元</text></view>
+  <navigator url="/user/profit/index?from=shop&type=0" class="moneyLeft tac df dfc cfff f26">
+    <view class="f36 mt20">{{userInfo.stay_money}}<text class="f22">元</text></view>
     <view>待入帐</view>
-    <view class="mt10">今日＋16.57元</view>
+    <view class="mt10">今日＋{{userInfo.today_stay_money}}元</view>
+  </navigator>
+  <navigator url="/user/profit/index?from=shop&type=1" class="moneyRight tac df dfc cfff f26">
+    <view class="f36 mt20">{{userInfo.already_money}}<text class="f22">元</text></view>
+    <view>累计入帐</view>
+    <view class="mt10">今日＋{{userInfo.today_count_money}}元</view>
+  </navigator>
+  <!-- <navigator url="/user/profit/index?type=3" class="moneyLeft tac df dfc cfff f26">
+    <view class="f36 mt20">{{userInfo.stay_money}}<text class="f22">元</text></view>
+    <view>待入帐</view>
+    <view class="mt10">今日＋{{userInfo.today_stay_money}}元</view>
   </navigator>
   <navigator url="/user/profit/index?type=2" class="moneyRight tac df dfc cfff f26">
-    <view class="f36 mt20">14.03<text class="f22">元</text></view>
+    <view class="f36 mt20">{{userInfo.already_money}}<text class="f22">元</text></view>
     <view>累计入帐</view>
-    <view class="mt10">今日＋16.57元</view>
-  </navigator>
+    <view class="mt10">今日＋{{userInfo.today_count_money}}元</view>
+  </navigator> -->
 </view>
 </view>
 <!--资金信息 -e-->
 <!--导航列表 -s-->
-<navigator url="/user/profit/index?type=0" class="arrow p2030 bgfff">
+<!-- <navigator url="/user/profit/index?type=0" class="arrow p2030 bgfff">
 <view class="left-pillar">收益明细</view>
 </navigator>
 <navigator url="/user/detail/index" class="arrow p2030 bgfff mt20">
@@ -35,7 +45,16 @@
 </navigator>
 <navigator url="/user/profit/index?type=1" class="arrow p2030 bgfff mt20">
   <view class="left-pillar">今日收益</view>
+</navigator> -->
+<navigator url="/user/detail/index?type=shop" class="arrow p2030 bgfff">
+<view class="left-pillar">收益明细</view>
 </navigator>
+<navigator url="/user/detail/index?type=shop&index=1" class="arrow p2030 bgfff mt20">
+<view class="left-pillar">提现明细</view>
+</navigator>
+<!-- <navigator url="/user/profit/index?type=1" class="arrow p2030 bgfff mt20">
+  <view class="left-pillar">今日收益</view>
+</navigator> -->
 <!--导航列表 -e-->
 <!--错误弹窗-->
 <toast toast="{{ toast }}"></toast>

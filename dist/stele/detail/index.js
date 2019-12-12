@@ -22,6 +22,9 @@ Page({
     commentMore: true,
     leftChoose: 0
   },
+  showasdf: function showasdf(e) {
+    app.showImg(this.data.section[e.currentTarget.dataset.index].img_name, [this.data.section[e.currentTarget.dataset.index].img_name]);
+  },
   _writeComment: function _writeComment(e) {
     this.setData({
       focus: e.currentTarget.dataset.type === 'in'
@@ -157,7 +160,11 @@ Page({
     });
   },
   sendWordsDiscussSub: function sendWordsDiscussSub(e) {
-    if (!e.detail.value.comment.trim()) return app.toast({ content: '评论内容不能为空' });
+    if (!e.detail.value.comment.trim()) {
+      return app.toast({
+        content: '评论内容不能为空'
+      });
+    }
     var that = this;
     app.wxrequest({
       url: app.getUrl().wordsDiscussSub,
@@ -170,7 +177,10 @@ Page({
         state: 1
       }
     }).then(function () {
-      app.toast({ content: '评论成功', image: '' });
+      app.toast({
+        content: '评论成功',
+        image: ''
+      });
       that.setData({
         commentValue: ''
       });
@@ -198,10 +208,18 @@ Page({
   },
   onReachBottom: function onReachBottom() {
     if (this.data.leftChoose <= 0) {
-      if (!this.data.commentMore) return app.toast({ content: '没有更多评论了' });
+      if (!this.data.commentMore) {
+        return app.toast({
+          content: '没有更多评论了'
+        });
+      }
       this.getWordsDiscuss();
     } else if (this.data.leftChoose >= 2) {
-      if (!this.data.more) return app.toast({ content: '没有更多作品了' });
+      if (!this.data.more) {
+        return app.toast({
+          content: '没有更多作品了'
+        });
+      }
       this.getWordsPiece();
     }
   },

@@ -59,7 +59,7 @@
            class="pa"
            style="display:inline-block; top: {{ item.yy }}px; left: {{ item.xx }}px; width: {{ item.width }}px; height: {{ item.height }}px;"></image>
   </view>
-  <image class="backImage pa"
+  <image class="backImage pa sdfsdfasdfasdf"
          wx:if="{{ backImageInfo.zIndex > 9 }}"
          src="{{ backImageInfo.path }}"
          style="top: 0;left:0; width: {{ backImageInfo.fixWidth }}px; height: {{ backImageInfo.fixHeight }}px;"></image>

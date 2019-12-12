@@ -53,7 +53,7 @@ Page({
           imgUrl: FilePath
         });
         wx.uploadFile({
-          url: app.getUrl().distinguishKnow,
+          url: app.getExactlyUrl(app.getUrl().distinguishKnow),
           filePath: FilePath,
           name: 'file',
           formData: {
@@ -165,7 +165,9 @@ Page({
   },
   onReachBottom: function onReachBottom() {
     if (!this.data.more) {
-      return app.toast({ content: '没有更多内容了' });
+      return app.toast({
+        content: '没有更多内容了'
+      });
     }
     this.getWordOut(this.data.list[0].words);
   },
@@ -186,7 +188,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function onShow() {
-    app.checkUser({ login: false });
+    app.checkUser({
+      login: false
+    });
     // app.toast()
     // this.setKill()
     // console.log(' ---------- onShow ----------')

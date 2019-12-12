@@ -9,82 +9,52 @@ Page({
     capsule: {
       bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
     },
+    list: [],
+    more: true,
+    page: 0,
     height: app.data.height,
     imgArr: ['https://c.jiangwenqiang.com/lqsy/canvas_bottom_0.jpg'],
     chooseArr: [
       {
         t: '作品宽',
         tIndex: -1,
-        items: [
-          '100-100',
-          '100-100',
-          '100-100',
-          '100-100',
-          '100-100',
-          '100-100',
-          '100-100',
-          '100-100',
-          '100-100'
-        ]
+        items: ['100-100']
       },
       {
         t: '作品高',
         tIndex: -1,
-        items: [
-          '100-100',
-          '100-100',
-          '100-100'
-        ]
+        items: ['100-100']
       },
       {
         t: '摆放场景',
         tIndex: -1,
-        items: [
-          '100-100',
-          '100-100',
-          '100-100'
-        ]
+        items: ['100-100']
       },
       {
         t: '作品高',
         tIndex: -1,
-        items: [
-          '100-100',
-          '100-100',
-          '100-100'
-        ]
+        items: ['100-100']
       },
       {
         t: '摆放场景',
         tIndex: -1,
-        items: [
-          '100-100',
-          '100-100',
-          '100-100'
-        ]
+        items: ['100-100']
       },
       {
         t: '作品高',
         tIndex: -1,
-        items: [
-          '100-100',
-          '100-100',
-          '100-100'
-        ]
+        items: ['100-100']
       },
       {
         t: '摆放场景',
         tIndex: -1,
-        items: [
-          '100-100',
-          '100-100',
-          '100-100'
-        ]
+        items: ['100-100']
       }
     ]
   },
   chooseImage (e) {
-    app.data['userBackImage'] = this.data.imgArr[e.currentTarget.dataset.index]
+    app.data['userBackImage'] = this.data.list[e.currentTarget.dataset.index].src
+    app.su('backImageInfo', this.data.list[e.currentTarget.dataset.index])
     wx.navigateTo({
       url: `/commonPage/canvas2/index?single=${this.data.single}`
     })
@@ -113,11 +83,31 @@ Page({
       }
     })
   },
+  mounting () {
+    app.wxrequest({
+      url: app.getUrl().mounting,
+      data: {
+        page: ++this.data.page
+      }
+    }).then(res => {
+      this.setData({
+        list: this.data.list.concat(res.lists)
+      })
+      this.data.more = res.lists.length >= res.pre_page
+    })
+  },
+  onReachBottom () {
+    if (!this.data.more) {
+      return app.toast({content: '没有更多内容了'})
+    }
+    this.mounting()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
     this.data.single = options.single
+    this.mounting()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

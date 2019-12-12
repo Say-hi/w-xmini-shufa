@@ -22,15 +22,14 @@ Page({
     capsule: {
       bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
     },
-    tab: [
-      {
-        i: 'https://c.jiangwenqiang.com/lqsy/camera.png',
-        t: '拍照'
-      },
-      {
-        i: 'https://c.jiangwenqiang.com/lqsy/camera_pic.png',
-        t: '照片'
-      }
+    tab: [{
+      i: 'https://c.jiangwenqiang.com/lqsy/camera.png',
+      t: '拍照'
+    },
+    {
+      i: 'https://c.jiangwenqiang.com/lqsy/camera_pic.png',
+      t: '照片'
+    }
     ],
     page: 0,
     more: true,
@@ -52,7 +51,7 @@ Page({
           imgUrl: FilePath
         })
         wx.uploadFile({
-          url: app.getUrl().distinguishKnow,
+          url: app.getExactlyUrl(app.getUrl().distinguishKnow),
           filePath: FilePath,
           name: 'file',
           formData: {
@@ -146,15 +145,16 @@ Page({
   },
   onReachBottom () {
     if (!this.data.more) {
-      return app.toast({content: '没有更多内容了'})
+      return app.toast({
+        content: '没有更多内容了'
+      })
     }
     this.getWordOut(this.data.list[0].words)
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad (options) {
-  },
+  onLoad (options) {},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -165,7 +165,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow () {
-    app.checkUser({login: false})
+    app.checkUser({
+      login: false
+    })
     // app.toast()
     // this.setKill()
     // console.log(' ---------- onShow ----------')

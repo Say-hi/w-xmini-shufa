@@ -102,15 +102,19 @@ Page({
     })
   },
   phoneLogin (e) {
-    if (e.detail.value.phone.length !== 11) {return app.toast({
-      content: '请输入正确的手机号码'
-    })}
+    if (e.detail.value.phone.length !== 11) {
+      return app.toast({
+        content: '请输入正确的手机号码'
+      })
+    }
     if (e.detail.target.id === 'code') {
       this._getCode(e.detail.value.phone)
     } else {
-      if (!e.detail.value.code) {return app.toast({
-        content: '请输入验证码'
-      })}
+      if (!e.detail.value.code) {
+        return app.toast({
+          content: '请输入验证码'
+        })
+      }
       this._login(e)
     }
   },
@@ -119,9 +123,11 @@ Page({
     else if (e.target.id === 'code') this.data.code = e.detail.value
   },
   _getUserInfo (e) {
-    if (!e.detail.signature) {return app.toast({
-      content: '请授权后再操作'
-    })}
+    if (!e.detail.signature) {
+      return app.toast({
+        content: '请授权后再操作'
+      })
+    }
     e.detail['value'] = {}
     e.detail['target'] = {}
     e.detail['target']['id'] = 'login'

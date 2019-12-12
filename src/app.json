@@ -175,7 +175,7 @@
     //    "my-login": "/components/my-login/my-login",
     "my-express": "/components/my-express/my-express",
     "my-navigator-tab": "/components/my-navigator-tab/my-navigator-tab",
-    //    "canvasdrawer": "/components/canvasdrawer/canvasdrawer",
+    "canvasdrawer": "/components/canvasdrawer/canvasdrawer",
     //    "my-back": "/components/my-back/back",
     //    "my-ng": "/components/my-ng/ng",
     //    "my-top-tab": "/components/my-top-tab/my-top-tab",

@@ -13,10 +13,37 @@ Page({
     },
     capsules: app.data.capsule
   },
+  shopUser: function shopUser() {
+    var _this = this;
+
+    app.wxrequest({
+      url: app.getUrl().shopUser,
+      data: {
+        uid: app.gs('userInfoAll').uid
+      }
+    }).then(function (res) {
+      _this.setData({
+        userInfo: res
+      });
+    }, function () {
+      app.toast({
+        content: '您尚未登陆，请先登陆系统',
+        mask: true
+      });
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '/user/login/index'
+        });
+      }, 1000);
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function onLoad() {},
+  onLoad: function onLoad() {
+    this.shopUser();
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

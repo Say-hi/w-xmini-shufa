@@ -95,7 +95,11 @@ Page({
     });
   },
   onReachBottom: function onReachBottom() {
-    if (!this.data.more) return app.toast({ content: '没有更多内容了' });
+    if (!this.data.more) {
+      return app.toast({
+        content: '没有更多内容了'
+      });
+    }
     this.getList();
   },
 
@@ -104,7 +108,8 @@ Page({
    */
   onLoad: function onLoad(options) {
     this.setData({
-      options: options
+      options: options,
+      leftChoose: options.index || 0
     }, this.getList);
   },
 

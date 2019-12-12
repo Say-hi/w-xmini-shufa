@@ -17,7 +17,7 @@ Page({
       '笔画求教',
       '单字求救',
       '作品求救',
-      '无'
+      '分享作品'
     ],
     sosIndex: 0,
     commentLV: 4
@@ -94,7 +94,7 @@ Page({
           }
         }).then(res => {
           app.toast({
-            content: '发布成功',
+            content: '发布成功,等待系统审核',
             image: '',
             mask: true
           })
@@ -129,7 +129,38 @@ Page({
           }
         }).then(res => {
           app.toast({
-            content: '发布成功',
+            content: '发布成功,等待系统审核',
+            image: '',
+            mask: true
+          })
+          setTimeout(() => {
+            wx.navigateBack()
+          }, 1000)
+        })
+        break
+      case 'camera':
+        if (!e.detail.value.camear.trim()) {
+          return app.toast({
+            content: '内容不能为空'
+          })
+        }
+        if (!new UpLoad({
+          imgArr: 'imgArr'
+        }).checkAll()) return
+        app.wxrequest({
+          url: app.getUrl().communityPostsSub,
+          data: {
+            uid: app.gs('userInfoAll').uid || 10000,
+            is_video: -1,
+            title: this.data.sos[this.data.sosIndex],
+            comment: e.detail.value.camear.trim(),
+            imgs_url: JSON.stringify({
+              'imgs': that.getRealUrl()
+            })
+          }
+        }).then(res => {
+          app.toast({
+            content: '发布成功,等待系统审核',
             image: '',
             mask: true
           })

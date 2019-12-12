@@ -6,4 +6,4 @@ function getCodeUrl (url) {
   }
   console.log(num)
 }
-getCodeUrl('/commen/logistic')
+getCodeUrl('/sell/mounting')

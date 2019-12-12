@@ -38,7 +38,7 @@
 <!--底格 -e-->
 
 <view class="cameraSe df p20 pr">
-  <image catchtap="_toggleMask" data-type="cameraMask" src="https://c.jiangwenqiang.com/lqsy/camera_share.png"></image>
+  <image catchtap="eventDraw" data-type="cameraMask" src="https://c.jiangwenqiang.com/lqsy/camera_share.png"></image>
   <navigator open-type="navigateBack"><image src="https://c.jiangwenqiang.com/lqsy/camera_back.png"></image></navigator>
 </view>
 
@@ -47,7 +47,7 @@
 <view class="bgfff br10 mask-in ">
   <view class="f30 tac lh60 fw7 c323232">分享</view>
   <view class="df dfac dfb p30">
-    <navigator url="../talk/index?type=camera" class="df dfc dfac f25 c323232">
+    <navigator url="../talk/index?type=camera&url={{ SteleShareImage }}" class="df dfc dfac f25 c323232">
       <text style="color: #cfa972;" class="jwqfont jwqshequ"></text>
       <text class="mt10">社区</text>
     </navigator>
@@ -73,10 +73,10 @@
 <!--</view>-->
         <!--&lt;!&ndash;transform-origin:(0,0);&ndash;&gt;-->
 <!--<view catchtap="canvasDraw" class="lh80">save</view>-->
-<!--<canvas style="width: {{ systemWidth }}px; height: {{ backImageHeight }}px" class="cameraCanvas" canvas-id="cOne"></canvas>-->
+<!-- <canvas style="width: {{ systemWidth }}px; height: {{ backImageHeight }}px;display:none;" class="cameraCanvas" canvas-id="cOne"></canvas> -->
 
 <!--<image mode="widthFix" class="w100" src="{{ temp }}"></image>-->
-
+<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"></canvasdrawer>
 <view></view>
 <!--错误弹窗-->
 <toast toast="{{ toast }}"></toast>

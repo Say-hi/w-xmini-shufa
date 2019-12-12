@@ -93,7 +93,7 @@
 <view class="mask cameraMask o0 {{ cameraMaskAnimate ? 'o1' : '' }} tr5">
   <view class="bgfff br10 mask-in ">
     <view class="df dfac dfb p30">
-      <navigator url="/commonPage/camera/index?type={{ index + 1 }}" class="df dfc dfac f25 c323232" wx:for="{{ cameraType }}" wx:key="index">
+      <navigator url="/commonPage/camera/index?type={{ index + 1 }}&wid={{options.wid}}&oid={{options.oid}}&word={{ info.word }}" class="df dfc dfac f25 c323232" wx:for="{{ cameraType }}" wx:key="index">
         <text style="background: {{ index <= 0 ? '#009944' : index == 1 ? '#ec6941' : '#00a0e9' }};" class="jwqfont {{ item.i }} cfff"></text>
         <text class="mt10">{{ item.t }}</text>
       </navigator>

@@ -44,30 +44,28 @@ Page({
       i: -1,
       item: [
         '#ffffff',
-        '#ff0000',
-        '#ffff00',
-        '#00ff00',
-        '#0000ff',
-        '#ff00ff'
+        '#F1ECD9',
+        '#E7D3D4',
+        '#CDC2C0',
+        '#BDC8C0'
       ]
     },
     borderColorArr: {
       i: 0,
       item: [
         '#ffffff',
-        '#ff0000',
-        '#ffff00',
-        '#00ff00',
-        '#0000ff',
-        '#ff00ff'
+        '#F1ECD9',
+        '#E7D3D4',
+        '#CDC2C0',
+        '#BDC8C0'
       ]
     },
     operationArr: {
       chooseIndex: 0,
       tab: [{
         t: '画框',
-        img: 'https://c.jiangwenqiang.com/lqsy/canvasType_2.png',
-        imgChoose: 'https://c.jiangwenqiang.com/lqsy/canvasType_1_choose.png',
+        img: 'https://c.jiangwenqiang.com/lqsy/sb11.png',
+        imgChoose: 'https://c.jiangwenqiang.com/lqsy/sb1.png',
         sliderText: '缩放',
         currentSlider: 0,
         minSlider: 0,
@@ -75,8 +73,8 @@ Page({
       },
       {
         t: '卡纸',
-        img: 'https://c.jiangwenqiang.com/lqsy/canvasType_2.png',
-        imgChoose: 'https://c.jiangwenqiang.com/lqsy/canvasType_1_choose.png',
+        img: 'https://c.jiangwenqiang.com/lqsy/sb2.png',
+        imgChoose: 'https://c.jiangwenqiang.com/lqsy/sb22.png',
         sliderText: '宽度',
         currentSlider: 0,
         minSlider: 0,
@@ -84,8 +82,8 @@ Page({
       },
       {
         t: '局条',
-        img: 'https://c.jiangwenqiang.com/lqsy/canvasType_2.png',
-        imgChoose: 'https://c.jiangwenqiang.com/lqsy/canvasType_1_choose.png',
+        img: 'https://c.jiangwenqiang.com/lqsy/sb3.png',
+        imgChoose: 'https://c.jiangwenqiang.com/lqsy/sb33.png',
         sliderText: '宽度',
         currentSlider: 0,
         minSlider: 0,
@@ -288,8 +286,12 @@ Page({
   getBackImageInfo (src) {
     this.getImageInfo(src).then(res => {
       res.fixWidth = app.data.system.windowWidth
+      console.log('res.fixWidth', res.fixWidth)
       baseScale = app.data.system.windowWidth / res.width
+      console.log('baseScale', baseScale)
       res.fixHeight = baseScale * res.height
+      console.log('res.fixHeight', res.fixHeight)
+      console.log('this.data.backImageInfo.positionItem', this.data.backImageInfo.positionItem)
       for (let v of this.data.backImageInfo.positionItem) {
         v.x = baseScale * v.x
         v.y = baseScale * v.y
@@ -298,6 +300,7 @@ Page({
         v.width = baseScale * v.width
         v.height = baseScale * v.height
       }
+      console.log('this.data.backImageInfo.positionItem', this.data.backImageInfo.positionItem)
       this.setData({
         backImageInfo: Object.assign(this.data.backImageInfo, res)
       }, () => {
@@ -309,6 +312,9 @@ Page({
           this.getItemImageInfo(i)
         }
       })
+    }, () => {
+      wx.hideLoading()
+      app.toast({content: '图片信息加载失败，请重新进入'})
     })
   },
   /**
@@ -347,6 +353,9 @@ Page({
       this.setData({
         [`upImgArr[${index}]`]: res
       })
+    }, () => {
+      wx.hideLoading()
+      app.toast({content: '图片信息加载失败，请重新进入'})
     })
   },
   /**
@@ -369,6 +378,9 @@ Page({
       this.setData({
         [`upImgArr[${currentIndex}].borderImageInfo`]: res
       })
+    }, () => {
+      wx.hideLoading()
+      app.toast({content: '图片信息加载失败，请重新进入'})
     })
   },
 
@@ -520,9 +532,11 @@ Page({
     this.getuser()
     this.setData({
       single: options.single,
-      sell_release: app.data.sell_release
+      sell_release: app.data.sell_release,
+      backImageInfo: app.gs('backImageInfo')
+    }, () => {
+      this.getBackImageInfo(this.data.backImageInfo.src)
     })
-    this.getBackImageInfo(this.data.backImageInfo.src)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

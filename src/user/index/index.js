@@ -13,64 +13,61 @@ Page({
     },
     userInfoAll: {},
     capsules: app.data.capsule,
-    op: [
-      {
-        t: '我的收益',
-        i: 'jwqjindutiaoshouyidaozhang',
-        c: '#ff0000',
-        url: '/user/money/index'
-      },
-      {
-        t: '我的赞',
-        i: 'jwqshoucang',
-        c: '#f39800',
-        url: '/user/collect/index?type=zan'
-      },
-      {
-        t: '意见反馈',
-        i: 'jwqyoujian',
-        c: '#0068b7',
-        url: '/commonPage/talk/index?type=suggest'
-      }
+    op: [{
+      t: '我的收益',
+      i: 'jwqjindutiaoshouyidaozhang',
+      c: '#ff0000',
+      url: '/user/money/index'
+    },
+    {
+      t: '我的赞',
+      i: 'jwqshoucang',
+      c: '#f39800',
+      url: '/user/collect/index?type=zan'
+    },
+    {
+      t: '意见反馈',
+      i: 'jwqyoujian',
+      c: '#0068b7',
+      url: '/commonPage/talk/index?type=suggest'
+    }
     ],
-    uiOp: [
-      {
-        t: '帖子',
-        n: 0,
-        url: '/user/collect/index?type=send'
-      },
-      {
-        t: '评论',
-        n: 0,
-        url: '/user/comment/index?type=comment'
-      },
-      {
-        t: '粉丝',
-        n: 0,
-        url: '/user/comment/index?type=fans'
-      }
+    uiOp: [{
+      t: '帖子',
+      n: 0,
+      url: '/user/collect/index?type=send'
+    },
+    {
+      t: '评论',
+      n: 0,
+      url: '/user/comment/index?type=comment'
+    },
+    {
+      t: '粉丝',
+      n: 0,
+      url: '/user/comment/index?type=fans'
+    }
     ],
-    tabArr: [
-      {
-        t: '我的师友',
-        i: 'https://c.jiangwenqiang.com/lqsy/user1.png',
-        url: '/user/team/index'
-      },
-      {
-        t: '邀约好友',
-        i: 'https://c.jiangwenqiang.com/lqsy/user2.png',
-        url: '/share/carShare/carShare?type=user'
-      },
-      {
-        t: '关于刘谦',
-        i: 'https://c.jiangwenqiang.com/lqsy/user3.png',
-        url: ''
-      },
-      {
-        t: '我的消息',
-        i: 'https://c.jiangwenqiang.com/lqsy/user4.png',
-        url: '/user/message/index?type=user'
-      }
+    tabArr: [{
+      t: '我的师友',
+      i: 'https://c.jiangwenqiang.com/lqsy/user1.png',
+      url: '/user/team/index'
+    },
+    {
+      t: '邀约好友',
+      i: 'https://c.jiangwenqiang.com/lqsy/user2.png',
+      url: '/share/carShare/carShare?type=user'
+    },
+    {
+      t: '关于刘谦',
+      i: 'https://c.jiangwenqiang.com/lqsy/user3.png',
+      url: ''
+    },
+    {
+      t: '我的消息',
+      i: 'https://c.jiangwenqiang.com/lqsy/user4.png',
+      url: '/user/message/index?type=shop'
+    }
     ]
   },
   upFormId (e) {
@@ -83,7 +80,11 @@ Page({
   },
   _sign (e) {
     let that = this
-    if (!e.detail.value.sign.trim()) return app.toast({content: '请输入内容'})
+    if (!e.detail.value.sign.trim()) {
+      return app.toast({
+        content: '请输入内容'
+      })
+    }
     app.wxrequest({
       url: app.getUrl().userSign,
       data: {
@@ -91,7 +92,10 @@ Page({
         sign: e.detail.value.sign.trim()
       }
     }).then(() => {
-      app.toast({content: '修改成功', image: ''})
+      app.toast({
+        content: '修改成功',
+        image: ''
+      })
       that.userInfo()
       that._toggleSign()
     })
@@ -99,7 +103,9 @@ Page({
   _getUserInfo (e) {
     let that = this
     if (!app.gs('access_token')) {
-      app.toast({content: '请先登录再进行此操作'})
+      app.toast({
+        content: '请先登录再进行此操作'
+      })
       wx.navigateTo({
         url: '/user/login/index'
       })
@@ -117,7 +123,10 @@ Page({
             phone: app.gs('userInfoAll').phone || ''
           }
         }).then(res => {
-          app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res, {avatar_url: e.detail.userInfo.avatarUrl, nickname: e.detail.userInfo.nickName}))
+          app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res, {
+            avatar_url: e.detail.userInfo.avatarUrl,
+            nickname: e.detail.userInfo.nickName
+          }))
           that.setData({
             userInfoAll: app.gs('userInfoAll')
           })
@@ -134,7 +143,11 @@ Page({
     }, 10)
   },
   userInfo () {
-    if (!app.gs('userInfoAll').uid) return app.toast({content: '您尚未登录哦'})
+    if (!app.gs('userInfoAll').uid) {
+      return app.toast({
+        content: '您尚未登录哦'
+      })
+    }
     app.wxrequest({
       url: app.getUrl().userInfo,
       data: {

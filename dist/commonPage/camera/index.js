@@ -35,6 +35,7 @@ Page({
       i: 'https://c.jiangwenqiang.com/lqsy/camera_jiu.png',
       t: '九宫格'
     }],
+    painting: {},
     bottomIndex: 0,
     rotate: 0,
     scale: 1,
@@ -64,7 +65,9 @@ Page({
     } else if (e.touches.length <= 2) {
       start = e.touches;
     } else {
-      app.toast({ content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作' });
+      app.toast({
+        content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'
+      });
     }
   },
   touchMove: function touchMove(e) {
@@ -110,18 +113,32 @@ Page({
     });
   },
   upload: function upload() {
-    new UpLoad({ imgArr: 'imgArr' }).chooseImage();
+    new UpLoad({
+      imgArr: 'imgArr'
+    }).chooseImage();
   },
   checkAll: function checkAll() {
-    if (new UpLoad({ imgArr: 'imgArr' }).checkAll()) {}
+    if (new UpLoad({
+      imgArr: 'imgArr'
+    }).checkAll()) {}
   },
   imgOp: function imgOp(e) {
-    new UpLoad({ imgArr: e.currentTarget.dataset.img, index: e.currentTarget.dataset.index }).imgOp();
+    new UpLoad({
+      imgArr: e.currentTarget.dataset.img,
+      index: e.currentTarget.dataset.index
+    }).imgOp();
   },
   choosePhoto: function choosePhoto() {
     if (this.data.options.type > 1) {
       var that = this;
-      if (!app.gs('firstCamera')) app.toast({ content: '建议您选取图片后通过【预览】--【编辑】将图片裁剪为【正方形】以体验更佳的对比效果', image: '', time: 5000, mask: true });
+      if (!app.gs('firstCamera')) {
+        app.toast({
+          content: '建议您选取图片后通过【预览】--【编辑】将图片裁剪为【正方形】以体验更佳的对比效果',
+          image: '',
+          time: 5000,
+          mask: true
+        });
+      }
       setTimeout(function () {
         app.su('firstCamera', true);
         wx.chooseImage({
@@ -132,7 +149,7 @@ Page({
               title: '图片上传处理中'
             });
             wx.uploadFile({
-              url: app.getUrl().stackingImg,
+              url: app.getExactlyUrl(app.getUrl().stackingImg),
               filePath: res1.tempFilePaths[0],
               name: 'file',
               formData: {
@@ -142,6 +159,13 @@ Page({
               success: function success(res) {
                 wx.hideLoading();
                 // let data = JSON.parse(res.data).data
+                wx.getImageInfo({
+                  src: JSON.parse(res.data).data,
+                  success: function success(res2) {
+                    that.data.imageWidth = 165.5;
+                    that.data.imageHeight = 165.5 * res2.height / res2.width;
+                  }
+                });
                 that.setData({
                   main: JSON.parse(res.data).data
                 });
@@ -149,7 +173,9 @@ Page({
             });
           },
           fail: function fail() {
-            app.toast({ content: '您取消了操作~~' });
+            app.toast({
+              content: '您取消了操作~~'
+            });
             setTimeout(function () {
               wx.navigateBack();
             }, 1000);
@@ -252,6 +278,58 @@ Page({
   //     }, this)
   //   }, 100)
   // },
+  eventDraw: function eventDraw(e) {
+    wx.showLoading({
+      title: '图片生成中',
+      mask: true
+    });
+    // let that = this
+    var views = [{
+      type: 'image',
+      url: this.data.bgImg,
+      top: 0,
+      left: 0,
+      width: 331,
+      height: 331
+    }, {
+      type: 'image',
+      url: this.data.main,
+      top: this.data.moveY / app.data.fixPxToRpx,
+      left: this.data.moveX / app.data.fixPxToRpx,
+      width: this.data.imageWidth,
+      height: this.data.imageHeight.toFixed(2) * 1
+    }];
+    if (this.data.bottomIndex > 0) {
+      views.push({
+        type: 'image',
+        url: this.data.bottomImg[this.data.bottomIndex].i,
+        top: 0,
+        left: 0,
+        width: 331,
+        height: 331
+      });
+    }
+    this.setData({
+      painting: {
+        width: 331,
+        height: 331,
+        clear: true,
+        views: views
+      }
+    });
+    this._toggleMask(e);
+  },
+  eventGetImage: function eventGetImage(event) {
+    console.log(1);
+    wx.hideLoading();
+    var tempFilePath = event.detail.tempFilePath;
+
+    this.setData({
+      SteleShareImage: tempFilePath
+    });
+    // app.data['SteleShareImage'] = tempFilePath
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -297,7 +375,17 @@ Page({
   },
   onShareAppMessage: function onShareAppMessage(e) {
     if (e.from === 'button') {
-      console.log(1);
+      var temps = app.gs('shareUrl');
+      var url = 'camera/detail/index';
+      for (var i in temps) {
+        if (temps[i].indexOf(url) >= 0) {
+          return {
+            title: '\u6211\u6B63\u5728\u5B66\u4E60\u3010' + this.data.options.word + '\u3011\u5B57',
+            imageUrl: this.data.SteleShareImage,
+            path: '/openShare/index/index?url=' + i + '&q=' + this.data.options.wid + ',' + this.data.options.oid
+          };
+        }
+      }
     }
   },
 
