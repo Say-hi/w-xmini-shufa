@@ -66,6 +66,32 @@ Page({
     list: [],
     more: true
   },
+  payAgain (e) {
+    // let that = this
+    app.wxrequest({
+      url: app.getUrl().payShopAgain,
+      data: {
+        oid: this.data.list[e.currentTarget.dataset.index].id,
+        uid: app.gs('userInfoAll').uid,
+        openid: app.gs('userInfoAll').openid
+      }
+    }).then(res => {
+      app.wxpay2(res.msg).then(() => {
+        app.toast({
+          content: '付款成功',
+          image: ''
+        })
+        this.setData({
+          [`list[${e.currentTarget.dataset.index}].status`]: '待发货',
+          [`list[${e.currentTarget.dataset.index}].statuss`]: 1
+        })
+      }, () => {
+        app.toast({
+          content: '未完成支付,如有支付遇到问题,请联系客服处理'
+        })
+      })
+    })
+  },
   changeAddress () {
     console.log(this.data.chooseOrderIndex)
     app.wxrequest({
@@ -79,6 +105,10 @@ Page({
         address: `${this.data.addressInfo.provinceName}${this.data.addressInfo.cityName}${this.data.addressInfo.countyName}${this.data.addressInfo.detailInfo}`
       }
     }).then(() => {
+      app.toast({
+        content: '地址修改成功',
+        image: ''
+      })
       this._toggleMask({
         currentTarget: {
           dataset: {
@@ -86,6 +116,15 @@ Page({
           }
         }
       })
+    })
+  },
+  showExpress (e) {
+    this.setData({
+      expressObj: {
+        out_trade_no: this.data.list[e.currentTarget.dataset.index].out_trade_no,
+        order_num: this.data.list[e.currentTarget.dataset.index].order_num,
+        state: this.data.options.from ? 2 : 1
+      }
     })
   },
   chooseIndex (e) {
@@ -215,6 +254,7 @@ Page({
       }
     }).then(res => {
       for (let v of res.lists) {
+        // v.order_num = '544629261291'
         v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, this.data.options.from === 'sell' ? 'MM月DD日 HH:mm' : 'YYYY-MM-DD HH:mm') : '时间不详'
         v.statuss = v.status
         switch (v.status * 1) {
@@ -275,6 +315,10 @@ Page({
         remark: e.currentTarget.dataset.op === 'confirm' ? '' : this.data.cancelArr[this.data.cancelIndex]
       }
     }).then(() => {
+      app.toast({
+        content: e.currentTarget.dataset.op === 'confirm' ? '订单信息修改成功' : '订单已删除',
+        image: ''
+      })
       this.data.list.splice(e.currentTarget.dataset.op === 'confirm' ? e.currentTarget.dataset.index : this.data.chooseOrderIndex, 1)
       this.setData({
         list: this.data.list

@@ -59,8 +59,35 @@ Page({
     list: [],
     more: true
   },
-  changeAddress: function changeAddress() {
+  payAgain: function payAgain(e) {
     var _this = this;
+
+    // let that = this
+    app.wxrequest({
+      url: app.getUrl().payShopAgain,
+      data: {
+        oid: this.data.list[e.currentTarget.dataset.index].id,
+        uid: app.gs('userInfoAll').uid,
+        openid: app.gs('userInfoAll').openid
+      }
+    }).then(function (res) {
+      app.wxpay2(res.msg).then(function () {
+        var _this$setData;
+
+        app.toast({
+          content: '付款成功',
+          image: ''
+        });
+        _this.setData((_this$setData = {}, _defineProperty(_this$setData, 'list[' + e.currentTarget.dataset.index + '].status', '待发货'), _defineProperty(_this$setData, 'list[' + e.currentTarget.dataset.index + '].statuss', 1), _this$setData));
+      }, function () {
+        app.toast({
+          content: '未完成支付,如有支付遇到问题,请联系客服处理'
+        });
+      });
+    });
+  },
+  changeAddress: function changeAddress() {
+    var _this2 = this;
 
     console.log(this.data.chooseOrderIndex);
     app.wxrequest({
@@ -74,7 +101,11 @@ Page({
         address: '' + this.data.addressInfo.provinceName + this.data.addressInfo.cityName + this.data.addressInfo.countyName + this.data.addressInfo.detailInfo
       }
     }).then(function () {
-      _this._toggleMask({
+      app.toast({
+        content: '地址修改成功',
+        image: ''
+      });
+      _this2._toggleMask({
         currentTarget: {
           dataset: {
             type: 'changeAdd'
@@ -83,16 +114,25 @@ Page({
       });
     });
   },
+  showExpress: function showExpress(e) {
+    this.setData({
+      expressObj: {
+        out_trade_no: this.data.list[e.currentTarget.dataset.index].out_trade_no,
+        order_num: this.data.list[e.currentTarget.dataset.index].order_num,
+        state: this.data.options.from ? 2 : 1
+      }
+    });
+  },
   chooseIndex: function chooseIndex(e) {
-    var _this2 = this;
+    var _this3 = this;
 
     this.setData({
       tabIndex: e.currentTarget.dataset.index,
       tabId: e.currentTarget.dataset.index
     }, function () {
-      _this2.data.page = 0;
-      _this2.data.list = [];
-      _this2.shopOrderList();
+      _this3.data.page = 0;
+      _this3.data.list = [];
+      _this3.shopOrderList();
     });
   },
   _cancelChoose: function _cancelChoose(e) {
@@ -119,7 +159,7 @@ Page({
   //   })
   // },
   _toggleMask: function _toggleMask(e) {
-    var _this3 = this,
+    var _this4 = this,
         _setData2;
 
     var type = e.currentTarget.dataset.type;
@@ -127,7 +167,7 @@ Page({
     if (this.data[type]) {
       this.setData(_defineProperty({}, animate, !this.data[animate]));
       setTimeout(function () {
-        _this3.setData(_defineProperty({}, type, !_this3.data[type]));
+        _this4.setData(_defineProperty({}, type, !_this4.data[type]));
       }, 900);
       return;
     }
@@ -202,7 +242,7 @@ Page({
     });
   },
   shopOrderList: function shopOrderList() {
-    var _this4 = this;
+    var _this5 = this;
 
     app.wxrequest({
       url: app.getUrl()[this.data.options.from === 'sellShop' ? 'sellOrderList' : 'shopOrderList'],
@@ -221,7 +261,8 @@ Page({
         for (var _iterator = res.lists[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var v = _step.value;
 
-          v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, _this4.data.options.from === 'sell' ? 'MM月DD日 HH:mm' : 'YYYY-MM-DD HH:mm') : '时间不详';
+          // v.order_num = '544629261291'
+          v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, _this5.data.options.from === 'sell' ? 'MM月DD日 HH:mm' : 'YYYY-MM-DD HH:mm') : '时间不详';
           v.statuss = v.status;
           switch (v.status * 1) {
             case 0:
@@ -258,7 +299,7 @@ Page({
               v.status = '退款失败';
               break;
           }
-          if (_this4.data.options.from !== 'sellShop') {
+          if (_this5.data.options.from !== 'sellShop') {
             v.all_count = 0;
             var _iteratorNormalCompletion2 = true;
             var _didIteratorError2 = false;
@@ -301,14 +342,14 @@ Page({
         }
       }
 
-      _this4.setData({
-        list: _this4.data.list.concat(res.lists)
+      _this5.setData({
+        list: _this5.data.list.concat(res.lists)
       });
-      _this4.data.more = res.lists.length >= res.pre_page;
+      _this5.data.more = res.lists.length >= res.pre_page;
     });
   },
   orderOperate: function orderOperate(e) {
-    var _this5 = this;
+    var _this6 = this;
 
     app.wxrequest({
       url: app.getUrl().shopOrderOperate,
@@ -319,11 +360,15 @@ Page({
         remark: e.currentTarget.dataset.op === 'confirm' ? '' : this.data.cancelArr[this.data.cancelIndex]
       }
     }).then(function () {
-      _this5.data.list.splice(e.currentTarget.dataset.op === 'confirm' ? e.currentTarget.dataset.index : _this5.data.chooseOrderIndex, 1);
-      _this5.setData({
-        list: _this5.data.list
+      app.toast({
+        content: e.currentTarget.dataset.op === 'confirm' ? '订单信息修改成功' : '订单已删除',
+        image: ''
       });
-      _this5._toggleMask(e);
+      _this6.data.list.splice(e.currentTarget.dataset.op === 'confirm' ? e.currentTarget.dataset.index : _this6.data.chooseOrderIndex, 1);
+      _this6.setData({
+        list: _this6.data.list
+      });
+      _this6._toggleMask(e);
     });
   },
   backMoney: function backMoney(e) {

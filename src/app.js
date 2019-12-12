@@ -2,7 +2,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-09 09:35:12
+ * @Last Modified time: 2019-12-10 09:59:46
  */
 /*eslint-disable*/
 const useUrl = require('./utils/service2')
@@ -561,7 +561,7 @@ App({
   },
   // 手机号码验证
   checkMobile(mobile) {
-    if (!(/^1[3|4|5|7|8][0-9]\d{8}$/.test(mobile))) {
+    if (!(/^1[3|4|5|7|8|9][0-9]\d{8}$/.test(mobile))) {
       return true
     }
   },

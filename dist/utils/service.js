@@ -158,6 +158,7 @@ var serviceUrl = {
   // scDetail: shopBaseDomain + '/material/detail',
   // 书法api
   homeConfig: lqsyBaseDomain + '/home/config', // 获取全局变量+首页广告
+  logistic: lqsyBaseDomain + '/commen/logistic', // 快递信息查询
   wechatOpenid: lqsyBaseDomain + '/wechat/openid', // 小程序授权|获取用户小程序openid
   rankCard: lqsyBaseDomain + '/rank/card', // rank
   userInfo: lqsyBaseDomain + '/user/info', // 获取用户基本信息
@@ -173,6 +174,7 @@ var serviceUrl = {
   payRank: lqsyBaseDomain + '/pay/rank', // 购买会员
   payShop: lqsyBaseDomain + '/pay/shop', // 商城购买产品
   paySell: lqsyBaseDomain + '/pay/sell', // 墨宝真迹购买
+  payShopAgain: lqsyBaseDomain + '/pay/shop-again', // 商城产品重新下单
   shopCategory: lqsyBaseDomain + '/shop/category', // 获取商城菜单分类
   shopTeamList: lqsyBaseDomain + '/shop/team-list', // 我的团队列表
   shopShow: lqsyBaseDomain + '/shop/show', // 获取热销and人气产品
@@ -195,6 +197,7 @@ var serviceUrl = {
   shopCartAdd: lqsyBaseDomain + '/shop/cart-add', // 产品添加到购物车
   shopDiscuss: lqsyBaseDomain + '/shop/discuss', // 分页获取评论
   shopNotice: lqsyBaseDomain + '/shop/notice', // 通知消息
+  shopIosCheck: lqsyTestDomain + '/lqsy/ios.json', // 通知消息
   shopAppearList: lqsyBaseDomain + '/shop/appear-list', // 获取用户提现记录
   shopRewardList: lqsyBaseDomain + '/shop/reward-list', // 获取用户奖励记录
   shopTeamOrders: lqsyBaseDomain + '/shop/team-orders', // 查看团队订单
@@ -213,6 +216,7 @@ var serviceUrl = {
   stackingDiscussStar: lqsyBaseDomain + '/stacking/discuss-star', // 对评论点赞|取消点赞
   stackingImg: lqsyBaseDomain + '/stacking/img', // 上传图片返回透明处理后的图片
   dayList: lqsyBaseDomain + '/day/list', // 每日一字列表
+  toJson: lqsyTestDomain + '/lqsy/tojson.json', // 通知消息
   dayDesc: lqsyBaseDomain + '/day/desc', // 每日一字介绍
   dayDetail: lqsyBaseDomain + '/day/detail', // 每日一字内容详情
   dayDiscuss: lqsyBaseDomain + '/day/discuss', // 获取评论列表
@@ -225,6 +229,8 @@ var serviceUrl = {
   userSign: lqsyBaseDomain + '/user/sign', // 修改签名
   userDiscuss: lqsyBaseDomain + '/user/discuss', // 我的评论
   userFans: lqsyBaseDomain + '/user/fans', // 我的粉丝
+  userStar: lqsyBaseDomain + '/user/star', // 我的赞
+  userFeedback: lqsyBaseDomain + '/user/feedback', // 我的反馈
   communityList: lqsyBaseDomain + '/community/list', // 社区帖子获取
   communityPostsSub: lqsyBaseDomain + '/community/posts-sub', // 插入一条社区帖子
   communityDetail: lqsyBaseDomain + '/community/detail', // 帖子详情

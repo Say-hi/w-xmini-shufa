@@ -79,7 +79,10 @@ Page({
     }).then(function (res) {
       if (res.rank > 0) {
         // todo 修改等级判断
-        app.toast({ content: '您还未成为会员,无法继续享受服务哦~~', mask: true });
+        app.toast({
+          content: '您还未成为会员,无法继续享受服务哦~~',
+          mask: true
+        });
         setTimeout(function () {
           wx.navigateTo({
             url: '/openvip/index/index'
@@ -91,7 +94,10 @@ Page({
         });
       }
     }, function () {
-      app.toast({ content: '您还未成为会员,无法继续享受服务哦~~', mask: true });
+      app.toast({
+        content: '您还未成为会员,无法继续享受服务哦~~',
+        mask: true
+      });
       setTimeout(function () {
         wx.navigateTo({
           url: '/openvip/index/index'
@@ -106,12 +112,13 @@ Page({
   onLoad: function onLoad(options) {
     console.log(options);
     // options规则 判断是否为扫码进入
-    // if (options.scene) { // todo 扫码进入
-    //   var scene = decodeURIComponent(options.scene).split('&')
-    // }
+    if (options.scene) {
+      // todo 扫码进入
+      options.scene = decodeURIComponent(options.scene).split('*');
+      options['url'] = options.scene[0];
+      options['q'] = options.scene[1];
+    }
     // 扫码进入则第一位为url,后面为对应页面的参数
-    // url对应：
-    // 1: 碑帖详情页  /stele/detail/index?id=1
     if (app.gs('shareUrl')) {
       this.setData({
         options: options

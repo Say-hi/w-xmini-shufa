@@ -18,7 +18,11 @@ Page({
     app.upFormId(e)
   },
   _getCode (phone) {
-    if (timer) { return app.toast({ content: `${second}秒后可再次获取验证码` }) }
+    if (timer) {
+      return app.toast({
+        content: `${second}秒后可再次获取验证码`
+      })
+    }
     let that = this
     that.setData({
       codeText: `${second}秒`
@@ -44,7 +48,10 @@ Page({
         phone
       }
     }).then(() => {
-      app.toast({content: '验证码已发送,请注意查收'})
+      app.toast({
+        content: '验证码已发送,请注意查收',
+        image: ''
+      })
     })
   },
   _phoneLogin () {
@@ -84,7 +91,10 @@ Page({
               phone: e.detail.value.phone
             }
           }).then(res => {
-            app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res, {avatar_url: e.detail.userInfo.avatarUrl, nickname: e.detail.userInfo.nickName}))
+            app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res, {
+              avatar_url: e.detail.userInfo.avatarUrl,
+              nickname: e.detail.userInfo.nickName
+            }))
             wx.navigateBack()
           })
         }
@@ -92,11 +102,15 @@ Page({
     })
   },
   phoneLogin (e) {
-    if (e.detail.value.phone.length !== 11) return app.toast({content: '请输入正确的手机号码'})
+    if (e.detail.value.phone.length !== 11) {return app.toast({
+      content: '请输入正确的手机号码'
+    })}
     if (e.detail.target.id === 'code') {
       this._getCode(e.detail.value.phone)
     } else {
-      if (!e.detail.value.code) return app.toast({content: '请输入验证码'})
+      if (!e.detail.value.code) {return app.toast({
+        content: '请输入验证码'
+      })}
       this._login(e)
     }
   },
@@ -105,7 +119,9 @@ Page({
     else if (e.target.id === 'code') this.data.code = e.detail.value
   },
   _getUserInfo (e) {
-    if (!e.detail.signature) return app.toast({content: '请授权后再操作'})
+    if (!e.detail.signature) {return app.toast({
+      content: '请授权后再操作'
+    })}
     e.detail['value'] = {}
     e.detail['target'] = {}
     e.detail['target']['id'] = 'login'
@@ -128,8 +144,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow () {
-  },
+  onShow () {},
   /**
    * 生命周期函数--监听页面隐藏
    */

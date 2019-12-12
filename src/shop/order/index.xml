@@ -53,10 +53,10 @@
       <view catchtap="goPJ" data-index="{{index}}" wx:if="{{ item.statuss == 3 }}" class="f25 c787878 goI">评价</view>
       <view wx:if="{{ item.statuss == 1 && item.is_change != 1 }}" catchtap="_toggleMask" data-index="{{ index }}" data-type="changeAdd" class="f25 c787878 goI">修改地址</view>
       <view wx:if="{{ item.statuss == -1 }}" catchtap="_toggleMask" data-op="cancel" data-index="{{index}}" data-type="cancelOrder" class="f25 c787878 goI">取消订单</view>
-      <view wx:if="{{ item.statuss == 2 || item.statuss == 3 }}" class="f25 c787878 goI">查看物流</view>
+      <view catchtap='showExpress' data-index='{{index}}' wx:if="{{ item.statuss == 2 || item.statuss == 3 }}" class="f25 c787878 goI">查看物流</view>
       <view wx:if="{{ item.statuss == 3 }}" catchtap="_buyAgain" class="f25 c787878 goI">再次购买</view>
       <view wx:if="{{ item.statuss == 2 }}" catchtap="orderOperate" data-op="confirm" data-index="{{index}}" data-type="confirmOrder" class="f25 c787878 goI goIB">确定收货</view>
-      <view wx:if="{{ item.statuss == -1 }}" class="f25 c787878 goI goIB">付款</view>
+      <view catchtap='payAgain' data-index='{{index}}' wx:if="{{ item.statuss == -1 }}" class="f25 c787878 goI goIB">付款</view>
       <view wx:if="{{ item.statuss == 1 || item.statuss == 2 || item.statuss == 3}}" catchtap="backMoney" data-index="{{index}}" class="f25 c787878 goI">申请退款</view>
       <view wx:if="{{ item.statuss == 1 && item.is_send != 1 }}" data-id="{{item.id}}" catchtap="_remind" class="f25 c787878 goI">提醒发货</view>
     </view>
@@ -160,6 +160,6 @@
   </view>
 </view>
 <!--修改地址 -e-->
-
+<my-express prop-obj="{{ expressObj }}"></my-express>
 <!--错误弹窗-->
 <toast toast="{{ toast }}"></toast>

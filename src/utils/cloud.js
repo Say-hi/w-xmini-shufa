@@ -28,6 +28,20 @@ module.exports = {
       })
     })
   },
+  getPermission () {
+    return new Promise((resolve, reject) => {
+      wx.cloud.callFunction({
+        name: 'getPermission',
+        data: {},
+        success (res) {
+          resolve(res.result)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
+  },
   getUserOperation () {
     return new Promise((resolve, reject) => {
       wx.cloud.callFunction({

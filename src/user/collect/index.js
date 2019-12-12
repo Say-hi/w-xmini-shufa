@@ -46,8 +46,11 @@ Page({
   },
   getlist () {
     app.wxrequest({
-      url: app.getUrl().userPostsRelease,
-      data: {
+      url: app.getUrl()[this.data.options.type === 'zan' ? 'userStar' : 'userPostsRelease'],
+      data: this.data.options.type === 'zan' ? {
+        uid: app.gs('userInfoAll').uid,
+        page: ++this.data.page
+      } : {
         uid: app.gs('userInfoAll').uid,
         state: this.data.tnIndex * 1 + 1,
         page: ++this.data.page

@@ -9,11 +9,12 @@ Component({
       type: Object,
       value: {
         out_trade_no: 123123,
-        order_num: 1
+        order_num: 1,
+        state: 1
       },
       observer (newValue, oldValue, changePath) {
         if (newValue) {
-          this._getData(newValue.out_trade_no, newValue.order_num)
+          this._getData(newValue.out_trade_no, newValue.order_num, newValue.state)
         }
       }
     }
@@ -27,28 +28,19 @@ Component({
         showS: !this.data.showS
       })
     },
-    _getData (one, two) {
-      let that = this
+    _getData (one, two, three) {
       app.wxrequest({
-        url: app.getUrl().userLogistic,
+        url: app.getUrl().logistic,
         data: {
           out_trade_no: one,
-          order_num: two
-        },
-        success (res) {
-          wx.hideLoading()
-          if (res.data.status === 200) {
-            that.setData({
-              express: res.data.data.data,
-              showS: true
-            })
-          } else {
-            that.setData({
-              showS: false
-            })
-            app.setToast(getCurrentPages()[getCurrentPages().length - 1], {content: res.data.desc})
-          }
+          order_num: two,
+          state: three
         }
+      }).then(res => {
+        this.setData({
+          express: res.data,
+          showS: true
+        })
       })
     }
   }

@@ -58,7 +58,12 @@ Page({
     })
   },
   pay () {
-    if (!this.data.addressInfo || !this.data.addressInfo.telNumber) return app.toast({content: '请填写收货地址信息'})
+    if (this.data.oid) return this.payAgain()
+    if (!this.data.addressInfo || !this.data.addressInfo.telNumber) {
+      return app.toast({
+        content: '请填写收货地址信息'
+      })
+    }
     let carts = []
     let that = this
     for (let v of this.data.info) {
@@ -78,6 +83,28 @@ Page({
         openid: app.gs('userInfoAll').openid,
         address: `${this.data.addressInfo.provinceName}${this.data.addressInfo.cityName}${this.data.addressInfo.countyName}${this.data.addressInfo.detailInfo}`,
         carts: JSON.stringify(carts)
+      }
+    }).then(res => {
+      that.data.oid = res.oid
+      app.wxpay2(res.msg).then(() => {
+        that.setData({
+          paySuccess: true
+        })
+      }, () => {
+        app.toast({
+          content: '未完成支付,如有支付遇到问题,请联系客服处理'
+        })
+      })
+    })
+  },
+  payAgain () {
+    let that = this
+    app.wxrequest({
+      url: app.getUrl().payShopAgain,
+      data: {
+        oid: this.data.oid,
+        uid: app.gs('userInfoAll').uid,
+        openid: app.gs('userInfoAll').openid
       }
     }).then(res => {
       app.wxpay2(res.msg).then(() => {

@@ -184,16 +184,63 @@ Page({
           }, 1000)
         })
         break
+      case 'suggest':
+        if (!e.detail.value.comment.trim()) {
+          return app.toast({
+            content: '内容不能为空'
+          })
+        } else if (!e.detail.value.phone.trim() || app.checkMobile(e.detail.value.phone)) {
+          return app.toast({
+            content: '需要有效的手机号码'
+          })
+        } else if (!new UpLoad({
+          imgArr: 'imgArr'
+        }).checkAll()) {
+          return app.toast({
+            content: '请等待图片上传完成后继续操作'
+          })
+        }
+        app.wxrequest({
+          url: app.getUrl().userFeedback,
+          data: {
+            uid: app.gs('userInfoAll').uid,
+            content: e.detail.value.comment,
+            phone: e.detail.value.phone,
+            imgs_url: JSON.stringify({
+              'imgs': that.getRealUrl()
+            })
+          }
+        }).then(() => {
+          app.toast({
+            content: '反馈成功',
+            image: ''
+          })
+        })
+        break
       default:
         return app.toast({
           content: '错误！！请返回上一页重新进入'
         })
     }
   },
+  getJson () {
+    let that = this
+    wx.request({
+      url: app.getExactlyUrl(app.getUrl().toJson),
+      success (res) {
+        if (res.statusCode === 200) {
+          that.setData({
+            tojson: res.data.data.toJson
+          })
+        } else {} // todo cloud tojson add
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
+    this.getJson()
     this.setData({
       options
     })

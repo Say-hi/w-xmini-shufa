@@ -49,7 +49,7 @@
   </view>
   <view wx:if="{{ options.type == 'suggest' }}" class="mt10">
     <view class="p20 bgfff f22 c787878">输入有效的联系方式以便开发联系你</view>
-    <input class="bgfff p20 mt20 f28" placeholder="输入您的联系方式"/>
+    <input name='phone' class="bgfff p20 mt20 f28" placeholder="输入您的联系方式"/>
   </view>
   <view wx:if="{{ options.type == 'camera' }}" class="cameraInput mt10 bgfff">
     <view catchtap="chooseSoS" class="bd1 arrow p20 c323232 f28">
@@ -72,6 +72,7 @@
     <!--上传图片 -e-->
   </view>
   <!--发布 -s-->
+  <view class='zw90'></view>
   <button form-type="submit" class="fabu f34 cfff" style="padding-bottom: {{ fix ? 40:0 }}rpx;">
     {{ options.type === 'camera' ? '提交分享' : options.type === 'suggest' ? '确定提交' : '发布' }}
   </button>

@@ -52,6 +52,20 @@ module.exports = {
       });
     });
   },
+  getPermission: function getPermission() {
+    return new Promise(function (resolve, reject) {
+      wx.cloud.callFunction({
+        name: 'getPermission',
+        data: {},
+        success: function success(res) {
+          resolve(res.result);
+        },
+        fail: function fail(err) {
+          reject(err);
+        }
+      });
+    });
+  },
   getUserOperation: function getUserOperation() {
     return new Promise(function (resolve, reject) {
       wx.cloud.callFunction({

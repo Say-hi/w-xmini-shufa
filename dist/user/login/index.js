@@ -21,7 +21,9 @@ Page({
   },
   _getCode: function _getCode(phone) {
     if (timer) {
-      return app.toast({ content: second + '\u79D2\u540E\u53EF\u518D\u6B21\u83B7\u53D6\u9A8C\u8BC1\u7801' });
+      return app.toast({
+        content: second + '\u79D2\u540E\u53EF\u518D\u6B21\u83B7\u53D6\u9A8C\u8BC1\u7801'
+      });
     }
     var that = this;
     that.setData({
@@ -48,7 +50,10 @@ Page({
         phone: phone
       }
     }).then(function () {
-      app.toast({ content: '验证码已发送,请注意查收' });
+      app.toast({
+        content: '验证码已发送,请注意查收',
+        image: ''
+      });
     });
   },
   _phoneLogin: function _phoneLogin() {
@@ -88,7 +93,10 @@ Page({
               phone: e.detail.value.phone
             }
           }).then(function (res) {
-            app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res, { avatar_url: e.detail.userInfo.avatarUrl, nickname: e.detail.userInfo.nickName }));
+            app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res, {
+              avatar_url: e.detail.userInfo.avatarUrl,
+              nickname: e.detail.userInfo.nickName
+            }));
             wx.navigateBack();
           });
         }
@@ -96,11 +104,19 @@ Page({
     });
   },
   phoneLogin: function phoneLogin(e) {
-    if (e.detail.value.phone.length !== 11) return app.toast({ content: '请输入正确的手机号码' });
+    if (e.detail.value.phone.length !== 11) {
+      return app.toast({
+        content: '请输入正确的手机号码'
+      });
+    }
     if (e.detail.target.id === 'code') {
       this._getCode(e.detail.value.phone);
     } else {
-      if (!e.detail.value.code) return app.toast({ content: '请输入验证码' });
+      if (!e.detail.value.code) {
+        return app.toast({
+          content: '请输入验证码'
+        });
+      }
       this._login(e);
     }
   },
@@ -108,7 +124,11 @@ Page({
     if (e.target.id === 'phone') this.data.phone = e.detail.value;else if (e.target.id === 'code') this.data.code = e.detail.value;
   },
   _getUserInfo: function _getUserInfo(e) {
-    if (!e.detail.signature) return app.toast({ content: '请授权后再操作' });
+    if (!e.detail.signature) {
+      return app.toast({
+        content: '请授权后再操作'
+      });
+    }
     e.detail['value'] = {};
     e.detail['target'] = {};
     e.detail['target']['id'] = 'login';

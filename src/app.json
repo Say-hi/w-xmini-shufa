@@ -173,7 +173,7 @@
     //    "my-add": "/components/my-add/add",
     //    "my-tip": "/components/my-tip/my-tip",
     //    "my-login": "/components/my-login/my-login",
-    //    "my-express": "/components/my-express/my-express",
+    "my-express": "/components/my-express/my-express",
     "my-navigator-tab": "/components/my-navigator-tab/my-navigator-tab",
     //    "canvasdrawer": "/components/canvasdrawer/canvasdrawer",
     //    "my-back": "/components/my-back/back",

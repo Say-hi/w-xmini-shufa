@@ -26,9 +26,9 @@
 <!--导航 -s-->
 <view class="lh80 mt20 bd1 f25 c323232 p030 bgfff">卖在流谦</view>
 <view class="userTab tac f23 c787878 bgfff">
-  <navigator hidden="{{ item.t === '待付款' }}" url="{{ item.url }}" wx:for="{{ tabArr }}" wx:key="index">
+  <navigator class='orderNav' data-num='{{ item.n }}' hidden="{{ item.t === '待付款' }}" url="{{ item.url }}" wx:for="{{ tabArr }}" wx:key="index">
     <image mode="widthFix" src="{{ item.i || 'https://c.jiangwenqiang.com/api/logo.jpg' }}"></image>
-    <view>{{ item.t }}{{ item.n }}</view>
+    <view>{{ item.t }}</view>
   </navigator>
 </view>
 <!--导航 -e-->

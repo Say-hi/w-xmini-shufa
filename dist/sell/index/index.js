@@ -45,22 +45,22 @@ Page({
       url: '/shop/order/index?type=1&from=sellShop' // 用户订单端
     }, {
       t: '待发货 ',
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_0.png',
+      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_1.png',
       n: 0,
       url: '/shop/order/index?type=2&from=sellShop' // 用户销售端
     }, {
       t: '待收货 ',
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_0.png',
+      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_2.png',
       n: 0,
       url: '/shop/order/index?type=3&from=sellShop'
     }, {
       t: '已完成 ',
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_0.png',
+      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_3.png',
       n: 0,
       url: '/shop/order/index?type=4&from=sellShop'
     }, {
       t: '退货中 ',
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_0.png',
+      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_4.png',
       n: 0,
       url: '/shop/order/index?type=5&from=sellShop'
     }]

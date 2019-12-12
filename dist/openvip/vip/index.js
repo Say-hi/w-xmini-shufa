@@ -13,6 +13,7 @@ Page({
     capsule: {
       bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
     },
+    checkIos: true,
     system: app.data.system.system.indexOf('iOS') >= 0
   },
   getInfo: function getInfo() {
@@ -43,13 +44,35 @@ Page({
       }, 2000);
     }
   },
+  getData: function getData() {
+    var that = this;
+    wx.request({
+      url: app.getExactlyUrl(app.getUrl().shopIosCheck),
+      success: function success(res) {
+        if (res.statusCode !== 200) {
+          app.cloud().getPermission().then(function (res2) {
+            that.setData({
+              checkIos: res2.check
+            });
+          });
+        } else {
+          that.setData({
+            checkIos: res.data.data.check
+          });
+        }
+      }
+    });
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad() {
     var pages = getCurrentPages();
-    pages[pages.length - 2].route === 'pages/index/index' && this.setData({ openType: 'navigateBack' });
+    pages[pages.length - 2].route === 'pages/index/index' && this.setData({
+      openType: 'navigateBack'
+    });
+    this.getData();
     this.getInfo();
     // let that = this
     // if (!app.gs() || !app.gs('userInfoAll')) return app.wxlogin()
