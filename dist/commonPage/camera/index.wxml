@@ -3,7 +3,7 @@
 </jwqcapsule>
 
 <!--比较区域 -s-->
-<camera hidden="{{ !(options.type == 1 && !cameraMaskAnimate) }}"  class="comCamera pr">
+<camera hidden="{{ !(options.type == 1 && !cameraMaskAnimate) }}"  class="comCamera pr" style='margin: 50rpx auto;width: 662rpx;height: 662rpx;overflow: hidden;'>
   <cover-image bindtouchstart="touchStart" bindtouchmove="touchMove" style="transform: scale({{ scale }}) rotate({{ rotate }}deg);  top: {{ moveY }}rpx; left: {{ moveX }}rpx;" class="pa mainPic" mode="widthFix" src="{{ main }}"></cover-image>
   <cover-image bindtouchstart="touchStart" bindtouchmove="touchMove" wx:if="{{ bottomImg[bottomIndex].i }}" class="pa bgPic" src="{{ bottomImg[bottomIndex].i }}"></cover-image>
 </camera>
@@ -46,7 +46,7 @@
 <view class="mask cameraMask o0 {{ cameraMaskAnimate ? 'o1' : '' }} tr5">
 <view class="bgfff br10 mask-in ">
   <view class="f30 tac lh60 fw7 c323232">分享</view>
-  <view class="df dfac dfb p30">
+  <view catchtap="eventDraw" data-type="cameraMask" class="df dfac dfb p30">
     <navigator url="../talk/index?type=camera&url={{ SteleShareImage }}" class="df dfc dfac f25 c323232">
       <text style="color: #cfa972;" class="jwqfont jwqshequ"></text>
       <text class="mt10">社区</text>

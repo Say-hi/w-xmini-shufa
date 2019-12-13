@@ -84,6 +84,29 @@ module.exports = {
       })
     })
   },
+  getImgCheck (imgsrc) {
+    return new Promise((resolve, reject) => {
+      wx.getFileSystemManager().readFile({
+        filePath: imgsrc,
+        success: buffer => {
+          wx.cloud.callFunction({
+            name: 'check',
+            data: {
+              value: buffer.data
+            },
+            success (imgres) {
+              wx.hideToast()
+              if (imgres.result.errCode * 1 === 87014 || !imgres.result) {
+                reject()
+              } else {
+                resolve()
+              }
+            }
+          })
+        }
+      })
+    })
+  },
   getFreight () {
     return new Promise((resolve, reject) => {
       wx.request({

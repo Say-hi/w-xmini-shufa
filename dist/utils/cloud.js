@@ -108,6 +108,29 @@ module.exports = {
       });
     });
   },
+  getImgCheck: function getImgCheck(imgsrc) {
+    return new Promise(function (resolve, reject) {
+      wx.getFileSystemManager().readFile({
+        filePath: imgsrc,
+        success: function success(buffer) {
+          wx.cloud.callFunction({
+            name: 'check',
+            data: {
+              value: buffer.data
+            },
+            success: function success(imgres) {
+              wx.hideToast();
+              if (imgres.result.errCode * 1 === 87014 || !imgres.result) {
+                reject();
+              } else {
+                resolve();
+              }
+            }
+          });
+        }
+      });
+    });
+  },
   getFreight: function getFreight() {
     var _this = this;
 

@@ -3,7 +3,7 @@
 </jwqcapsule>
 <!--比较区域 -s-->
 <view class="comparison pr bgfff">
-  <image class="pa mainPic" mode="widthFix" src="{{item.img_name}}"></image>
+  <image class="pa mainPic" mode="widthFix" src="{{info.img_name}}"></image>
   <image class="pa bgPic" src="{{ bottomImg[bottomIndex].i }}"></image>
 </view>
 <!--比较区域 -e-->

@@ -33,7 +33,9 @@ Page({
           that.data.goodsInfo = res.data.data;
           that.getQrCode();
         } else {
-          app.setToast(that, { content: res.data.desc });
+          app.setToast(that, {
+            content: res.data.desc
+          });
         }
       }
     });
@@ -114,6 +116,220 @@ Page({
         }];
         break;
       case 'stele':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        }, {
+          type: 'image',
+          url: this.data.info.img_name || this.data.info.cover_url,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        }, {
+          type: 'image',
+          url: '' + that.data.qrCode,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        }, {
+          type: 'text',
+          content: this.data.info.name || this.data.info.title,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }];
+        break;
+      case 'shop':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        }, {
+          type: 'image',
+          url: this.data.info.img_url,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        }, {
+          type: 'image',
+          url: '' + that.data.qrCode,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        }, {
+          type: 'text',
+          content: this.data.info.title,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }];
+        break;
+      case 'hundred':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        }, {
+          type: 'image',
+          url: this.data.info.imgs_url.imgs && this.data.info.imgs_url.imgs[0] ? this.data.info.imgs_url.imgs[0] : this.data.info.avatar_url,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        }, {
+          type: 'image',
+          url: '' + that.data.qrCode,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        }, {
+          type: 'text',
+          content: this.data.info.title,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }];
+        break;
+      case 'community':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        }, {
+          type: 'image',
+          url: this.data.info.imgs_url.imgs && this.data.info.imgs_url.imgs[0] ? this.data.info.imgs_url.imgs[0] : this.data.info.avatar_url,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        }, {
+          type: 'image',
+          url: '' + that.data.qrCode,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        }, {
+          type: 'text',
+          content: this.data.info.title,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }];
+        break;
+      case 'dayword':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        }, {
+          type: 'image',
+          url: this.data.info.img_url,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        }, {
+          type: 'image',
+          url: '' + that.data.qrCode,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        }, {
+          type: 'text',
+          content: this.data.info.title,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }];
+        break;
+      case 'camera':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        }, {
+          type: 'image',
+          url: this.data.info.img_name,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        }, {
+          type: 'image',
+          url: '' + that.data.qrCode,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        }, {
+          type: 'text',
+          content: this.data.info.word,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }];
         break;
     }
 
@@ -288,7 +504,9 @@ Page({
         });
       },
       fail: function fail() {
-        app.toast({ content: '请授权相册保存' });
+        app.toast({
+          content: '请授权相册保存'
+        });
         that.setData({
           buttonShow: true
         });

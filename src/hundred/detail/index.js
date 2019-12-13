@@ -61,9 +61,10 @@ Page({
     })
   },
   _goPicShare () {
+    app.su('shareCardInfo', this.data.info)
     this._shareType()
     wx.navigateTo({
-      url: '/share/carShare/carShare?type=2'
+      url: `/share/carShare/carShare?type=${this.data.options.from === 'main' ? 'community' : 'hundred'}`
     })
   },
   getDetail () {
@@ -110,7 +111,11 @@ Page({
     })
   },
   sendHundredDiscussSub (e) {
-    if (!e.detail.value.comment.trim()) return app.toast({content: '评论内容不能为空'})
+    if (!e.detail.value.comment.trim()) {
+      return app.toast({
+        content: '评论内容不能为空'
+      })
+    }
     let that = this
     app.wxrequest({
       url: app.getUrl()[this.data.options.from === 'main' ? 'communityDiscussSub' : 'hundredDiscussSub'],
@@ -130,7 +135,10 @@ Page({
         state: 1
       }
     }).then(() => {
-      app.toast({content: '评论成功', image: ''})
+      app.toast({
+        content: '评论成功,系统审核通过后即可展示',
+        image: ''
+      })
       that.setData({
         commentValue: ''
       })

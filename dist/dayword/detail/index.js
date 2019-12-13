@@ -29,9 +29,10 @@ Page({
     });
   },
   _goPicShare: function _goPicShare() {
+    app.su('shareCardInfo', this.data.info);
     this._shareType();
     wx.navigateTo({
-      url: '/share/carShare/carShare?type=3'
+      url: '/share/carShare/carShare?type=dayword'
     });
   },
   getHundredDiscuss: function getHundredDiscuss() {
@@ -105,7 +106,11 @@ Page({
     });
   },
   sendHundredDiscussSub: function sendHundredDiscussSub(e) {
-    if (!e.detail.value.comment.trim()) return app.toast({ content: '评论内容不能为空' });
+    if (!e.detail.value.comment.trim()) {
+      return app.toast({
+        content: '评论内容不能为空'
+      });
+    }
     var that = this;
     app.wxrequest({
       url: app.getUrl().dayDiscussSub,
@@ -119,7 +124,10 @@ Page({
         state: 1
       }
     }).then(function () {
-      app.toast({ content: '评论成功', image: '' });
+      app.toast({
+        content: '评论成功,系统审核通过后即可展示',
+        image: ''
+      });
       that.setData({
         commentValue: ''
       });

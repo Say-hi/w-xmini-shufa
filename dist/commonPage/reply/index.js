@@ -101,7 +101,9 @@ Page({
         };
         break;
       default:
-        return app.toast({ content: '评论类型错误,非有效类型' });
+        return app.toast({
+          content: '评论类型错误,非有效类型'
+        });
     }
     app.wxrequest({
       url: url,
@@ -144,7 +146,11 @@ Page({
     });
   },
   sendWordsDiscussSub: function sendWordsDiscussSub(e) {
-    if (!e.detail.value.comment.trim()) return app.toast({ content: '评论内容不能为空' });
+    if (!e.detail.value.comment.trim()) {
+      return app.toast({
+        content: '评论内容不能为空'
+      });
+    }
     var that = this;
     var data = {};
     var url = null;
@@ -230,13 +236,18 @@ Page({
         };
         break;
       default:
-        return app.toast({ content: '类型错误，非有效的评论类型' });
+        return app.toast({
+          content: '类型错误，非有效的评论类型'
+        });
     }
     app.wxrequest({
       url: url,
       data: data
     }).then(function () {
-      app.toast({ content: '评论成功', image: '' });
+      app.toast({
+        content: '评论成功,系统审核通过后即可展示',
+        image: ''
+      });
       that.setData({
         commentValue: ''
       });
@@ -319,7 +330,9 @@ Page({
         };
         break;
       default:
-        return app.toast({ content: '类型错误，非有效的评论类型' });
+        return app.toast({
+          content: '类型错误，非有效的评论类型'
+        });
     }
     app.wxrequest({
       url: url,
@@ -362,7 +375,9 @@ Page({
         options = 'vid=' + this.data.options.vid + '&state=2&did=' + this.data.comment[e.currentTarget.dataset.index].id + '&type=4&sid=' + this.data.options.sid;
         break;
       default:
-        return app.toast({ content: '评论类型错误,非有效类型' });
+        return app.toast({
+          content: '评论类型错误,非有效类型'
+        });
     }
     wx.redirectTo({
       url: '/commonPage/reply/index?' + options

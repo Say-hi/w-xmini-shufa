@@ -10,38 +10,36 @@ Page({
     capsule: {
       bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
     },
-    bottomImg: [
-      {
-        i: '',
-        t: '无'
-      },
-      {
-        i: 'https://c.jiangwenqiang.com/lqsy/camera_mi.png',
-        t: '米字格'
-      },
-      {
-        i: 'https://c.jiangwenqiang.com/lqsy/camera_hui.png',
-        t: '回字格'
-      },
-      {
-        i: 'https://c.jiangwenqiang.com/lqsy/camera_jiu.png',
-        t: '九宫格'
-      }
+    bottomImg: [{
+      i: '',
+      t: '无'
+    },
+    {
+      i: 'https://c.jiangwenqiang.com/lqsy/camera_mi.png',
+      t: '米字格'
+    },
+    {
+      i: 'https://c.jiangwenqiang.com/lqsy/camera_hui.png',
+      t: '回字格'
+    },
+    {
+      i: 'https://c.jiangwenqiang.com/lqsy/camera_jiu.png',
+      t: '九宫格'
+    }
     ],
     bottomIndex: 0,
-    cameraType: [
-      {
-        i: 'jwqduibi',
-        t: '快速对比'
-      },
-      {
-        i: 'jwqtupian',
-        t: '选图对比'
-      },
-      {
-        i: 'jwqmn_shangchuantupian',
-        t: '拍照对比'
-      }
+    cameraType: [{
+      i: 'jwqduibi',
+      t: '快速对比'
+    },
+    {
+      i: 'jwqtupian',
+      t: '选图对比'
+    },
+    {
+      i: 'jwqmn_shangchuantupian',
+      t: '拍照对比'
+    }
     ],
     page: 0,
     more: true,
@@ -52,9 +50,15 @@ Page({
       this.setData({
         needSetting: false
       })
-      app.toast({content: '授权成功，请选择功能进行体验', image: ''})
+      app.toast({
+        content: '授权成功，请选择功能进行体验',
+        image: ''
+      })
     } else {
-      app.toast({content: '请授权使用相机功能，否则无法体验功能, 请再次点击并进行授权', time: 10000})
+      app.toast({
+        content: '请授权使用相机功能，否则无法体验功能, 请再次点击并进行授权',
+        time: 10000
+      })
     }
   },
   userCamera (e) {
@@ -70,7 +74,10 @@ Page({
         that.setData({
           needSetting: true
         })
-        app.toast({content: '请授权使用相机功能，否则无法体验功能, 请再次点击并进行授权', time: 10000})
+        app.toast({
+          content: '请授权使用相机功能，否则无法体验功能, 请再次点击并进行授权',
+          time: 10000
+        })
       }
     })
   },
@@ -130,9 +137,10 @@ Page({
     })
   },
   _goPicShare () {
+    app.su('shareCardInfo', this.data.info)
     this._shareType()
     wx.navigateTo({
-      url: '/share/carShare/carShare?type=2'
+      url: '/share/carShare/carShare?type=camera'
     })
   },
   getDetail () {
@@ -175,7 +183,11 @@ Page({
     })
   },
   sendHundredDiscussSub (e) {
-    if (!e.detail.value.comment.trim()) return app.toast({content: '评论内容不能为空'})
+    if (!e.detail.value.comment.trim()) {
+      return app.toast({
+        content: '评论内容不能为空'
+      })
+    }
     let that = this
     app.wxrequest({
       url: app.getUrl().stackingDiscussSub,
@@ -189,7 +201,10 @@ Page({
         state: 1
       }
     }).then(() => {
-      app.toast({content: '评论成功', image: ''})
+      app.toast({
+        content: '评论成功,系统审核通过后即可展示',
+        image: ''
+      })
       that.setData({
         commentValue: ''
       })

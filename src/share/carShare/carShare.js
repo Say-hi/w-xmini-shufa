@@ -31,7 +31,9 @@ Page({
           that.data.goodsInfo = res.data.data
           that.getQrCode()
         } else {
-          app.setToast(that, {content: res.data.desc})
+          app.setToast(that, {
+            content: res.data.desc
+          })
         }
       }
     })
@@ -42,87 +44,322 @@ Page({
       mask: true
     })
     let that = this
-    let views = [
-      {
-        type: 'image',
-        url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
-        top: 0,
-        left: 0,
-        width: 375,
-        height: 603
-      },
-      {
-        type: 'image',
-        url: 'https://c.jiangwenqiang.com/lqsy/list1.png',
-        top: 150,
-        left: 375 / 2 - 110,
-        width: 220,
-        height: 220
-      },
-      {
-        type: 'image',
-        url: `${that.data.qrCode}`,
-        top: 385,
-        left: 250,
-        width: 80,
-        height: 80
-      },
-      {
-        type: 'text',
-        content: '啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦',
-        breakWord: true,
-        MaxLineNumber: 2,
-        fontSize: 20,
-        lineHeight: 20,
-        color: 'black',
-        textAlign: 'center',
-        top: 400,
-        left: 134,
-        width: 160
-      }
+    let views = [{
+      type: 'image',
+      url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+      top: 0,
+      left: 0,
+      width: 375,
+      height: 603
+    },
+    {
+      type: 'image',
+      url: 'https://c.jiangwenqiang.com/lqsy/list1.png',
+      top: 150,
+      left: 375 / 2 - 110,
+      width: 220,
+      height: 220
+    },
+    {
+      type: 'image',
+      url: `${that.data.qrCode}`,
+      top: 385,
+      left: 250,
+      width: 80,
+      height: 80
+    },
+    {
+      type: 'text',
+      content: '啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦',
+      breakWord: true,
+      MaxLineNumber: 2,
+      fontSize: 20,
+      lineHeight: 20,
+      color: 'black',
+      textAlign: 'center',
+      top: 400,
+      left: 134,
+      width: 160
+    }
     ]
     switch (this.data.options.type) {
       case 'inviteFriend':
-        views = [
-          {
-            type: 'image',
-            url: 'https://c.jiangwenqiang.com/lqsy/share/shopUserShare.png',
-            top: 0,
-            left: 0,
-            width: 375,
-            height: 603
-          },
-          {
-            type: 'image',
-            url: `${that.data.qrCode}`,
-            top: 230,
-            left: 145,
-            width: 80,
-            height: 80
-          }
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/shopUserShare.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        },
+        {
+          type: 'image',
+          url: `${that.data.qrCode}`,
+          top: 230,
+          left: 145,
+          width: 80,
+          height: 80
+        }
         ]
         break
       case 'user':
-        views = [
-          {
-            type: 'image',
-            url: 'https://c.jiangwenqiang.com/lqsy/share/shopUserShare.png',
-            top: 0,
-            left: 0,
-            width: 375,
-            height: 603
-          },
-          {
-            type: 'image',
-            url: `${that.data.qrCode}`,
-            top: 230,
-            left: 145,
-            width: 80,
-            height: 80
-          }
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/shopUserShare.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        },
+        {
+          type: 'image',
+          url: `${that.data.qrCode}`,
+          top: 230,
+          left: 145,
+          width: 80,
+          height: 80
+        }
         ]
         break
       case 'stele':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        },
+        {
+          type: 'image',
+          url: this.data.info.img_name || this.data.info.cover_url,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        },
+        {
+          type: 'image',
+          url: `${that.data.qrCode}`,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        },
+        {
+          type: 'text',
+          content: this.data.info.name || this.data.info.title,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }
+        ]
+        break
+      case 'shop':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        },
+        {
+          type: 'image',
+          url: this.data.info.img_url,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        },
+        {
+          type: 'image',
+          url: `${that.data.qrCode}`,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        },
+        {
+          type: 'text',
+          content: this.data.info.title,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }
+        ]
+        break
+      case 'hundred':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        },
+        {
+          type: 'image',
+          url: this.data.info.imgs_url.imgs && this.data.info.imgs_url.imgs[0] ? this.data.info.imgs_url.imgs[0] : this.data.info.avatar_url,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        },
+        {
+          type: 'image',
+          url: `${that.data.qrCode}`,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        },
+        {
+          type: 'text',
+          content: this.data.info.title,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }
+        ]
+        break
+      case 'community':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        },
+        {
+          type: 'image',
+          url: this.data.info.imgs_url.imgs && this.data.info.imgs_url.imgs[0] ? this.data.info.imgs_url.imgs[0] : this.data.info.avatar_url,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        },
+        {
+          type: 'image',
+          url: `${that.data.qrCode}`,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        },
+        {
+          type: 'text',
+          content: this.data.info.title,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }
+        ]
+        break
+      case 'dayword':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        },
+        {
+          type: 'image',
+          url: this.data.info.img_url,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        },
+        {
+          type: 'image',
+          url: `${that.data.qrCode}`,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        },
+        {
+          type: 'text',
+          content: this.data.info.title,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }
+        ]
+        break
+      case 'camera':
+        views = [{
+          type: 'image',
+          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          top: 0,
+          left: 0,
+          width: 375,
+          height: 603
+        },
+        {
+          type: 'image',
+          url: this.data.info.img_name,
+          top: 150,
+          left: 375 / 2 - 110,
+          width: 220,
+          height: 220
+        },
+        {
+          type: 'image',
+          url: `${that.data.qrCode}`,
+          top: 385,
+          left: 250,
+          width: 80,
+          height: 80
+        },
+        {
+          type: 'text',
+          content: this.data.info.word,
+          breakWord: true,
+          MaxLineNumber: 2,
+          fontSize: 20,
+          lineHeight: 20,
+          color: 'black',
+          textAlign: 'center',
+          top: 400,
+          left: 134,
+          width: 160
+        }
+        ]
         break
     }
 
@@ -141,51 +378,50 @@ Page({
       mask: true
     })
     let that = this
-    let views = [
-      {
-        type: 'image',
-        url: 'https://teach-1258261086.cos.ap-guangzhou.myqcloud.com/image/admin/mask/share_4.png',
-        top: 0,
-        left: 0,
-        width: 375,
-        height: 603
-      },
-      {
-        type: 'image',
-        url: `${this.data.imgDomain}/${this.data.goodsInfo.cover_image}`,
-        top: 120,
-        left: 36,
-        width: 300,
-        height: 220
-      },
-      {
-        type: 'text',
-        content: this.data.goodsInfo.name,
-        breakWord: true,
-        MaxLineNumber: 1,
-        fontSize: 20,
-        lineHeight: 20,
-        top: 360,
-        left: 40,
-        width: 120
-      },
-      {
-        type: 'text',
-        content: '售价：' + this.data.goodsInfo.price,
-        breakWord: true,
-        MaxLineNumber: 2,
-        top: 420,
-        left: 40,
-        width: 120
-      },
-      {
-        type: 'image',
-        url: `${that.data.qrCode}`,
-        top: 358,
-        left: 198,
-        width: 130,
-        height: 130
-      }
+    let views = [{
+      type: 'image',
+      url: 'https://teach-1258261086.cos.ap-guangzhou.myqcloud.com/image/admin/mask/share_4.png',
+      top: 0,
+      left: 0,
+      width: 375,
+      height: 603
+    },
+    {
+      type: 'image',
+      url: `${this.data.imgDomain}/${this.data.goodsInfo.cover_image}`,
+      top: 120,
+      left: 36,
+      width: 300,
+      height: 220
+    },
+    {
+      type: 'text',
+      content: this.data.goodsInfo.name,
+      breakWord: true,
+      MaxLineNumber: 1,
+      fontSize: 20,
+      lineHeight: 20,
+      top: 360,
+      left: 40,
+      width: 120
+    },
+    {
+      type: 'text',
+      content: '售价：' + this.data.goodsInfo.price,
+      breakWord: true,
+      MaxLineNumber: 2,
+      top: 420,
+      left: 40,
+      width: 120
+    },
+    {
+      type: 'image',
+      url: `${that.data.qrCode}`,
+      top: 358,
+      left: 198,
+      width: 130,
+      height: 130
+    }
     ]
 
     this.setData({
@@ -203,51 +439,50 @@ Page({
       mask: true
     })
     let that = this
-    let views = [
-      {
-        type: 'image',
-        url: 'https://c.jiangwenqiang.com/lqsy/cavas_bottom.jpg',
-        top: 0,
-        left: 0,
-        width: 375,
-        height: 603
-      },
-      {
-        type: 'image',
-        url: `${this.data.imgDomain}/${this.data.goodsInfo.cover_image}`,
-        top: 120,
-        left: 36,
-        width: 300,
-        height: 220
-      },
-      {
-        type: 'text',
-        content: this.data.goodsInfo.name,
-        breakWord: true,
-        MaxLineNumber: 1,
-        fontSize: 20,
-        lineHeight: 20,
-        top: 360,
-        left: 40,
-        width: 120
-      },
-      {
-        type: 'text',
-        content: '售价：' + this.data.goodsInfo.price,
-        breakWord: true,
-        MaxLineNumber: 2,
-        top: 420,
-        left: 40,
-        width: 120
-      },
-      {
-        type: 'image',
-        url: `${that.data.qrCode}`,
-        top: 358,
-        left: 198,
-        width: 130,
-        height: 130
-      }
+    let views = [{
+      type: 'image',
+      url: 'https://c.jiangwenqiang.com/lqsy/cavas_bottom.jpg',
+      top: 0,
+      left: 0,
+      width: 375,
+      height: 603
+    },
+    {
+      type: 'image',
+      url: `${this.data.imgDomain}/${this.data.goodsInfo.cover_image}`,
+      top: 120,
+      left: 36,
+      width: 300,
+      height: 220
+    },
+    {
+      type: 'text',
+      content: this.data.goodsInfo.name,
+      breakWord: true,
+      MaxLineNumber: 1,
+      fontSize: 20,
+      lineHeight: 20,
+      top: 360,
+      left: 40,
+      width: 120
+    },
+    {
+      type: 'text',
+      content: '售价：' + this.data.goodsInfo.price,
+      breakWord: true,
+      MaxLineNumber: 2,
+      top: 420,
+      left: 40,
+      width: 120
+    },
+    {
+      type: 'image',
+      url: `${that.data.qrCode}`,
+      top: 358,
+      left: 198,
+      width: 130,
+      height: 130
+    }
     ]
 
     this.setData({
@@ -261,7 +496,9 @@ Page({
   },
   eventGetImage (event) {
     wx.hideLoading()
-    const { tempFilePath } = event.detail
+    const {
+      tempFilePath
+    } = event.detail
     this.setData({
       shareImage: tempFilePath
     })
@@ -308,7 +545,9 @@ Page({
         })
       },
       fail () {
-        app.toast({content: '请授权相册保存'})
+        app.toast({
+          content: '请授权相册保存'
+        })
         that.setData({
           buttonShow: true
         })

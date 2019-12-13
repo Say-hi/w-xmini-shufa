@@ -45,68 +45,82 @@ Page({
       sizeType: ['compressed'],
       sourceType: [e.currentTarget.dataset.index > 0 ? 'album' : 'camera'],
       success: function success(res1) {
-        wx.showLoading({
-          title: '图片上传中'
+        app.toast({
+          content: '图片上传中',
+          mask: true,
+          time: 999999
         });
         var FilePath = res1.tempFilePaths[0];
         that.setData({
           imgUrl: FilePath
         });
-        wx.uploadFile({
-          url: app.getExactlyUrl(app.getUrl().distinguishKnow),
-          filePath: FilePath,
-          name: 'file',
-          formData: {
-            uid: app.gs('userInfoAll').uid,
-            file: FilePath
-          },
-          success: function success(res) {
-            wx.hideLoading();
-            that.data.page = 0;
-            that.data.outList = [];
-            var list = JSON.parse(res.data).data.words_result;
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
+        app.cloud().getImgCheck(FilePath).then(function () {
+          wx.uploadFile({
+            url: app.getExactlyUrl(app.getUrl().distinguishKnow),
+            filePath: FilePath,
+            name: 'file',
+            formData: {
+              uid: app.gs('userInfoAll').uid,
+              file: FilePath
+            },
+            success: function success(res) {
+              wx.hideLoading();
+              app.toast({
+                content: '',
+                image: '',
+                time: 100
+              });
+              that.data.page = 0;
+              that.data.outList = [];
+              var list = JSON.parse(res.data).data.words_result;
+              var _iteratorNormalCompletion = true;
+              var _didIteratorError = false;
+              var _iteratorError = undefined;
 
-            try {
-              for (var _iterator = list[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var v = _step.value;
-
-                v.probability.average = Math.floor(v.probability.average * 100);
-                v.words = v.words.slice(0, 1);
-              }
-            } catch (err) {
-              _didIteratorError = true;
-              _iteratorError = err;
-            } finally {
               try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                  _iterator.return();
+                for (var _iterator = list[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                  var v = _step.value;
+
+                  v.probability.average = Math.floor(v.probability.average * 100);
+                  v.words = v.words.slice(0, 1);
                 }
+              } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
               } finally {
-                if (_didIteratorError) {
-                  throw _iteratorError;
+                try {
+                  if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                  }
+                } finally {
+                  if (_didIteratorError) {
+                    throw _iteratorError;
+                  }
                 }
               }
-            }
 
-            list.sort(function (a, b) {
-              return b.probability.average - a.probability.average;
-            });
-            that.setData({
-              list: list
-            }, function () {
-              that._toggleShow();
-              that.getWordOut(list[0].words);
-            });
-          },
-          fail: function fail() {
-            wx.hideLoading();
-            app.toast({
-              content: '上传失败'
-            });
-          }
+              list.sort(function (a, b) {
+                return b.probability.average - a.probability.average;
+              });
+              that.setData({
+                list: list
+              }, function () {
+                that._toggleShow();
+                list[0] && list[0].words && that.getWordOut(list[0].words);
+              });
+            },
+            fail: function fail() {
+              wx.hideLoading();
+              app.toast({
+                content: '上传失败'
+              });
+            }
+          });
+        }, function () {
+          wx.hideLoading();
+          app.toast({
+            content: '为了营造绿色的网络环境，检测发现您的图片存在违规内容，请更换图片'
+          });
         });
       }
     });

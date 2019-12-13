@@ -145,31 +145,49 @@ Page({
           count: 1,
           sourceType: [that.data.options.type < 3 ? 'album' : 'camera'],
           success: function success(res1) {
-            wx.showLoading({
-              title: '图片上传处理中'
+            app.toast({
+              content: '图片上传处理中',
+              mask: true,
+              time: 99999
             });
-            wx.uploadFile({
-              url: app.getExactlyUrl(app.getUrl().stackingImg),
-              filePath: res1.tempFilePaths[0],
-              name: 'file',
-              formData: {
-                uid: app.gs('userInfoAll').uid,
-                file: res1.tempFilePaths[0]
-              },
-              success: function success(res) {
-                wx.hideLoading();
-                // let data = JSON.parse(res.data).data
-                wx.getImageInfo({
-                  src: JSON.parse(res.data).data,
-                  success: function success(res2) {
-                    that.data.imageWidth = 165.5;
-                    that.data.imageHeight = 165.5 * res2.height / res2.width;
-                  }
-                });
-                that.setData({
-                  main: JSON.parse(res.data).data
-                });
-              }
+            app.cloud().getImgCheck(res1.tempFilePaths[0]).then(function () {
+              wx.uploadFile({
+                url: app.getExactlyUrl(app.getUrl().stackingImg),
+                filePath: res1.tempFilePaths[0],
+                name: 'file',
+                formData: {
+                  uid: app.gs('userInfoAll').uid,
+                  file: res1.tempFilePaths[0]
+                },
+                success: function success(res) {
+                  wx.hideLoading();
+                  app.toast({
+                    content: '',
+                    image: '',
+                    time: 20
+                  });
+                  // let data = JSON.parse(res.data).data
+                  wx.getImageInfo({
+                    src: JSON.parse(res.data).data,
+                    success: function success(res2) {
+                      that.data.imageWidth = 165.5;
+                      that.data.imageHeight = 165.5 * res2.height / res2.width;
+                    }
+                  });
+                  that.setData({
+                    main: JSON.parse(res.data).data
+                  });
+                }
+              });
+            }, function () {
+              wx.hideLoading();
+              app.toast({
+                content: '为了营造绿色的网络环境，检测发现您的图片存在违规内容，请更换图片',
+                mask: true
+              });
+              setTimeout(function () {
+                wx.navigateBack();
+              }, 2000);
             });
           },
           fail: function fail() {
@@ -283,8 +301,14 @@ Page({
       title: '图片生成中',
       mask: true
     });
-    // let that = this
-    var views = [{
+    var views = this.data.options.type < 2 ? [{
+      type: 'image',
+      url: this.data.main,
+      top: 0,
+      left: 0,
+      width: 331,
+      height: 331
+    }] : [{
       type: 'image',
       url: this.data.bgImg,
       top: 0,
@@ -336,7 +360,8 @@ Page({
   onLoad: function onLoad(options) {
     // this.getImageInfo('https://c.jiangwenqiang.com/lqsy/canvas_bottom.jpg')
     this.setData({
-      options: options
+      options: options,
+      main: app.gs('alphaImg')
     }, this.choosePhoto);
     // if (options.type > 1) {
     //   canvas = wx.createCanvasContext('cOne')

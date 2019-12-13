@@ -70,6 +70,7 @@ Page({
     });
   },
   _goPicShare: function _goPicShare() {
+    app.su('shareCardInfo', this.data.info);
     this._shareType();
     wx.navigateTo({
       url: '/share/carShare/carShare?type=stele'
@@ -187,7 +188,11 @@ Page({
     });
   },
   sendWordsDiscussSub: function sendWordsDiscussSub(e) {
-    if (!e.detail.value.comment.trim()) return app.toast({ content: '评论内容不能为空' });
+    if (!e.detail.value.comment.trim()) {
+      return app.toast({
+        content: '评论内容不能为空'
+      });
+    }
     var that = this;
     app.wxrequest({
       url: app.getUrl()[this.data.main ? 'videoDiscussSub' : 'teachDiscussSub'],
@@ -201,7 +206,10 @@ Page({
         state: 1
       }
     }).then(function () {
-      app.toast({ content: '评论成功', image: '' });
+      app.toast({
+        content: '评论成功,系统审核通过后即可展示',
+        image: ''
+      });
       that.setData({
         commentValue: ''
       }, function () {
@@ -252,7 +260,11 @@ Page({
     });
   },
   onReachBottom: function onReachBottom() {
-    if (!this.data.more) return app.toast({ content: '没有更多评论了' });
+    if (!this.data.more) {
+      return app.toast({
+        content: '没有更多评论了'
+      });
+    }
     this.getDiscuss();
   },
 

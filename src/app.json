@@ -142,7 +142,32 @@
     }
   ],
   "preloadRule": {
-
+    "pages/index/index": {
+      "network": "all",
+      "packages": [
+        "hundred",
+        "dayword",
+        "teaching",
+        "user",
+        "shop",
+        "camera",
+        "stele",
+        "common"
+      ]
+    },
+    "openShare/index/index": {
+      "network": "all",
+      "packages": [
+        "hundred",
+        "dayword",
+        "teaching",
+        "user",
+        "shop",
+        "camera",
+        "stele",
+        "common"
+      ]
+    }
   },
   // Window configuration
   "window": {

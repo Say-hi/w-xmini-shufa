@@ -20,7 +20,11 @@ Page({
     skuIndex: -1
   },
   _submit: function _submit() {
-    if (this.data.skuIndex < 0) return app.toast({ content: '\u8BF7\u9009\u62E9' + this.data.info.label + '\u5206\u7C7B' });
+    if (this.data.skuIndex < 0) {
+      return app.toast({
+        content: '\u8BF7\u9009\u62E9' + this.data.info.label + '\u5206\u7C7B'
+      });
+    }
     if (this.data.buyType === 'car') return this.shopCartAdd();
     var temp = [{
       pid: this.data.info.sku[this.data.skuIndex].pid,
@@ -44,7 +48,9 @@ Page({
     if (e.currentTarget.dataset.type === 'add') {
       this.data.num++;
     } else {
-      this.data.num > 1 && this.data.num-- || app.toast({ content: '最小购买数量为1' });
+      this.data.num > 1 && this.data.num-- || app.toast({
+        content: '最小购买数量为1'
+      });
     }
     this.setData({
       num: this.data.num
@@ -82,9 +88,10 @@ Page({
     });
   },
   _goPicShare: function _goPicShare() {
+    app.su('shareCardInfo', this.data.info);
     this._shareType();
     wx.navigateTo({
-      url: '/share/carShare/carShare?type=2'
+      url: '/share/carShare/carShare?type=shop'
     });
   },
   shopProductDetail: function shopProductDetail() {
@@ -149,7 +156,11 @@ Page({
     });
   },
   moreComments: function moreComments() {
-    if (!this.data.more) return app.toast({ content: '没有更多内容了' });
+    if (!this.data.more) {
+      return app.toast({
+        content: '没有更多内容了'
+      });
+    }
     this.shopDiscuss();
   },
   showImg: function showImg(e) {
@@ -164,7 +175,9 @@ Page({
     var _this3 = this;
 
     if (!app.gs('userInfoAll').uid) {
-      app.toast({ content: '您尚未登陆,请登陆后再购买' });
+      app.toast({
+        content: '您尚未登陆,请登陆后再购买'
+      });
       return setTimeout(function () {
         wx.navigateTo({
           url: '/user/login/index'
@@ -180,7 +193,10 @@ Page({
         count: this.data.num
       }
     }).then(function () {
-      app.toast({ content: '添加入购物车成功', image: '' });
+      app.toast({
+        content: '添加入购物车成功',
+        image: ''
+      });
       _this3._toggleSpec();
     });
   },

@@ -43,46 +43,60 @@ Page({
       sizeType: ['compressed'],
       sourceType: [e.currentTarget.dataset.index > 0 ? 'album' : 'camera'],
       success (res1) {
-        wx.showLoading({
-          title: '图片上传中'
+        app.toast({
+          content: '图片上传中',
+          mask: true,
+          time: 999999
         })
         let FilePath = res1.tempFilePaths[0]
         that.setData({
           imgUrl: FilePath
         })
-        wx.uploadFile({
-          url: app.getExactlyUrl(app.getUrl().distinguishKnow),
-          filePath: FilePath,
-          name: 'file',
-          formData: {
-            uid: app.gs('userInfoAll').uid,
-            file: FilePath
-          },
-          success (res) {
-            wx.hideLoading()
-            that.data.page = 0
-            that.data.outList = []
-            let list = JSON.parse(res.data).data.words_result
-            for (let v of list) {
-              v.probability.average = Math.floor(v.probability.average * 100)
-              v.words = v.words.slice(0, 1)
+        app.cloud().getImgCheck(FilePath).then(() => {
+          wx.uploadFile({
+            url: app.getExactlyUrl(app.getUrl().distinguishKnow),
+            filePath: FilePath,
+            name: 'file',
+            formData: {
+              uid: app.gs('userInfoAll').uid,
+              file: FilePath
+            },
+            success (res) {
+              wx.hideLoading()
+              app.toast({
+                content: '',
+                image: '',
+                time: 100
+              })
+              that.data.page = 0
+              that.data.outList = []
+              let list = JSON.parse(res.data).data.words_result
+              for (let v of list) {
+                v.probability.average = Math.floor(v.probability.average * 100)
+                v.words = v.words.slice(0, 1)
+              }
+              list.sort((a, b) => {
+                return b.probability.average - a.probability.average
+              })
+              that.setData({
+                list
+              }, () => {
+                that._toggleShow()
+                list[0] && list[0].words && that.getWordOut(list[0].words)
+              })
+            },
+            fail () {
+              wx.hideLoading()
+              app.toast({
+                content: '上传失败'
+              })
             }
-            list.sort((a, b) => {
-              return b.probability.average - a.probability.average
-            })
-            that.setData({
-              list
-            }, () => {
-              that._toggleShow()
-              that.getWordOut(list[0].words)
-            })
-          },
-          fail () {
-            wx.hideLoading()
-            app.toast({
-              content: '上传失败'
-            })
-          }
+          })
+        }, () => {
+          wx.hideLoading()
+          app.toast({
+            content: '为了营造绿色的网络环境，检测发现您的图片存在违规内容，请更换图片'
+          })
         })
       }
     })

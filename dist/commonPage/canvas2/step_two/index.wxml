@@ -1,16 +1,17 @@
 <image style="position: fixed; top: {{ img.y }}px; left: {{ img.x }}px; width: {{ img.width }}px;height: {{ img.height }}px; transform: scale({{ img.scale }}) rotate({{ img.rotate }}deg);z-index: -1; transition: all {{ time }}s;" src="{{ img.path }}"></image>
 <view catchtouchstart="touchStart"
       catchtouchmove="touchMove" style="position:fixed; width:100%;height:80%;background:transparent; top:0;left:0;"></view>
-<view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="img" class="cutArea {{ cutAreaMove ? 'cutMove' : '' }}" style="transition: all {{ time }}s;position: fixed; top: {{ img.cutY}}px; left: {{ img.cutX }}px; width: {{ img.cutW }}px;height: {{ img.cutH }}px;">
+<view hidden="{{ !img || !img.path }}" catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="img" class="cutArea {{ cutAreaMove ? 'cutMove' : '' }}" style="transition: all {{ time }}s;position: fixed; top: {{ img.cutY}}px; left: {{ img.cutX }}px; width: {{ img.cutW }}px;height: {{ img.cutH }}px;">
   <view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="point" data-scroll="xy" class="dot dotLeftTop"></view>
   <view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="point" data-scroll="y" class="dot dotRightTop"></view>
   <view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="point" data-scroll="x" class="dot dotLeftBottom"></view>
   <view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="point" data-scroll="z" class="dot dotRightBottom"></view>
 </view>
-<view class="bottomOp df">
+<view hidden="{{ !img || !img.path }}" class="bottomOp df">
   <view class="tac" catchtap="go" data-type="back">取消</view>
   <view class="tac" catchtap="go" data-type="init">复位</view>
   <view class="tac" catchtap="go" data-type="next">下一步</view>
 </view>
 
 <canvas style="width: 1000px; height: 1000px; position: fixed; bottom: -200%;right:-200%;" canvas-id="outPic"></canvas>
+<toast toast="{{ toast }}"></toast>

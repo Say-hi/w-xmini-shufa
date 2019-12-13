@@ -133,7 +133,9 @@ Page({
     } else if (e.touches.length <= 2) {
       start = e.touches;
     } else {
-      app.toast({ content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作' });
+      app.toast({
+        content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'
+      });
     }
   },
   touchMove: function touchMove(e) {
@@ -233,9 +235,21 @@ Page({
       title: '加载图片中',
       mask: true
     });
-    this.data.single = options.single;
-    this.data.options = options;
-    this.getImageInfo(app.data.chooseImage);
+    var that = this;
+    app.cloud().getImgCheck(app.data.chooseImage).then(function () {
+      that.data.single = options.single;
+      that.data.options = options;
+      that.getImageInfo(app.data.chooseImage);
+    }, function () {
+      wx.hideLoading();
+      app.toast({
+        content: '为了营造绿色的网络环境，检测发现您的图片存在违规内容，请更换图片',
+        mask: true
+      });
+      setTimeout(function () {
+        wx.navigateBack();
+      }, 2000);
+    });
   },
 
   /**

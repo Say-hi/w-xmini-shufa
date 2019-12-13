@@ -152,7 +152,7 @@ Page({
       }
     }).then(() => {
       app.toast({
-        content: '评论成功',
+        content: '评论成功,系统审核通过后即可展示',
         image: ''
       })
       that.setData({

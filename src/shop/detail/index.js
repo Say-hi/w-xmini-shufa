@@ -18,7 +18,11 @@ Page({
     skuIndex: -1
   },
   _submit () {
-    if (this.data.skuIndex < 0) return app.toast({content: `请选择${this.data.info.label}分类`})
+    if (this.data.skuIndex < 0) {
+      return app.toast({
+        content: `请选择${this.data.info.label}分类`
+      })
+    }
     if (this.data.buyType === 'car') return this.shopCartAdd()
     let temp = [{
       pid: this.data.info.sku[this.data.skuIndex].pid,
@@ -42,7 +46,9 @@ Page({
     if (e.currentTarget.dataset.type === 'add') {
       this.data.num++
     } else {
-      this.data.num > 1 && this.data.num-- || app.toast({content: '最小购买数量为1'})
+      this.data.num > 1 && this.data.num-- || app.toast({
+        content: '最小购买数量为1'
+      })
     }
     this.setData({
       num: this.data.num
@@ -80,9 +86,10 @@ Page({
     })
   },
   _goPicShare () {
+    app.su('shareCardInfo', this.data.info)
     this._shareType()
     wx.navigateTo({
-      url: '/share/carShare/carShare?type=2'
+      url: '/share/carShare/carShare?type=shop'
     })
   },
   shopProductDetail () {
@@ -121,7 +128,11 @@ Page({
     })
   },
   moreComments () {
-    if (!this.data.more) return app.toast({content: '没有更多内容了'})
+    if (!this.data.more) {
+      return app.toast({
+        content: '没有更多内容了'
+      })
+    }
     this.shopDiscuss()
   },
   showImg (e) {
@@ -134,7 +145,9 @@ Page({
   },
   shopCartAdd () {
     if (!app.gs('userInfoAll').uid) {
-      app.toast({content: '您尚未登陆,请登陆后再购买'})
+      app.toast({
+        content: '您尚未登陆,请登陆后再购买'
+      })
       return setTimeout(() => {
         wx.navigateTo({
           url: '/user/login/index'
@@ -150,7 +163,10 @@ Page({
         count: this.data.num
       }
     }).then(() => {
-      app.toast({content: '添加入购物车成功', image: ''})
+      app.toast({
+        content: '添加入购物车成功',
+        image: ''
+      })
       this._toggleSpec()
     })
   },

@@ -47,9 +47,15 @@ Page({
       this.setData({
         needSetting: false
       });
-      app.toast({ content: '授权成功，请选择功能进行体验', image: '' });
+      app.toast({
+        content: '授权成功，请选择功能进行体验',
+        image: ''
+      });
     } else {
-      app.toast({ content: '请授权使用相机功能，否则无法体验功能, 请再次点击并进行授权', time: 10000 });
+      app.toast({
+        content: '请授权使用相机功能，否则无法体验功能, 请再次点击并进行授权',
+        time: 10000
+      });
     }
   },
   userCamera: function userCamera(e) {
@@ -65,7 +71,10 @@ Page({
         that.setData({
           needSetting: true
         });
-        app.toast({ content: '请授权使用相机功能，否则无法体验功能, 请再次点击并进行授权', time: 10000 });
+        app.toast({
+          content: '请授权使用相机功能，否则无法体验功能, 请再次点击并进行授权',
+          time: 10000
+        });
       }
     });
   },
@@ -121,9 +130,10 @@ Page({
     });
   },
   _goPicShare: function _goPicShare() {
+    app.su('shareCardInfo', this.data.info);
     this._shareType();
     wx.navigateTo({
-      url: '/share/carShare/carShare?type=2'
+      url: '/share/carShare/carShare?type=camera'
     });
   },
   getDetail: function getDetail() {
@@ -188,7 +198,11 @@ Page({
     });
   },
   sendHundredDiscussSub: function sendHundredDiscussSub(e) {
-    if (!e.detail.value.comment.trim()) return app.toast({ content: '评论内容不能为空' });
+    if (!e.detail.value.comment.trim()) {
+      return app.toast({
+        content: '评论内容不能为空'
+      });
+    }
     var that = this;
     app.wxrequest({
       url: app.getUrl().stackingDiscussSub,
@@ -202,7 +216,10 @@ Page({
         state: 1
       }
     }).then(function () {
-      app.toast({ content: '评论成功', image: '' });
+      app.toast({
+        content: '评论成功,系统审核通过后即可展示',
+        image: ''
+      });
       that.setData({
         commentValue: ''
       });
