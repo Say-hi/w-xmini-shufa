@@ -84,6 +84,20 @@ module.exports = {
       })
     })
   },
+  getRankLv () {
+    return new Promise((resolve, reject) => {
+      wx.cloud.callFunction({
+        name: 'getrank',
+        data: {},
+        success (res) {
+          resolve(res.result)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
+  },
   getImgCheck (imgsrc) {
     return new Promise((resolve, reject) => {
       wx.getFileSystemManager().readFile({

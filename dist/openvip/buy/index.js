@@ -20,12 +20,12 @@ Page({
     app.wxrequest({
       url: app.getUrl().payRank,
       data: {
-        pid: that.data.info.sku[0].pid,
+        pid: that.data.info.sku[that.data.rankIndex].pid,
         uid: app.gs('userInfoAll').uid,
-        sku_id: that.data.info.sku[0].id,
+        sku_id: that.data.info.sku[that.data.rankIndex].id,
         count: 1,
         openid: app.gs('userInfoAll').openid,
-        value: that.data.info.sku[0].value
+        value: that.data.info.sku[that.data.rankIndex].value
       }
     }).then(function (res) {
       app.wxpay2(res.msg).then(function () {
@@ -33,7 +33,9 @@ Page({
           success: true
         });
       }, function () {
-        app.toast({ content: '支付未完成,如有支付疑问,请联系管理员' });
+        app.toast({
+          content: '支付未完成,如有支付疑问,请联系管理员'
+        });
       });
     });
   },
@@ -42,9 +44,35 @@ Page({
     app.wxrequest({
       url: app.getUrl().rankCard,
       data: {
-        rank: 1
+        state: 1
       }
     }).then(function (res) {
+      var rankT = app.gs('rankLv');
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = res.sku[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var v = _step.value;
+
+          v['rankText'] = rankT[v.rank];
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
       that.setData({
         info: res
       });
@@ -54,9 +82,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function onLoad() {
+  onLoad: function onLoad(options) {
+    this.setData({
+      rankIndex: options.index
+    });
     var pages = getCurrentPages();
-    pages[pages.length - 2].route === 'pages/index/index' && this.setData({ openType: 'navigateBack' });
+    pages[pages.length - 2].route === 'pages/index/index' && this.setData({
+      openType: 'navigateBack'
+    });
     this.getInfo();
     // let that = this
     // if (!app.gs() || !app.gs('userInfoAll')) return app.wxlogin()

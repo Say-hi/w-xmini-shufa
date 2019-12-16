@@ -2,7 +2,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-10 09:59:46
+ * @Last Modified time: 2019-12-16 14:58:57
  */
 /*eslint-disable*/
 const useUrl = require('./utils/service2')
@@ -464,6 +464,26 @@ App({
       }
     })
   },
+  getRankLv() {
+    var _this = this
+    wx.request({
+      url: _this.getExactlyUrl(_this.getUrl().rankLv),
+      success(res) {
+        if (res.statusCode !== 200) {
+          _this.cloud().getRankLv().then(res => {
+            _this.su('rankLv', res)
+          })
+        } else {
+          _this.su('rankLv', res.data.data.rank)
+        }
+      },
+      fail() {
+        _this.cloud().getRankLv().then(res => {
+          _this.su('rankLv', res)
+        })
+      }
+    })
+  },
   // 获取缓存session_key
   gs(key) {
     return wx.getStorageSync(key || 'key')
@@ -591,6 +611,7 @@ App({
         rank: 1
       })
     }
+    this.checkUser()
   },
   // 设置顶部文字
   setBar(text) {
@@ -758,6 +779,7 @@ App({
       }
     }).then(res => {
       if (user) {
+        rea['rankText'] = this.gs('rankLv')[res.rank]
         try {
           getCurrentPages()[getCurrentPages().length - 1].setData({
             userInfo: res
@@ -817,6 +839,7 @@ App({
     wx.removeStorageSync('canvasImgArr')
     this.mapInfo()
     this.getShareUrl()
+    this.getRankLv()
     this.checkShare().then(res => this.su('ruler', res.data.data.ruler))
   },
   onShow() {},

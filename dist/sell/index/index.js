@@ -83,6 +83,7 @@ Page({
         uid: app.gs('userInfoAll').uid
       }
     }).then(function (res) {
+      res['rankText'] = app.gs('rankLv')[res.rank];
       _this.setData({
         userInfo: res
       });

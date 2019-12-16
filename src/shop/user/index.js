@@ -12,86 +12,83 @@ Page({
       bgc: ''
     },
     capsules: app.data.capsule,
-    userNav: [
-      {
-        t: '待付款',
-        i: 'https://c.jiangwenqiang.com/lqsy/shop_0.png',
-        u: '/shop/order/index?type=1'
-      },
-      {
-        t: '待发货',
-        i: 'https://c.jiangwenqiang.com/lqsy/shop_1.png',
-        u: '/shop/order/index?type=2'
-      },
-      {
-        t: '待收货',
-        i: 'https://c.jiangwenqiang.com/lqsy/shop_2.png',
-        u: '/shop/order/index?type=3'
-      },
-      {
-        t: '退货/售后',
-        i: 'https://c.jiangwenqiang.com/lqsy/shop_3.png',
-        u: '/shop/order/index?type=0'
-      },
-      {
-        t: '全部订单',
-        i: 'https://c.jiangwenqiang.com/lqsy/shop_4.png',
-        u: '/shop/order/index?type=0'
-      },
-      {
-        t: '我的团队',
-        i: 'https://c.jiangwenqiang.com/lqsy/shop_5.png',
-        u: '/user/team/index?type=shop'
-      },
-      {
-        t: '邀请好友 ',
-        i: 'https://c.jiangwenqiang.com/lqsy/shop_6.png',
-        u: '/share/carShare/carShare?type=inviteFriend'
-      },
-      {
-        t: '我的积分 ',
-        i: 'https://c.jiangwenqiang.com/lqsy/shop_7.png',
-        u: '/shop/score/index'
-      }
+    userNav: [{
+      t: '待付款',
+      i: 'https://c.jiangwenqiang.com/lqsy/shop_0.png',
+      u: '/shop/order/index?type=1'
+    },
+    {
+      t: '待发货',
+      i: 'https://c.jiangwenqiang.com/lqsy/shop_1.png',
+      u: '/shop/order/index?type=2'
+    },
+    {
+      t: '待收货',
+      i: 'https://c.jiangwenqiang.com/lqsy/shop_2.png',
+      u: '/shop/order/index?type=3'
+    },
+    {
+      t: '退货/售后',
+      i: 'https://c.jiangwenqiang.com/lqsy/shop_3.png',
+      u: '/shop/order/index?type=0'
+    },
+    {
+      t: '全部订单',
+      i: 'https://c.jiangwenqiang.com/lqsy/shop_4.png',
+      u: '/shop/order/index?type=0'
+    },
+    {
+      t: '我的团队',
+      i: 'https://c.jiangwenqiang.com/lqsy/shop_5.png',
+      u: '/user/team/index?type=shop'
+    },
+    {
+      t: '邀请好友 ',
+      i: 'https://c.jiangwenqiang.com/lqsy/shop_6.png',
+      u: '/share/carShare/carShare?type=inviteFriend'
+    },
+    {
+      t: '我的积分 ',
+      i: 'https://c.jiangwenqiang.com/lqsy/shop_7.png',
+      u: '/shop/score/index'
+    }
     ],
-    uiOp: [
-      {
-        t: '帖子',
-        n: 13,
-        url: '/user/collect/index?type=send'
-      },
-      {
-        t: '评论',
-        n: 13,
-        url: '/user/comment/index?type=comment'
-      },
-      {
-        t: '粉丝',
-        n: 13,
-        url: '/user/comment/index?type=fans'
-      }
+    uiOp: [{
+      t: '帖子',
+      n: 13,
+      url: '/user/collect/index?type=send'
+    },
+    {
+      t: '评论',
+      n: 13,
+      url: '/user/comment/index?type=comment'
+    },
+    {
+      t: '粉丝',
+      n: 13,
+      url: '/user/comment/index?type=fans'
+    }
     ],
-    tabArr: [
-      {
-        t: '我的师友',
-        i: '',
-        url: '/user/team/index'
-      },
-      {
-        t: '邀约好友',
-        i: '',
-        url: '/share/carShare/carShare?type=user'
-      },
-      {
-        t: '关于刘谦',
-        i: '',
-        url: ''
-      },
-      {
-        t: '我的消息',
-        i: '',
-        url: '/user/message/index'
-      }
+    tabArr: [{
+      t: '我的师友',
+      i: '',
+      url: '/user/team/index'
+    },
+    {
+      t: '邀约好友',
+      i: '',
+      url: '/share/carShare/carShare?type=user'
+    },
+    {
+      t: '关于刘谦',
+      i: '',
+      url: ''
+    },
+    {
+      t: '我的消息',
+      i: '',
+      url: '/user/message/index'
+    }
     ],
     userInfo: app.gs('userInfoAll')
   },
@@ -110,11 +107,15 @@ Page({
         uid: app.gs('userInfoAll').uid
       }
     }).then(res => {
+      res['rankText'] = app.gs('rankLv')[res.rank]
       this.setData({
         userInfo: res
       })
     }, () => {
-      app.toast({content: '您尚未登陆，请先登陆系统', mask: true})
+      app.toast({
+        content: '您尚未登陆，请先登陆系统',
+        mask: true
+      })
       setTimeout(() => {
         wx.navigateTo({
           url: '/user/login/index'
@@ -125,8 +126,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad (options) {
-  },
+  onLoad (options) {},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

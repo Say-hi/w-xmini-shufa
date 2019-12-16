@@ -164,7 +164,8 @@ Page({
       }
     }).then(function (res) {
       _this2.setData({
-        rank: res.rank
+        rank: res.rank,
+        rankText: app.gs('rankLv')[res.rank]
       });
     });
   },

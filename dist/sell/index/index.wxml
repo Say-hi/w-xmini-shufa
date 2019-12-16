@@ -11,7 +11,7 @@
   <image mode="aspectFill" class="br" src="{{userInfo.avatar_url}}"></image>
   <view class="utName flex1">
     <view class="f28 cfff">{{userInfo.nickname}}</view>
-    <view class="f22 cece696 mt10">{{ userInfo.rank > 0 ? '会员' : '非会员' }}</view>
+    <view class="f22 cece696 mt10">{{ userInfo.rank > 0 ? '会员:'+userInfo.rankText : '非会员' }}</view>
   </view>
   <navigator url="/commonPage/release/index?from=release" class="f21 df dfac c006bff jwqfont jwqzhifeiji tal">　发布商品</navigator>
 </view>

@@ -9,14 +9,19 @@
 <!--开通会员图片 -e-->
 <!--会员权益 -s-->
 <view class="tac vipEnjoy">
-  <image mode="widthFix" src="{{ info.img_url || 'https://c.jiangwenqiang.com/lqsy/vip_open.png' }}"></image>
+  <swiper bindchange='change' class='rank-swiper' previous-margin='40rpx' next-margin='40rpx'>
+    <swiper-item wx:key="item" wx:for="{{info.sku}}">
+      <!-- <view style='width: 100%;height:100%;'  > -->
+      <image class="{{ rankIndex == index ? 'active' : '' }} tr5" mode="aspectFill" src="{{ item.img_url || 'https://c.jiangwenqiang.com/lqsy/vip_open.png' }}"></image>
+      <!-- </view> -->
+    </swiper-item>
+  </swiper>
   <view class="vipBtn f25">
    <button wx:if="{{ system && checkIos }}" open-type="contact" class="vbItem cfff f22">苹果端请点击联系官方通过人工进行开通</button>
-    <navigator wx:else url="../buy/index" open-type="redirect" class="vbItem cfff">立即开通</navigator>
+    <navigator wx:else url="../buy/index?index={{rankIndex}}" open-type="redirect" class="vbItem cfff">立即开通</navigator>
   </view>
 </view>
 <!--会员权益 -e-->
-
 <!--权益信息 -s-->
 <view class="tac f25 c323232 p20 vipText">
 <image mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/vip_text_left.png"></image>
@@ -24,7 +29,7 @@
 <image mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/vip_text_left.png"></image>
 </view>
 <view style="transform: translateY(-130rpx);" class="p20 f22 c323232 ws">
-{{info.detail_text || '暂无权益'}}
+{{info.sku[rankIndex].detail_text || info.detail_text || '暂无权益'}}
 </view>
 <!--权益信息 -e-->
 

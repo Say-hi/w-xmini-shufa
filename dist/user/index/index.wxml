@@ -7,7 +7,7 @@
     <image mode="aspectFill" class="br" src="{{ userInfoAll.avatar_url || 'https://c.jiangwenqiang.com/lqsy/login1.png'}}"></image>
     <view class="utName">
       <view class="f28 cfff">{{ userInfoAll.nickname || '点击授权个人信息' }}</view>
-      <view class="f22 cece696 mt10">{{ rank > 0 ? '会员' : '非会员' }}</view>
+      <view class="f22 cece696 mt10">{{ rank > 0 ? '会员:'+rankText : '非会员' }}</view>
     </view>
   </button>
   <view catchtap="_toggleSign" class="f21 cfff jwqfont jwqic_pen flex1 tar">{{ user.signature || '个性签名' }}</view>

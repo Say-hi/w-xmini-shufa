@@ -89,6 +89,7 @@ Page({
         uid: app.gs('userInfoAll').uid
       }
     }).then(res => {
+      res['rankText'] = app.gs('rankLv')[res.rank]
       this.setData({
         userInfo: res
       })

@@ -6,7 +6,7 @@
     <image mode="aspectFill" class="br" src="{{userInfo.avatar_url || 'https://c.jiangwenqiang.com/api/logo.jpg'}}"></image>
     <view class="utName flex1">
       <view class="f28 cfff">{{userInfo.nickname || '未登录'}}</view>
-      <view class="f22 cece696 mt10">{{userInfo.rank < 0 ? '非会员' : '会员'}}</view>
+      <view class="f22 cece696 mt10">{{userInfo.rank > 0 ? '会员'+userInfo.rankText : '非会员'}}</view>
     </view>
     <navigator url="/user/message/index?type=shop" class="f21 cfff jwqfont jwqtianchongxing- tar"></navigator>
   </view>

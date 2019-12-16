@@ -168,7 +168,8 @@ Page({
       }
     }).then(res => {
       this.setData({
-        rank: res.rank
+        rank: res.rank,
+        rankText: app.gs('rankLv')[res.rank]
       })
     })
   },

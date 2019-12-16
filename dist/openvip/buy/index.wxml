@@ -4,32 +4,32 @@
 <view wx:if="{{ !success }}">
   <!--卡卷信息 -s-->
   <view class="mt10 topInfo">
-    <image mode="widthFix" src="{{ info.img_url || 'https://c.jiangwenqiang.com/lqsy/vip_open.png' }}"></image>
+    <image mode="widthFix" src="{{ info.sku[rankIndex].img_url || 'https://c.jiangwenqiang.com/lqsy/vip_open.png' }}"></image>
     <view class="f21 flex1">
-      <view class="f25 c323232">{{info.title}}</view>
+      <view class="f25 c323232">{{info.sku[rankIndex].title || info.title}}</view>
       <view class="c787878">
-        <text>{{ info.sku[0].limited < 0 ? '终生有效' : info.sku[0].limited + '天'}}</text>
+        <text>{{ info.sku[rankIndex].rankText }}</text>
         <text>×1</text>
       </view>
-      <view class="cff362c">¥{{info.sku[0].price}}</view>
+      <view class="cff362c">¥{{info.sku[rankIndex].price}}</view>
     </view>
   </view>
   <!--卡卷信息 -e-->
   <!--优惠券 -s-->
-  <view class="f22 p2030 mt10 c323232 df dfb bgfff">
+  <!-- <view class="f22 p2030 mt10 c323232 df dfb bgfff">
     <text>优惠券</text>
     <text>使用优惠　></text>
-  </view>
+  </view> -->
   <!--优惠券 -e-->
   <view class="f22 p2030 mt10 c323232 df dfb bgfff">
     <text>商品金额</text>
-    <text>￥{{info.sku[0].price}}</text>
+    <text>￥{{info.sku[rankIndex].price}}</text>
   </view>
   <view class="f22 p2030 mt10 c323232 df dfb bgfff">
     <text></text>
     <view>
       <text>合计：</text>
-      <text class="cff362c">¥{{info.sku[0].price}}</text>
+      <text class="cff362c">¥{{info.sku[rankIndex].price}}</text>
     </view>
   </view>
   <view class="tac f21 cff362c mt20">注：你将购买的是虚拟内容服务，购买后不支持退订、转让、退换</view>
@@ -38,7 +38,7 @@
   <view class="f29 c323232 buyBtn" style="padding-bottom: {{ fix ? 40:0 }}rpx;">
     <view class="flex1 tar p20">
       <text>合计：</text>
-      <text class="cff362c">¥{{info.new_price}}</text>
+      <text class="cff362c">¥{{info.sku[rankIndex].price}}</text>
     </view>
     <view catchtap="buy" class="ce5e5e5 f29 p20">
       提交订单

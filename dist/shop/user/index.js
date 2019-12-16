@@ -96,11 +96,15 @@ Page({
         uid: app.gs('userInfoAll').uid
       }
     }).then(function (res) {
+      res['rankText'] = app.gs('rankLv')[res.rank];
       _this.setData({
         userInfo: res
       });
     }, function () {
-      app.toast({ content: '您尚未登陆，请先登陆系统', mask: true });
+      app.toast({
+        content: '您尚未登陆，请先登陆系统',
+        mask: true
+      });
       setTimeout(function () {
         wx.navigateTo({
           url: '/user/login/index'

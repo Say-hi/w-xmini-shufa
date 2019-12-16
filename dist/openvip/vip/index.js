@@ -10,6 +10,7 @@ Page({
    */
   data: {
     openType: 'reLaunch',
+    rankIndex: 0,
     capsule: {
       bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
     },
@@ -21,12 +22,18 @@ Page({
     app.wxrequest({
       url: app.getUrl().rankCard,
       data: {
-        rank: 1
+        // rank: 1,
+        state: 1
       }
     }).then(function (res) {
       that.setData({
         info: res
       });
+    });
+  },
+  change: function change(e) {
+    this.setData({
+      rankIndex: e.detail.current
     });
   },
   checkUser: function checkUser() {

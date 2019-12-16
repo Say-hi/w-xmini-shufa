@@ -160,6 +160,7 @@ const serviceUrl = {
   mounting: lqsyBaseDomain + '/sell/mounting', // 装裱背景图获取
   wechatOpenid: lqsyBaseDomain + '/wechat/openid', // 小程序授权|获取用户小程序openid
   rankCard: lqsyBaseDomain + '/rank/card', // rank
+  rankLv: lqsyTestDomain + '/lqsy/rank.json', // VIP等级表
   userInfo: lqsyBaseDomain + '/user/info', // 获取用户基本信息
   sellRemind: lqsyBaseDomain + '/sell/remind', // 消息通知
   sellInfo: lqsyBaseDomain + '/sell/info', // 获取统计数据

@@ -1,0 +1,53 @@
+page {
+  background: #fff;
+}
+.jwqsousuo1 {
+  position: absolute;
+  top: 50%;
+  left: 40rpx;
+  color: #eee;
+  transform: translateY(-75%);
+}
+.rank-swiper {
+  width: 100%;
+}
+.vipEnjoy {
+  transform: translateY(-130rpx);
+  padding: 0 64rpx;
+  padding-bottom: 50rpx;
+  border-bottom: 10rpx solid #f2f2f2;
+}
+.vipEnjoy image {
+  display: inline-block;
+  width: 99%;
+  height: 100%;
+}
+.vipEnjoy .vipBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 59rpx;
+}
+.vipEnjoy .vipBtn .vbItem {
+  width: 634rpx;
+  padding: 30rpx 0;
+  border-radius: 15rpx;
+  border: solid 2rpx #ff0000;
+  background-color: #ff0000;
+}
+.vipText {
+  transform: translateY(-130rpx);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vipText image {
+  width: 215rpx;
+  display: inline-block;
+}
+.vipText image:nth-child(1) {
+  transform: rotate(180deg);
+}
+.vipText text {
+  margin: 0 20rpx;
+}

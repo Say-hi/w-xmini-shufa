@@ -1,4 +1,3 @@
-
 // 获取全局应用程序实例对象
 const app = getApp()
 // const bmap = require('../../utils/bmap-wx')
@@ -19,12 +18,12 @@ Page({
     app.wxrequest({
       url: app.getUrl().payRank,
       data: {
-        pid: that.data.info.sku[0].pid,
+        pid: that.data.info.sku[that.data.rankIndex].pid,
         uid: app.gs('userInfoAll').uid,
-        sku_id: that.data.info.sku[0].id,
+        sku_id: that.data.info.sku[that.data.rankIndex].id,
         count: 1,
         openid: app.gs('userInfoAll').openid,
-        value: that.data.info.sku[0].value
+        value: that.data.info.sku[that.data.rankIndex].value
       }
     }).then(res => {
       app.wxpay2(res.msg).then(() => {
@@ -32,7 +31,9 @@ Page({
           success: true
         })
       }, () => {
-        app.toast({content: '支付未完成,如有支付疑问,请联系管理员'})
+        app.toast({
+          content: '支付未完成,如有支付疑问,请联系管理员'
+        })
       })
     })
   },
@@ -41,9 +42,13 @@ Page({
     app.wxrequest({
       url: app.getUrl().rankCard,
       data: {
-        rank: 1
+        state: 1
       }
     }).then(res => {
+      let rankT = app.gs('rankLv')
+      for (let v of res.sku) {
+        v['rankText'] = rankT[v.rank]
+      }
       that.setData({
         info: res
       })
@@ -52,9 +57,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (options) {
+    this.setData({
+      rankIndex: options.index
+    })
     let pages = getCurrentPages()
-    pages[pages.length - 2].route === 'pages/index/index' && this.setData({openType: 'navigateBack'})
+    pages[pages.length - 2].route === 'pages/index/index' && this.setData({
+      openType: 'navigateBack'
+    })
     this.getInfo()
     // let that = this
     // if (!app.gs() || !app.gs('userInfoAll')) return app.wxlogin()
