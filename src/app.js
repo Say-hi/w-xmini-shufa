@@ -2,7 +2,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-16 14:58:57
+ * @Last Modified time: 2019-12-17 14:45:28
  */
 /*eslint-disable*/
 const useUrl = require('./utils/service2')
@@ -779,7 +779,7 @@ App({
       }
     }).then(res => {
       if (user) {
-        rea['rankText'] = this.gs('rankLv')[res.rank]
+        res['rankText'] = this.gs('rankLv')[res.rank]
         try {
           getCurrentPages()[getCurrentPages().length - 1].setData({
             userInfo: res
