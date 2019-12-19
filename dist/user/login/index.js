@@ -83,6 +83,7 @@ Page({
       });
       wx.login({
         success: function success(loginRes) {
+          console.log(e.detail.userInfo);
           app.wxrequest({
             url: app.getUrl().wechatOpenid,
             data: {
@@ -90,6 +91,7 @@ Page({
               code: loginRes.code,
               avatar_url: e.detail.userInfo.avatarUrl,
               nickname: e.detail.userInfo.nickName,
+              sex: e.detail.userInfo.gender,
               phone: e.detail.value.phone
             }
           }).then(function (res) {
@@ -140,7 +142,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function onLoad(options) {},
+  onLoad: function onLoad(options) {
+    var _this = this;
+
+    setTimeout(function () {
+      _this.setData({
+        bounceInUp: 'bounceInUp',
+        logo: 'logo'
+      });
+    }, 200);
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -168,13 +179,6 @@ Page({
   onUnload: function onUnload() {
     // clearInterval(timer)
     // console.log(' ---------- onUnload ----------')
-  },
-  onShareAppMessage: function onShareAppMessage() {
-    // return {
-    //   title: app.gs('shareText').t || '绣学问，真纹绣',
-    //   path: `/pages/index/index`,
-    //   imageUrl: app.gs('shareText').g
-    // }
   },
 
   /**

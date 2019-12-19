@@ -7,7 +7,7 @@
             data-index="{{ index }}"
             class="foot-item {{ fix ? 'fix' : '' }}">
       <image mode="widthFix" class="footImg" src="{{ item.active ? item.img_url_active : item.img_url }}"></image>
-      <view class="foot-title {{ item.active ? 'active' : '' }}">{{ item.title }}</view>
+      <view style='{{ item.color ? item.active ? "color:" + item.activeColor : "color:"+item.color : "" }}; {{ item.fontSize ? "font-size:" + item.fontSize : "" }}' class="foot-title {{ item.active ? 'active' : '' }}">{{ item.title }}</view>
     </button>
   </view>
   <view class="stance {{ fix ? 'fix' : '' }}"></view>

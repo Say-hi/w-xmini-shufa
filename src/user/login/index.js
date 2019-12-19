@@ -42,17 +42,19 @@ Page({
         })
       }
     }, 1000)
-    app.wxrequest({
-      url: app.getUrl().userCode,
-      data: {
-        phone
-      }
-    }).then(() => {
-      app.toast({
-        content: '验证码已发送,请注意查收',
-        image: ''
+    app
+      .wxrequest({
+        url: app.getUrl().userCode,
+        data: {
+          phone
+        }
       })
-    })
+      .then(() => {
+        app.toast({
+          content: '验证码已发送,请注意查收',
+          image: ''
+        })
+      })
   },
   _phoneLogin () {
     this.setData({
@@ -61,45 +63,54 @@ Page({
   },
   _login (e) {
     // let that = this
-    app.wxrequest({
-      url: app.getUrl().userToken,
-      data: {
-        phone: e.detail.value.phone,
-        code: e.detail.value.code
-      }
-    }).then(res => {
-      res.phone = e.detail.value.phone
-      if (app.gs('userInfoAll')) {
-        app.su('userInfoAll', Object.assign(app.gs('userInfoAll'), res))
-      } else {
-        app.su('userInfoAll', res)
-      }
-      app.su('access_token', res.access_token)
-      app.toast({
-        content: '登录成功',
-        mask: true
-      })
-      wx.login({
-        success (loginRes) {
-          app.wxrequest({
-            url: app.getUrl().wechatOpenid,
-            data: {
-              uid: app.gs('userInfoAll').uid,
-              code: loginRes.code,
-              avatar_url: e.detail.userInfo.avatarUrl,
-              nickname: e.detail.userInfo.nickName,
-              phone: e.detail.value.phone
-            }
-          }).then(res => {
-            app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res, {
-              avatar_url: e.detail.userInfo.avatarUrl,
-              nickname: e.detail.userInfo.nickName
-            }))
-            wx.navigateBack()
-          })
+    app
+      .wxrequest({
+        url: app.getUrl().userToken,
+        data: {
+          phone: e.detail.value.phone,
+          code: e.detail.value.code
         }
       })
-    })
+      .then(res => {
+        res.phone = e.detail.value.phone
+        if (app.gs('userInfoAll')) {
+          app.su('userInfoAll', Object.assign(app.gs('userInfoAll'), res))
+        } else {
+          app.su('userInfoAll', res)
+        }
+        app.su('access_token', res.access_token)
+        app.toast({
+          content: '登录成功',
+          mask: true
+        })
+        wx.login({
+          success (loginRes) {
+            console.log(e.detail.userInfo)
+            app
+              .wxrequest({
+                url: app.getUrl().wechatOpenid,
+                data: {
+                  uid: app.gs('userInfoAll').uid,
+                  code: loginRes.code,
+                  avatar_url: e.detail.userInfo.avatarUrl,
+                  nickname: e.detail.userInfo.nickName,
+                  sex: e.detail.userInfo.gender,
+                  phone: e.detail.value.phone
+                }
+              })
+              .then(res => {
+                app.su(
+                  'userInfoAll',
+                  Object.assign(app.gs('userInfoAll') || {}, res, {
+                    avatar_url: e.detail.userInfo.avatarUrl,
+                    nickname: e.detail.userInfo.nickName
+                  })
+                )
+                wx.navigateBack()
+              })
+          }
+        })
+      })
   },
   phoneLogin (e) {
     if (e.detail.value.phone.length !== 11) {
@@ -139,7 +150,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-
+    setTimeout(() => {
+      this.setData({
+        bounceInUp: 'bounceInUp',
+        logo: 'logo'
+      })
+    }, 200)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -164,13 +180,6 @@ Page({
   onUnload () {
     // clearInterval(timer)
     // console.log(' ---------- onUnload ----------')
-  },
-  onShareAppMessage () {
-    // return {
-    //   title: app.gs('shareText').t || '绣学问，真纹绣',
-    //   path: `/pages/index/index`,
-    //   imageUrl: app.gs('shareText').g
-    // }
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

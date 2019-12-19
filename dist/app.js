@@ -4,7 +4,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-17 14:45:28
+ * @Last Modified time: 2019-12-18 15:53:01
  */
 /*eslint-disable*/
 var useUrl = require('./utils/service2');
@@ -161,7 +161,7 @@ App({
     wx.chooseImage({
       count: count,
       success: function success(res) {
-        console.log(res);
+        // console.log(res)
         wx.showLoading({
           title: '图片上传中'
         });
@@ -182,10 +182,10 @@ App({
                 file: v
               },
               success: function success(res) {
-                console.log(res);
+                // console.log(res)
                 wx.hideLoading();
                 var parseData = JSON.parse(res.data);
-                console.log(parseData);
+                // console.log(parseData)
               }
             });
           }
@@ -298,7 +298,7 @@ App({
   wxrequest: function wxrequest(obj) {
     var _this2 = this;
 
-    console.log('request', obj);
+    this.gs('canLog') > 1 && console.log('request', obj);
     var that = this;
     // if (that.data.requireDisable < 10) {
     //   that.toast({
@@ -370,8 +370,9 @@ App({
           reject(err);
         },
 
-        complete: obj.complete || function () {
+        complete: obj.complete || function (res3) {
           wx.stopPullDownRefresh();
+          that.gs('canLog') > 1 && console.log('response', res3);
         }
       });
     });
@@ -480,7 +481,7 @@ App({
                       } catch (err) {
                         query = currentPage[currentPage.length - 1]['__displayReporter']['showOptions']['query'];
                       }
-                      console.log('query', query);
+                      // console.log('query', query)
                       wx.reLaunch({
                         url: '/' + currentPage[currentPage.length - 1]['__route__'] + (query.length > 0 ? '?' + query : '')
                       });
@@ -502,7 +503,7 @@ App({
                 code: code
               },
               success: function success(session) {
-                console.log('session', session);
+                // console.log('session', session)
                 wx.hideLoading();
                 wx.setStorageSync('key', session.data.data.openid);
                 that.wxrequest({
@@ -533,7 +534,7 @@ App({
                 } catch (err) {
                   query = currentPage[currentPage.length - 1]['__displayReporter']['showOptions']['query'];
                 }
-                console.log('query', query);
+                // console.log('query', query)
                 wx.reLaunch({
                   url: '/' + currentPage[currentPage.length - 1]['__route__'] + (query.length > 0 ? '?' + query : '')
                 });
@@ -594,10 +595,10 @@ App({
       withCredentials: obj.withCredentials || true,
       lang: obj.lang || 'zh_CN',
       success: obj.success || function (res) {
-        console.log('getUserInfoSuccess', res);
+        // console.log('getUserInfoSuccess', res)
       },
       fail: obj.fail || function (res) {
-        console.log('getUserInfoFail', res);
+        // console.log('getUserInfoFail', res)
       }
     });
   },
@@ -700,7 +701,7 @@ App({
   },
   mapInfoCheck: function mapInfoCheck() {
     this.checkUser = function () {
-      this.su("userInfoAll", {
+      this.su('userInfoAll', {
         uid: 3,
         rank: 1
       });
@@ -746,7 +747,7 @@ App({
         wx.request({
           url: _this.getExactlyUrl(_this.getUrl().user),
           success: function success(res) {
-            console.log(res);
+            // console.log(res)
             if (res.statusCode === 404) {
               _this.cloud().getUserOperation().then(function (res) {
                 that.data.mainScale = res.check;

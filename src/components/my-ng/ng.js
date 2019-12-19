@@ -3,9 +3,9 @@ Component({
   properties: {
     propShow: {
       type: Number,
-      observer (newValue, oldValue, changePath) {
+      observer(newValue, oldValue, changePath) {
         if (newValue > 1) {
-          console.log('newValue',newValue)
+          // console.log('newValue',newValue)
           this._show()
         }
       }
@@ -17,10 +17,10 @@ Component({
   data: {
     show: 2
   },
-  ready () {},
+  ready() {},
   methods: {
-    _back () {
-      if(getCurrentPages().length >= 2) {
+    _back() {
+      if (getCurrentPages().length >= 2) {
         wx.navigateBack()
       } else {
         wx.reLaunch({
@@ -28,24 +28,24 @@ Component({
         })
       }
     },
-    _close () {
+    _close() {
       this.setData({
         show: 2
       })
     },
-    _show () {
+    _show() {
       this.setData({
         show: 1
       })
     }
   },
   pageLifetimes: {
-    show () {
+    show() {
       this.setData({
         move: !this.data.move
       })
     },
-    hide () {
+    hide() {
       this.setData({
         move: !this.data.move
       })

@@ -11,6 +11,7 @@ Page({
       transparent: true,
       bgc: ''
     },
+    showItem: false,
     HEIGHT_TOP: app.data.HEIGHT_TOP,
     ALL_HEIGHT: app.data.ALL_HEIGHT,
     capsules: app.data.capsule,
@@ -44,11 +45,14 @@ Page({
     if (!this.data.openType) {
       wx.chooseLocation({
         success (res) {
-          that.setData({
-            address: res.address,
-            latitude: res.latitude,
-            longitude: res.longitude
-          }, that.Bmap(that, `${res.longitude},${res.latitude}`))
+          that.setData(
+            {
+              address: res.address,
+              latitude: res.latitude,
+              longitude: res.longitude
+            },
+            that.Bmap(that, `${res.longitude},${res.latitude}`)
+          )
         }
       })
     }
@@ -135,12 +139,18 @@ Page({
         uid: app.gs('userInfoAll').id
       },
       success (res) {
-        app.su('userInfoAll', Object.assign(app.gs('userInfoAll'), {star: res.data.data.star}))
+        app.su(
+          'userInfoAll',
+          Object.assign(app.gs('userInfoAll'), { star: res.data.data.star })
+        )
         wx.hideLoading()
         if (res.data.status === 200) {
-          that.setData({
-            userInfo: res.data.data
-          }, that.checkLvShow)
+          that.setData(
+            {
+              userInfo: res.data.data
+            },
+            that.checkLvShow
+          )
         }
       }
     })
@@ -162,7 +172,7 @@ Page({
             if (res.data.status === 200) {
               that.getUser()
             } else {
-              app.setToast(that, {content: res.data.desc})
+              app.setToast(that, { content: res.data.desc })
             }
           }
         })
@@ -187,15 +197,18 @@ Page({
       return
     }
     let that = this
-    this.setData({
-      lvShow: app.gs('beforeShow') * 1 !== app.gs('userInfoAll').star * 1
-    }, function () {
-      if (that.data.lvShow) {
-        that.setData({
-          lvStar: app.gs('userInfoAll').star || 5
-        })
+    this.setData(
+      {
+        lvShow: app.gs('beforeShow') * 1 !== app.gs('userInfoAll').star * 1
+      },
+      function () {
+        if (that.data.lvShow) {
+          that.setData({
+            lvStar: app.gs('userInfoAll').star || 5
+          })
+        }
       }
-    })
+    )
   },
   getTopNav () {
     let that = this
@@ -205,23 +218,38 @@ Page({
       that.setData({
         nav: res.middle_menu,
         openVipImg: res.page_img.home_page_img || 'https://c.jiangwenqiang.com/lqsy/vip.png'
+      }, function () {
+        setTimeout(() => {
+          that.setData({
+            showItem: true
+          })
+        }, 10)
       })
     })
   },
   getWordsCategory () {
     let that = this
-    app.wxrequest({
-      url: app.getUrl().wordsCategory
-    }).then(res => {
-      that.setData({
-        wordsCategoryList: res.lists
+    app
+      .wxrequest({
+        url: app.getUrl().wordsCategory
       })
-    })
+      .then(res => {
+        that.setData({
+          wordsCategoryList: res.lists
+        })
+      })
   },
   onPageScroll (e) {
     this.setData({
-      moveY: e.scrollTop - app.data.moveHeight > 0 ? e.scrollTop - app.data.moveHeight : 0
+      moveY:
+        e.scrollTop - app.data.moveHeight > 0
+          ? e.scrollTop - app.data.moveHeight
+          : 0
     })
+  },
+  showLog () {
+    this.data.num = this.data.num ? ++this.data.num : 1
+    this.data.num > 10 && app.su('canLog', 10)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -248,6 +276,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide () {
+    // this.setData({
+    //   showItem: false
+    // })
     // clearInterval(timer)
     // console.log(' ---------- onHide ----------')
   },
@@ -255,6 +286,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload () {
+    // this.setData({
+    //   showItem: false
+    // })
     // clearInterval(timer)
     // console.log(' ---------- onUnload ----------')
   },

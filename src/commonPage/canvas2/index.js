@@ -286,12 +286,12 @@ Page({
   getBackImageInfo (src) {
     this.getImageInfo(src).then(res => {
       res.fixWidth = app.data.system.windowWidth
-      console.log('res.fixWidth', res.fixWidth)
+      // console.log('res.fixWidth', res.fixWidth)
       baseScale = app.data.system.windowWidth / res.width
-      console.log('baseScale', baseScale)
+      // console.log('baseScale', baseScale)
       res.fixHeight = baseScale * res.height
-      console.log('res.fixHeight', res.fixHeight)
-      console.log('this.data.backImageInfo.positionItem', this.data.backImageInfo.positionItem)
+      // console.log('res.fixHeight', res.fixHeight)
+      // console.log('this.data.backImageInfo.positionItem', this.data.backImageInfo.positionItem)
       for (let v of this.data.backImageInfo.positionItem) {
         v.x = baseScale * v.x
         v.y = baseScale * v.y
@@ -300,7 +300,7 @@ Page({
         v.width = baseScale * v.width
         v.height = baseScale * v.height
       }
-      console.log('this.data.backImageInfo.positionItem', this.data.backImageInfo.positionItem)
+      // console.log('this.data.backImageInfo.positionItem', this.data.backImageInfo.positionItem)
       this.setData({
         backImageInfo: Object.assign(this.data.backImageInfo, res)
       }, () => {

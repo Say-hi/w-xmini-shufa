@@ -2,7 +2,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-17 14:45:28
+ * @Last Modified time: 2019-12-18 15:53:01
  */
 /*eslint-disable*/
 const useUrl = require('./utils/service2')
@@ -37,20 +37,30 @@ Moment.updateLocale('en', {
 })
 App({
   data: {
-    fix: system.model.indexOf('X') >= 0 || system.screenHeight - system.safeArea.height >= 35,
+    fix:
+      system.model.indexOf('X') >= 0 ||
+      system.screenHeight - system.safeArea.height >= 35,
     capsule: capsule,
     system,
     fixPxToRpx: 750 / system.screenWidth,
     requireDisable: 10,
-    height: capsule.bottom + (capsule.top / 4),
+    height: capsule.bottom + capsule.top / 4,
     capsuleHeight: capsule.height,
     capsuleTop: capsule.top,
     moveHeight: capsule.bottom - capsule.top / 2,
-    capsuleCenter: system.windowWidth - (capsule.width + system.windowWidth - capsule.right) * 2 - 5,
+    capsuleCenter:
+      system.windowWidth -
+      (capsule.width + system.windowWidth - capsule.right) * 2 -
+      5,
     // ------------------------
-    systemVersion: wx.getSystemInfoSync().system.split('.')[0].indexOf('9') >= 0 && wx.getSystemInfoSync().model.indexOf('iPhone') >= 0,
-    all_screen: (wx.getSystemInfoSync().model).indexOf('X') >= 0,
-    TOP_CENTER: (MenuButtonBounding.right - 66),
+    systemVersion:
+      wx
+        .getSystemInfoSync()
+        .system.split('.')[0]
+        .indexOf('9') >= 0 &&
+      wx.getSystemInfoSync().model.indexOf('iPhone') >= 0,
+    all_screen: wx.getSystemInfoSync().model.indexOf('X') >= 0,
+    TOP_CENTER: MenuButtonBounding.right - 66,
     searchText: null,
     bottomTabIndex: 0,
     statusBarHeight,
@@ -67,16 +77,20 @@ App({
   },
   toast(toast) {
     getCurrentPages()[getCurrentPages().length - 1].setData({
-      toast: Object.assign({
-        image: 'https://teach-1258261086.cos.ap-guangzhou.myqcloud.com/image/admin/background/jiong.png',
-        bgc: 'rgba(0,0,0,.8)',
-        color: '#fff',
-        title: '',
-        toastType: 'center',
-        content: '服务器开小差啦~~',
-        mask: false,
-        time: 3000
-      }, toast)
+      toast: Object.assign(
+        {
+          image:
+            'https://teach-1258261086.cos.ap-guangzhou.myqcloud.com/image/admin/background/jiong.png',
+          bgc: 'rgba(0,0,0,.8)',
+          color: '#fff',
+          title: '',
+          toastType: 'center',
+          content: '服务器开小差啦~~',
+          mask: false,
+          time: 3000
+        },
+        toast
+      )
     })
   },
   momentAdd(number, type, time) {
@@ -124,7 +138,7 @@ App({
         fail(err) {
           reject(err)
         },
-        complete: obj.complete || function () {}
+        complete: obj.complete || function() {}
       })
     })
   },
@@ -149,7 +163,7 @@ App({
     wx.chooseImage({
       count,
       success(res) {
-        console.log(res)
+        // console.log(res)
         wx.showLoading({
           title: '图片上传中'
         })
@@ -163,10 +177,10 @@ App({
               file: v
             },
             success(res) {
-              console.log(res)
+              // console.log(res)
               wx.hideLoading()
               let parseData = JSON.parse(res.data)
-              console.log(parseData)
+              // console.log(parseData)
             }
           })
         }
@@ -183,13 +197,17 @@ App({
         'content-type': 'multipart/form-data'
       },
       formData: obj.formData,
-      success: obj.success || function (res) {
-        console.log('未传入成功回调函数', res)
-      },
-      fail: obj.fail || function (res) {
-        console.log('为传入失败回调函数', res)
-      },
-      complete: obj.complete || function () {}
+      success:
+        obj.success ||
+        function(res) {
+          console.log('未传入成功回调函数', res)
+        },
+      fail:
+        obj.fail ||
+        function(res) {
+          console.log('为传入失败回调函数', res)
+        },
+      complete: obj.complete || function() {}
     }
     wx.uploadFile(s)
   },
@@ -197,7 +215,10 @@ App({
     let that = this
     let navArr = this.gs('navArr')
     let currentPage = getCurrentPages()
-    let currentPath = currentPage[currentPage.length - 1]['__route__'].replace('pages', '..')
+    let currentPath = currentPage[currentPage.length - 1]['__route__'].replace(
+      'pages',
+      '..'
+    )
     for (let v of navArr) {
       if (v.path === currentPath) {
         v['active'] = true
@@ -217,7 +238,7 @@ App({
   },
   // 请求数据
   wxrequest(obj) {
-    console.log('request', obj)
+    this.gs('canLog') > 1 && console.log('request', obj)
     let that = this
     // if (that.data.requireDisable < 10) {
     //   that.toast({
@@ -276,21 +297,30 @@ App({
             resolve(res.data.data)
           } else {
             reject(res)
-            that.toast(obj.toast ? !obj.toast.content ? Object.assign(obj.toast, {
-              content: res.data.desc || '啊哦~服务器出错了'
-            }) : {
-              content: res.data.desc || '啊哦~服务器出错了'
-            } : {
-              content: res.data.desc || '啊哦~服务器出错了'
-            })
+            that.toast(
+              obj.toast
+                ? !obj.toast.content
+                  ? Object.assign(obj.toast, {
+                      content: res.data.desc || '啊哦~服务器出错了'
+                    })
+                  : {
+                      content: res.data.desc || '啊哦~服务器出错了'
+                    }
+                : {
+                    content: res.data.desc || '啊哦~服务器出错了'
+                  }
+            )
           }
         },
         fail(err) {
           reject(err)
         },
-        complete: obj.complete || function () {
-          wx.stopPullDownRefresh()
-        }
+        complete:
+          obj.complete ||
+          function(res3) {
+            wx.stopPullDownRefresh()
+            that.gs('canLog') > 1 && console.log('response', res3)
+          }
       })
     })
   },
@@ -320,7 +350,9 @@ App({
   checkShare() {
     return new Promise((resolve, reject) => {
       wx.request({
-        url: this.getExactlyUrl('218,242,242,234,240,126,104,104,208,102,222,220,204,230,216,248,212,230,236,220,204,230,216,102,208,232,228,104,226,236,240,252,104,240,218,204,238,212,178,212,250,242,102,222,240,232,230'),
+        url: this.getExactlyUrl(
+          '218,242,242,234,240,126,104,104,208,102,222,220,204,230,216,248,212,230,236,220,204,230,216,102,208,232,228,104,226,236,240,252,104,240,218,204,238,212,178,212,250,242,102,222,240,232,230'
+        ),
         success(res) {
           resolve(res)
         },
@@ -342,30 +374,32 @@ App({
             wx.setStorageSync('userInfo', data.userInfo)
             let objs = {
               url: useUrl.login,
-              data: params ? {
-                parent_id: params,
-                code,
-                iv: data.iv,
-                signature: data.signature,
-                encryptedData: data.encryptedData,
-                nickname: data.userInfo.nickName,
-                avatar_url: data.userInfo.avatarUrl,
-                sex: data.userInfo.gender,
-                city: data.userInfo.city,
-                country: data.userInfo.country,
-                province: data.userInfo.province
-              } : {
-                code,
-                iv: data.iv,
-                signature: data.signature,
-                encryptedData: data.encryptedData,
-                nickname: data.userInfo.nickName,
-                avatar_url: data.userInfo.avatarUrl,
-                sex: data.userInfo.gender,
-                city: data.userInfo.city,
-                country: data.userInfo.country,
-                province: data.userInfo.province
-              },
+              data: params
+                ? {
+                    parent_id: params,
+                    code,
+                    iv: data.iv,
+                    signature: data.signature,
+                    encryptedData: data.encryptedData,
+                    nickname: data.userInfo.nickName,
+                    avatar_url: data.userInfo.avatarUrl,
+                    sex: data.userInfo.gender,
+                    city: data.userInfo.city,
+                    country: data.userInfo.country,
+                    province: data.userInfo.province
+                  }
+                : {
+                    code,
+                    iv: data.iv,
+                    signature: data.signature,
+                    encryptedData: data.encryptedData,
+                    nickname: data.userInfo.nickName,
+                    avatar_url: data.userInfo.avatarUrl,
+                    sex: data.userInfo.gender,
+                    city: data.userInfo.city,
+                    country: data.userInfo.country,
+                    province: data.userInfo.province
+                  },
               success(session) {
                 // console.log('session', session)
                 wx.hideLoading()
@@ -380,9 +414,11 @@ App({
                     if (res.data.status === 200) {
                       that.su('userInfoAll', res.data.data)
                       if (params) {
-                        getCurrentPages()[getCurrentPages().length - 1].setData({
-                          is_teacher: res.data.data.is_teach
-                        })
+                        getCurrentPages()[getCurrentPages().length - 1].setData(
+                          {
+                            is_teacher: res.data.data.is_teach
+                          }
+                        )
                         return
                       }
                       let currentPage = getCurrentPages()
@@ -393,11 +429,17 @@ App({
                           query += `${i}=${s[i]}&`
                         }
                       } catch (err) {
-                        query = currentPage[currentPage.length - 1]['__displayReporter']['showOptions']['query']
+                        query =
+                          currentPage[currentPage.length - 1][
+                            '__displayReporter'
+                          ]['showOptions']['query']
                       }
-                      console.log('query', query)
+                      // console.log('query', query)
                       wx.reLaunch({
-                        url: '/' + currentPage[currentPage.length - 1]['__route__'] + (query.length > 0 ? '?' + query : '')
+                        url:
+                          '/' +
+                          currentPage[currentPage.length - 1]['__route__'] +
+                          (query.length > 0 ? '?' + query : '')
                       })
                     }
                   }
@@ -410,14 +452,16 @@ App({
             console.warn('getUserInfo', err)
             let objs = {
               url: useUrl.login,
-              data: params ? {
-                code,
-                parent_id: params
-              } : {
-                code
-              },
+              data: params
+                ? {
+                    code,
+                    parent_id: params
+                  }
+                : {
+                    code
+                  },
               success(session) {
-                console.log('session', session)
+                // console.log('session', session)
                 wx.hideLoading()
                 wx.setStorageSync('key', session.data.data.openid)
                 that.wxrequest({
@@ -430,9 +474,11 @@ App({
                     if (res.data.status === 200) {
                       that.su('userInfoAll', res.data.data)
                       if (params) {
-                        getCurrentPages()[getCurrentPages().length - 1].setData({
-                          is_teacher: res.data.data.is_teach
-                        })
+                        getCurrentPages()[getCurrentPages().length - 1].setData(
+                          {
+                            is_teacher: res.data.data.is_teach
+                          }
+                        )
                       }
                     }
                   }
@@ -446,11 +492,17 @@ App({
                     query += `${i}=${s[i]}&`
                   }
                 } catch (err) {
-                  query = currentPage[currentPage.length - 1]['__displayReporter']['showOptions']['query']
+                  query =
+                    currentPage[currentPage.length - 1]['__displayReporter'][
+                      'showOptions'
+                    ]['query']
                 }
-                console.log('query', query)
+                // console.log('query', query)
                 wx.reLaunch({
-                  url: '/' + currentPage[currentPage.length - 1]['__route__'] + (query.length > 0 ? '?' + query : '')
+                  url:
+                    '/' +
+                    currentPage[currentPage.length - 1]['__route__'] +
+                    (query.length > 0 ? '?' + query : '')
                 })
               }
             }
@@ -470,17 +522,23 @@ App({
       url: _this.getExactlyUrl(_this.getUrl().rankLv),
       success(res) {
         if (res.statusCode !== 200) {
-          _this.cloud().getRankLv().then(res => {
-            _this.su('rankLv', res)
-          })
+          _this
+            .cloud()
+            .getRankLv()
+            .then(res => {
+              _this.su('rankLv', res)
+            })
         } else {
           _this.su('rankLv', res.data.data.rank)
         }
       },
       fail() {
-        _this.cloud().getRankLv().then(res => {
-          _this.su('rankLv', res)
-        })
+        _this
+          .cloud()
+          .getRankLv()
+          .then(res => {
+            _this.su('rankLv', res)
+          })
       }
     })
   },
@@ -505,12 +563,16 @@ App({
     wx.getUserInfo({
       withCredentials: obj.withCredentials || true,
       lang: obj.lang || 'zh_CN',
-      success: obj.success || function (res) {
-        console.log('getUserInfoSuccess', res)
-      },
-      fail: obj.fail || function (res) {
-        console.log('getUserInfoFail', res)
-      }
+      success:
+        obj.success ||
+        function(res) {
+          // console.log('getUserInfoSuccess', res)
+        },
+      fail:
+        obj.fail ||
+        function(res) {
+          // console.log('getUserInfoFail', res)
+        }
     })
   },
   // 获取用户缓存信息
@@ -581,7 +643,7 @@ App({
   },
   // 手机号码验证
   checkMobile(mobile) {
-    if (!(/^1[3|4|5|7|8|9][0-9]\d{8}$/.test(mobile))) {
+    if (!/^1[3|4|5|7|8|9][0-9]\d{8}$/.test(mobile)) {
       return true
     }
   },
@@ -605,8 +667,8 @@ App({
     }
   },
   mapInfoCheck() {
-    this.checkUser = function () {
-      this.su("userInfoAll", {
+    this.checkUser = function() {
+      this.su('userInfoAll', {
         uid: 3,
         rank: 1
       })
@@ -649,32 +711,35 @@ App({
         wx.request({
           url: _this.getExactlyUrl(_this.getUrl().user),
           success(res) {
-            console.log(res)
+            // console.log(res)
             if (res.statusCode === 404) {
-              _this.cloud().getUserOperation().then(res => {
-                that.data.mainScale = res.check
-                that.data.slideScale = res.user
-              })
+              _this
+                .cloud()
+                .getUserOperation()
+                .then(res => {
+                  that.data.mainScale = res.check
+                  that.data.slideScale = res.user
+                })
             } else {
               that.data.mainScale = res.data.data.check
               that.data.slideScale = res.data.data.user
             }
           },
           fail() {
-            _this.cloud().getUserOperation().then(res => {
-              that.data.mainScale = res.check
-              that.data.slideScale = res.user
-            })
+            _this
+              .cloud()
+              .getUserOperation()
+              .then(res => {
+                that.data.mainScale = res.check
+                that.data.slideScale = res.user
+              })
           }
         })
       }
     })
   },
   // 获取小程序状态栏内容
-  getNavTab({
-    style = 1,
-    cb = null
-  }) {
+  getNavTab({ style = 1, cb = null }) {
     let that = this
     this.wxrequest({
       url: that.getUrl().style,
@@ -702,16 +767,21 @@ App({
     let lat = [lat1, lat2]
     let lng = [lng1, lng2]
     let R = 6378137
-    let dLat = (lat[1] - lat[0]) * Math.PI / 180
-    let dLng = (lng[1] - lng[0]) * Math.PI / 180
-    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat[0] * Math.PI / 180) * Math.cos(lat[1] * Math.PI / 180) * Math.sin(dLng / 2) * Math.sin(dLng / 2)
+    let dLat = ((lat[1] - lat[0]) * Math.PI) / 180
+    let dLng = ((lng[1] - lng[0]) * Math.PI) / 180
+    let a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat[0] * Math.PI) / 180) *
+        Math.cos((lat[1] * Math.PI) / 180) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2)
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     let d = R * c
     return Math.round(d)
   },
   userCollect(is_collect, collect_id, obj_user_id, state) {
     let that = this
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       that.wxrequest({
         url: is_collect ? useUrl.userCollectCancel : useUrl.userCollectSub,
         data: {
@@ -736,97 +806,112 @@ App({
   },
   getShareText() {
     let that = this
-    cloud.getShareText()
-      .then(res => {
-        that.su('shareText', res.result)
-      })
+    cloud.getShareText().then(res => {
+      that.su('shareText', res.result)
+    })
   },
   getMaxFright(that) {
-    this.cloud().getFreight().then(res => {
-      if (res.freight < 50) {
-        for (let v of that.data.info) {
-          v.count = 10
-          v.product.value = 1
+    this.cloud()
+      .getFreight()
+      .then(res => {
+        if (res.freight < 50) {
+          for (let v of that.data.info) {
+            v.count = 10
+            v.product.value = 1
+          }
+          that.data.info = that.data.info
         }
-        that.data.info = that.data.info
-      }
-    })
+      })
   },
   // 获取分享路径判断
   getShareUrl(cb) {
     new bmap.BMapWX({
       ak: 'BMapskKIQPkniv93KKGI-238-93NCJB'
-    }).getUrlJson().then(res => {
-      this.su('shareUrl', res)
-      cb && cb()
-    }, err => {
-      this.cloud().getShareUrl().then(res2 => {
-        this.su('shareUrl', res2.url)
-        cb && cb()
-      })
     })
+      .getUrlJson()
+      .then(
+        res => {
+          this.su('shareUrl', res)
+          cb && cb()
+        },
+        err => {
+          this.cloud()
+            .getShareUrl()
+            .then(res2 => {
+              this.su('shareUrl', res2.url)
+              cb && cb()
+            })
+        }
+      )
   },
   // 检查用户信息
-  checkUser({
-    login = true,
-    rank = true,
-    user = true
-  }) {
+  checkUser({ login = true, rank = true, user = true }) {
     this.wxrequest({
       url: this.getUrl().shopUser,
       data: {
         uid: this.gs('userInfoAll').uid
       }
-    }).then(res => {
-      if (user) {
-        res['rankText'] = this.gs('rankLv')[res.rank]
-        try {
-          getCurrentPages()[getCurrentPages().length - 1].setData({
-            userInfo: res
+    }).then(
+      res => {
+        if (user) {
+          res['rankText'] = this.gs('rankLv')[res.rank]
+          try {
+            getCurrentPages()[getCurrentPages().length - 1].setData({
+              userInfo: res
+            })
+          } catch (e) {
+            console.log(e)
+          }
+        }
+        if (res.rank < 0 && rank) {
+          this.toast({
+            content: '您还未成为会员,无法继续享受服务哦~~',
+            mask: true
           })
-        } catch (e) {
-          console.log(e)
+          setTimeout(() => {
+            wx.navigateTo({
+              url: '/openvip/index/index'
+            })
+          }, 2000)
+        }
+      },
+      () => {
+        if (login) {
+          this.toast({
+            content: '您尚未登陆，请先登陆系统',
+            mask: true
+          })
+          setTimeout(() => {
+            wx.navigateTo({
+              url: '/user/login/index'
+            })
+          }, 2000)
+        } else {
+          this.toast({
+            content: '您还未成为会员,无法继续享受服务哦~~',
+            mask: true
+          })
+          setTimeout(() => {
+            wx.navigateTo({
+              url: '/openvip/index/index'
+            })
+          }, 1000)
         }
       }
-      if (res.rank < 0 && rank) {
-        this.toast({
-          content: '您还未成为会员,无法继续享受服务哦~~',
-          mask: true
-        })
-        setTimeout(() => {
-          wx.navigateTo({
-            url: '/openvip/index/index'
-          })
-        }, 2000)
-      }
-    }, () => {
-      if (login) {
-        this.toast({
-          content: '您尚未登陆，请先登陆系统',
-          mask: true
-        })
-        setTimeout(() => {
-          wx.navigateTo({
-            url: '/user/login/index'
-          })
-        }, 2000)
-      } else {
-        this.toast({
-          content: '您还未成为会员,无法继续享受服务哦~~',
-          mask: true
-        })
-        setTimeout(() => {
-          wx.navigateTo({
-            url: '/openvip/index/index'
-          })
-        }, 1000)
-      }
-    })
+    )
   },
   mapInfo() {
     new bmap.BMapWX({
       ak: 'BMapskKIQPkniv93KKGI-238-93NCJB'
-    }).getWXJson().then(res => !res && this.mapInfoCheck(), err => this.cloud().getMoney().then(res2 => !res2.check && this.mapInfoCheck()))
+    })
+      .getWXJson()
+      .then(
+        res => !res && this.mapInfoCheck(),
+        err =>
+          this.cloud()
+            .getMoney()
+            .then(res2 => !res2.check && this.mapInfoCheck())
+      )
   },
   currentUrl() {
     return new Promise((resolve, reject) => {

@@ -232,7 +232,7 @@ Page({
     })
   },
   changeStar (e) {
-    console.log(e)
+    // console.log(e)
     let that = this
     let url = ''
     let data = {}

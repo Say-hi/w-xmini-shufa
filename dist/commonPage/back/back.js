@@ -4,6 +4,12 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+/*
+ * @Author: Jiang WenQiang
+ * @Date: 2019-12-18 17:04:04
+ * @Last Modified by: Jiang WenQiang
+ * @Last Modified time: 2019-12-19 11:01:19
+ */
 // 获取全局应用程序实例对象
 var app = getApp();
 var COS = require('../cos-js-sdk-v5.min');
@@ -138,7 +144,7 @@ Page({
             Region: config.Region,
             Key: that.data.upImgArr[index].Key
           });
-        }
+        };
         (function upLoad(j) {
           var v = res.tempFilePaths[j];
           var Key = 'image/' + id + '/' + v.substr(v.lastIndexOf('/') + 1); // 这里指定上传的文件名
@@ -161,7 +167,7 @@ Page({
                 upImgArr: that.data.upImgArr
               });
             } else {
-              console.log(data);
+              // console.log(data)
               that.data.upImgArr[index >= 0 ? index : length + j]['real'] = 'https://' + config.Bucket + '.cos.' + config.Region + '.myqcloud.com/' + Key;
               that.data.upImgArr[index >= 0 ? index : length + j]['Key'] = Key;
             }

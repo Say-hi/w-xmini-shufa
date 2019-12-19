@@ -29,7 +29,7 @@ Page({
     var url = urlData[0];
     urlData.shift();
     var q = this.data.options.q.split(',');
-    console.log(q);
+    // console.log(q)
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
@@ -110,7 +110,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
-    console.log(options);
+    // console.log(options)
     // options规则 判断是否为扫码进入
     if (options.scene) {
       // todo 扫码进入

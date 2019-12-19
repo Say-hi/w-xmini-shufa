@@ -23,7 +23,7 @@ Page({
     });
   },
   _showColumn: function _showColumn(e) {
-    console.log(e);
+    // console.log(e)
     this.setData({
       showColumn: !this.data.showColumn,
       showColumnType: e.currentTarget.id === 'openVideo'

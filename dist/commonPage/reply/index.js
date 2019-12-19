@@ -258,7 +258,7 @@ Page({
     });
   },
   changeStar: function changeStar(e) {
-    console.log(e);
+    // console.log(e)
     var that = this;
     var url = '';
     var data = {};

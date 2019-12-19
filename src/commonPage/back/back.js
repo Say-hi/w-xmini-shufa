@@ -1,3 +1,9 @@
+/*
+ * @Author: Jiang WenQiang
+ * @Date: 2019-12-18 17:04:04
+ * @Last Modified by: Jiang WenQiang
+ * @Last Modified time: 2019-12-19 11:01:19
+ */
 // 获取全局应用程序实例对象
 const app = getApp()
 const COS = require('../cos-js-sdk-v5.min')
@@ -117,7 +123,7 @@ Page({
             Region: config.Region,
             Key: that.data.upImgArr[index].Key
           })
-        }
+        };
         (function upLoad (j) {
           let v = res.tempFilePaths[j]
           let Key = `image/${id}/${v.substr(v.lastIndexOf('/') + 1)}` // 这里指定上传的文件名
@@ -127,7 +133,8 @@ Page({
             Key: Key,
             FilePath: v,
             onProgress: function (info) {
-              that.data.upImgArrProgress[index >= 0 ? index : length + j] = info.percent * 100
+              that.data.upImgArrProgress[index >= 0 ? index : length + j] =
+                  info.percent * 100
               that.setData({
                 upImgArrProgress: that.data.upImgArrProgress
               })
@@ -140,7 +147,7 @@ Page({
                 upImgArr: that.data.upImgArr
               })
             } else {
-              console.log(data)
+                // console.log(data)
               that.data.upImgArr[index >= 0 ? index : length + j]['real'] = `https://${config.Bucket}.cos.${config.Region}.myqcloud.com/${Key}`
               that.data.upImgArr[index >= 0 ? index : length + j]['Key'] = Key
             }
@@ -165,18 +172,22 @@ Page({
       itemList,
       success (res) {
         if (res.tapIndex === 0) {
-          app.showImg(that.data.upImgArr[e.currentTarget.dataset.index].temp, [that.data.upImgArr[e.currentTarget.dataset.index].temp])
+          app.showImg(that.data.upImgArr[e.currentTarget.dataset.index].temp, [
+            that.data.upImgArr[e.currentTarget.dataset.index].temp
+          ])
         } else if (res.tapIndex === 2) {
           cos.deleteObject({
             Bucket: config.Bucket,
             Region: config.Region,
             Key: that.data.upImgArr[e.currentTarget.dataset.index].Key
-          }, () => {
-            that.data.upImgArr.splice(e.currentTarget.dataset.index, 1)
-            that.setData({
-              upImgArr: that.data.upImgArr
-            })
-          })
+          },
+            () => {
+              that.data.upImgArr.splice(e.currentTarget.dataset.index, 1)
+              that.setData({
+                upImgArr: that.data.upImgArr
+              })
+            }
+          )
         } else if (res.tapIndex === 1) {
           that.wxUploadImg(e.currentTarget.dataset.index)
         }
@@ -184,22 +195,24 @@ Page({
     })
   },
   shopUserRefund () {
-    app.wxrequest({
-      url: app.getUrl()[this.data.info.goodsType === 'sell' ? 'shopUserRefund' : 'shopUserRefund'], // todo 自售订单退款判断参数待定
-      data: {
-        uid: app.gs('userInfoAll').uid,
-        oid: this.data.info.id,
-        amount: this.data.info.total_fee,
-        out_trade_no: this.data.info.out_trade_no,
-        types: this.data.backType[this.data.backTypeIndex].t,
-        reason: this.data.backReason[this.data.backReasonIndex].t,
-        explain: this.data.content
-      }
-    }).then(() => {
-      this.setData({
-        apply: true
+    app
+      .wxrequest({
+        url: app.getUrl()[this.data.info.goodsType === 'sell' ? 'shopUserRefund' : 'shopUserRefund'], // todo 自售订单退款判断参数待定
+        data: {
+          uid: app.gs('userInfoAll').uid,
+          oid: this.data.info.id,
+          amount: this.data.info.total_fee,
+          out_trade_no: this.data.info.out_trade_no,
+          types: this.data.backType[this.data.backTypeIndex].t,
+          reason: this.data.backReason[this.data.backReasonIndex].t,
+          explain: this.data.content
+        }
       })
-    })
+      .then(() => {
+        this.setData({
+          apply: true
+        })
+      })
   },
   /**
    * 生命周期函数--监听页面加载

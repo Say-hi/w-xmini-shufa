@@ -260,12 +260,12 @@ Page({
 
     this.getImageInfo(src).then(function (res) {
       res.fixWidth = app.data.system.windowWidth;
-      console.log('res.fixWidth', res.fixWidth);
+      // console.log('res.fixWidth', res.fixWidth)
       baseScale = app.data.system.windowWidth / res.width;
-      console.log('baseScale', baseScale);
+      // console.log('baseScale', baseScale)
       res.fixHeight = baseScale * res.height;
-      console.log('res.fixHeight', res.fixHeight);
-      console.log('this.data.backImageInfo.positionItem', _this2.data.backImageInfo.positionItem);
+      // console.log('res.fixHeight', res.fixHeight)
+      // console.log('this.data.backImageInfo.positionItem', this.data.backImageInfo.positionItem)
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
       var _iteratorError = undefined;
@@ -281,6 +281,7 @@ Page({
           v.width = baseScale * v.width;
           v.height = baseScale * v.height;
         }
+        // console.log('this.data.backImageInfo.positionItem', this.data.backImageInfo.positionItem)
       } catch (err) {
         _didIteratorError = true;
         _iteratorError = err;
@@ -296,7 +297,6 @@ Page({
         }
       }
 
-      console.log('this.data.backImageInfo.positionItem', _this2.data.backImageInfo.positionItem);
       _this2.setData({
         backImageInfo: Object.assign(_this2.data.backImageInfo, res)
       }, function () {

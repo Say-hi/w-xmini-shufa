@@ -9,13 +9,14 @@ module.exports = {
     App: true,
     Page: true,
     getApp: true,
-	Component: true,
-	getCurrentPages: true,
+    Component: true,
+    getCurrentPages: true,
     wx: true,
     noUse: true
   },
   'rules': {
-  	'no-unused-vars': 1,
-  	'no-useless-computed-key': 1
+    'no-unused-vars': 1,
+    'no-useless-computed-key': 1
+    // "space-before-function-paren": 'off'
   }
 };

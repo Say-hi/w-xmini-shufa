@@ -14,13 +14,15 @@
 </navigator>
 <!--搜索 e-->
 <!--屋檐 s-->
-<view class="eaves"></view>
+<view catchtap='showLog' class="eaves"></view>
 <!--屋檐 e-->
 <!--首页导航 s-->
 <view>
   <image class="w100" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/4.png"></image>
   <view class="navTab">
-    <navigator class="ntItem" url="{{ item.path_mini }}" wx:for="{{ nav }}" wx:key="index">
+    <navigator class="ntItem tr3" 
+    style='transition-delay: {{ index * 0.1 }}s; {{ item && showItem ? "opacity: 1;" : "opacity: 0;" }}' 
+    url="{{ item.path_mini }}" wx:for="{{ nav }}" wx:key="index">
       <image mode="widthFix" src="{{ item.img_url }}"></image>
     </navigator>
   </view>

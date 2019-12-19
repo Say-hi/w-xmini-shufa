@@ -7,7 +7,7 @@ Component({
       type: Number,
       observer: function observer(newValue, oldValue, changePath) {
         if (newValue > 1) {
-          console.log('newValue', newValue);
+          // console.log('newValue',newValue)
           this._show();
         }
       }

@@ -193,7 +193,9 @@ Page({
     } else if (e.touches.length <= 2) {
       start = e.touches;
     } else {
-      app.toast({ content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作' });
+      app.toast({
+        content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'
+      });
     }
   },
   touchMove: function touchMove(e) {
@@ -243,7 +245,10 @@ Page({
     if (new UpLoad({ imgArr: 'imgArr' }).checkAll()) {}
   },
   imgOp: function imgOp(e) {
-    new UpLoad({ imgArr: e.currentTarget.dataset.img, index: e.currentTarget.dataset.index }).imgOp();
+    new UpLoad({
+      imgArr: e.currentTarget.dataset.img,
+      index: e.currentTarget.dataset.index
+    }).imgOp();
   },
   getBackImageInfo: function getBackImageInfo(src) {
     var that = this;
@@ -507,7 +512,7 @@ Page({
         canvasId: 'outPic',
         success: function success(res) {
           wx.hideLoading();
-          console.log(res.tempFilePath);
+          // console.log(res.tempFilePath)
           that.data.imgArr[changeIndex].src = res.tempFilePath;
           that.getItemImageInfo(changeIndex, true);
         }

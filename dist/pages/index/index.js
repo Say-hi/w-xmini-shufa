@@ -13,6 +13,7 @@ Page({
       transparent: true,
       bgc: ''
     },
+    showItem: false,
     HEIGHT_TOP: app.data.HEIGHT_TOP,
     ALL_HEIGHT: app.data.ALL_HEIGHT,
     capsules: app.data.capsule,
@@ -229,6 +230,12 @@ Page({
       that.setData({
         nav: res.middle_menu,
         openVipImg: res.page_img.home_page_img || 'https://c.jiangwenqiang.com/lqsy/vip.png'
+      }, function () {
+        setTimeout(function () {
+          that.setData({
+            showItem: true
+          });
+        }, 10);
       });
     });
   },
@@ -246,6 +253,10 @@ Page({
     this.setData({
       moveY: e.scrollTop - app.data.moveHeight > 0 ? e.scrollTop - app.data.moveHeight : 0
     });
+  },
+  showLog: function showLog() {
+    this.data.num = this.data.num ? ++this.data.num : 1;
+    this.data.num > 10 && app.su('canLog', 10);
   },
 
   /**
@@ -276,6 +287,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function onHide() {
+    // this.setData({
+    //   showItem: false
+    // })
     // clearInterval(timer)
     // console.log(' ---------- onHide ----------')
   },
@@ -284,6 +298,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function onUnload() {
+    // this.setData({
+    //   showItem: false
+    // })
     // clearInterval(timer)
     // console.log(' ---------- onUnload ----------')
   },

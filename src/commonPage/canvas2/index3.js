@@ -444,7 +444,7 @@ Page({
         canvasId: 'outPic',
         success (res) {
           wx.hideLoading()
-          console.log(res.tempFilePath)
+          // console.log(res.tempFilePath)
           that.data.imgArr[changeIndex].src = res.tempFilePath
           that.getItemImageInfo(changeIndex, true)
         }

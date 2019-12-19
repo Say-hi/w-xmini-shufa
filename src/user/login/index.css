@@ -15,7 +15,6 @@
     transform: scale(1.1);
   }
 }
-
 .loginBtn {
   width: 550rpx;
   height: 173rpx;
@@ -28,31 +27,29 @@
   margin: 0 auto;
   transform: translateX(-50rpx);
 }
-
 .phoneArea {
   padding: 30rpx 100rpx;
   opacity: 0;
 }
 .pb20 {
   padding-bottom: 20rpx;
-  input {
-    padding-left: 20rpx;
-  }
+}
+.pb20 input {
+  padding-left: 20rpx;
 }
 .codeArea {
   display: flex;
   align-items: center;
-  .time {
-    width: 138rpx;
-    height: 44rpx;
-    border-radius: 22rpx;
-    border: solid 2rpx #b28850;
-    font-size: 21rpx;
-    line-height: 44rpx;
-    color: #b28850;
-  }
 }
-
+.codeArea .time {
+  width: 138rpx;
+  height: 44rpx;
+  border-radius: 22rpx;
+  border: solid 2rpx #b28850;
+  font-size: 21rpx;
+  line-height: 44rpx;
+  color: #b28850;
+}
 .loginConfirm {
   text-align: center;
   width: 501rpx;

@@ -4,20 +4,20 @@
 <!--屋檐 s-->
 <view class="eaves"></view>
 <!--屋檐 e-->
-<image class="logo" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/login1.png"></image>
+<image class="before-logo {{ logo }}" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/login1.png"></image>
 
 <!--登录选择 -s-->
-<view wx:if="{{ phoneLogin }}">
+<!-- <view wx:if="{{ phoneLogin }}">
   <view class="tac">
     <button open-type="getUserInfo" getUserInfo="_getUserInfo" class="loginBtn">微信一键登陆</button>
   </view>
   <view class="tac">
     <view catchtap="_phoneLogin" class="loginBtn">手机验证码登陆</view>
   </view>
-</view>
+</view> -->
 <!--登录选择 -e-->
 <!--账号登陆 -s-->
-<view wx:else class="p30 f25 phoneArea animated bounceInUp">
+<view class="p30 f25 phoneArea animated {{ bounceInUp }}" style='animation-fill-mode:forwards;'>
   <form bindsubmit="phoneLogin">
     <view class="bd1 pb20">
       <input id="phone" bindinput="inputValue" name="phone" maxlength="11" type="number" placeholder="请输入手机号"/>

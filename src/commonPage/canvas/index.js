@@ -65,7 +65,16 @@ Page({
       }
     ],
     tabIndex: null,
-    tabBorderArr: ['关注', '推荐', '热议', '视频', '关注', '推荐', '热议', '视频'],
+    tabBorderArr: [
+      '关注',
+      '推荐',
+      '热议',
+      '视频',
+      '关注',
+      '推荐',
+      '热议',
+      '视频'
+    ],
     tabBorderIndex: -1,
     chooseAreaInfo: {
       path: 'https://c.jiangwenqiang.com/api/logo.jpg',
@@ -101,19 +110,27 @@ Page({
     if (e.currentTarget.dataset.type === 'bgc') {
       if (this.data.tabIndex === e.currentTarget.dataset.index) return
       canChoose = false
-      this.setData({
-        tabIndex: e.currentTarget.dataset.index
-        // tabId: e.currentTarget.dataset.index
-      }, () => {
-        this.getBackImageInfo(`https://c.jiangwenqiang.com/lqsy/canvas_bottom_${e.currentTarget.dataset.index}.jpg`)
-      })
+      this.setData(
+        {
+          tabIndex: e.currentTarget.dataset.index
+          // tabId: e.currentTarget.dataset.index
+        },
+        () => {
+          this.getBackImageInfo(
+            `https://c.jiangwenqiang.com/lqsy/canvas_bottom_${e.currentTarget.dataset.index}.jpg`
+          )
+        }
+      )
     } else {
       canChoose = false
-      this.setData({
-        tabBorderIndex: e.currentTarget.dataset.index
-      }, () => {
-        this.setBorder()
-      })
+      this.setData(
+        {
+          tabBorderIndex: e.currentTarget.dataset.index
+        },
+        () => {
+          this.setBorder()
+        }
+      )
     }
   },
   itemStart (e) {
@@ -130,7 +147,17 @@ Page({
     if (e.timeStamp - tapTime < 100) {
       tapTime = 0
       wx.showActionSheet({
-        itemList: that.data.imgArr.length >= 2 ? ['替换图片', '垂直放置', '水平放置', '复位', '裁切图片', '删除图片'] : ['替换图片', '垂直放置', '水平放置', '复位', '裁切图片'],
+        itemList:
+          that.data.imgArr.length >= 2
+            ? [
+              '替换图片',
+              '垂直放置',
+              '水平放置',
+              '复位',
+              '裁切图片',
+              '删除图片'
+            ]
+            : ['替换图片', '垂直放置', '水平放置', '复位', '裁切图片'],
         success (res) {
           if (res.tapIndex === 0) {
             wx.chooseImage({
@@ -148,44 +175,53 @@ Page({
             that.setData({
               reload: true
             })
-            that.setData({
-              [`imgArr[${changeIndex}].rotate`]: 0
-            }, () => {
-              setTimeout(() => {
-                that.setData({
-                  reload: false
-                })
-              }, 530)
-            })
+            that.setData(
+              {
+                [`imgArr[${changeIndex}].rotate`]: 0
+              },
+              () => {
+                setTimeout(() => {
+                  that.setData({
+                    reload: false
+                  })
+                }, 530)
+              }
+            )
           } else if (res.tapIndex === 1) {
             that.setData({
               reload: true
             })
-            that.setData({
-              [`imgArr[${changeIndex}].rotate`]: 90
-            }, () => {
-              setTimeout(() => {
-                that.setData({
-                  reload: false
-                })
-              }, 530)
-            })
+            that.setData(
+              {
+                [`imgArr[${changeIndex}].rotate`]: 90
+              },
+              () => {
+                setTimeout(() => {
+                  that.setData({
+                    reload: false
+                  })
+                }, 530)
+              }
+            )
           } else if (res.tapIndex === 3) {
             that.setData({
               reload: true
             })
-            that.setData({
-              [`imgArr[${changeIndex}].rotate`]: 0,
-              [`imgArr[${changeIndex}].scale`]: 1,
-              [`imgArr[${changeIndex}].left`]: that.data.backImageInfo.sX,
-              [`imgArr[${changeIndex}].top`]: that.data.backImageInfo.sY
-            }, () => {
-              setTimeout(() => {
-                that.setData({
-                  reload: false
-                })
-              }, 530)
-            })
+            that.setData(
+              {
+                [`imgArr[${changeIndex}].rotate`]: 0,
+                [`imgArr[${changeIndex}].scale`]: 1,
+                [`imgArr[${changeIndex}].left`]: that.data.backImageInfo.sX,
+                [`imgArr[${changeIndex}].top`]: that.data.backImageInfo.sY
+              },
+              () => {
+                setTimeout(() => {
+                  that.setData({
+                    reload: false
+                  })
+                }, 530)
+              }
+            )
           } else if (res.tapIndex === 4) {
             that.fixImg(that.data.imgArr[changeIndex].path)
           }
@@ -203,7 +239,9 @@ Page({
     } else if (e.touches.length <= 2) {
       start = e.touches
     } else {
-      app.toast({content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'})
+      app.toast({
+        content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'
+      })
     }
   },
   touchMove (e) {
@@ -215,8 +253,12 @@ Page({
     } else if (e.touches.length <= 2) {
       if (start.length < 1) start = e.touches
       let now = e.touches
-      let scale = (this.getDistance(now[0], now[1]) / this.getDistance(start[0], start[1])).toFixed(1)
-      let rotate = (this.getAngle(now[0], now[1]) - this.getAngle(start[0], start[1])).toFixed(1)
+      let scale = (
+        this.getDistance(now[0], now[1]) / this.getDistance(start[0], start[1])
+      ).toFixed(1)
+      let rotate = (
+        this.getAngle(now[0], now[1]) - this.getAngle(start[0], start[1])
+      ).toFixed(1)
       this.setData({
         [`imgArr[${changeIndex}].scale`]: scale > 2 ? 2 : scale < 1 ? 1 : scale,
         [`imgArr[${changeIndex}].rotate`]: rotate
@@ -233,7 +275,8 @@ Page({
     wx.chooseImage({
       count: 1,
       success (res) {
-        that.data.imgArr[e.currentTarget.dataset.index].src = res.tempFilePaths[0]
+        that.data.imgArr[e.currentTarget.dataset.index].src =
+          res.tempFilePaths[0]
         that.getItemImageInfo(e.currentTarget.dataset.index, true)
       }
     })
@@ -241,22 +284,25 @@ Page({
   getDistance (p1, p2) {
     let x = p2.pageX - p1.pageX
     let y = p2.pageY - p1.pageY
-    return Math.sqrt((x * x) + (y * y))
+    return Math.sqrt(x * x + y * y)
   },
   getAngle (p1, p2) {
     let x = p1.pageX - p2.pageX
     let y = p1.pageY - p2.pageY
-    return Math.atan2(y, x) * 180 / Math.PI
+    return (Math.atan2(y, x) * 180) / Math.PI
   },
   upload () {
-    new UpLoad({imgArr: 'imgArr'}).chooseImage()
+    new UpLoad({ imgArr: 'imgArr' }).chooseImage()
   },
   checkAll () {
-    if (new UpLoad({imgArr: 'imgArr'}).checkAll()) {
+    if (new UpLoad({ imgArr: 'imgArr' }).checkAll()) {
     }
   },
   imgOp (e) {
-    new UpLoad({imgArr: e.currentTarget.dataset.img, index: e.currentTarget.dataset.index}).imgOp()
+    new UpLoad({
+      imgArr: e.currentTarget.dataset.img,
+      index: e.currentTarget.dataset.index
+    }).imgOp()
   },
   getBackImageInfo (src) {
     let that = this
@@ -274,9 +320,12 @@ Page({
               [`imgArr[${i}].top`]: v.backImageInfo.sY
             })
           }
-          that.setData({
-            backImageInfo: v.backImageInfo
-          }, that.getItemImageInfo(0))
+          that.setData(
+            {
+              backImageInfo: v.backImageInfo
+            },
+            that.getItemImageInfo(0)
+          )
           return
         }
       }
@@ -290,23 +339,40 @@ Page({
           oHeight: res.height,
           path: res.path,
           showWidth: app.data.system.windowWidth,
-          showHeight: app.data.system.windowWidth * res.height / res.width,
+          showHeight: (app.data.system.windowWidth * res.height) / res.width,
           zIndex: 1,
-          sX: app.data.system.windowWidth * that.data.tabArr[that.data.tabIndex].oX / res.width,
-          sY: app.data.system.windowWidth * res.height / res.width * that.data.tabArr[that.data.tabIndex].oY / res.height,
-          imgWidth: app.data.system.windowWidth * that.data.tabArr[that.data.tabIndex].oW / res.width,
-          imgHeight: that.data.tabArr[that.data.tabIndex].oH / that.data.tabArr[that.data.tabIndex].oW * (app.data.system.windowWidth * that.data.tabArr[that.data.tabIndex].oW / res.width)
+          sX:
+            (app.data.system.windowWidth *
+              that.data.tabArr[that.data.tabIndex].oX) /
+            res.width,
+          sY:
+            (((app.data.system.windowWidth * res.height) / res.width) *
+              that.data.tabArr[that.data.tabIndex].oY) /
+            res.height,
+          imgWidth:
+            (app.data.system.windowWidth *
+              that.data.tabArr[that.data.tabIndex].oW) /
+            res.width,
+          imgHeight:
+            (that.data.tabArr[that.data.tabIndex].oH /
+              that.data.tabArr[that.data.tabIndex].oW) *
+            ((app.data.system.windowWidth *
+              that.data.tabArr[that.data.tabIndex].oW) /
+              res.width)
         }
-        storage.push({src, backImageInfo})
+        storage.push({ src, backImageInfo })
         for (let [i] of that.data.imgArr.entries()) {
           that.setData({
             [`imgArr[${i}].left`]: backImageInfo.sX,
             [`imgArr[${i}].top`]: backImageInfo.sY
           })
         }
-        that.setData({
-          backImageInfo
-        }, that.getItemImageInfo(0))
+        that.setData(
+          {
+            backImageInfo
+          },
+          that.getItemImageInfo(0)
+        )
         app.su('canvasImgArr', storage)
       }
     })
@@ -321,21 +387,32 @@ Page({
       src: that.data.imgArr[index].src,
       success (res) {
         wx.hideLoading()
-        that.setData({
-          cutImg: false,
-          [`imgArr[${index}].oWidth`]: res.width,
-          [`imgArr[${index}].oHeight`]: res.height,
-          [`imgArr[${index}].showWidth`]: that.data.backImageInfo.imgWidth,
-          [`imgArr[${index}].showHeight`]: that.data.backImageInfo.imgHeight,
-          [`imgArr[${index}].path`]: res.path,
-          [`imgArr[${index}].left`]: that.data.imgArr[index].left ? that.data.imgArr[index].left : that.data.backImageInfo.sX,
-          [`imgArr[${index}].top`]: that.data.imgArr[index].top ? that.data.imgArr[index].top : that.data.backImageInfo.sY,
-          [`imgArr[${index}].zIndex`]: index + 1,
-          [`imgArr[${index}].rotate`]: 0
-        }, () => {
-          canChoose = true
-          change ? '' : index >= that.data.imgArr.length - 1 ? '' : that.getItemImageInfo(index + 1)
-        })
+        that.setData(
+          {
+            cutImg: false,
+            [`imgArr[${index}].oWidth`]: res.width,
+            [`imgArr[${index}].oHeight`]: res.height,
+            [`imgArr[${index}].showWidth`]: that.data.backImageInfo.imgWidth,
+            [`imgArr[${index}].showHeight`]: that.data.backImageInfo.imgHeight,
+            [`imgArr[${index}].path`]: res.path,
+            [`imgArr[${index}].left`]: that.data.imgArr[index].left
+              ? that.data.imgArr[index].left
+              : that.data.backImageInfo.sX,
+            [`imgArr[${index}].top`]: that.data.imgArr[index].top
+              ? that.data.imgArr[index].top
+              : that.data.backImageInfo.sY,
+            [`imgArr[${index}].zIndex`]: index + 1,
+            [`imgArr[${index}].rotate`]: 0
+          },
+          () => {
+            canChoose = true
+            change
+              ? ''
+              : index >= that.data.imgArr.length - 1
+              ? ''
+              : that.getItemImageInfo(index + 1)
+          }
+        )
       }
     })
   },
@@ -356,7 +433,7 @@ Page({
             w: that.data.backImageInfo.imgWidth,
             h: that.data.backImageInfo.imgHeight,
             imgW: that.data.backImageInfo.showWidth,
-            imgH: res.height * that.data.backImageInfo.showWidth / res.width
+            imgH: (res.height * that.data.backImageInfo.showWidth) / res.width
           },
           cutImg: true
         })
@@ -372,41 +449,94 @@ Page({
     let ctx = wx.createCanvasContext('outPic', this)
     let that = this
     ctx.setFillStyle('white')
-    ctx.fillRect(0, 0, that.data.backImageInfo.showWidth * 2, that.data.backImageInfo.showHeight * 2)
+    ctx.fillRect(
+      0,
+      0,
+      that.data.backImageInfo.showWidth * 2,
+      that.data.backImageInfo.showHeight * 2
+    )
     if (that.data.backImageInfo.zIndex <= 1) {
-      ctx.drawImage(that.data.backImageInfo.path, 0, 0, that.data.backImageInfo.showWidth * 2, that.data.backImageInfo.showHeight * 2)
+      ctx.drawImage(
+        that.data.backImageInfo.path,
+        0,
+        0,
+        that.data.backImageInfo.showWidth * 2,
+        that.data.backImageInfo.showHeight * 2
+      )
     }
     for (let v of that.data.imgArr) {
       ctx.save()
       ctx.translate(v.left * 2 + v.showWidth, v.top * 2 + v.showHeight)
-      ctx.rotate(v.rotate * Math.PI / 180)
-      ctx.drawImage(v.path, -(v.showWidth * v.scale), -(v.showHeight * v.scale), v.showWidth * v.scale * 2, v.showHeight * v.scale * 2)
+      ctx.rotate((v.rotate * Math.PI) / 180)
+      ctx.drawImage(
+        v.path,
+        -(v.showWidth * v.scale),
+        -(v.showHeight * v.scale),
+        v.showWidth * v.scale * 2,
+        v.showHeight * v.scale * 2
+      )
       if (v.border) {
         // 左上角
         ctx.translate(-v.showWidth * v.scale, -v.showHeight * v.scale)
-        ctx.rotate(45 * Math.PI / 180)
-        ctx.drawImage(v.border.path, -(v.border.width * v.scale), -(v.border.width * v.scale), v.border.width * v.scale * 2, v.border.width * v.scale * 2)
-        ctx.rotate(-45 * Math.PI / 180)
+        ctx.rotate((45 * Math.PI) / 180)
+        ctx.drawImage(
+          v.border.path,
+          -(v.border.width * v.scale),
+          -(v.border.width * v.scale),
+          v.border.width * v.scale * 2,
+          v.border.width * v.scale * 2
+        )
+        ctx.rotate((-45 * Math.PI) / 180)
         ctx.translate(v.showWidth * 2 * v.scale, 0)
-        ctx.rotate(135 * Math.PI / 180)
-        ctx.drawImage(v.border.path, -(v.border.width * v.scale), -(v.border.width * v.scale), v.border.width * v.scale * 2, v.border.width * v.scale * 2)
-        ctx.rotate(-135 * Math.PI / 180)
+        ctx.rotate((135 * Math.PI) / 180)
+        ctx.drawImage(
+          v.border.path,
+          -(v.border.width * v.scale),
+          -(v.border.width * v.scale),
+          v.border.width * v.scale * 2,
+          v.border.width * v.scale * 2
+        )
+        ctx.rotate((-135 * Math.PI) / 180)
         ctx.translate(0, v.showHeight * 2 * v.scale)
-        ctx.rotate(225 * Math.PI / 180)
-        ctx.drawImage(v.border.path, -(v.border.width * v.scale), -(v.border.width * v.scale), v.border.width * v.scale * 2, v.border.width * v.scale * 2)
-        ctx.rotate(-225 * Math.PI / 180)
+        ctx.rotate((225 * Math.PI) / 180)
+        ctx.drawImage(
+          v.border.path,
+          -(v.border.width * v.scale),
+          -(v.border.width * v.scale),
+          v.border.width * v.scale * 2,
+          v.border.width * v.scale * 2
+        )
+        ctx.rotate((-225 * Math.PI) / 180)
         ctx.translate(-v.showWidth * 2 * v.scale, 0)
-        ctx.rotate(315 * Math.PI / 180)
-        ctx.drawImage(v.border.path, -(v.border.width * v.scale), -(v.border.width * v.scale), v.border.width * v.scale * 2, v.border.width * v.scale * 2)
-        ctx.rotate(-315 * Math.PI / 180)
+        ctx.rotate((315 * Math.PI) / 180)
+        ctx.drawImage(
+          v.border.path,
+          -(v.border.width * v.scale),
+          -(v.border.width * v.scale),
+          v.border.width * v.scale * 2,
+          v.border.width * v.scale * 2
+        )
+        ctx.rotate((-315 * Math.PI) / 180)
         ctx.translate(v.showWidth * v.scale, -v.showHeight * v.scale)
-        ctx.drawImage(v.path, -(v.showWidth * v.scale), -(v.showHeight * v.scale), v.showWidth * v.scale * 2, v.showHeight * v.scale * 2)
+        ctx.drawImage(
+          v.path,
+          -(v.showWidth * v.scale),
+          -(v.showHeight * v.scale),
+          v.showWidth * v.scale * 2,
+          v.showHeight * v.scale * 2
+        )
       }
       ctx.restore()
     }
 
     if (that.data.backImageInfo.zIndex >= 10) {
-      ctx.drawImage(that.data.backImageInfo.path, 0, 0, that.data.backImageInfo.showWidth * 2, that.data.backImageInfo.showHeight * 2)
+      ctx.drawImage(
+        that.data.backImageInfo.path,
+        0,
+        0,
+        that.data.backImageInfo.showWidth * 2,
+        that.data.backImageInfo.showHeight * 2
+      )
     }
     ctx.draw()
     setTimeout(() => {
@@ -421,8 +551,19 @@ Page({
     })
     let ctx = wx.createCanvasContext('outPic', this)
     let that = this
-    ctx.clearRect(0, 0, that.data.chooseAreaInfo.imgW * 2, that.data.chooseAreaInfo.imgH * 2)
-    ctx.drawImage(that.data.chooseAreaInfo.path, 0, 0, that.data.chooseAreaInfo.imgW * 2, that.data.chooseAreaInfo.imgH * 2)
+    ctx.clearRect(
+      0,
+      0,
+      that.data.chooseAreaInfo.imgW * 2,
+      that.data.chooseAreaInfo.imgH * 2
+    )
+    ctx.drawImage(
+      that.data.chooseAreaInfo.path,
+      0,
+      0,
+      that.data.chooseAreaInfo.imgW * 2,
+      that.data.chooseAreaInfo.imgH * 2
+    )
     ctx.draw()
     setTimeout(() => {
       wx.canvasToTempFilePath({
@@ -435,7 +576,7 @@ Page({
         canvasId: 'outPic',
         success (res) {
           wx.hideLoading()
-          console.log(res.tempFilePath)
+          // console.log(res.tempFilePath)
           that.data.imgArr[changeIndex].src = res.tempFilePath
           that.getItemImageInfo(changeIndex, true)
         }
@@ -498,7 +639,10 @@ Page({
         wx.hideLoading()
         that.setData({
           [`imgArr[${changeIndex}].border`]: {
-            width: res.width > that.data.imgArr[changeIndex].showWidth / 4 ? that.data.imgArr[changeIndex].showWidth / 4 : res.width,
+            width:
+              res.width > that.data.imgArr[changeIndex].showWidth / 4
+                ? that.data.imgArr[changeIndex].showWidth / 4
+                : res.width,
             path: res.path
           }
         })
@@ -520,12 +664,25 @@ Page({
       let x = chooseArea.xx + (e.touches[0].pageX - chooseArea.x)
       let y = chooseArea.yy + (e.touches[0].pageY - chooseArea.y)
       this.setData({
-        [`chooseAreaInfo.x`]: x < 0 ? 0 : x >= chooseAreaInfo.imgW - chooseAreaInfo.w ? chooseAreaInfo.imgW - chooseAreaInfo.w : x,
-        [`chooseAreaInfo.y`]: y < 0 ? 0 : y >= chooseAreaInfo.imgH - chooseAreaInfo.h ? chooseAreaInfo.imgH - chooseAreaInfo.h : y
+        [`chooseAreaInfo.x`]:
+          x < 0
+            ? 0
+            : x >= chooseAreaInfo.imgW - chooseAreaInfo.w
+            ? chooseAreaInfo.imgW - chooseAreaInfo.w
+            : x,
+        [`chooseAreaInfo.y`]:
+          y < 0
+            ? 0
+            : y >= chooseAreaInfo.imgH - chooseAreaInfo.h
+            ? chooseAreaInfo.imgH - chooseAreaInfo.h
+            : y
       })
     } else if (e.currentTarget.dataset.type === 'point') {
-      let width = chooseArea.w + (e.touches[0].pageX - chooseArea.x) < 10 ? 10 : chooseArea.w + (e.touches[0].pageX - chooseArea.x)
-      let height = chooseArea.h * width / chooseArea.w
+      let width =
+        chooseArea.w + (e.touches[0].pageX - chooseArea.x) < 10
+          ? 10
+          : chooseArea.w + (e.touches[0].pageX - chooseArea.x)
+      let height = (chooseArea.h * width) / chooseArea.w
       if (width > chooseAreaInfo.imgW || height > chooseAreaInfo.imgH) return
       this.setData({
         [`chooseAreaInfo.w`]: width,
