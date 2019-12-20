@@ -42,10 +42,10 @@
 <view class="p20 bgfff mt20">
   <view class="f25 c646464 left-pillar">我的流谦书苑</view>
   <view class="df dfac dfb c323232 shopTab">
-    <navigator url="{{ item.u }}" wx:for="{{ userNav }}" wx:key="index" class="df mt20 dfc dfac f24 stItem">
+    <view catchtap='goUrl' data-index="{{ index }}" wx:for="{{ userNav }}" wx:key="index" class="df mt20 dfc dfac f24 stItem">
       <image mode="widthFix" class="tabImg" src="{{ item.i }}"></image>
       <text class="mt10">{{ item.t }}</text>
-    </navigator>
+    </view>
   </view>
 </view>
 <!--用户操作导航 -e-->

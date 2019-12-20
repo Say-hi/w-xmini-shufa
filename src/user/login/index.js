@@ -9,7 +9,8 @@ Page({
    */
   data: {
     capsule: {
-      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)',
+      hImg: null
     },
     capsules: app.data.capsule,
     codeText: '获取验证码'
@@ -73,11 +74,12 @@ Page({
       })
       .then(res => {
         res.phone = e.detail.value.phone
-        if (app.gs('userInfoAll')) {
-          app.su('userInfoAll', Object.assign(app.gs('userInfoAll'), res))
-        } else {
-          app.su('userInfoAll', res)
-        }
+        app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res))
+        // if (app.gs('userInfoAll')) {
+
+        // } else {
+        //   app.su('userInfoAll', res)
+        // }
         app.su('access_token', res.access_token)
         app.toast({
           content: '登录成功',
@@ -85,7 +87,7 @@ Page({
         })
         wx.login({
           success (loginRes) {
-            console.log(e.detail.userInfo)
+            // console.log(e.detail.userInfo)
             app
               .wxrequest({
                 url: app.getUrl().wechatOpenid,

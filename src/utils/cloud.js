@@ -98,6 +98,20 @@ module.exports = {
       })
     })
   },
+  checkPrivier () {
+    return new Promise((resolve, reject) => {
+      wx.cloud.callFunction({
+        name: 'checkPrivier',
+        data: {},
+        success (res) {
+          resolve(res.result)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
+  },
   getImgCheck (imgsrc) {
     return new Promise((resolve, reject) => {
       wx.getFileSystemManager().readFile({

@@ -23,10 +23,10 @@
 <!--导航 -s-->
 <view wx:if='{{ userInfoAll.openid }}' class="pr" style="height: 190rpx">
   <view class="pa userTab tac f23 cfff br10">
-    <navigator class="utitem" url="{{ item.url }}" wx:for="{{ tabArr }}" wx:key="index">
+    <view class="utitem" data-index="{{index}}" catchtap='goUrl' wx:for="{{ tabArr }}" wx:key="index">
       <image mode="widthFix" src="{{ item.i || 'https://c.jiangwenqiang.com/api/logo.jpg' }}"></image>
       <view class="mt10">{{ item.t }}</view>
-    </navigator>
+    </view>
   </view>
 </view>
 <!--导航 -e-->

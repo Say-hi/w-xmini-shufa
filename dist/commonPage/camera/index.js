@@ -344,7 +344,7 @@ Page({
     this._toggleMask(e);
   },
   eventGetImage: function eventGetImage(event) {
-    console.log(1);
+    // console.log(1)
     wx.hideLoading();
     var tempFilePath = event.detail.tempFilePath;
 
@@ -361,6 +361,7 @@ Page({
     // this.getImageInfo('https://c.jiangwenqiang.com/lqsy/canvas_bottom.jpg')
     this.setData({
       options: options,
+      bgImg: app.gs('alphaImg2'),
       main: app.gs('alphaImg')
     }, this.choosePhoto);
     // if (options.type > 1) {
@@ -407,7 +408,7 @@ Page({
           return {
             title: '\u6211\u6B63\u5728\u5B66\u4E60\u3010' + this.data.options.word + '\u3011\u5B57',
             imageUrl: this.data.SteleShareImage,
-            path: '/openShare/index/index?url=' + i + '&q=' + this.data.options.wid + ',' + this.data.options.oid
+            path: '/openShare/index/index?url=' + i + '&q=' + this.data.options.wid + ',' + this.data.options.oid + ',' + app.gs('userInfoAll').uid
           };
         }
       }

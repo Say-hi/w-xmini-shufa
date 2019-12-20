@@ -463,24 +463,43 @@ Page({
     });
   },
   getQrCode: function getQrCode() {
-    var that = this;
-    wx.request({
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      url: 'https://teach.idwenshi.com/teach/teach/web/index.php/product/qrcode',
+    var _this = this;
+
+    // let that = this
+    app.wxrequest({
+      url: app.getUrl().codeInvite,
       data: {
-        uid: 10000,
-        pid: 472,
-        mid: 10000
-      },
-      success: function success(res) {
-        that.setData({
-          qrCode: res.data.data
-        }, that.eventDraw);
+        uid: app.gs('userInfoAll').uid || 1,
+        scene: app.gs('scene') || null
       }
+    }).then(function (res) {
+      _this.setData({
+        qrCode: res
+      }, _this.eventDraw);
+    }).catch(function (err) {
+      console.error(err);
+      app.toast({ content: '服务器出错啦' });
+      setTimeout(function () {
+        wx.navigateBack();
+      }, 1000);
     });
+    // wx.request({
+    //   method: 'POST',
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded'
+    //   },
+    //   url: 'https://teach.idwenshi.com/teach/teach/web/index.php/product/qrcode',
+    //   data: {
+    //     uid: 10000,
+    //     pid: 472,
+    //     mid: 10000
+    //   },
+    //   success (res) {
+    //     that.setData({
+    //       qrCode: res.data.data
+    //     }, that.eventDraw)
+    //   }
+    // })
     // app.wxrequest({
     //   url: 'https://teach.idwenshi.com/teach/teach/web/index.php/product/qrcode',
     //   data: {

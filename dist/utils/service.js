@@ -162,8 +162,10 @@ var serviceUrl = {
   mounting: lqsyBaseDomain + '/sell/mounting', // 装裱背景图获取
   wechatOpenid: lqsyBaseDomain + '/wechat/openid', // 小程序授权|获取用户小程序openid
   rankCard: lqsyBaseDomain + '/rank/card', // rank
+  codeInvite: lqsyBaseDomain + '/wechat/code-invite', // rank
   rankLv: lqsyTestDomain + '/lqsy/rank.json', // VIP等级表
   userInfo: lqsyBaseDomain + '/user/info', // 获取用户基本信息
+  userBind: lqsyBaseDomain + '/user/bind', // 获取用户基本信息
   sellRemind: lqsyBaseDomain + '/sell/remind', // 消息通知
   sellInfo: lqsyBaseDomain + '/sell/info', // 获取统计数据
   sellDiscussSub: lqsyBaseDomain + '/sell/discuss-sub', // 买后评论
@@ -195,6 +197,7 @@ var serviceUrl = {
   shopCartChange: lqsyBaseDomain + '/shop/cart-change', // 修改购物车的数量
   json: lqsyTestDomain + '/lqsy/test.json', // 修改购物车的数量2
   user: lqsyTestDomain + '/lqsy/canvas-test.json', // 修改购物车的数量2
+  checkPrivier: lqsyTestDomain + '/lqsy/checkPrivier.json',
   shopCarList: lqsyBaseDomain + '/shop/cart-list', // 查看购物车
   shopCartAdd: lqsyBaseDomain + '/shop/cart-add', // 产品添加到购物车
   shopDiscuss: lqsyBaseDomain + '/shop/discuss', // 分页获取评论

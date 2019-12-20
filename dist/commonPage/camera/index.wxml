@@ -46,8 +46,8 @@
 <view class="mask cameraMask o0 {{ cameraMaskAnimate ? 'o1' : '' }} tr5">
 <view class="bgfff br10 mask-in ">
   <view class="f30 tac lh60 fw7 c323232">分享</view>
-  <view catchtap="eventDraw" data-type="cameraMask" class="df dfac dfb p30">
-    <navigator url="../talk/index?type=camera&url={{ SteleShareImage }}" class="df dfc dfac f25 c323232">
+  <view data-type="cameraMask" class="df dfac dfb p30">
+    <navigator catchtap='_toggleMask' data-type="cameraMask" url="../talk/index?type=camera&url={{ SteleShareImage }}" class="df dfc dfac f25 c323232">
       <text style="color: #cfa972;" class="jwqfont jwqshequ"></text>
       <text class="mt10">社区</text>
     </navigator>

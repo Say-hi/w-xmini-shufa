@@ -69,9 +69,17 @@ Page({
   _goPicShare: function _goPicShare() {
     app.su('shareCardInfo', this.data.info);
     this._shareType();
-    wx.navigateTo({
-      url: '/share/carShare/carShare?type=' + (this.data.options.from === 'main' ? 'community' : 'hundred')
-    });
+    var temps = app.gs('shareUrl');
+    var url = getCurrentPages()[getCurrentPages().length - 1].route;
+    for (var i in temps) {
+      if (temps[i].indexOf(url) >= 0) {
+        app.su('scene', i + '*' + this.data.info.id + ',' + this.data.options.from + ',' + app.gs('userInfoAll').uid);
+        wx.navigateTo({
+          url: '/share/carShare/carShare?type=' + (this.data.options.from === 'main' ? 'community' : 'hundred')
+        });
+        return;
+      }
+    }
   },
   getDetail: function getDetail() {
     var that = this;
@@ -287,7 +295,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: '' + this.data.info.title,
-          path: '/openShare/index/index?url=' + i + '&q=' + this.data.info.id + ',' + this.data.options.from
+          path: '/openShare/index/index?url=' + i + '&q=' + this.data.info.id + ',' + this.data.options.from + ',' + app.gs('userInfoAll').uid
         };
       }
     }

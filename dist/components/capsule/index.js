@@ -17,6 +17,7 @@ Component({
         _this.setData({
           capsuleSet: Object.assign(_this.data.capsuleSet, res)
         });
+        // console.log(this.data.capsuleSet)
       }, 10);
     }
   },
@@ -28,6 +29,7 @@ Component({
       backImg: 'https://c.jiangwenqiang.com/lqsy/back.png?123',
       op: false,
       opImg: 'https://c.jiangwenqiang.com/api/image/home.png',
+      hImg: 'https://c.jiangwenqiang.com/lqsy/homeImg.png?123',
       opType: 'reLaunch'
     },
     height: app.data.height,
@@ -67,6 +69,11 @@ Component({
     }
   },
   methods: {
+    _home: function _home() {
+      wx.reLaunch({
+        url: '/pages/index/index'
+      });
+    },
     _getAuth: function _getAuth(e) {
       if (this.data.user.type !== 'getUserInfo') this.triggerEvent('back', e.detail);else app.wxlogin();
     },

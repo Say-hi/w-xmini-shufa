@@ -11,7 +11,8 @@ Page({
   data: {
     capsule: {
       transparent: true,
-      bgc: ''
+      bgc: '',
+      hImg: null
     },
     userInfoAll: {},
     capsules: app.data.capsule,
@@ -62,6 +63,14 @@ Page({
       url: '/user/message/index?type=shop'
     }]
   },
+  goUrl: function goUrl(e) {
+    if (this.data.tabArr[e.currentTarget.dataset.index].t === '邀约好友') {
+      app.su('scene', '7*' + app.gs('userInfoAll').uid);
+    }
+    wx.navigateTo({
+      url: this.data.tabArr[e.currentTarget.dataset.index].url
+    });
+  },
   upFormId: function upFormId(e) {
     app.upFormId(e);
   },
@@ -108,7 +117,7 @@ Page({
         app.wxrequest({
           url: app.getUrl().wechatOpenid,
           data: {
-            uid: app.gs('userInfoAll').uid,
+            uid: app.gs('userInfoAll').uid || null,
             code: loginRes.code,
             avatar_url: e.detail.userInfo.avatarUrl,
             nickname: e.detail.userInfo.nickName,

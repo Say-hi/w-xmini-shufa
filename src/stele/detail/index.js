@@ -37,9 +37,17 @@ Page({
   _goPicShare () {
     this._shareType()
     app.su('shareCardInfo', this.data.info)
-    wx.navigateTo({
-      url: '/share/carShare/carShare?type=stele'
-    })
+    let temps = app.gs('shareUrl')
+    let url = getCurrentPages()[getCurrentPages().length - 1].route
+    for (let i in temps) {
+      if (temps[i].indexOf(url) >= 0) {
+        app.su('scene', `${i}*${this.data.info.id},${app.gs('userInfoAll').uid}`)
+        wx.navigateTo({
+          url: '/share/carShare/carShare?type=stele'
+        })
+        return
+      }
+    }
   },
   _collection () {
     let that = this
@@ -244,7 +252,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: `${this.data.info.name}`,
-          path: `/openShare/index/index?url=${i}&q=${this.data.info.id}`,
+          path: `/openShare/index/index?url=${i}&q=${this.data.info.id},${app.gs('userInfoAll').uid}`,
           imageUrl: `${this.data.info.img_name}`
         }
       }

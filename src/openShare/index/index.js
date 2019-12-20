@@ -9,7 +9,8 @@ Page({
     capsule: {
       transparent: true,
       bgc: ''
-    }
+    },
+    inviteId: null
   },
   caseUrl () {
     let res = app.gs('shareUrl')
@@ -27,6 +28,7 @@ Page({
     let q = this.data.options.q.split(',')
     // console.log(q)
     for (let [i, v] of urlData.entries()) {
+      if (v === 'uid') { this.data.inviteId = q[i] }
       if (i < 1) {
         url += `?${v}=${q[i]}`
       } else {
@@ -41,16 +43,15 @@ Page({
   },
   checkRank () {
     if (!this.data.goUrl) return
-    app
-      .wxrequest({
-        url: app.getUrl().shopUser,
-        data: {
-          uid: app.gs('userInfoAll').uid
-        }
-      })
-      .then(
+    app.gs('userInfoAll').uid && this.data.inviteId && app.wxrequest({url: app.getUrl().userBind, data: {son_phone: app.gs('userInfoAll').phone || null, parent_id: this.data.inviteId || null}})
+    app.wxrequest({
+      url: app.getUrl().shopUser,
+      data: {
+        uid: app.gs('userInfoAll').uid || null
+      }
+    }).then(
         res => {
-          if (res.rank > 0) {
+          if (res.rank < 0 && this.data.options.url * 1 !== 7 && this.data.options.url * 1 !== 6) {
             // todo 修改等级判断
             app.toast({
               content: '您还未成为会员,无法继续享受服务哦~~',
@@ -62,19 +63,22 @@ Page({
               })
             }, 1000)
           } else {
-            wx.redirectTo({
+            // wx.navigateTo({
+            //   url: this.data.goUrl
+            // })
+            wx.reLaunch({
               url: this.data.goUrl
             })
           }
         },
         () => {
           app.toast({
-            content: '您还未成为会员,无法继续享受服务哦~~',
+            content: '您还未登录,无法继续享受服务哦~~',
             mask: true
           })
           setTimeout(() => {
             wx.navigateTo({
-              url: '/openvip/index/index'
+              url: '/user/login/index'
             })
           }, 1000)
         }

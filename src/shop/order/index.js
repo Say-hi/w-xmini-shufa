@@ -93,7 +93,7 @@ Page({
     })
   },
   changeAddress () {
-    console.log(this.data.chooseOrderIndex)
+    // console.log(this.data.chooseOrderIndex)
     app.wxrequest({
       url: app.getUrl().shopOrderUpdate,
       data: {

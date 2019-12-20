@@ -38,7 +38,7 @@ Page({
     });
   },
   _showColumn: function _showColumn(e) {
-    console.log(e);
+    // console.log(e)
     this.setData({
       showColumn: !this.data.showColumn,
       showColumnType: e.currentTarget.id === 'openVideo'
@@ -72,9 +72,17 @@ Page({
   _goPicShare: function _goPicShare() {
     app.su('shareCardInfo', this.data.info);
     this._shareType();
-    wx.navigateTo({
-      url: '/share/carShare/carShare?type=stele'
-    });
+    var temps = app.gs('shareUrl');
+    var url = getCurrentPages()[getCurrentPages().length - 1].route;
+    for (var i in temps) {
+      if (temps[i].indexOf(url) >= 0) {
+        app.su('scene', i + '*' + this.data.info.id + ',' + this.data.options.from + ',' + app.gs('userInfoAll').uid);
+        wx.navigateTo({
+          url: '/share/carShare/carShare?type=stele'
+        });
+        return;
+      }
+    }
   },
   setMainSection: function setMainSection(id) {
     var _iteratorNormalCompletion = true;
@@ -272,10 +280,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
-    this.setData({
-      options: options,
-      main: options.from === 'main'
-    }, this.getSection);
+    var _this3 = this;
+
+    app.checkPrivier().then(function (res) {
+      if (res.check || res.data.data.check) {
+        app.toast({ content: '内容根据微信运营规则,禁止展示' });
+        return wx.redirectTo({ url: '/pages/index/index' });
+      }
+      _this3.setData({
+        options: options,
+        noCheck: true,
+        main: options.from === 'main'
+      }, _this3.getSection);
+    }, function (err) {
+      console.error(err);
+    });
   },
 
   /**
@@ -315,7 +334,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: '' + this.data.info.title,
-          path: '/openShare/index/index?url=' + i + '&q=' + this.data.info.id + ',' + this.data.options.from,
+          path: '/openShare/index/index?url=' + i + '&q=' + this.data.info.id + ',' + this.data.options.from + ',' + app.gs('userInfoAll').uid,
           imageUrl: '' + this.data.info.cover_url
         };
       }

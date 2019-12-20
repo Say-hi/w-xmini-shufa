@@ -39,11 +39,11 @@ Page({
       i: 'https://c.jiangwenqiang.com/lqsy/shop_5.png',
       u: '/user/team/index?type=shop'
     }, {
-      t: '邀请好友 ',
+      t: '邀请好友',
       i: 'https://c.jiangwenqiang.com/lqsy/shop_6.png',
       u: '/share/carShare/carShare?type=inviteFriend'
     }, {
-      t: '我的积分 ',
+      t: '我的积分',
       i: 'https://c.jiangwenqiang.com/lqsy/shop_7.png',
       u: '/shop/score/index'
     }],
@@ -78,6 +78,14 @@ Page({
       url: '/user/message/index'
     }],
     userInfo: app.gs('userInfoAll')
+  },
+  goUrl: function goUrl(e) {
+    if (this.data.userNav[e.currentTarget.dataset.index].t === '邀请好友') {
+      app.su('scene', '7*' + app.gs('userInfoAll').uid);
+    }
+    wx.navigateTo({
+      url: this.data.userNav[e.currentTarget.dataset.index].u
+    });
   },
   upFormId: function upFormId(e) {
     app.upFormId(e);

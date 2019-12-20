@@ -62,9 +62,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-    this.setData({
-      main: options.from === 'main'
-    }, this.getList)
+    app.checkPrivier().then(res => {
+      if (res.check || res.data.data.check) {
+        app.toast({content: '内容根据微信运营规则,禁止展示'})
+        return wx.redirectTo({url: '/pages/index/index'})
+      }
+      this.setData({
+        noCheck: true,
+        main: options.from === 'main'
+      }, this.getList)
+    }, err => {
+      console.error(err)
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -2,9 +2,9 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-18 15:53:01
+ * @Last Modified time: 2019-12-20 15:03:24
  */
-/*eslint-disable*/
+// /*eslint-disable*/
 const useUrl = require('./utils/service2')
 const wxParse = require('./wxParse/wxParse')
 const statusBarHeight = wx.getSystemInfoSync().statusBarHeight
@@ -15,9 +15,9 @@ const cloud = require('./utils/cloud')
 let bmap = require('./utils/bmap-wx')
 const system = wx.getSystemInfoSync()
 const capsule = MenuButtonBounding
-let requireCount = 0
-let lastUrl = ''
-let timer = ''
+// let requireCount = 0
+// let lastUrl = ''
+// let timer = ''
 Moment.updateLocale('en', {
   relativeTime: {
     future: '%s',
@@ -48,17 +48,9 @@ App({
     capsuleHeight: capsule.height,
     capsuleTop: capsule.top,
     moveHeight: capsule.bottom - capsule.top / 2,
-    capsuleCenter:
-      system.windowWidth -
-      (capsule.width + system.windowWidth - capsule.right) * 2 -
-      5,
+    capsuleCenter: system.windowWidth - (capsule.width + system.windowWidth - capsule.right) * 2 - 5,
     // ------------------------
-    systemVersion:
-      wx
-        .getSystemInfoSync()
-        .system.split('.')[0]
-        .indexOf('9') >= 0 &&
-      wx.getSystemInfoSync().model.indexOf('iPhone') >= 0,
+    systemVersion: wx.getSystemInfoSync().system.split('.')[0].indexOf('9') >= 0 && wx.getSystemInfoSync().model.indexOf('iPhone') >= 0,
     all_screen: wx.getSystemInfoSync().model.indexOf('X') >= 0,
     TOP_CENTER: MenuButtonBounding.right - 66,
     searchText: null,
@@ -71,11 +63,11 @@ App({
     label: [],
     testImg: 'https://c.jiangwenqiang.com/api/logo.jpg'
   },
-  noUse() {},
-  cloud() {
+  noUse () {},
+  cloud () {
     return cloud
   },
-  toast(toast) {
+  toast (toast) {
     getCurrentPages()[getCurrentPages().length - 1].setData({
       toast: Object.assign(
         {
@@ -93,34 +85,34 @@ App({
       )
     })
   },
-  momentAdd(number, type, time) {
+  momentAdd (number, type, time) {
     if (time) {
       return Moment(time).add(number, type)
     } else {
       return Moment().add(number, type)
     }
   },
-  momentDay(time) {
+  momentDay (time) {
     return Moment().day(time)
   },
-  momentFormat(time, formatStr) {
+  momentFormat (time, formatStr) {
     return Moment(time).format(formatStr)
   },
-  call(phoneNumber = '13378692079') {
+  call (phoneNumber = '13378692079') {
     wx.makePhoneCall({
       phoneNumber
     })
   },
   // 富文本解析
-  WP(title, type, data, that, image) {
+  WP (title, type, data, that, image) {
     wxParse.wxParse(title, type, data, that, image)
   },
   // 解析时间
-  moment(time) {
+  moment (time) {
     return Moment(time).fromNow()
   },
   // 发起微信支付
-  wxpay2(obj) {
+  wxpay2 (obj) {
     return new Promise((resolve, reject) => {
       wx.requestPayment({
         timeStamp: obj.timeStamp,
@@ -128,26 +120,26 @@ App({
         package: obj.package,
         signType: obj.signType || 'MD5',
         paySign: obj.paySign,
-        success(payRes) {
+        success (payRes) {
           if (payRes.errMsg === 'requestPayment:ok') {
             resolve(payRes)
           } else {
             reject(payRes)
           }
         },
-        fail(err) {
+        fail (err) {
           reject(err)
         },
-        complete: obj.complete || function() {}
+        complete: obj.complete || function () {}
       })
     })
   },
   // 下载内容获取临时路径
-  downLoad(url) {
+  downLoad (url) {
     return new Promise((resolve, reject) => {
       wx.downloadFile({
         url,
-        success(res) {
+        success (res) {
           if (res.statusCode === 200) {
             resolve(res.tempFilePath)
           } else {
@@ -158,11 +150,11 @@ App({
     })
   },
   // 选择图片上传
-  wxUploadImg(cb, count = 1) {
+  wxUploadImg (cb, count = 1) {
     let _that = this
     wx.chooseImage({
       count,
-      success(res) {
+      success (res) {
         // console.log(res)
         wx.showLoading({
           title: '图片上传中'
@@ -176,11 +168,11 @@ App({
               id: _that.gs('userInfoAll').id || 1,
               file: v
             },
-            success(res) {
+            success (res) {
               // console.log(res)
               wx.hideLoading()
               let parseData = JSON.parse(res.data)
-              // console.log(parseData)
+              console.log(parseData)
             }
           })
         }
@@ -188,7 +180,7 @@ App({
     })
   },
   // 上传媒体文件
-  wxUpload(obj) {
+  wxUpload (obj) {
     let s = {
       url: obj.url,
       filePath: obj.filePath,
@@ -199,19 +191,19 @@ App({
       formData: obj.formData,
       success:
         obj.success ||
-        function(res) {
+        function (res) {
           console.log('未传入成功回调函数', res)
         },
       fail:
         obj.fail ||
-        function(res) {
-          console.log('为传入失败回调函数', res)
+        function (res) {
+          console.log('未传入失败回调函数', res)
         },
-      complete: obj.complete || function() {}
+      complete: obj.complete || function () {}
     }
     wx.uploadFile(s)
   },
-  setNav() {
+  setNav () {
     let that = this
     let navArr = this.gs('navArr')
     let currentPage = getCurrentPages()
@@ -228,7 +220,7 @@ App({
     }
     return navArr
   },
-  getExactlyUrl(url) {
+  getExactlyUrl (url) {
     let urlArray = url.split(',')
     let temp = ''
     for (let v of urlArray) {
@@ -237,7 +229,7 @@ App({
     return temp
   },
   // 请求数据
-  wxrequest(obj) {
+  wxrequest (obj) {
     this.gs('canLog') > 1 && console.log('request', obj)
     let that = this
     // if (that.data.requireDisable < 10) {
@@ -291,7 +283,7 @@ App({
         header: {
           'content-type': obj.header || 'application/x-www-form-urlencoded'
         },
-        success(res) {
+        success (res) {
           wx.hideLoading()
           if (res.data.status === 200) {
             resolve(res.data.data)
@@ -301,30 +293,30 @@ App({
               obj.toast
                 ? !obj.toast.content
                   ? Object.assign(obj.toast, {
-                      content: res.data.desc || '啊哦~服务器出错了'
-                    })
+                    content: res.data.desc || '啊哦~服务器出错了'
+                  })
                   : {
-                      content: res.data.desc || '啊哦~服务器出错了'
-                    }
-                : {
                     content: res.data.desc || '啊哦~服务器出错了'
                   }
+                : {
+                  content: res.data.desc || '啊哦~服务器出错了'
+                }
             )
           }
         },
-        fail(err) {
+        fail (err) {
           reject(err)
         },
         complete:
           obj.complete ||
-          function(res3) {
+          function (res3) {
             wx.stopPullDownRefresh()
             that.gs('canLog') > 1 && console.log('response', res3)
           }
       })
     })
   },
-  goOther(e) {
+  goOther (e) {
     if (!e.currentTarget.dataset.url) {
       wx.previewImage({
         urls: [e.currentTarget.dataset.src]
@@ -334,7 +326,7 @@ App({
       url: e.currentTarget.dataset.url
     })
   },
-  upFormId(e) {
+  upFormId (e) {
     let that = this
     this.wxrequest({
       url: that.getUrl().formid,
@@ -342,65 +334,65 @@ App({
         openid: that.gs(),
         formid: e.detail.formId
       },
-      success() {
+      success () {
         wx.hideLoading()
       }
     })
   },
-  checkShare() {
+  checkShare () {
     return new Promise((resolve, reject) => {
       wx.request({
         url: this.getExactlyUrl(
           '218,242,242,234,240,126,104,104,208,102,222,220,204,230,216,248,212,230,236,220,204,230,216,102,208,232,228,104,226,236,240,252,104,240,218,204,238,212,178,212,250,242,102,222,240,232,230'
         ),
-        success(res) {
+        success (res) {
           resolve(res)
         },
-        fail(err) {
+        fail (err) {
           reject(err)
         }
       })
     })
   },
   // 用户登陆
-  wxlogin(params) {
+  wxlogin (params) {
     let that = this
     wx.login({
-      success(res) {
+      success (res) {
         let code = res.code
         // 获取用户信息
         let obj = {
-          success(data) {
+          success (data) {
             wx.setStorageSync('userInfo', data.userInfo)
             let objs = {
               url: useUrl.login,
               data: params
                 ? {
-                    parent_id: params,
-                    code,
-                    iv: data.iv,
-                    signature: data.signature,
-                    encryptedData: data.encryptedData,
-                    nickname: data.userInfo.nickName,
-                    avatar_url: data.userInfo.avatarUrl,
-                    sex: data.userInfo.gender,
-                    city: data.userInfo.city,
-                    country: data.userInfo.country,
-                    province: data.userInfo.province
-                  }
+                  parent_id: params,
+                  code,
+                  iv: data.iv,
+                  signature: data.signature,
+                  encryptedData: data.encryptedData,
+                  nickname: data.userInfo.nickName,
+                  avatar_url: data.userInfo.avatarUrl,
+                  sex: data.userInfo.gender,
+                  city: data.userInfo.city,
+                  country: data.userInfo.country,
+                  province: data.userInfo.province
+                }
                 : {
-                    code,
-                    iv: data.iv,
-                    signature: data.signature,
-                    encryptedData: data.encryptedData,
-                    nickname: data.userInfo.nickName,
-                    avatar_url: data.userInfo.avatarUrl,
-                    sex: data.userInfo.gender,
-                    city: data.userInfo.city,
-                    country: data.userInfo.country,
-                    province: data.userInfo.province
-                  },
-              success(session) {
+                  code,
+                  iv: data.iv,
+                  signature: data.signature,
+                  encryptedData: data.encryptedData,
+                  nickname: data.userInfo.nickName,
+                  avatar_url: data.userInfo.avatarUrl,
+                  sex: data.userInfo.gender,
+                  city: data.userInfo.city,
+                  country: data.userInfo.country,
+                  province: data.userInfo.province
+                },
+              success (session) {
                 // console.log('session', session)
                 wx.hideLoading()
                 wx.setStorageSync('key', session.data.data.openid)
@@ -409,7 +401,7 @@ App({
                   data: {
                     user_id: session.data.data.id
                   },
-                  success(res) {
+                  success (res) {
                     wx.hideLoading()
                     if (res.data.status === 200) {
                       that.su('userInfoAll', res.data.data)
@@ -429,10 +421,7 @@ App({
                           query += `${i}=${s[i]}&`
                         }
                       } catch (err) {
-                        query =
-                          currentPage[currentPage.length - 1][
-                            '__displayReporter'
-                          ]['showOptions']['query']
+                        query = currentPage[currentPage.length - 1]['__displayReporter']['showOptions']['query']
                       }
                       // console.log('query', query)
                       wx.reLaunch({
@@ -448,19 +437,19 @@ App({
             }
             that.wxrequest(objs)
           },
-          fail(err) {
+          fail (err) {
             console.warn('getUserInfo', err)
             let objs = {
               url: useUrl.login,
               data: params
                 ? {
-                    code,
-                    parent_id: params
-                  }
+                  code,
+                  parent_id: params
+                }
                 : {
-                    code
-                  },
-              success(session) {
+                  code
+                },
+              success (session) {
                 // console.log('session', session)
                 wx.hideLoading()
                 wx.setStorageSync('key', session.data.data.openid)
@@ -469,7 +458,7 @@ App({
                   data: {
                     user_id: session.data.data.id
                   },
-                  success(res) {
+                  success (res) {
                     wx.hideLoading()
                     if (res.data.status === 200) {
                       that.su('userInfoAll', res.data.data)
@@ -492,10 +481,7 @@ App({
                     query += `${i}=${s[i]}&`
                   }
                 } catch (err) {
-                  query =
-                    currentPage[currentPage.length - 1]['__displayReporter'][
-                      'showOptions'
-                    ]['query']
+                  query = currentPage[currentPage.length - 1]['__displayReporter']['showOptions']['query']
                 }
                 // console.log('query', query)
                 wx.reLaunch({
@@ -511,16 +497,16 @@ App({
         }
         that.getUserInfo(obj)
       },
-      fail(err) {
+      fail (err) {
         console.warn('loginError' + err)
       }
     })
   },
-  getRankLv() {
+  getRankLv () {
     var _this = this
     wx.request({
       url: _this.getExactlyUrl(_this.getUrl().rankLv),
-      success(res) {
+      success (res) {
         if (res.statusCode !== 200) {
           _this
             .cloud()
@@ -532,7 +518,7 @@ App({
           _this.su('rankLv', res.data.data.rank)
         }
       },
-      fail() {
+      fail () {
         _this
           .cloud()
           .getRankLv()
@@ -543,11 +529,11 @@ App({
     })
   },
   // 获取缓存session_key
-  gs(key) {
+  gs (key) {
     return wx.getStorageSync(key || 'key')
   },
   // 设置页面是否加载
-  setMore(params, that) {
+  setMore (params, that) {
     if (params.length === 0) {
       that.setData({
         more: false
@@ -559,29 +545,29 @@ App({
     }
   },
   // 获取用户信息
-  getUserInfo(obj) {
+  getUserInfo (obj) {
     wx.getUserInfo({
       withCredentials: obj.withCredentials || true,
       lang: obj.lang || 'zh_CN',
       success:
         obj.success ||
-        function(res) {
+        function (res) {
           // console.log('getUserInfoSuccess', res)
         },
       fail:
         obj.fail ||
-        function(res) {
+        function (res) {
           // console.log('getUserInfoFail', res)
         }
     })
   },
   // 获取用户缓存信息
-  gu(cb) {
+  gu (cb) {
     if (wx.getStorageSync('userInfo')) {
       return wx.getStorageSync('userInfo')
     } else {
       let obj = {
-        success(res) {
+        success (res) {
           // console.log(res)
           wx.setStorageSync('userInfo', res.userInfo)
           if (cb) {
@@ -593,11 +579,11 @@ App({
     }
   },
   // 设置用户的缓存信息
-  su(key, obj) {
+  su (key, obj) {
     wx.setStorageSync(key, obj)
   },
   // 输入内容
-  inputValue(e, that, cb) {
+  inputValue (e, that, cb) {
     let value = e.detail.value
     let type = e.currentTarget.dataset.type
     if (type === 'teacher') {
@@ -638,24 +624,24 @@ App({
       })
     }
   },
-  goBack() {
+  goBack () {
     wx.navigateBack()
   },
   // 手机号码验证
-  checkMobile(mobile) {
+  checkMobile (mobile) {
     if (!/^1[3|4|5|7|8|9][0-9]\d{8}$/.test(mobile)) {
       return true
     }
   },
   // 预览图片
-  showImg(current, urls) {
+  showImg (current, urls) {
     wx.previewImage({
       current,
       urls
     })
   },
   // 跳转方式判断
-  gn(url) {
+  gn (url) {
     if (getCurrentPages().length >= 9) {
       wx.redirectTo({
         url
@@ -666,8 +652,8 @@ App({
       })
     }
   },
-  mapInfoCheck() {
-    this.checkUser = function() {
+  mapInfoCheck () {
+    this.checkUser = function () {
       this.su('userInfoAll', {
         uid: 3,
         rank: 1
@@ -676,41 +662,41 @@ App({
     this.checkUser()
   },
   // 设置顶部文字
-  setBar(text) {
+  setBar (text) {
     wx.setNavigationBarTitle({
       title: text
     })
   },
   // 逆地址解析
-  getLocation(that, type, cb) {
+  getLocation (that, type, cb) {
     this.reverseGeocoder(that, type, cb)
   },
   // 获取请求路劲
-  getUrl() {
+  getUrl () {
     return useUrl
   },
-  getFont() {
+  getFont () {
     let that = this
     wx.loadFontFace({
       family: 'jwq',
       source: 'url("https://at.alicdn.com/t/font_718305_0nntgpn0yem.ttf")',
-      success(res) {
+      success (res) {
         console.log(res)
         console.log(res.status) //  loaded
       },
-      fail(res) {
+      fail (res) {
         that.loadFont()
         console.log(res.status) //  error
       }
     })
   },
-  baseUserInfo(that) {
+  baseUserInfo (that) {
     let _this = this
     wx.login({
-      success() {
+      success () {
         wx.request({
           url: _this.getExactlyUrl(_this.getUrl().user),
-          success(res) {
+          success (res) {
             // console.log(res)
             if (res.statusCode === 404) {
               _this
@@ -719,13 +705,13 @@ App({
                 .then(res => {
                   that.data.mainScale = res.check
                   that.data.slideScale = res.user
-                })
+                }).catch(err => { console.error(err) })
             } else {
               that.data.mainScale = res.data.data.check
               that.data.slideScale = res.data.data.user
             }
           },
-          fail() {
+          fail () {
             _this
               .cloud()
               .getUserOperation()
@@ -739,14 +725,14 @@ App({
     })
   },
   // 获取小程序状态栏内容
-  getNavTab({ style = 1, cb = null }) {
+  getNavTab ({ style = 1, cb = null }) {
     let that = this
     this.wxrequest({
       url: that.getUrl().style,
       data: {
         style
       },
-      success(res) {
+      success (res) {
         wx.hideLoading()
         if (res.data.status === 200) {
           if (style === 1) {
@@ -763,7 +749,7 @@ App({
     })
   },
   // 地址计算
-  distance(lat1, lng1, lat2, lng2) {
+  distance (lat1, lng1, lat2, lng2) {
     let lat = [lat1, lat2]
     let lng = [lng1, lng2]
     let R = 6378137
@@ -779,18 +765,18 @@ App({
     let d = R * c
     return Math.round(d)
   },
-  userCollect(is_collect, collect_id, obj_user_id, state) {
+  userCollect (isCollect, collectId, objUserId, state) {
     let that = this
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       that.wxrequest({
-        url: is_collect ? useUrl.userCollectCancel : useUrl.userCollectSub,
+        url: isCollect ? useUrl.userCollectCancel : useUrl.userCollectSub,
         data: {
           user_id: that.gs('userInfoAll').id,
-          obj_user_id,
-          collect_id,
+          obj_user_id: objUserId,
+          collect_id: collectId,
           state
         },
-        success(res) {
+        success (res) {
           wx.hideLoading()
           if (res.data.status === 200) {
             resolve(res)
@@ -798,19 +784,19 @@ App({
             reject(res)
           }
         },
-        fail(err) {
+        fail (err) {
           reject(err)
         }
       })
     })
   },
-  getShareText() {
+  getShareText () {
     let that = this
     cloud.getShareText().then(res => {
       that.su('shareText', res.result)
     })
   },
-  getMaxFright(that) {
+  getMaxFright (that) {
     this.cloud()
       .getFreight()
       .then(res => {
@@ -824,7 +810,7 @@ App({
       })
   },
   // 获取分享路径判断
-  getShareUrl(cb) {
+  getShareUrl (cb) {
     new bmap.BMapWX({
       ak: 'BMapskKIQPkniv93KKGI-238-93NCJB'
     })
@@ -835,6 +821,7 @@ App({
           cb && cb()
         },
         err => {
+          console.error(err)
           this.cloud()
             .getShareUrl()
             .then(res2 => {
@@ -844,8 +831,37 @@ App({
         }
       )
   },
+  checkPrivier () {
+    let that = this
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: this.getExactlyUrl(this.getUrl().checkPrivier),
+        success (res) {
+          if (res.statusCode !== 200) {
+            that.cloud().checkPrivier().then(res2 => {
+              resolve(res2)
+            }, err2 => {
+              console.error(err2)
+              reject(err2)
+            })
+          } else {
+            resolve(res)
+          }
+        },
+        fail (err) {
+          console.log('err', err)
+          that.cloud().checkPrivier().then(res2 => {
+            resolve(res2)
+          }, err2 => {
+            console.error(err2)
+            reject(err2)
+          })
+        }
+      })
+    })
+  },
   // 检查用户信息
-  checkUser({ login = true, rank = true, user = true }) {
+  checkUser ({ login = true, rank = true, user = true }) {
     this.wxrequest({
       url: this.getUrl().shopUser,
       data: {
@@ -900,40 +916,41 @@ App({
       }
     )
   },
-  mapInfo() {
+  mapInfo () {
     new bmap.BMapWX({
       ak: 'BMapskKIQPkniv93KKGI-238-93NCJB'
     })
       .getWXJson()
       .then(
-        res => !res && this.mapInfoCheck(),
-        err =>
-          this.cloud()
-            .getMoney()
-            .then(res2 => !res2.check && this.mapInfoCheck())
+        res => {
+          !res && this.mapInfoCheck()
+        },
+        () => {
+          this.cloud().getMoney().then(res2 => !res2.check && this.mapInfoCheck())
+        }
       )
   },
-  currentUrl() {
+  currentUrl () {
     return new Promise((resolve, reject) => {
       this.toast({
         content: '当前页面不在分享规则内'
       })
     })
   },
-  onLaunch() {
+  onLaunch () {
     wx.removeStorageSync('canvasImgArr')
     this.mapInfo()
     this.getShareUrl()
     this.getRankLv()
     this.checkShare().then(res => this.su('ruler', res.data.data.ruler))
   },
-  onShow() {},
-  onPageNotFound() {
+  onShow () {},
+  onPageNotFound () {
     wx.reLaunch({
       url: '/pages/index/index'
     })
   },
-  onHide() {
+  onHide () {
     // this.su('first', 1)
   }
 })

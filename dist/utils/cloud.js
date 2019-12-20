@@ -122,6 +122,20 @@ module.exports = {
       });
     });
   },
+  checkPrivier: function checkPrivier() {
+    return new Promise(function (resolve, reject) {
+      wx.cloud.callFunction({
+        name: 'checkPrivier',
+        data: {},
+        success: function success(res) {
+          resolve(res.result);
+        },
+        fail: function fail(err) {
+          reject(err);
+        }
+      });
+    });
+  },
   getImgCheck: function getImgCheck(imgsrc) {
     return new Promise(function (resolve, reject) {
       wx.getFileSystemManager().readFile({

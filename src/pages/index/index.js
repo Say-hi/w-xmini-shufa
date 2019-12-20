@@ -9,7 +9,8 @@ Page({
   data: {
     capsule: {
       transparent: true,
-      bgc: ''
+      bgc: '',
+      hImg: null
     },
     showItem: false,
     HEIGHT_TOP: app.data.HEIGHT_TOP,

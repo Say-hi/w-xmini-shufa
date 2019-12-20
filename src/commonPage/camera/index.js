@@ -352,7 +352,7 @@ Page({
     this._toggleMask(e)
   },
   eventGetImage (event) {
-    console.log(1)
+    // console.log(1)
     wx.hideLoading()
     const {
       tempFilePath
@@ -369,6 +369,7 @@ Page({
     // this.getImageInfo('https://c.jiangwenqiang.com/lqsy/canvas_bottom.jpg')
     this.setData({
       options,
+      bgImg: app.gs('alphaImg2'),
       main: app.gs('alphaImg')
     }, this.choosePhoto)
     // if (options.type > 1) {
@@ -411,7 +412,7 @@ Page({
           return {
             title: `我正在学习【${this.data.options.word}】字`,
             imageUrl: this.data.SteleShareImage,
-            path: `/openShare/index/index?url=${i}&q=${this.data.options.wid},${this.data.options.oid}`
+            path: `/openShare/index/index?url=${i}&q=${this.data.options.wid},${this.data.options.oid},${app.gs('userInfoAll').uid}`
           }
         }
       }

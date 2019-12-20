@@ -9,7 +9,6 @@
 <!-- <image catchtap="chooseImage" lazy-load='1' data-index="{{ index }}" wx:for="{{ list }}" wx:key="item" mode="widthFix" class="w100 choose {{ index > 0 ? 'mt20' : '' }}" src="{{item.src}}"></image> -->
 
 <view wx:for="{{ list }}" wx:key="item">
-{{index}}
 <image catchtap="chooseImage" lazy-load='1' data-index="{{ index }}"  mode="widthFix" class="w100 choose {{ index > 0 ? 'mt20' : '' }}" src="{{item.src}}"></image>
 </view>
 

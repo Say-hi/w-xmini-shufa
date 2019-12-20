@@ -88,9 +88,17 @@ Page({
   _goPicShare () {
     app.su('shareCardInfo', this.data.info)
     this._shareType()
-    wx.navigateTo({
-      url: '/share/carShare/carShare?type=shop'
-    })
+    let temps = app.gs('shareUrl')
+    let url = getCurrentPages()[getCurrentPages().length - 1].route
+    for (let i in temps) {
+      if (temps[i].indexOf(url) >= 0) {
+        app.su('scene', `${i}*${this.data.info.id},${app.gs('userInfoAll').uid}`)
+        wx.navigateTo({
+          url: '/share/carShare/carShare?type=shop'
+        })
+        return
+      }
+    }
   },
   shopProductDetail () {
     app.wxrequest({
@@ -212,7 +220,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: `${this.data.info.title}`,
-          path: `/openShare/index/index?url=${i}&q=${this.data.info.id}`,
+          path: `/openShare/index/index?url=${i}&q=${this.data.info.id},${app.gs('userInfoAll').uid}`,
           imageUrl: `${this.data.info.img_url}`
         }
       }

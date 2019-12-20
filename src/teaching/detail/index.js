@@ -32,7 +32,7 @@ Page({
     })
   },
   _showColumn (e) {
-    console.log(e)
+    // console.log(e)
     this.setData({
       showColumn: !this.data.showColumn,
       showColumnType: e.currentTarget.id === 'openVideo'
@@ -66,9 +66,17 @@ Page({
   _goPicShare () {
     app.su('shareCardInfo', this.data.info)
     this._shareType()
-    wx.navigateTo({
-      url: '/share/carShare/carShare?type=stele'
-    })
+    let temps = app.gs('shareUrl')
+    let url = getCurrentPages()[getCurrentPages().length - 1].route
+    for (let i in temps) {
+      if (temps[i].indexOf(url) >= 0) {
+        app.su('scene', `${i}*${this.data.info.id},${this.data.options.from},${app.gs('userInfoAll').uid}`)
+        wx.navigateTo({
+          url: '/share/carShare/carShare?type=stele'
+        })
+        return
+      }
+    }
   },
   setMainSection (id) {
     for (let v of this.data.sectionList) {
@@ -221,10 +229,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-    this.setData({
-      options,
-      main: options.from === 'main'
-    }, this.getSection)
+    app.checkPrivier().then(res => {
+      if (res.check || res.data.data.check) {
+        app.toast({content: '内容根据微信运营规则,禁止展示'})
+        return wx.redirectTo({url: '/pages/index/index'})
+      }
+      this.setData({
+        options,
+        noCheck: true,
+        main: options.from === 'main'
+      }, this.getSection)
+    }, err => {
+      console.error(err)
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -260,7 +277,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: `${this.data.info.title}`,
-          path: `/openShare/index/index?url=${i}&q=${this.data.info.id},${this.data.options.from}`,
+          path: `/openShare/index/index?url=${i}&q=${this.data.info.id},${this.data.options.from},${app.gs('userInfoAll').uid}`,
           imageUrl: `${this.data.info.cover_url}`
         }
       }

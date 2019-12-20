@@ -4,9 +4,9 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-18 15:53:01
+ * @Last Modified time: 2019-12-20 15:03:24
  */
-/*eslint-disable*/
+// /*eslint-disable*/
 var useUrl = require('./utils/service2');
 var wxParse = require('./wxParse/wxParse');
 var statusBarHeight = wx.getSystemInfoSync().statusBarHeight;
@@ -17,9 +17,9 @@ var _cloud = require('./utils/cloud');
 var bmap = require('./utils/bmap-wx');
 var system = wx.getSystemInfoSync();
 var capsule = MenuButtonBounding;
-var requireCount = 0;
-var lastUrl = '';
-var timer = '';
+// let requireCount = 0
+// let lastUrl = ''
+// let timer = ''
 Moment.updateLocale('en', {
   relativeTime: {
     future: '%s',
@@ -185,7 +185,7 @@ App({
                 // console.log(res)
                 wx.hideLoading();
                 var parseData = JSON.parse(res.data);
-                // console.log(parseData)
+                console.log(parseData);
               }
             });
           }
@@ -221,7 +221,7 @@ App({
         console.log('未传入成功回调函数', res);
       },
       fail: obj.fail || function (res) {
-        console.log('为传入失败回调函数', res);
+        console.log('未传入失败回调函数', res);
       },
       complete: obj.complete || function () {}
     };
@@ -752,6 +752,8 @@ App({
               _this.cloud().getUserOperation().then(function (res) {
                 that.data.mainScale = res.check;
                 that.data.slideScale = res.user;
+              }).catch(function (err) {
+                console.error(err);
               });
             } else {
               that.data.mainScale = res.data.data.check;
@@ -811,15 +813,15 @@ App({
     var d = R * c;
     return Math.round(d);
   },
-  userCollect: function userCollect(is_collect, collect_id, obj_user_id, state) {
+  userCollect: function userCollect(isCollect, collectId, objUserId, state) {
     var that = this;
     return new Promise(function (resolve, reject) {
       that.wxrequest({
-        url: is_collect ? useUrl.userCollectCancel : useUrl.userCollectSub,
+        url: isCollect ? useUrl.userCollectCancel : useUrl.userCollectSub,
         data: {
           user_id: that.gs('userInfoAll').id,
-          obj_user_id: obj_user_id,
-          collect_id: collect_id,
+          obj_user_id: objUserId,
+          collect_id: collectId,
           state: state
         },
         success: function success(res) {
@@ -886,16 +888,48 @@ App({
       _this4.su('shareUrl', res);
       cb && cb();
     }, function (err) {
+      console.error(err);
       _this4.cloud().getShareUrl().then(function (res2) {
         _this4.su('shareUrl', res2.url);
         cb && cb();
       });
     });
   },
+  checkPrivier: function checkPrivier() {
+    var _this5 = this;
+
+    var that = this;
+    return new Promise(function (resolve, reject) {
+      wx.request({
+        url: _this5.getExactlyUrl(_this5.getUrl().checkPrivier),
+        success: function success(res) {
+          if (res.statusCode !== 200) {
+            that.cloud().checkPrivier().then(function (res2) {
+              resolve(res2);
+            }, function (err2) {
+              console.error(err2);
+              reject(err2);
+            });
+          } else {
+            resolve(res);
+          }
+        },
+        fail: function fail(err) {
+          console.log('err', err);
+          that.cloud().checkPrivier().then(function (res2) {
+            resolve(res2);
+          }, function (err2) {
+            console.error(err2);
+            reject(err2);
+          });
+        }
+      });
+    });
+  },
 
   // 检查用户信息
   checkUser: function checkUser(_ref2) {
-    var _this5 = this;
+    var _this6 = this;
 
     var _ref2$login = _ref2.login,
         login = _ref2$login === undefined ? true : _ref2$login,
@@ -911,7 +945,7 @@ App({
       }
     }).then(function (res) {
       if (user) {
-        res['rankText'] = _this5.gs('rankLv')[res.rank];
+        res['rankText'] = _this6.gs('rankLv')[res.rank];
         try {
           getCurrentPages()[getCurrentPages().length - 1].setData({
             userInfo: res
@@ -921,7 +955,7 @@ App({
         }
       }
       if (res.rank < 0 && rank) {
-        _this5.toast({
+        _this6.toast({
           content: '您还未成为会员,无法继续享受服务哦~~',
           mask: true
         });
@@ -933,7 +967,7 @@ App({
       }
     }, function () {
       if (login) {
-        _this5.toast({
+        _this6.toast({
           content: '您尚未登陆，请先登陆系统',
           mask: true
         });
@@ -943,7 +977,7 @@ App({
           });
         }, 2000);
       } else {
-        _this5.toast({
+        _this6.toast({
           content: '您还未成为会员,无法继续享受服务哦~~',
           mask: true
         });
@@ -956,36 +990,36 @@ App({
     });
   },
   mapInfo: function mapInfo() {
-    var _this6 = this;
+    var _this7 = this;
 
     new bmap.BMapWX({
       ak: 'BMapskKIQPkniv93KKGI-238-93NCJB'
     }).getWXJson().then(function (res) {
-      return !res && _this6.mapInfoCheck();
-    }, function (err) {
-      return _this6.cloud().getMoney().then(function (res2) {
-        return !res2.check && _this6.mapInfoCheck();
+      !res && _this7.mapInfoCheck();
+    }, function () {
+      _this7.cloud().getMoney().then(function (res2) {
+        return !res2.check && _this7.mapInfoCheck();
       });
     });
   },
   currentUrl: function currentUrl() {
-    var _this7 = this;
+    var _this8 = this;
 
     return new Promise(function (resolve, reject) {
-      _this7.toast({
+      _this8.toast({
         content: '当前页面不在分享规则内'
       });
     });
   },
   onLaunch: function onLaunch() {
-    var _this8 = this;
+    var _this9 = this;
 
     wx.removeStorageSync('canvasImgArr');
     this.mapInfo();
     this.getShareUrl();
     this.getRankLv();
     this.checkShare().then(function (res) {
-      return _this8.su('ruler', res.data.data.ruler);
+      return _this9.su('ruler', res.data.data.ruler);
     });
   },
   onShow: function onShow() {},

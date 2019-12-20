@@ -6,6 +6,6 @@ function getCodeUrl (url) {
   }
   console.log(num)
 }
-getCodeUrl('/lqsy/rank.json')
+getCodeUrl('/user/bind')
 // ' + Select id,pid,username,state,comment from book_community_discuss
 // '+%df/ and 1 = 1

@@ -31,9 +31,16 @@ Page({
   _goPicShare: function _goPicShare() {
     app.su('shareCardInfo', this.data.info);
     this._shareType();
-    wx.navigateTo({
-      url: '/share/carShare/carShare?type=dayword'
-    });
+    var temps = app.gs('shareUrl');
+    var url = getCurrentPages()[getCurrentPages().length - 1].route;
+    for (var i in temps) {
+      if (temps[i].indexOf(url) >= 0) {
+        app.su('scene', i + '*' + this.data.options.id + ',' + app.gs('userInfoAll').uid);
+        return wx.navigateTo({
+          url: '/share/carShare/carShare?type=dayword'
+        });
+      }
+    }
   },
   getHundredDiscuss: function getHundredDiscuss() {
     var that = this;
@@ -227,7 +234,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: '' + this.data.info.title,
-          path: '/openShare/index/index?url=' + i + '&q=' + this.data.options.id,
+          path: '/openShare/index/index?url=' + i + '&q=' + this.data.options.id + ',' + app.gs('userInfoAll').uid,
           imageUrl: '' + this.data.info.img_url
         };
       }

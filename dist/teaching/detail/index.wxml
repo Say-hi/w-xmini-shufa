@@ -1,9 +1,9 @@
 <jwqcapsule capsule="{{ capsule }}">
   <text class="cfff">{{info.title}}</text>
 </jwqcapsule>
-<video bindplay="play" class="detailVideo" poster="{{item.cover_url}}" style="top: {{ height }}px;" src="{{info.video_url}}"></video>
+<video wx:if="{{noCheck}}" bindplay="play" class="detailVideo" poster="{{item.cover_url}}" style="top: {{ height }}px;" src="{{info.video_url}}"></video>
 <view style="height: 437rpx;"></view>
-<view wx:if="{{ !showColumn }}">
+<view wx:if="{{ !showColumn && noCheck }}">
   <!--屋檐 s-->
   <view class="eaves"></view>
   <!--屋檐 e-->
@@ -18,7 +18,7 @@
   </view>
   <!--标题 -e-->
   <!--选集 -s-->
-  <view class="bd1 p2030 f25 c3e3a39">
+  <view wx:if="{{noCheck}}" class="bd1 p2030 f25 c3e3a39">
   <text>选集</text>
   <text catchtap="_showColumn" id="openVideo" class="f22 c828282 tar flex1">查看更多 ></text>
   </view>

@@ -139,9 +139,17 @@ Page({
   _goPicShare () {
     app.su('shareCardInfo', this.data.info)
     this._shareType()
-    wx.navigateTo({
-      url: '/share/carShare/carShare?type=camera'
-    })
+    let temps = app.gs('shareUrl')
+    let url = getCurrentPages()[getCurrentPages().length - 1].route
+    for (let i in temps) {
+      if (temps[i].indexOf(url) >= 0) {
+        app.su('scene', `${i}*${this.data.options.wid},${this.data.options.oid},${app.gs('userInfoAll').uid}`)
+        wx.navigateTo({
+          url: '/share/carShare/carShare?type=camera'
+        })
+        return
+      }
+    }
   },
   getDetail () {
     let that = this
@@ -281,7 +289,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: `${this.data.info.word}`,
-          path: `/openShare/index/index?url=${i}&q=${this.data.options.wid},${this.data.options.oid}`
+          path: `/openShare/index/index?url=${i}&q=${this.data.options.wid},${this.data.options.oid},${app.gs('userInfoAll').uid}`
         }
       }
     }

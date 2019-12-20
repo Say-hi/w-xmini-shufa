@@ -10,6 +10,7 @@
     <view class="capsule-img" style="top: {{ capsuleTop }}px; height: {{ capsules.height }}px;">
       <image wx:if="{{ capsuleSet.backShow }}" catchtap="_back" style="height: {{ capsules.height }}px; width: {{ capsules.height }}px;" src="{{ capsuleSet.backImg }}"></image>
       <image wx:if="{{ capsuleSet.op }}" catchtap="_op" style="height: {{ capsules.height }}px; width: {{ capsules.height }}px;" src="{{ capsuleSet.opImg }}"></image>
+      <image wx:if="{{ !capsuleSet.backShow && capsuleSet.hImg }}" catchtap="_home" style="height: {{ capsules.height }}px; width: {{ capsules.height }}px;" src="{{ capsuleSet.hImg }}"></image>
     </view>
   </view>
 </form>

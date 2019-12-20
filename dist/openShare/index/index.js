@@ -13,7 +13,8 @@ Page({
     capsule: {
       transparent: true,
       bgc: ''
-    }
+    },
+    inviteId: null
   },
   caseUrl: function caseUrl() {
     var res = app.gs('shareUrl');
@@ -40,6 +41,9 @@ Page({
             i = _step$value[0],
             v = _step$value[1];
 
+        if (v === 'uid') {
+          this.data.inviteId = q[i];
+        }
         if (i < 1) {
           url += '?' + v + '=' + q[i];
         } else {
@@ -71,13 +75,14 @@ Page({
     var _this = this;
 
     if (!this.data.goUrl) return;
+    app.gs('userInfoAll').uid && this.data.inviteId && app.wxrequest({ url: app.getUrl().userBind, data: { son_phone: app.gs('userInfoAll').phone || null, parent_id: this.data.inviteId || null } });
     app.wxrequest({
       url: app.getUrl().shopUser,
       data: {
-        uid: app.gs('userInfoAll').uid
+        uid: app.gs('userInfoAll').uid || null
       }
     }).then(function (res) {
-      if (res.rank > 0) {
+      if (res.rank < 0 && _this.data.options.url * 1 !== 7 && _this.data.options.url * 1 !== 6) {
         // todo 修改等级判断
         app.toast({
           content: '您还未成为会员,无法继续享受服务哦~~',
@@ -89,18 +94,21 @@ Page({
           });
         }, 1000);
       } else {
-        wx.redirectTo({
+        // wx.navigateTo({
+        //   url: this.data.goUrl
+        // })
+        wx.reLaunch({
           url: _this.data.goUrl
         });
       }
     }, function () {
       app.toast({
-        content: '您还未成为会员,无法继续享受服务哦~~',
+        content: '您还未登录,无法继续享受服务哦~~',
         mask: true
       });
       setTimeout(function () {
         wx.navigateTo({
-          url: '/openvip/index/index'
+          url: '/user/login/index'
         });
       }, 1000);
     });

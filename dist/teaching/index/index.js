@@ -87,9 +87,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
-    this.setData({
-      main: options.from === 'main'
-    }, this.getList);
+    var _this = this;
+
+    app.checkPrivier().then(function (res) {
+      if (res.check || res.data.data.check) {
+        app.toast({ content: '内容根据微信运营规则,禁止展示' });
+        return wx.redirectTo({ url: '/pages/index/index' });
+      }
+      _this.setData({
+        noCheck: true,
+        main: options.from === 'main'
+      }, _this.getList);
+    }, function (err) {
+      console.error(err);
+    });
   },
 
   /**

@@ -9,7 +9,8 @@ Page({
   data: {
     capsule: {
       transparent: true,
-      bgc: ''
+      bgc: '',
+      hImg: null
     },
     userInfoAll: {},
     capsules: app.data.capsule,
@@ -73,6 +74,14 @@ Page({
       }
     ]
   },
+  goUrl (e) {
+    if (this.data.tabArr[e.currentTarget.dataset.index].t === '邀约好友') {
+      app.su('scene', `7*${app.gs('userInfoAll').uid}`)
+    }
+    wx.navigateTo({
+      url: this.data.tabArr[e.currentTarget.dataset.index].url
+    })
+  },
   upFormId (e) {
     app.upFormId(e)
   },
@@ -118,29 +127,27 @@ Page({
     }
     wx.login({
       success (loginRes) {
-        app
-          .wxrequest({
-            url: app.getUrl().wechatOpenid,
-            data: {
-              uid: app.gs('userInfoAll').uid,
-              code: loginRes.code,
-              avatar_url: e.detail.userInfo.avatarUrl,
-              nickname: e.detail.userInfo.nickName,
-              phone: app.gs('userInfoAll').phone || null
-            }
-          })
-          .then(res => {
-            app.su(
+        app.wxrequest({
+          url: app.getUrl().wechatOpenid,
+          data: {
+            uid: app.gs('userInfoAll').uid || null,
+            code: loginRes.code,
+            avatar_url: e.detail.userInfo.avatarUrl,
+            nickname: e.detail.userInfo.nickName,
+            phone: app.gs('userInfoAll').phone || null
+          }
+        }).then(res => {
+          app.su(
               'userInfoAll',
               Object.assign(app.gs('userInfoAll') || {}, res, {
                 avatar_url: e.detail.userInfo.avatarUrl,
                 nickname: e.detail.userInfo.nickName
               })
             )
-            that.setData({
-              userInfoAll: app.gs('userInfoAll')
-            })
+          that.setData({
+            userInfoAll: app.gs('userInfoAll')
           })
+        })
       }
     })
   },
