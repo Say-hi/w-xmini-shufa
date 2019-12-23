@@ -12,7 +12,8 @@ Page({
   data: {
     all_screen: app.data.fix,
     capsule: {
-      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)',
+      hImg: ''
     },
     capsules: app.data.capsule,
     height: app.data.height,

@@ -41,7 +41,7 @@
     <view class="tac f30 cff362c lh60">{{ right ? "三" : "五" }}星奖励</view>
     <view style="height: 500rpx;">
       <scroll-view scroll-y="1" style="height: 100%;">
-        adsfasfasdfasdfsadfsdf
+        奖励说明奖励说明奖励说明奖励说明奖励说明
       </scroll-view>
     </view>
   </view>

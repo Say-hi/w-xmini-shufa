@@ -12,7 +12,8 @@ Page({
   data: {
     capsule: {
       transparent: true,
-      bgc: ''
+      bgc: '',
+      hImg: ''
     },
     capsules: app.data.capsule,
     tag1: [],

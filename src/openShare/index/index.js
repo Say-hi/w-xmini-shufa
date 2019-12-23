@@ -88,7 +88,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-    // console.log(options)
+    console.log(options)
     // options规则 判断是否为扫码进入
     if (options.scene) {
       // todo 扫码进入
@@ -98,13 +98,13 @@ Page({
     }
     // 扫码进入则第一位为url,后面为对应页面的参数
     if (app.gs('shareUrl')) {
-      this.setData(
-        {
-          options
-        },
-        this.caseUrl
-      )
+      this.setData({
+        options
+      }, this.caseUrl)
     } else {
+      this.setData({
+        options
+      })
       app.getShareUrl(this.caseUrl)
     }
   },

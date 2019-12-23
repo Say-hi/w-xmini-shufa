@@ -32,7 +32,7 @@
   <navigator url="../detail/index?id={{item.id}}" class="listItem mt20 f19 c787878" wx:for="{{list}}" wx:key="index">
     <image lazy-load="1" src="{{item.img_url}}"></image>
     <view class="f29 c323232 tal w100 fw7">{{item.title}}</view>
-    <view class="tal w100">{{item.des}}</view>
+    <view class="tal w100 ws">{{item.des_text || item.des}}</view>
     <view class="tal w100">{{item.create_at}} {{item.hits}}次阅读</view>
   </navigator>
 </view>

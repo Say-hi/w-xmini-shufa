@@ -118,7 +118,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
-    // console.log(options)
+    console.log(options);
     // options规则 判断是否为扫码进入
     if (options.scene) {
       // todo 扫码进入
@@ -132,6 +132,9 @@ Page({
         options: options
       }, this.caseUrl);
     } else {
+      this.setData({
+        options: options
+      });
       app.getShareUrl(this.caseUrl);
     }
   },

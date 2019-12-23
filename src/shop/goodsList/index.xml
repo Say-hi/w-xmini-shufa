@@ -29,7 +29,7 @@
   <view wx:if="{{!list.length}}" class='tac f22 p20 c999'>暂无相关内容</view>
 </view>
 
-<navigator class="goCart">
+<navigator open-type='reLaunch' url='/shop/cart/index' class="goCart">
   <image src="https://c.jiangwenqiang.com/lqsy/cart.png"></image>
 </navigator>
 <!--错误弹窗-->
