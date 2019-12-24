@@ -1,1 +1,56 @@
-.userInfo{background:url(https://c.jiangwenqiang.com/lqsy/3.png)}.userInfo .userTop{display:flex;align-items:flex-start}.userInfo .userTop image{width:124rpx;height:124rpx;margin-right:24rpx}.userInfo .uiOperation{padding-bottom:80rpx}.userInfo .uiOperation,.userTab{display:flex;align-items:center;justify-content:space-around}.userTab{background:url(https://c.jiangwenqiang.com/lqsy/user.png);background-size:682rpx 190rpx;width:682rpx;height:190rpx;top:-40rpx;left:50%;transform:translateX(-50%)}.userTab image{width:65rpx;display:inline-block}.userTab .utitem{flex-direction:column;justify-content:flex-end;min-height:100rpx}.jwqfont.df,.userTab .utitem{display:flex;align-items:center}.jwqfont:before{font-size:40rpx}.login{color:red;margin:30rpx;line-height:80rpx}.loginBtn{display:flex}
+.userInfo {
+  background: url('https://c.jiangwenqiang.com/lqsy/3.png');
+}
+.userInfo .userTop {
+  display: flex;
+  align-items: flex-start;
+}
+.userInfo .userTop image {
+  width: 124rpx;
+  height: 124rpx;
+  margin-right: 24rpx;
+}
+.userInfo .uiOperation {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 80rpx;
+}
+.userTab {
+  background: url("https://c.jiangwenqiang.com/lqsy/user.png");
+  background-size: 682rpx 190rpx;
+  display: flex;
+  width: 682rpx;
+  height: 190rpx;
+  align-items: center;
+  justify-content: space-around;
+  top: -40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.userTab image {
+  width: 65rpx;
+  display: inline-block;
+}
+.userTab .utitem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 100rpx;
+}
+.jwqfont.df {
+  display: flex;
+  align-items: center;
+}
+.jwqfont:before {
+  font-size: 40rpx;
+}
+.login {
+  color: #f00;
+  margin: 30rpx;
+  line-height: 80rpx;
+}
+.loginBtn {
+  display: flex;
+}

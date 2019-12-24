@@ -31,10 +31,14 @@ Page({
     var _this = this;
 
     app.wxrequest({
-      url: app.getUrl()[this.data.options.type === 'shop' ? 'shopTeamList' : ''],
-      data: {
+      url: app.getUrl()[this.data.options.type === 'shop' ? 'shopTeamList' : 'userFriend'],
+      data: this.data.options.type === 'shop' ? {
         uid: this.data.options.id,
         rank: 1,
+        page: ++this.data.page
+      } : {
+        uid: this.data.options.id,
+        state: 1,
         page: ++this.data.page
       }
     }).then(function (res) {

@@ -98,7 +98,7 @@
         <image wx:if="{{ operationArr.chooseIndex <= 0 }}"
                class="borderImg"
                mode="aspectFill"
-               src="{{ item }}?123"></image>
+               src="{{ item }}?1234"></image>
         </button>
       </view>
   </scroll-view>

@@ -1,1 +1,67 @@
-page{background:#000;transform:translateZ(0);height:100%}.cutArea{background:linear-gradient(90deg,rgba(200,0,0,0) 1px,transparent 0,transparent 50%),linear-gradient(rgba(200,0,0,0) 1px,transparent 0,transparent 50%);background-size:33.33% 33.33%,33.33% 33.33%;box-shadow:0 0 1800px 1800px rgba(0,0,0,.8);border:2px solid rgba(255,26,21,.84)}.cutArea.cutMove{background:linear-gradient(90deg,rgba(200,0,0,.5) 1px,transparent 0,transparent 50%),linear-gradient(rgba(200,0,0,.5) 1px,transparent 0,transparent 50%);background-size:33.33% 33.33%,33.33% 33.33%}.cutArea .dot{position:absolute;width:60rpx;height:60rpx;background-repeat:no-repeat;background-image:linear-gradient(90deg,red,red),linear-gradient(red,red);background-size:6rpx 60rpx,60rpx 6rpx}.cutArea .dotLeftTop{top:-30rpx;left:-30rpx;background-position:20rpx 20rpx,20rpx 20rpx}.cutArea .dotRightTop{top:-30rpx;right:-30rpx;background-position:34rpx 20rpx,-26rpx 20rpx}.cutArea .dotLeftBottom{bottom:-30rpx;left:-30rpx;background-position:20rpx -20rpx,20rpx 36rpx}.cutArea .dotRightBottom{bottom:-30rpx;right:-30rpx;background-position:34rpx -20rpx,-22rpx 36rpx}.bottomOp{position:fixed;bottom:80rpx;left:0;width:100%;justify-content:space-around}.bottomOp .tac{padding:8rpx 30rpx;outline:none;border:none;border-radius:10rpx;background-image:linear-gradient(#039cf8,#30c99f);box-shadow:0 10rpx 0 #039cf8;cursor:pointer;text-shadow:0 5rpx 5rpx #ccc;font-size:30rpx;color:#fff;transition:all .3s}.bottomOp .tac:active{box-shadow:0 5rpx 0 #039cf8;transform:translate3d(0,5rpx,0)}
+page {
+  background: #000;
+  transform: translate3d(0, 0, 0);
+  height: 100%;
+}
+.cutArea {
+  background: linear-gradient(90deg, rgba(200, 0, 0, 0) 1px, transparent 0, transparent 50%), linear-gradient(rgba(200, 0, 0, 0) 1px, transparent 0, transparent 50%);
+  background-size: 33.33% 33.33%, 33.33% 33.33%;
+  box-shadow: 0 0 1800px 1800px rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(255, 26, 21, 0.84);
+}
+.cutArea.cutMove {
+  background: linear-gradient(90deg, rgba(200, 0, 0, 0.5) 1px, transparent 0, transparent 50%), linear-gradient(rgba(200, 0, 0, 0.5) 1px, transparent 0, transparent 50%);
+  background-size: 33.33% 33.33%, 33.33% 33.33%;
+}
+.cutArea .dot {
+  position: absolute;
+  width: 60rpx;
+  height: 60rpx;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(90deg, #f00, #f00), linear-gradient(#f00, #f00);
+  background-size: 6rpx 60rpx, 60rpx 6rpx;
+}
+.cutArea .dotLeftTop {
+  top: -30rpx;
+  left: -30rpx;
+  background-position: 20rpx 20rpx,20rpx 20rpx;
+}
+.cutArea .dotRightTop {
+  top: -30rpx;
+  right: -30rpx;
+  background-position: 34rpx 20rpx, -26rpx 20rpx;
+}
+.cutArea .dotLeftBottom {
+  bottom: -30rpx;
+  left: -30rpx;
+  background-position: 20rpx -20rpx, 20rpx 36rpx;
+}
+.cutArea .dotRightBottom {
+  bottom: -30rpx;
+  right: -30rpx;
+  background-position: 34rpx -20rpx, -22rpx 36rpx;
+}
+.bottomOp {
+  position: fixed;
+  bottom: 80rpx;
+  left: 0;
+  width: 100%;
+  justify-content: space-around;
+}
+.bottomOp .tac {
+  padding: 8rpx 30rpx;
+  outline: none;
+  border: none;
+  border-radius: 10rpx;
+  background-image: linear-gradient(#039CF8, #30C99F);
+  box-shadow: 0 10rpx 0 #039CF8;
+  cursor: pointer;
+  text-shadow: 0 5rpx 5rpx #ccc;
+  font-size: 30rpx;
+  color: #fff;
+  transition: all 300ms;
+}
+.bottomOp .tac:active {
+  box-shadow: 0 5rpx 0 #039CF8;
+  transform: translate3d(0, 5rpx, 0);
+}

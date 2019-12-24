@@ -17,10 +17,10 @@
   <scroll-view scroll-y="1" scroll-with-animation="1" scroll-into-view="l{{ cLeftIndex }}" class="cLeft h100">
     <view wx:key="index" catchtap='_leftChoose' id="l{{ index }}" data-index="{{ index }}" class="f22 c323232 tac lh60 bd1 {{ cLeftIndex == index ? 'bgfff active' : '' }}" wx:for="{{ category }}">{{ item.name }}</view>
   </scroll-view>
-  <view class="h100 flex1 df dfc crr">
+  <view class="h100 flex1 df dfc crr pr">
     <view wx:if="{{ !list.length }}" class='tac p20 c999 f30'>- 暂无相关产品 -</view>
-    <navigator wx:if="{{ list.length }}" url="/shop/goodsList/index?id={{ category[cLeftIndex].id }}&name={{ category[cLeftIndex].name }}" class="zw60 bgfff arrow w100"></navigator>
-    <scroll-view bindscrolltolower="moreShopProducts" scroll-y="1" scroll-with-animation="1" class="flex1">
+    <navigator wx:if="{{ list.length }}" url="/shop/goodsList/index?id={{ category[cLeftIndex].id }}&name={{ category[cLeftIndex].name }}" class="zw60 bgfff arrow w100 fixps"></navigator>
+    <scroll-view bindscrolltolower="moreShopProducts" scroll-y="1" style='height: 100%;' class="flex1 fixsc">
       <view class="cRight ">
         <navigator url="/shop/detail/index?id={{ item.id }}" class="goodsItem tac mt20" wx:for="{{ list }}" wx:key="index">
           <image mode="aspectFill" lazy-load="1" src="{{item.img_url}}"></image>

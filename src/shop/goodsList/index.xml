@@ -16,7 +16,7 @@
 <view class="p20 goods">
   <navigator url="/shop/detail/index?id={{item.id}}" wx:for="{{list}}" wx:key="index" class="goodsItem bgfff">
     <image lazy-load="1" class="w100" mode="aspectFill" src="{{item.img_url}}"></image>
-    <view class="ell2 f22 mt10 c646464">{{ item.title }}</view>
+    <view class="ell2 f22 mt10 c646464 p10">{{ item.title }}</view>
     <view class="p10 mt10 df dfac">
       <view>
         <text class="f22 cff362c">￥</text>

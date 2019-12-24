@@ -4,7 +4,7 @@
 <!--屋檐 s-->
 <view class="eaves"></view>
 <!--屋檐 e-->
-<image class="before-logo {{ logo }}" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/login1.png"></image>
+<image class="before-logo {{ logo }}" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/home/img/public/eiyxnaeasd_20190902104914.jpg"></image>
 
 <!--登录选择 -s-->
 <!-- <view wx:if="{{ phoneLogin }}">

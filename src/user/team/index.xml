@@ -13,7 +13,7 @@
   </view>
 </view>
 <view class="gift f21">
-  <text>您可以获得{{ right ? "三" : "五" }}星消费奖励的{{ right ? "10" : "20" }}%</text>
+  <text>您可以获得{{ right ? "三" : "五" }}{{ options.type == 'shop' ? '级' : '星' }}消费奖励的{{ right ? "10" : "20" }}%</text>
   <text catchtap="_toggleGift" class="jwqfont jwqiconset0143 c646464"></text>
 </view>
 <!--等级 -e-->
@@ -38,7 +38,7 @@
 <!--奖励 -s-->
 <view class="mask" wx:if="{{ ruler }}" catchtap="_toggleGift">
   <view catchtap="noUp" class="mask-in p10 br10 animated zoomIn" hover-stop-propagation="1">
-    <view class="tac f30 cff362c lh60">{{ right ? "三" : "五" }}星奖励</view>
+    <view class="tac f30 cff362c lh60">{{ right ? "三" : "五" }}{{ options.type == 'shop' ? '级' : '星' }}奖励</view>
     <view style="height: 500rpx;">
       <scroll-view scroll-y="1" style="height: 100%;">
         奖励说明奖励说明奖励说明奖励说明奖励说明

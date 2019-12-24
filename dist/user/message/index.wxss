@@ -1,1 +1,23 @@
-.messageList{align-items:flex-start}.messageList image{width:100rpx;height:100rpx;margin-right:12rpx}.goodsInfo{background:#f1f1f1}.goodsInfo image{width:130rpx;height:130rpx}.commentImage{flex-wrap:wrap}.commentImage image{width:130rpx;height:130rpx;margin:5rpx}
+.messageList {
+  align-items: flex-start;
+}
+.messageList image {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 12rpx;
+}
+.goodsInfo {
+  background: #f1f1f1;
+}
+.goodsInfo image {
+  width: 130rpx;
+  height: 130rpx;
+}
+.commentImage {
+  flex-wrap: wrap;
+}
+.commentImage image {
+  width: 130rpx;
+  height: 130rpx;
+  margin: 5rpx;
+}

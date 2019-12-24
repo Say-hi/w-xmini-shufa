@@ -1,1 +1,4 @@
-.board{position:fixed;bottom:-2000rpx}
+.board {
+  position: fixed;
+  bottom: -2000rpx;
+}

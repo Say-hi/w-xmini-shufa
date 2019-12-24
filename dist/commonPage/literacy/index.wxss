@@ -1,1 +1,79 @@
-.tab{justify-content:space-around;padding:60rpx 80rpx}.tab image{width:164rpx;height:164rpx}.resTop{display:grid;grid-template-columns:repeat(5,20%);grid-template-row:repeat(2,144rpx)}.resTop .item{transition:all .5s;margin:5rpx;outline:2rpx solid #a0a0a0}.resTop .item0{grid-column-start:1;grid-column-end:3;grid-row-start:1;grid-row-end:3}.resTop .item0 image{width:100%;height:100%}.resTop .item1{grid-row-start:1;grid-row-end:3}.jiexi{border-top:2rpx solid #787878;padding:4rpx 0;position:relative}.jiexi:after{content:"";border:8rpx solid #787878;width:0;height:0;border-color:#fff #fff #fff #787878;position:absolute;bottom:25%;left:75%}.jiexi.f21:after{bottom:-10rpx;left:45%;border-color:#787878 #fff #fff}.refresh{width:70%;margin:20rpx auto 0;background:url(https://c.jiangwenqiang.com/lqsy/2.png);border-radius:50rpx}.outWhere image{width:280rpx;height:4rpx}.iitemImg{text-align:center;flex-wrap:wrap}.iitemImg .df{margin:10rpx}.iitemImg image{width:100rpx;height:100rpx}.jiexiText{position:absolute;top:20%;left:50%;transform:translateX(-50%)}
+.tab {
+  justify-content: space-around;
+  padding: 60rpx 80rpx;
+}
+.tab image {
+  width: 164rpx;
+  height: 164rpx;
+}
+.resTop {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-template-row: repeat(2, 144rpx);
+}
+.resTop .item {
+  transition: all 0.5s;
+  margin: 5rpx;
+  outline: 2rpx solid #a0a0a0;
+}
+.resTop .item0 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+.resTop .item0 image {
+  width: 100%;
+  height: 100%;
+}
+.resTop .item1 {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+.jiexi {
+  border-top: 2rpx solid #787878;
+  padding: 4rpx 0;
+  position: relative;
+}
+.jiexi:after {
+  content: '';
+  border: 8rpx solid #787878;
+  width: 0;
+  height: 0;
+  border-color: #fff #fff #fff #787878;
+  position: absolute;
+  bottom: 25%;
+  left: 75%;
+}
+.jiexi.f21::after {
+  bottom: -10rpx;
+  left: 45%;
+  border-color: #787878 #fff #fff #fff;
+}
+.refresh {
+  width: 70%;
+  margin: 20rpx auto 0 auto;
+  background: url(https://c.jiangwenqiang.com/lqsy/2.png);
+  border-radius: 50rpx;
+}
+.outWhere image {
+  width: 280rpx;
+  height: 4rpx;
+}
+.iitemImg {
+  text-align: center;
+  flex-wrap: wrap;
+}
+.iitemImg .df {
+  margin: 10rpx;
+}
+.iitemImg image {
+  width: 100rpx;
+  height: 100rpx;
+}
+.jiexiText {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}

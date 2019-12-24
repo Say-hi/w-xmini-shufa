@@ -58,7 +58,7 @@ Page({
   goNext (e) {
     app.su('nextTeamInfo', this.data.list[e.currentTarget.dataset.index])
     wx.navigateTo({
-      url: `/user/tnext/index?id=${this.data.list[e.currentTarget.dataset.index].id}&type=shop`
+      url: `/user/tnext/index?id=${this.data.list[e.currentTarget.dataset.index].id}&type=${this.data.options.type}`
     })
   },
   /**

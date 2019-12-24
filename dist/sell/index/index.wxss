@@ -1,1 +1,76 @@
-.userInfo{background:url(https://c.jiangwenqiang.com/lqsy/3.png);border-bottom-left-radius:40rpx;border-bottom-right-radius:40rpx;background-repeat:no-repeat;background-size:cover}.userInfo .userTop{display:flex}.userInfo .userTop image{width:124rpx;height:124rpx;margin-right:24rpx}.userInfo .userTop .cece696{padding:4rpx 10rpx;background-color:#000;border-radius:16rpx;opacity:.42;display:inline-block}.userInfo .userTop .jwqzhifeiji{padding:10rpx;background:hsla(0,0%,100%,.8);border-top-left-radius:50rpx;border-bottom-left-radius:50rpx;margin-right:-30rpx}.userInfo .uiOperation{padding-bottom:80rpx}.userInfo .uiOperation,.userTab{display:flex;align-items:center;justify-content:space-around}.userTab{height:190rpx}.userTab image{width:65rpx;display:inline-block}.jwqfont.df{display:flex;align-items:center}.jwqfont:before{font-size:40rpx}.arrow:after{width:10rpx;height:10rpx}.opImg{width:52rpx}.orderNav{position:relative}.orderNav:after{content:attr(data-num);padding:0rpx 8rpx;line-height:28rpx;height:30rpx;border-radius:30rpx;font-size:22rpx;background:linear-gradient(135deg,red,#ff362c);position:absolute;top:0;right:0;color:#fff;transform:translate(50%,-50%)}
+.userInfo {
+  background: url('https://c.jiangwenqiang.com/lqsy/3.png');
+  border-bottom-left-radius: 40rpx;
+  border-bottom-right-radius: 40rpx;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.userInfo .userTop {
+  display: flex;
+}
+.userInfo .userTop image {
+  width: 124rpx;
+  height: 124rpx;
+  margin-right: 24rpx;
+}
+.userInfo .userTop .cece696 {
+  padding: 4rpx 10rpx;
+  background-color: #000000;
+  border-radius: 16rpx;
+  opacity: 0.42;
+  display: inline-block;
+}
+.userInfo .userTop .jwqzhifeiji {
+  padding: 10rpx;
+  background: rgba(255, 255, 255, 0.8);
+  border-top-left-radius: 50rpx;
+  border-bottom-left-radius: 50rpx;
+  margin-right: -30rpx;
+}
+.userInfo .uiOperation {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 80rpx;
+}
+.userTab {
+  display: flex;
+  height: 190rpx;
+  align-items: center;
+  justify-content: space-around;
+}
+.userTab image {
+  width: 65rpx;
+  display: inline-block;
+}
+.jwqfont.df {
+  display: flex;
+  align-items: center;
+}
+.jwqfont:before {
+  font-size: 40rpx;
+}
+.arrow::after {
+  width: 10rpx;
+  height: 10rpx;
+}
+.opImg {
+  width: 52rpx;
+}
+.orderNav {
+  position: relative;
+}
+.orderNav:after {
+  content: attr(data-num);
+  padding: 0rpx 8rpx;
+  line-height: 28rpx;
+  height: 30rpx;
+  border-radius: 30rpx;
+  font-size: 22rpx;
+  background: linear-gradient(135deg, #f00, #ff362c);
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  transform: translate(50%, -50%);
+}

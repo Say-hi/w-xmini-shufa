@@ -8,11 +8,15 @@
 }
 
 .shopNav {
-  display: grid;
-  grid-template-columns: repeat(5, 20%);
-  //grid-template-rows: repeat(2, 140rpx);
-  grid-row-gap: 20rpx;
+  // display: grid;
+  // grid-template-columns: repeat(5, 20%);
+  // //grid-template-rows: repeat(2, 140rpx);
+  // grid-row-gap: 20rpx;
+  flex-wrap: wrap;
+  padding-bottom: 20rpx;
   .shopNavItem {
+    flex: 0 0 20%;
+    margin-top: 20rpx;
     image {
       display: inline-block;
       width: 90rpx;

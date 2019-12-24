@@ -42,12 +42,16 @@
 </view>
 <!--名师文字 -e-->
 <!--名师列表 -s-->
-<view class="teacherList">
+<form>
+<view class="teacherList pr">
   <navigator url="/stele/index/index?id={{ item.id }}&name={{ item.name }}" class="listItem bd1 mt20" wx:for="{{ wordsCategoryList }}" wx:key="index">
-    <image lazy-load="1" src="{{ item.img_url }}"></image>
-    <text>{{ item.name }}</text>
+    <button>
+      <image class='tl-img' lazy-load="1" src="{{ item.img_url }}"></image>
+      <view class='tl-text'>{{ item.name }}</view>
+    </button>
   </navigator>
 </view>
+</form>
 <!--名师列表 -e-->
 <jwqfoot></jwqfoot>
 

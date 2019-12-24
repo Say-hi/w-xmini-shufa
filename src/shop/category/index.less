@@ -28,13 +28,28 @@
       height: 10rpx;
     }
     .cRight {
-      //display: flex;
-      //flex-wrap: wrap;
-      //justify-content: space-around;
-      display: grid;
-      grid-template-columns: repeat(3, 33.33%);
-      grid-row-gap: 40rpx;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      .goodsItem {
+        flex: 0 0 33.33%;
+      }
+      // display: grid;
+      // grid-template-columns: repeat(3, 33.33%);
+      // grid-row-gap: 40rpx;
     }
 
   }
+}
+
+.fixps {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+}
+.fixsc {
+  box-sizing: border-box;
+  padding-top: 60rpx;
+  padding-bottom: 16rpx;
 }

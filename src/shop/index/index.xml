@@ -23,7 +23,7 @@
 </swiper>
 <!--轮播图 -e-->
 <!--商城导航 -s-->
-<view class="shopNav df dfb p200">
+<view class="shopNav df">
   <navigator url="/shop/category/index?id={{item.id}}" wx:for="{{category}}" wx:key="index" class="shopNavItem f22 c323232 tac">
     <image class="br" src="{{item.img_url}}"></image>
     <view class="mt10">{{item.name}}</view>

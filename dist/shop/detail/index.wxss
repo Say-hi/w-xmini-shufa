@@ -1,1 +1,161 @@
-.mask-bottom-share{background-color:#fff;width:100%;border-radius:30rpx;position:absolute;bottom:-30rpx;left:0;padding:30rpx 0}.mask-bottom-share .bottom-share{display:flex;align-items:center;justify-content:space-around;padding:10rpx 0}.mask-bottom-share image{width:150rpx;height:150rpx}.detailS{height:560rpx}.detailInfo{bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ff7913,#ff2e3b)}.detailInfo .detailShare{background:#fff;display:inline-block;padding:10rpx 20rpx}.arrow{padding-right:20rpx}.arrow:after{right:0;width:10rpx;height:10rpx;border-color:red red transparent transparent}.commentItem image{width:51rpx;height:51rpx}.detailBtn{position:fixed;bottom:0;left:0}.detailBtn image{width:95rpx;height:87rpx}.detailBtn .jwqshouye{margin-left:30rpx;margin-right:20rpx}.detailBtn .jwqshouye:before{font-size:40rpx}.detailBtn .dbBtn{overflow:hidden;margin-left:20rpx}.detailBtn .dbBtn view{padding:20rpx;background:linear-gradient(90deg,#feb8aa,#feaaae)}.detailBtn .dbBtn view:nth-child(2){background:linear-gradient(90deg,#ff7a13,#ff2e3b)}.specs{position:fixed;bottom:0;left:0;border-top-left-radius:20rpx;border-top-right-radius:20rpx;padding-bottom:20rpx}.specs .sTop image{width:252rpx;height:258rpx;border-radius:13rpx}.specs .stInfo{justify-content:flex-end}.specs .specScroll{max-height:700rpx}.specs .specChoose{flex-wrap:wrap}.specs .specChoose .specItem{background:#dcdcdc;border-radius:8rpx;padding:10rpx;margin:5rpx 10rpx 5rpx 0}.specs .snI{padding:10rpx 20rpx;background:#dcdcdc;margin:0 5rpx;border-radius:5rpx}.specs .specConfirm{background:linear-gradient(90deg,#ff7814,#ff2e3b);border-radius:40rpx;width:90%;transform:translateX(5%)}.commentScrollOut{position:fixed;bottom:0;left:0;width:100%}.closeComment{display:inline-block;position:absolute;top:0;left:50%;transform:translate(-50%,-100%);border-top-left-radius:10rpx;border-top-right-radius:10rpx}.closeComment:after,.closeComment:before{content:"";width:20rpx;height:20rpx;background:#fff;border-radius:50%;position:absolute;bottom:0;left:0;transform:translate(-50%,50%)}.closeComment:after{left:100%}.commentScroll{width:100%;min-height:300rpx;max-height:1000rpx;background:#fff;padding:10rpx;box-sizing:border-box;border-top-left-radius:10rpx;border-top-right-radius:10rpx}.commentImage{flex-wrap:wrap}.commentImage image{width:100rpx;height:100rpx;margin:5rpx}
+.mask-bottom-share {
+  background-color: #fff;
+  width: 100%;
+  border-radius: 30rpx;
+  position: absolute;
+  bottom: -30rpx;
+  left: 0;
+  padding: 30rpx 0;
+}
+.mask-bottom-share .bottom-share {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10rpx 0;
+}
+.mask-bottom-share image {
+  width: 150rpx;
+  height: 150rpx;
+}
+.detailS {
+  height: 560rpx;
+}
+.detailInfo {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #ff7913, #ff2e3b);
+}
+.detailInfo .detailShare {
+  background: #fff;
+  display: inline-block;
+  padding: 10rpx 20rpx;
+}
+.arrow {
+  padding-right: 20rpx;
+}
+.arrow:after {
+  right: 0;
+  width: 10rpx;
+  height: 10rpx;
+  border-color: #f00 #f00 transparent transparent;
+}
+.commentItem image {
+  width: 51rpx;
+  height: 51rpx;
+}
+.detailBtn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.detailBtn image {
+  width: 95rpx;
+  height: 87rpx;
+}
+.detailBtn .jwqshouye {
+  margin-left: 30rpx;
+  margin-right: 20rpx;
+}
+.detailBtn .jwqshouye:before {
+  font-size: 40rpx;
+}
+.detailBtn .dbBtn {
+  overflow: hidden;
+  margin-left: 20rpx;
+}
+.detailBtn .dbBtn view {
+  padding: 20rpx 20rpx;
+  background: linear-gradient(90deg, #feb8aa, #feaaae);
+}
+.detailBtn .dbBtn view:nth-child(2) {
+  background: linear-gradient(90deg, #ff7a13, #ff2e3b);
+}
+.specs {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  padding-bottom: 20rpx;
+}
+.specs .sTop image {
+  width: 252rpx;
+  height: 258rpx;
+  border-radius: 13rpx;
+}
+.specs .stInfo {
+  justify-content: flex-end;
+}
+.specs .specScroll {
+  max-height: 700rpx;
+}
+.specs .specChoose {
+  flex-wrap: wrap;
+}
+.specs .specChoose .specItem {
+  background: #dcdcdc;
+  border-radius: 8rpx;
+  padding: 10rpx;
+  margin: 5rpx 10rpx 5rpx 0;
+}
+.specs .snI {
+  padding: 10rpx 20rpx;
+  background: #dcdcdc;
+  margin: 0 5rpx;
+  border-radius: 5rpx;
+}
+.specs .specConfirm {
+  background: linear-gradient(90deg, #ff7814, #ff2e3b);
+  border-radius: 40rpx;
+  width: 90%;
+  transform: translateX(5%);
+}
+.commentScrollOut {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.closeComment {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+.closeComment:before,
+.closeComment:after {
+  content: '';
+  width: 20rpx;
+  height: 20rpx;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(-50%, 50%);
+}
+.closeComment:after {
+  left: 100%;
+}
+.commentScroll {
+  width: 100%;
+  min-height: 300rpx;
+  max-height: 1000rpx;
+  background: #fff;
+  padding: 10rpx;
+  box-sizing: border-box;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+.commentImage {
+  flex-wrap: wrap;
+}
+.commentImage image {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 5rpx;
+}

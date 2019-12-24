@@ -1,1 +1,98 @@
-.toast{position:fixed;z-index:9999;width:100%;height:100%;overflow:hidden;transition:all .5s;background-color:transparent}.toast.hides{transform:scale(0);opacity:0;pointer-events:none}.toast.shows{transform:scale(1);opacity:1;pointer-events:auto}.center{bottom:0;left:0}.center .toast-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:500;border-radius:10rpx}.center .toast-image{width:100rpx;height:100rpx}.ontop{transition:all .5s;top:0;left:0}.ontop.hides{height:0;pointer-events:none}.ontop.hides,.ontop.shows{transform:scale(1);opacity:1}.ontop.shows{height:100%;pointer-events:auto}.ontop .toast-content{width:100%;border-radius:0;border-bottom:2rpx solid #eee}.ontop .toast-image{width:100rpx;height:100rpx}.leftIn{bottom:0;left:0}.leftIn.hides{left:-100%;pointer-events:none}.leftIn.hides,.leftIn.shows{transform:scale(1);opacity:1}.leftIn.shows{left:0;pointer-events:auto}.leftIn .toast-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:500;border-radius:10rpx}.leftIn .toast-image{width:100rpx;height:100rpx}.df{display:flex}.dfc{flex-direction:column}.dftac{align-items:center}
+.toast {
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.5s;
+  background-color: transparent;
+}
+.toast.hides {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+.toast.shows {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.center {
+  bottom: 0;
+  left: 0;
+}
+.center .toast-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500;
+  border-radius: 10rpx;
+}
+.center .toast-image {
+  width: 100rpx;
+  height: 100rpx;
+}
+.ontop {
+  transition: all 0.5s;
+  top: 0;
+  left: 0;
+}
+.ontop.hides {
+  height: 0;
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: none;
+}
+.ontop.shows {
+  height: 100%;
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.ontop .toast-content {
+  width: 100%;
+  border-radius: 0;
+  border-bottom: 2rpx solid #eee;
+}
+.ontop .toast-image {
+  width: 100rpx;
+  height: 100rpx;
+}
+.leftIn {
+  bottom: 0;
+  left: 0;
+}
+.leftIn.hides {
+  left: -100%;
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: none;
+}
+.leftIn.shows {
+  left: 0;
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.leftIn .toast-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500;
+  border-radius: 10rpx;
+}
+.leftIn .toast-image {
+  width: 100rpx;
+  height: 100rpx;
+}
+.df {
+  display: flex;
+}
+.dfc {
+  flex-direction: column;
+}
+.dftac {
+  align-items: center;
+}
