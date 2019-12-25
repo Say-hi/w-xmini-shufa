@@ -103,7 +103,7 @@ gulp.task('compile:less', () => {
     // .pipe(plugins.autoprefixer({
     //   browsers: ['last 20 versions']
     // }))
-    // .pipe(plugins.if(true, plugins.cssnano({ compatibility: '*', zindex: false })))
+    .pipe(plugins.if(true, plugins.cssnano({ compatibility: '*', zindex: false })))
     .pipe(plugins.rename({ extname: '.wxss' }))
     // .pipe(plugins.sourcemaps.write('.'))
     .pipe(gulp.dest('dist'))

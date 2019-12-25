@@ -17,6 +17,7 @@ Page({
     ALL_HEIGHT: app.data.ALL_HEIGHT,
     capsules: app.data.capsule,
     page: 0,
+    wordsCategoryList: [],
     answerArr: [],
     indicatorColor: 'rgba(0, 0, 0, 0.4)',
     indicatorActiveColor: '#ffffff',
@@ -230,15 +231,17 @@ Page({
   },
   getWordsCategory () {
     let that = this
-    app
-      .wxrequest({
-        url: app.getUrl().wordsCategory
+    app.wxrequest({
+      url: app.getUrl().wordsCategory,
+      data: {
+        page: ++this.data.page
+      }
+    }).then(res => {
+      that.setData({
+        wordsCategoryList: that.data.wordsCategoryList.concat(res.lists)
       })
-      .then(res => {
-        that.setData({
-          wordsCategoryList: res.lists
-        })
-      })
+      that.data.more = res.lists.length >= res.pre_page
+    })
   },
   onPageScroll (e) {
     this.setData({
@@ -257,6 +260,14 @@ Page({
    */
   onLoad (options) {
     this.getTopNav()
+    this.getWordsCategory()
+  },
+  onReachBottom () {
+    if (!this.data.more) {
+      return app.toast({
+        content: '没有更多内容了'
+      })
+    }
     this.getWordsCategory()
   },
   /**

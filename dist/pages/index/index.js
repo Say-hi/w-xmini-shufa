@@ -19,6 +19,7 @@ Page({
     ALL_HEIGHT: app.data.ALL_HEIGHT,
     capsules: app.data.capsule,
     page: 0,
+    wordsCategoryList: [],
     answerArr: [],
     indicatorColor: 'rgba(0, 0, 0, 0.4)',
     indicatorActiveColor: '#ffffff',
@@ -243,11 +244,15 @@ Page({
   getWordsCategory: function getWordsCategory() {
     var that = this;
     app.wxrequest({
-      url: app.getUrl().wordsCategory
+      url: app.getUrl().wordsCategory,
+      data: {
+        page: ++this.data.page
+      }
     }).then(function (res) {
       that.setData({
-        wordsCategoryList: res.lists
+        wordsCategoryList: that.data.wordsCategoryList.concat(res.lists)
       });
+      that.data.more = res.lists.length >= res.pre_page;
     });
   },
   onPageScroll: function onPageScroll(e) {
@@ -265,6 +270,14 @@ Page({
    */
   onLoad: function onLoad(options) {
     this.getTopNav();
+    this.getWordsCategory();
+  },
+  onReachBottom: function onReachBottom() {
+    if (!this.data.more) {
+      return app.toast({
+        content: '没有更多内容了'
+      });
+    }
     this.getWordsCategory();
   },
 

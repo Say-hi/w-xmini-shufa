@@ -54,7 +54,7 @@ Page({
       i: 'https://c.jiangwenqiang.com/lqsy/user2.png',
       url: '/share/carShare/carShare?type=user'
     }, {
-      t: '关于刘谦',
+      t: '关于流谦',
       i: 'https://c.jiangwenqiang.com/lqsy/user3.png',
       url: ''
     }, {

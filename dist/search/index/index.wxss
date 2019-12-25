@@ -1,9 +1,1 @@
-.searchPos {
-  width: 100%;
-  position: fixed;
-  z-index: 98;
-}
-.searchImg {
-  width: 150rpx;
-  height: 150rpx;
-}
+.searchPos{width:100%;position:fixed;z-index:98}.searchImg{width:150rpx;height:150rpx}

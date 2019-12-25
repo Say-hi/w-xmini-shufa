@@ -1,13 +1,1 @@
-.scoreTop {
-  overflow-x: hidden;
-}
-.scoreTop .cff362c {
-  font-size: 100rpx;
-}
-.scoreTop .jwqjifenshangcheng {
-  bottom: 0rpx;
-  right: -50rpx;
-  font-size: 130rpx;
-  color: #787878;
-  opacity: 0.5;
-}
+.scoreTop{overflow-x:hidden}.scoreTop .cff362c{font-size:100rpx}.scoreTop .jwqjifenshangcheng{bottom:0rpx;right:-50rpx;font-size:130rpx;color:#787878;opacity:.5}
