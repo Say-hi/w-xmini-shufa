@@ -46,8 +46,8 @@
 <view class="teacherList pr">
   <navigator url="/stele/index/index?id={{ item.id }}&name={{ item.name }}" class="listItem bd1 mt20" wx:for="{{ wordsCategoryList }}" wx:key="index">
     <button>
-      <image class='tl-img' lazy-load="1" src="{{ item.img_url }}"></image>
-      <view class='tl-text'>{{ item.name }}</view>
+      <image class='tl-img' mode='widthFix' lazy-load="1" src="{{ item.img_url }}"></image>
+      <!-- <view class='tl-text'>{{ item.name }}</view> -->
     </button>
   </navigator>
 </view>
