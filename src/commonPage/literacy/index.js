@@ -20,14 +20,14 @@ Page({
    */
   data: {
     capsule: {
-      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+      bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
     tab: [{
-      i: 'https://c.jiangwenqiang.com/lqsy/camera.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera.png',
       t: '拍照'
     },
     {
-      i: 'https://c.jiangwenqiang.com/lqsy/camera_pic.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_pic.png',
       t: '照片'
     }
     ],

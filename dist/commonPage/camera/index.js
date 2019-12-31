@@ -20,19 +20,19 @@ Page({
    */
   data: {
     capsule: {
-      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+      bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
     bottomImg: [{
       i: '',
       t: '无'
     }, {
-      i: 'https://c.jiangwenqiang.com/lqsy/camera_mi.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_mi.png',
       t: '米字格'
     }, {
-      i: 'https://c.jiangwenqiang.com/lqsy/camera_hui.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_hui.png',
       t: '回字格'
     }, {
-      i: 'https://c.jiangwenqiang.com/lqsy/camera_jiu.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_jiu.png',
       t: '九宫格'
     }],
     painting: {},
@@ -233,7 +233,7 @@ Page({
   //           systemWidth: app.data.system.windowWidth,
   //           backImageHeight: app.data.system.windowWidth * res.height / res.width
   //         })
-  //         that.getImageInfo('https://c.jiangwenqiang.com/lqsy/list1.png', true)
+  //         that.getImageInfo('https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/list1.png', true)
   //       }
   //     }
   //   })
@@ -358,7 +358,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
-    // this.getImageInfo('https://c.jiangwenqiang.com/lqsy/canvas_bottom.jpg')
+    // this.getImageInfo('https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom.jpg')
     this.setData({
       options: options,
       bgImg: app.gs('alphaImg2'),

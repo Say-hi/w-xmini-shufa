@@ -30,9 +30,9 @@
   </view>
   <view catchtap="_toggleShow" class="p20 bgfff f22 cfff tac refresh">重新识字</view>
   <view class="df dfac outWhere bgfff mt20">
-    <image src="https://c.jiangwenqiang.com/lqsy/literacy.png"></image>
+    <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/literacy.png"></image>
     <text class="f33 c646464 p20">出处参考</text>
-    <image style="transform: rotate(180deg);" src="https://c.jiangwenqiang.com/lqsy/literacy.png"></image>
+    <image style="transform: rotate(180deg);" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/literacy.png"></image>
   </view>
   <view class="f33 c646464 bgfff p20 bd1" wx:for="{{outList}}" wx:key="index">
     <view>{{item.path}}</view>

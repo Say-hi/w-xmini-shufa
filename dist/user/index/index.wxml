@@ -4,7 +4,7 @@
 <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
 <view class="userTop p2030">
   <button class="loginBtn" open-type="getUserInfo" bindgetuserinfo="_getUserInfo">
-    <image mode="aspectFill" class="br" src="{{ userInfoAll.avatar_url || 'https://c.jiangwenqiang.com/lqsy/login1.png'}}"></image>
+    <image mode="aspectFill" class="br" src="{{ userInfoAll.avatar_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/login1.png'}}"></image>
     <view class="utName">
       <view class="f28 cfff">{{ userInfoAll.nickname || '点击授权个人信息' }}</view>
       <view class="f22 cece696 mt10">{{ rank > 0 ? '会员:'+rankText : '非会员' }}</view>

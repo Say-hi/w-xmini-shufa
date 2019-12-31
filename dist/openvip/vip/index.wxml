@@ -5,14 +5,14 @@
 <view class="eaves"></view>
 <!--屋檐 e-->
 <!--开通会员图片 -s-->
-<image class="w100" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/vip_open_top.png"></image>
+<image class="w100" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_open_top.png"></image>
 <!--开通会员图片 -e-->
 <!--会员权益 -s-->
 <view class="tac vipEnjoy">
   <swiper bindchange='change' class='rank-swiper' previous-margin='40rpx' next-margin='40rpx'>
     <swiper-item wx:key="item" wx:for="{{info.sku}}">
       <!-- <view style='width: 100%;height:100%;'  > -->
-      <image class="{{ rankIndex == index ? 'active' : '' }} tr5" mode="aspectFill" src="{{ item.img_url || 'https://c.jiangwenqiang.com/lqsy/vip_open.png' }}"></image>
+      <image class="{{ rankIndex == index ? 'active' : '' }} tr5" mode="aspectFill" src="{{ item.img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_open.png' }}"></image>
       <!-- </view> -->
     </swiper-item>
   </swiper>
@@ -24,9 +24,9 @@
 <!--会员权益 -e-->
 <!--权益信息 -s-->
 <view class="tac f25 c323232 p20 vipText">
-<image mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/vip_text_left.png"></image>
+<image mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_text_left.png"></image>
 <text>会员权益</text>
-<image mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/vip_text_left.png"></image>
+<image mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_text_left.png"></image>
 </view>
 <view style="transform: translateY(-130rpx);" class="p20 f22 c323232 ws">
 {{info.sku[rankIndex].detail_text || info.detail_text || '暂无权益'}}

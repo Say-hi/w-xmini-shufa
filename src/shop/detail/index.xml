@@ -58,7 +58,7 @@
 <view class="bt1 df dfac detailBtn w100 bgfff f33 p10" style="padding-bottom: {{fix?50:10}}rpx;">
   <navigator url="/shop/index/index" open-type="reLaunch" class="jwqfont jwqshouye df dfc dfac f22">首页</navigator>
   <jwqnav url="/shop/cart/index">
-    <image src="https://c.jiangwenqiang.com/lqsy/cart.png"></image>
+    <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/cart.png"></image>
   </jwqnav>
   <view class="dbBtn br10 cfff tac flex1 df">
     <view catchtap="_toggleSpec" data-type="car" class="flex1">加入购物车</view>

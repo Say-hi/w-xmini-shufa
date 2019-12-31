@@ -22,7 +22,7 @@
 <jwqnav url="{{tnArr[tnIndex].url}}{{item.id}}" >
   <view wx:if="{{!item.cover_url || item.cover_url.length < 10}}">
     <view class="hliTitle mt20 f30 c323232">
-      <image class="hlitImg" mode="widthFix" wx:if="{{ item.label.length }}" src="https://c.jiangwenqiang.com/lqsy/essence.png"></image>
+      <image class="hlitImg" mode="widthFix" wx:if="{{ item.label.length }}" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/essence.png"></image>
       <text>{{ item.title }}</text>
     </view>
     <view class="hliContent f28 c787878 mt20 ell3">

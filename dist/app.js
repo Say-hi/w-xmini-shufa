@@ -4,7 +4,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-20 15:03:24
+ * @Last Modified time: 2019-12-31 10:46:27
  */
 // /*eslint-disable*/
 var useUrl = require('./utils/service2');
@@ -1002,6 +1002,43 @@ App({
       });
     });
   },
+  getBaseImageInfo: function getBaseImageInfo() {
+    var that = this;
+    if (!that.data.baseInfoActive) {
+      wx.request({
+        url: that.getExactlyUrl(that.getUrl().baseImageInfo),
+        success: function success(res) {
+          if (res.statusCode === 200) {
+            that.data.baseInfoActive = res.data.data.do;
+            that.data.baseInfoActiveUrl = res.data.data.url;
+            res.data.data.do && that.getBaseImageInfo();
+          } else {
+            that.cloud().getBaseImageInfo().then(function (cloudRes) {
+              that.data.baseInfoActive = cloudRes.do;
+              that.data.baseInfoActiveUrl = cloudRes.url;
+              cloudRes.do && that.getBaseImageInfo();
+            });
+          }
+        },
+        fail: function fail() {
+          that.cloud().getBaseImageInfo().then(function (cloudRes) {
+            that.data.baseInfoActive = cloudRes.do;
+            that.data.baseInfoActiveUrl = cloudRes.url;
+            cloudRes.do && that.getBaseImageInfo();
+          });
+        }
+      });
+    } else {
+      setTimeout(function () {
+        wx.downloadFile({
+          url: that.data.baseInfoActiveUrl + '?' + Math.random(),
+          complete: function complete() {
+            that.getBaseImageInfo();
+          }
+        });
+      }, 5000);
+    }
+  },
   currentUrl: function currentUrl() {
     var _this8 = this;
 
@@ -1021,6 +1058,7 @@ App({
     this.checkShare().then(function (res) {
       return _this9.su('ruler', res.data.data.ruler);
     });
+    this.getBaseImageInfo();
   },
   onShow: function onShow() {},
   onPageNotFound: function onPageNotFound() {

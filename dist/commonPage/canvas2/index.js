@@ -30,7 +30,7 @@ Page({
     upImgArr: [],
     tabBorderArr: {
       i: -1,
-      item: ['https://c.jiangwenqiang.com/lqsy/canvas_border_0.jpg', 'https://c.jiangwenqiang.com/lqsy/canvas_border_1.jpg', 'https://c.jiangwenqiang.com/lqsy/canvas_border_2.jpg', 'https://c.jiangwenqiang.com/lqsy/canvas_border_3.jpg', 'https://c.jiangwenqiang.com/lqsy/canvas_border_4.jpg', 'https://c.jiangwenqiang.com/lqsy/canvas_border_5.jpg']
+      item: ['https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border_0.jpg', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border_1.jpg', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border_2.jpg', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border_3.jpg', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border_4.jpg', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border_5.jpg']
     },
     bgColorArr: {
       i: -1,
@@ -44,24 +44,24 @@ Page({
       chooseIndex: 0,
       tab: [{
         t: '画框',
-        img: 'https://c.jiangwenqiang.com/lqsy/sb11.png',
-        imgChoose: 'https://c.jiangwenqiang.com/lqsy/sb1.png',
+        img: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sb11.png',
+        imgChoose: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sb1.png',
         sliderText: '缩放',
         currentSlider: 0,
         minSlider: 0,
         maxSlider: 80
       }, {
         t: '卡纸',
-        img: 'https://c.jiangwenqiang.com/lqsy/sb2.png',
-        imgChoose: 'https://c.jiangwenqiang.com/lqsy/sb22.png',
+        img: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sb2.png',
+        imgChoose: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sb22.png',
         sliderText: '宽度',
         currentSlider: 0,
         minSlider: 0,
         maxSlider: 20
       }, {
         t: '局条',
-        img: 'https://c.jiangwenqiang.com/lqsy/sb3.png',
-        imgChoose: 'https://c.jiangwenqiang.com/lqsy/sb33.png',
+        img: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sb3.png',
+        imgChoose: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sb33.png',
         sliderText: '宽度',
         currentSlider: 0,
         minSlider: 0,
@@ -310,7 +310,7 @@ Page({
 
             // console.log(i)
             _this2.data.upImgArr[i] = {
-              'src': app.data.userUseImg || 'https://c.jiangwenqiang.com/lqsy/nav_0.png'
+              'src': app.data.userUseImg || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/nav_0.png'
             };
             _this2.getItemImageInfo(i);
           }

@@ -2,7 +2,7 @@
   <text class="cfff fw7">流谦书苑</text>
 </jwqcapsule>
 <!--搜索 s-->
-<view class="search" style="background:url(https://c.jiangwenqiang.com/lqsy/3.png) ;">
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
   <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
   <view style="height:  {{ searchHeight }}px;"></view>
   <view style="height: {{ searchHeight }}px; top: {{ searchPosTop }}px; left: 0; padding: 0 {{ searchPosPad }}px;" class="f24 searchPos">

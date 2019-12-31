@@ -5,7 +5,7 @@
 <navigator hover-class="none"
            url="/search/index/index?type=shop"
            class="search"
-           style="background:url(https://c.jiangwenqiang.com/lqsy/3.png);transform: translateY({{ moveY || 0 }}px); {{ moveY > 0 ? 'position: relative; z-index: 800' : '' }}">
+           style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png);transform: translateY({{ moveY || 0 }}px); {{ moveY > 0 ? 'position: relative; z-index: 800' : '' }}">
   <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
   <view style="height: 80rpx; padding:0 30rpx;" class="pr f24">
     <view class="jwqfont jwqsousuo1 f40"></view>
@@ -18,7 +18,7 @@
 <!--屋檐 e-->
 <!--首页导航 s-->
 <view>
-  <image class="w100" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/4.png"></image>
+  <image class="w100" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/4.png"></image>
   <view class="navTab">
     <navigator class="ntItem tr3" 
     style='transition-delay: {{ index * 0.1 }}s; {{ item && showItem ? "opacity: 1;" : "opacity: 0;" }}' 
@@ -38,7 +38,7 @@
 <!--vip -e-->
 <!--名师文字 -s-->
 <view class="tac p30">
-  <image class="indexText" src="https://c.jiangwenqiang.com/lqsy/index_text.png"></image>
+  <image class="indexText" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/index_text.png"></image>
 </view>
 <!--名师文字 -e-->
 <!--名师列表 -s-->
@@ -57,5 +57,3 @@
 
 <!--错误弹窗-->
 <toast toast="{{ toast }}"></toast>
-<!--<import src="/template/template"></import>-->
-<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

@@ -10,7 +10,7 @@ Page({
     openType: 'reLaunch',
     rankIndex: 0,
     capsule: {
-      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+      bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
     checkIos: true,
     system: app.data.system.system.indexOf('iOS') >= 0

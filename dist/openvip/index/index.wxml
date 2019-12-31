@@ -6,14 +6,15 @@
 <!--屋檐 e-->
 <view>
   <!--开通会员图片 -s-->
-  <image class="w100" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/open_vip.png"></image>
+  <image class="w100" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/open_vip.png"></image>
   <!--开通会员图片 -e-->
   <!--会员权益 -s-->
   <view class="tac vipEnjoy">
-    <text class="vipText f23">现在开通仅需￥298终身享受</text>
+    <!-- <text class="vipText f23">现在开通仅需￥298终身享受</text> -->
+    <text class="vipText f23">　</text>
     <view class="vipContent">
       <view class="vipItem f21 c81511c" wx:for="123" wx:key="index">
-        <image mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/vip_{{ index }}.png"></image>
+        <image mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_{{ index }}.png"></image>
         <view class="mt20">{{ index == 0 ? '自用省钱' : index == 1 ? '分享赚钱' : '终身享受' }}</view>
       </view>
     </view>

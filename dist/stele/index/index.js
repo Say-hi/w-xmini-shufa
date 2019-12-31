@@ -22,7 +22,7 @@ Page({
       showAll: !this.data.showAll,
       capsule: {
         transparent: false,
-        bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+        bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
       }
     });
   },

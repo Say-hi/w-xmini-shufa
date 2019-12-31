@@ -11,7 +11,7 @@ Page({
    */
   data: {
     capsule: {
-      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+      bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
     height: app.data.height,
     tabIndex: 0,

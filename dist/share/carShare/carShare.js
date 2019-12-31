@@ -48,14 +48,14 @@ Page({
     var that = this;
     var views = [{
       type: 'image',
-      url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+      url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/share/stele_share.png',
       top: 0,
       left: 0,
       width: 375,
       height: 603
     }, {
       type: 'image',
-      url: 'https://c.jiangwenqiang.com/lqsy/list1.png',
+      url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/list1.png',
       top: 150,
       left: 375 / 2 - 110,
       width: 220,
@@ -84,7 +84,7 @@ Page({
       case 'inviteFriend':
         views = [{
           type: 'image',
-          url: 'https://c.jiangwenqiang.com/lqsy/share/shopUserShare.png',
+          url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/share/shopUserShare.png',
           top: 0,
           left: 0,
           width: 375,
@@ -101,7 +101,7 @@ Page({
       case 'user':
         views = [{
           type: 'image',
-          url: 'https://c.jiangwenqiang.com/lqsy/share/shopUserShare.png',
+          url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/share/shopUserShare.png',
           top: 0,
           left: 0,
           width: 375,
@@ -118,7 +118,7 @@ Page({
       case 'stele':
         views = [{
           type: 'image',
-          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/share/stele_share.png',
           top: 0,
           left: 0,
           width: 375,
@@ -154,7 +154,7 @@ Page({
       case 'shop':
         views = [{
           type: 'image',
-          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/share/stele_share.png',
           top: 0,
           left: 0,
           width: 375,
@@ -190,7 +190,7 @@ Page({
       case 'hundred':
         views = [{
           type: 'image',
-          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/share/stele_share.png',
           top: 0,
           left: 0,
           width: 375,
@@ -226,7 +226,7 @@ Page({
       case 'community':
         views = [{
           type: 'image',
-          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/share/stele_share.png',
           top: 0,
           left: 0,
           width: 375,
@@ -262,7 +262,7 @@ Page({
       case 'dayword':
         views = [{
           type: 'image',
-          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/share/stele_share.png',
           top: 0,
           left: 0,
           width: 375,
@@ -298,7 +298,7 @@ Page({
       case 'camera':
         views = [{
           type: 'image',
-          url: 'https://c.jiangwenqiang.com/lqsy/share/stele_share.png',
+          url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/share/stele_share.png',
           top: 0,
           left: 0,
           width: 375,
@@ -406,7 +406,7 @@ Page({
     var that = this;
     var views = [{
       type: 'image',
-      url: 'https://c.jiangwenqiang.com/lqsy/cavas_bottom.jpg',
+      url: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/cavas_bottom.jpg',
       top: 0,
       left: 0,
       width: 375,

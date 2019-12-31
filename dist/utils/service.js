@@ -214,6 +214,7 @@ var serviceUrl = {
   distinguishKnow: lqsyBaseDomain + '/distinguish/know', // 拍照后上传图片进行识别
   distinguishWord: lqsyBaseDomain + '/distinguish/word', // 文字释义
   stackingSearch: lqsyBaseDomain + '/stacking/search', // 文字搜索
+  baseImageInfo: lqsyTestDomain + '/lqsy/baseImageInfo.json', // 修改购物车的数量2
   stackingDetail: lqsyBaseDomain + '/stacking/detail', // 查看其中一张字帖(完全一张字体的)
   stackingDiscuss: lqsyBaseDomain + '/stacking/discuss', // 获取用户评论
   stackingDiscussSub: lqsyBaseDomain + '/stacking/discuss-sub', // 提交用户评论

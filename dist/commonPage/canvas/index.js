@@ -24,10 +24,10 @@ Page({
    */
   data: {
     capsule: {
-      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+      bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
     imgArr: [{
-      src: 'https://c.jiangwenqiang.com/lqsy/nav_0.png',
+      src: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/nav_0.png',
       scale: 1,
       rotate: 0
     }],
@@ -37,27 +37,27 @@ Page({
     positionTop: 150,
     positionLeftShow: 0,
     positionTopShow: 0,
-    borderImg: 'https://c.jiangwenqiang.com/lqsy/canvas_border.jpg',
+    borderImg: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border.jpg',
     tabArr: [{
-      src: 'https://c.jiangwenqiang.com/lqsy/canvas_bottom_0.jpg',
+      src: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom_0.jpg',
       oX: 750 / 2 - 100,
       oY: 750 / 2 - 175,
       oW: 200,
       oH: 250
     }, {
-      src: 'https://c.jiangwenqiang.com/lqsy/canvas_bottom_0.jpg',
+      src: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom_0.jpg',
       oX: 150,
       oY: 100,
       oW: 200,
       oH: 200
     }, {
-      src: 'https://c.jiangwenqiang.com/lqsy/canvas_bottom_0.jpg',
+      src: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom_0.jpg',
       oX: 232.441,
       oY: 93.543,
       oW: 283,
       oH: 198
     }, {
-      src: 'https://c.jiangwenqiang.com/lqsy/canvas_bottom_0.jpg',
+      src: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom_0.jpg',
       oX: 200,
       oY: 200,
       oW: 200,
@@ -102,7 +102,7 @@ Page({
         tabIndex: e.currentTarget.dataset.index
         // tabId: e.currentTarget.dataset.index
       }, function () {
-        _this2.getBackImageInfo('https://c.jiangwenqiang.com/lqsy/canvas_bottom_' + e.currentTarget.dataset.index + '.jpg');
+        _this2.getBackImageInfo('https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom_' + e.currentTarget.dataset.index + '.jpg');
       });
     } else {
       canChoose = false;
@@ -568,7 +568,7 @@ Page({
       mask: true
     });
     wx.getImageInfo({
-      src: 'https://c.jiangwenqiang.com/lqsy/canvas_border_' + that.data.tabBorderIndex + '.jpg',
+      src: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border_' + that.data.tabBorderIndex + '.jpg',
       success: function success(res) {
         wx.hideLoading();
         that.setData(_defineProperty({}, 'imgArr[' + changeIndex + '].border', {

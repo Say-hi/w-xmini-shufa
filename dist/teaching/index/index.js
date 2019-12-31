@@ -36,8 +36,8 @@ Page({
   getList: function getList() {
     var that = this;
     app.wxrequest({
-      url: app.getUrl()[this.data.mian ? 'videoVideoList' : 'teachVideoList'],
-      data: this.data.mian ? {
+      url: app.getUrl()[this.data.main ? 'videoVideoList' : 'teachVideoList'],
+      data: this.data.main ? {
         uid: app.gs('userInfoAll').uid,
         state: that.data.tabIndex * 1 + 1,
         page: ++that.data.page

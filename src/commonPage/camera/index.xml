@@ -38,8 +38,8 @@
 <!--底格 -e-->
 
 <view class="cameraSe df p20 pr">
-  <image catchtap="eventDraw" data-type="cameraMask" src="https://c.jiangwenqiang.com/lqsy/camera_share.png"></image>
-  <navigator open-type="navigateBack"><image src="https://c.jiangwenqiang.com/lqsy/camera_back.png"></image></navigator>
+  <image catchtap="eventDraw" data-type="cameraMask" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_share.png"></image>
+  <navigator open-type="navigateBack"><image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_back.png"></image></navigator>
 </view>
 
 <!--分享 -s-->

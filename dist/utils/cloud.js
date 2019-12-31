@@ -122,6 +122,20 @@ module.exports = {
       });
     });
   },
+  getBaseImageInfo: function getBaseImageInfo() {
+    return new Promise(function (resolve, reject) {
+      wx.cloud.callFunction({
+        name: 'getBaseImageInfo',
+        data: {},
+        success: function success(res) {
+          resolve(res.result);
+        },
+        fail: function fail(err) {
+          reject(err);
+        }
+      });
+    });
+  },
   checkPrivier: function checkPrivier() {
     return new Promise(function (resolve, reject) {
       wx.cloud.callFunction({

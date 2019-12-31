@@ -122,14 +122,14 @@
   <view class="specs bgfff w100 animated slideInUp am5 p30">
     <view class="">
       <view class="df dfac">
-        <image style="transform: rotateZ(180deg) rotateX(180deg);" class="flex1" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/canvas_share_line.png"></image>
+        <image style="transform: rotateZ(180deg) rotateX(180deg);" class="flex1" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_line.png"></image>
         <view class="c646464 f38"> 分享作品到 </view>
-        <image class="flex1" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/canvas_share_line.png"></image>
+        <image class="flex1" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_line.png"></image>
       </view>
     </view>
     <view style="padding: 50rpx;">
       <view catchtap="shareType" data-index="{{index}}" class="shareChoose df dfc dfac" wx:for="{{ shareArr }}" wx:key="index">
-        <image src="https://c.jiangwenqiang.com/lqsy/canvas_share_{{ index }}.png"></image>
+        <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_{{ index }}.png"></image>
         <view class="mt20 tac f28 c646464">{{ item }}</view>
       </view>
     </view>

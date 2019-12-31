@@ -2,7 +2,7 @@
   <text class="cfff fw7">{{ !noCheck ? '流谦书院' : main ? '视频' : '书法教学' }}</text>
 </jwqcapsule>
 <!--搜索 s-->
-<view class="search" style="background:url(https://c.jiangwenqiang.com/lqsy/3.png) ;">
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
   <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
 <!--  <view style="height: 80rpx; padding:0 30rpx;" class="pr f24">-->
 <!--    <view class="jwqfont jwqsousuo1 f40"></view>-->
@@ -57,7 +57,7 @@
     <image mode="aspectFill" lazy-load="1" class="tlitImg" src="{{item.cover_url}}"></image>
     <view class="playIcon pa cfff"></view>
   </view>
-  <view class="tliR">
+  <view class="tliR flex1">
     <view class="f25 c323232 tliTil ell1">{{item.title}}</view>
     <view class="c646464 f18 tliTil ell3 mt10">{{item.des}}</view>
     <view class="c646464 f17 pr df mt20">

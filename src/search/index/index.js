@@ -16,7 +16,7 @@ Page({
     searchPosTop: app.data.capsule.bottom + app.data.capsule.top / 2,
     searchPosPad: 10,
     inputColor: '#fff',
-    inputbg: 'url(https://c.jiangwenqiang.com/lqsy/3.png)',
+    inputbg: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png)',
     page: 0,
     more: true,
     list: []

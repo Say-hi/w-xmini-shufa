@@ -98,6 +98,20 @@ module.exports = {
       })
     })
   },
+  getBaseImageInfo () {
+    return new Promise((resolve, reject) => {
+      wx.cloud.callFunction({
+        name: 'getBaseImageInfo',
+        data: {},
+        success (res) {
+          resolve(res.result)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
+  },
   checkPrivier () {
     return new Promise((resolve, reject) => {
       wx.cloud.callFunction({

@@ -11,13 +11,13 @@ Page({
    */
   data: {
     capsule: {
-      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+      bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
     list: [],
     more: true,
     page: 0,
     height: app.data.height,
-    imgArr: ['https://c.jiangwenqiang.com/lqsy/canvas_bottom_0.jpg'],
+    imgArr: ['https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom_0.jpg'],
     chooseArr: [{
       t: '作品宽',
       tIndex: -1,

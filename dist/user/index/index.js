@@ -47,19 +47,19 @@ Page({
     }],
     tabArr: [{
       t: '我的师友',
-      i: 'https://c.jiangwenqiang.com/lqsy/user1.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/user1.png',
       url: '/user/team/index'
     }, {
       t: '邀约好友',
-      i: 'https://c.jiangwenqiang.com/lqsy/user2.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/user2.png',
       url: '/share/carShare/carShare?type=user'
     }, {
       t: '关于流谦',
-      i: 'https://c.jiangwenqiang.com/lqsy/user3.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/user3.png',
       url: ''
     }, {
       t: '我的消息',
-      i: 'https://c.jiangwenqiang.com/lqsy/user4.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/user4.png',
       url: '/user/message/index?type=shop'
     }]
   },

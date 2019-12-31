@@ -1,7 +1,7 @@
 <jwqcapsule capsule="{{ capsule }}">
   <text class="cfff">作品装裱</text>
 </jwqcapsule>
-<image style="width: 100%;" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/choose_type_bg.png"></image>
+<image style="width: 100%;" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/choose_type_bg.png"></image>
 
 <view class="df dfb type_choose_wrap">
   <view catchtap="typeChoose" class="type_choose" data-text="单幅装裱"></view>

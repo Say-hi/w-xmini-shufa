@@ -22,7 +22,7 @@ Page({
    */
   data: {
     capsule: {
-      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+      bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
     imgArr: [{
       src: '',
@@ -33,24 +33,24 @@ Page({
       chooseIndex: 0,
       tab: [{
         t: '画框',
-        img: 'https://c.jiangwenqiang.com/lqsy/canvasType_2.png',
-        imgChoose: 'https://c.jiangwenqiang.com/lqsy/canvasType_1_choose.png',
+        img: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvasType_2.png',
+        imgChoose: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvasType_1_choose.png',
         sliderText: '缩放',
         currentSlider: 0,
         minSlider: 0,
         maxSlider: 100
       }, {
         t: '卡纸',
-        img: 'https://c.jiangwenqiang.com/lqsy/canvasType_2.png',
-        imgChoose: 'https://c.jiangwenqiang.com/lqsy/canvasType_1_choose.png',
+        img: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvasType_2.png',
+        imgChoose: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvasType_1_choose.png',
         sliderText: '宽度',
         currentSlider: 0,
         minSlider: 0,
         maxSlider: 20
       }, {
         t: '局条',
-        img: 'https://c.jiangwenqiang.com/lqsy/canvasType_2.png',
-        imgChoose: 'https://c.jiangwenqiang.com/lqsy/canvasType_1_choose.png',
+        img: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvasType_2.png',
+        imgChoose: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvasType_1_choose.png',
         sliderText: '宽度',
         currentSlider: 0,
         minSlider: 0,
@@ -64,16 +64,16 @@ Page({
     positionTop: 150,
     positionLeftShow: 0,
     positionTopShow: 0,
-    borderImg: 'https://c.jiangwenqiang.com/lqsy/canvas_border.jpg',
+    borderImg: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border.jpg',
     tabArr: [{
-      src: 'https://c.jiangwenqiang.com/lqsy/canvas_bottom_0.jpg',
+      src: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom_0.jpg',
       oX: 750 / 2,
       oY: 750 / 2,
       oW: 200,
       oH: 250
     }],
     bottomImage: {
-      src: 'https://c.jiangwenqiang.com/lqsy/canvas_bottom_0.jpg',
+      src: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom_0.jpg',
       showImgArr: [{
         oX: 750 / 2 - 100,
         oY: 750 / 2 - 175,
@@ -500,7 +500,7 @@ Page({
       mask: true
     });
     wx.getImageInfo({
-      src: 'https://c.jiangwenqiang.com/lqsy/canvas_border_' + that.data.tabBorderIndex + '.jpg',
+      src: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border_' + that.data.tabBorderIndex + '.jpg',
       success: function success(res) {
         wx.hideLoading();
         // let width = that.data.imgArr[changeIndex].showWidth > that.data.imgArr[changeIndex].showHeight ? that.data.imgArr[changeIndex].showHeight / 2 : that.data.imgArr[changeIndex].showWidth / 2
@@ -546,7 +546,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
-    this.setData(_defineProperty({}, 'imgArr[0].src', app.data.userUseImg || 'https://c.jiangwenqiang.com/lqsy/nav_0.png'));
+    this.setData(_defineProperty({}, 'imgArr[0].src', app.data.userUseImg || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/nav_0.png'));
     this.chooseIndex({
       currentTarget: {
         dataset: {

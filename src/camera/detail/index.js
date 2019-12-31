@@ -8,22 +8,22 @@ Page({
   data: {
     fix: app.data.fix,
     capsule: {
-      bgc: 'url(https://c.jiangwenqiang.com/lqsy/2.png)'
+      bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
     bottomImg: [{
       i: '',
       t: '无'
     },
     {
-      i: 'https://c.jiangwenqiang.com/lqsy/camera_mi.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_mi.png',
       t: '米字格'
     },
     {
-      i: 'https://c.jiangwenqiang.com/lqsy/camera_hui.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_hui.png',
       t: '回字格'
     },
     {
-      i: 'https://c.jiangwenqiang.com/lqsy/camera_jiu.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_jiu.png',
       t: '九宫格'
     }
     ],

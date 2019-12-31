@@ -2,7 +2,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-20 15:03:24
+ * @Last Modified time: 2019-12-31 10:46:27
  */
 // /*eslint-disable*/
 const useUrl = require('./utils/service2')
@@ -930,6 +930,43 @@ App({
         }
       )
   },
+  getBaseImageInfo () {
+    let that = this
+    if (!that.data.baseInfoActive) {
+      wx.request({
+        url: that.getExactlyUrl(that.getUrl().baseImageInfo),
+        success (res) {
+          if (res.statusCode === 200) {
+            that.data.baseInfoActive = res.data.data.do
+            that.data.baseInfoActiveUrl = res.data.data.url
+            res.data.data.do && that.getBaseImageInfo()
+          } else {
+            that.cloud().getBaseImageInfo().then(cloudRes => {
+              that.data.baseInfoActive = cloudRes.do
+              that.data.baseInfoActiveUrl = cloudRes.url
+              cloudRes.do && that.getBaseImageInfo()
+            })
+          }
+        },
+        fail () {
+          that.cloud().getBaseImageInfo().then(cloudRes => {
+            that.data.baseInfoActive = cloudRes.do
+            that.data.baseInfoActiveUrl = cloudRes.url
+            cloudRes.do && that.getBaseImageInfo()
+          })
+        }
+      })
+    } else {
+      setTimeout(() => {
+        wx.downloadFile({
+          url: `${that.data.baseInfoActiveUrl}?${Math.random()}`,
+          complete () {
+            that.getBaseImageInfo()
+          }
+        })
+      }, 5000)
+    }
+  },
   currentUrl () {
     return new Promise((resolve, reject) => {
       this.toast({
@@ -943,6 +980,7 @@ App({
     this.getShareUrl()
     this.getRankLv()
     this.checkShare().then(res => this.su('ruler', res.data.data.ruler))
+    this.getBaseImageInfo()
   },
   onShow () {},
   onPageNotFound () {

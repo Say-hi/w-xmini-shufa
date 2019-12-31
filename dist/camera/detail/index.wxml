@@ -27,11 +27,11 @@
 <!--底格 -e-->
 <view class="cameraSe df p20">
   <button hover-class="none" wx:if="{{ needSetting }}" bindopensetting="openSetting" open-type="openSetting">
-    <image src="https://c.jiangwenqiang.com/lqsy/camera.png"></image>
+    <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera.png"></image>
   </button>
-  <image wx:else catchtap="userCamera" data-type="cameraMask" src="https://c.jiangwenqiang.com/lqsy/camera.png"></image>
+  <image wx:else catchtap="userCamera" data-type="cameraMask" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera.png"></image>
   <navigator url="/search/index/index?type=camera">
-    <image src="https://c.jiangwenqiang.com/lqsy/search.png"></image>
+    <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/search.png"></image>
   </navigator>
 </view>
 

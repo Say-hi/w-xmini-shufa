@@ -26,10 +26,10 @@ Component({
     capsuleSet: {
       bgc: '#fff',
       backShow: false,
-      backImg: 'https://c.jiangwenqiang.com/lqsy/back.png?123',
+      backImg: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/back.png?123',
       op: false,
       opImg: 'https://c.jiangwenqiang.com/api/image/home.png',
-      hImg: 'https://c.jiangwenqiang.com/lqsy/homeImg.png?123',
+      hImg: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/homeImg.png?123',
       opType: 'reLaunch'
     },
     height: app.data.height,

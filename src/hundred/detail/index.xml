@@ -4,7 +4,7 @@
 <!--列表 -s-->
 <view class="hundredListItem">
   <view class="hliTitle f30 mt20 c323232">
-    <image wx:if="{{ info.label.length }}" class="hlitImg" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/essence.png"></image>
+    <image wx:if="{{ info.label.length }}" class="hlitImg" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/essence.png"></image>
     <text>{{info.title}}</text>
   </view>
   <view class="hliTop mt20">

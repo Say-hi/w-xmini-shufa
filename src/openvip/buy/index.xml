@@ -4,7 +4,7 @@
 <view wx:if="{{ !success }}">
   <!--卡卷信息 -s-->
   <view class="mt10 topInfo">
-    <image mode="widthFix" src="{{ info.sku[rankIndex].img_url || 'https://c.jiangwenqiang.com/lqsy/vip_open.png' }}"></image>
+    <image mode="widthFix" src="{{ info.sku[rankIndex].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_open.png' }}"></image>
     <view class="f21 flex1">
       <view class="f25 c323232">{{info.sku[rankIndex].title || info.title}}</view>
       <view class="c787878">
@@ -50,7 +50,7 @@
 <view wx:if="{{ success }}" class="tac bgfff">
   <view style="padding-top: 70rpx;" class="f42 c323232 fw7">恭喜您</view>
   <view class="f33 c323232 mt20 fw7">成为流谦书苑会员</view>
-  <image style="width: 182rpx;display: inline-block; margin-top: 70rpx;" mode="widthFix" src="https://c.jiangwenqiang.com/lqsy/buy_success.png"></image>
+  <image style="width: 182rpx;display: inline-block; margin-top: 70rpx;" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/buy_success.png"></image>
   <view class="vipBtn f25">
     <navigator open-type="navigateBack" class="vbItem cf73650">返回</navigator>
     <navigator open-type="redirect" url="../vip/index" class="vbItem">查看我的权益</navigator>

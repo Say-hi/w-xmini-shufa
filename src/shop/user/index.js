@@ -15,42 +15,42 @@ Page({
     capsules: app.data.capsule,
     userNav: [{
       t: '待付款',
-      i: 'https://c.jiangwenqiang.com/lqsy/shop_0.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop_0.png',
       u: '/shop/order/index?type=1'
     },
     {
       t: '待发货',
-      i: 'https://c.jiangwenqiang.com/lqsy/shop_1.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop_1.png',
       u: '/shop/order/index?type=2'
     },
     {
       t: '待收货',
-      i: 'https://c.jiangwenqiang.com/lqsy/shop_2.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop_2.png',
       u: '/shop/order/index?type=3'
     },
     {
       t: '退货/售后',
-      i: 'https://c.jiangwenqiang.com/lqsy/shop_3.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop_3.png',
       u: '/shop/order/index?type=0'
     },
     {
       t: '全部订单',
-      i: 'https://c.jiangwenqiang.com/lqsy/shop_4.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop_4.png',
       u: '/shop/order/index?type=0'
     },
     {
       t: '我的团队',
-      i: 'https://c.jiangwenqiang.com/lqsy/shop_5.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop_5.png',
       u: '/user/team/index?type=shop'
     },
     {
       t: '邀请好友',
-      i: 'https://c.jiangwenqiang.com/lqsy/shop_6.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop_6.png',
       u: '/share/carShare/carShare?type=inviteFriend'
     },
     {
       t: '我的积分',
-      i: 'https://c.jiangwenqiang.com/lqsy/shop_7.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop_7.png',
       u: '/shop/score/index'
     }
     ],

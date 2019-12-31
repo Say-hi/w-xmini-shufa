@@ -77,7 +77,7 @@
 </view>
 <!--分享方式选择 -e-->
 <jwqnav url="/camera/index/index">
-  <image class="talk" mode="widthFix"  src="https://c.jiangwenqiang.com/lqsy/overlapping.png"></image>
+  <image class="talk" mode="widthFix"  src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/overlapping.png"></image>
 </jwqnav>
 
 <!--错误弹窗-->

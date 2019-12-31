@@ -6,6 +6,6 @@ function getCodeUrl (url) {
   }
   console.log(num)
 }
-getCodeUrl('/user/bind')
+getCodeUrl('/lqsy/baseImageInfo.json')
 // ' + Select id,pid,username,state,comment from book_community_discuss
 // '+%df/ and 1 = 1

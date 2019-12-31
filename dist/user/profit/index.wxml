@@ -43,7 +43,7 @@
     <view>五星消费金额：¥298</view>
     <view>奖励：<text class="cf73650">¥122.9</text></view>
   </view>
-  <image wx:if="{{ tabIndex > 1 }}" mode="widthFix" class="orderBackImg" src="https://c.jiangwenqiang.com/lqsy/order_back.png" lazy-load="1"></image>
+  <image wx:if="{{ tabIndex > 1 }}" mode="widthFix" class="orderBackImg" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/order_back.png" lazy-load="1"></image>
 </view>
 <view wx:if="{{!list.length}}" class='tac f22 p20 c999'>暂无相关内容</view>
 <!--成员 -e-->

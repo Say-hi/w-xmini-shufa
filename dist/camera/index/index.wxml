@@ -2,7 +2,7 @@
   <text class="cfff fw7">叠影纠错</text>
 </jwqcapsule>
 <!--搜索 s-->
-<view class="search" style="background:url(https://c.jiangwenqiang.com/lqsy/3.png) ;">
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
   <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
   <navigator url="/search/index/index?type=cameraIndex" style="height: 80rpx; padding:0 30rpx;" class="pr f24">
     <view class="jwqfont jwqsousuo1 f40"></view>

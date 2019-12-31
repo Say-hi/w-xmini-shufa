@@ -16,12 +16,12 @@ Page({
     capsules: app.data.capsule,
     op: [{
       t: '评价管理',
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_op_0.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sell_op_0.png',
       c: '#ff0000',
       url: '/user/message/index?type=sellcomment'
     }, {
       t: '流谦公约',
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_op_1.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sell_op_1.png',
       c: '#f39800',
       url: '/user/collect/index?type=zan'
     }],
@@ -41,26 +41,26 @@ Page({
     tabArr: [{
       t: '待付款',
       n: 0,
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_0.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sell_tab_0.png',
       url: '/shop/order/index?type=1&from=sellShop' // 用户订单端
     }, {
       t: '待发货 ',
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_1.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sell_tab_1.png',
       n: 0,
       url: '/shop/order/index?type=2&from=sellShop' // 用户销售端
     }, {
       t: '待收货 ',
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_2.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sell_tab_2.png',
       n: 0,
       url: '/shop/order/index?type=3&from=sellShop'
     }, {
       t: '已完成 ',
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_3.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sell_tab_3.png',
       n: 0,
       url: '/shop/order/index?type=4&from=sellShop'
     }, {
       t: '退货中 ',
-      i: 'https://c.jiangwenqiang.com/lqsy/sell_tab_4.png',
+      i: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/sell_tab_4.png',
       n: 0,
       url: '/shop/order/index?type=5&from=sellShop'
     }]
