@@ -1,5 +1,5 @@
 <form>
-  <view style="background: url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/bottom_nav.png) center;" class="foot {{ fix ? 'fix' : '' }}">
+  <view wx:if="{{ footArr.length }}" style="background: url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/bottom_nav.png) center;" class="foot {{ fix ? 'fix' : '' }}">
     <button wx:for="{{ footArr }}"
             wx:key="index"
             catchtap="footOp"

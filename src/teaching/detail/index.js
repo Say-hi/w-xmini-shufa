@@ -70,7 +70,7 @@ Page({
     let url = getCurrentPages()[getCurrentPages().length - 1].route
     for (let i in temps) {
       if (temps[i].indexOf(url) >= 0) {
-        app.su('scene', `${i}*${this.data.info.id},${this.data.options.from},${app.gs('userInfoAll').uid}`)
+        app.su('scene', `${i}*${this.data.info.vid},${this.data.options.from},${app.gs('userInfoAll').uid}`)
         wx.navigateTo({
           url: '/share/carShare/carShare?type=stele'
         })
@@ -78,14 +78,7 @@ Page({
       }
     }
   },
-  setMainSection (id) {
-    for (let v of this.data.sectionList) {
-      if (v.id === id) {
-        return this.setData({
-          info: v
-        }, this.getDiscuss)
-      }
-    }
+  setMainSection () {
     this.setData({
       info: this.data.sectionList[0]
     }, this.getDiscuss)
@@ -101,9 +94,7 @@ Page({
     }).then(res => {
       that.setData({
         sectionList: res
-      }, () => {
-        that.setMainSection(that.data.options.id)
-      })
+      }, that.setMainSection)
     })
   },
   getDiscuss () {
@@ -280,7 +271,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: `${this.data.info.title}`,
-          path: `/openShare/index/index?url=${i}&q=${this.data.info.id},${this.data.options.from},${app.gs('userInfoAll').uid}`,
+          path: `/openShare/index/index?url=${i}&q=${this.data.info.vid},${this.data.options.from},${app.gs('userInfoAll').uid}`,
           imageUrl: `${this.data.info.cover_url}`
         }
       }

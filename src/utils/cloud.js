@@ -112,6 +112,20 @@ module.exports = {
       })
     })
   },
+  getShopNav () {
+    return new Promise((resolve, reject) => {
+      wx.cloud.callFunction({
+        name: 'getShopNav',
+        data: {},
+        success (res) {
+          resolve(res.result)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
+  },
   checkPrivier () {
     return new Promise((resolve, reject) => {
       wx.cloud.callFunction({

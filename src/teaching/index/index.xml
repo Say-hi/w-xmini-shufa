@@ -25,7 +25,7 @@
             catchtap="chooseIndex"
             data-index="{{ index }}"
             wx:key="index"
-            wx:for="{{ main ? tabArr2 : tabArr }}">{{ item }}</button>
+            wx:for="{{ tabArr }}">{{ item[0].name }}</button>
   </view>
 </scroll-view>
 <!--分类 -e-->

@@ -76,7 +76,7 @@ Page({
     var url = getCurrentPages()[getCurrentPages().length - 1].route;
     for (var i in temps) {
       if (temps[i].indexOf(url) >= 0) {
-        app.su('scene', i + '*' + this.data.info.id + ',' + this.data.options.from + ',' + app.gs('userInfoAll').uid);
+        app.su('scene', i + '*' + this.data.info.vid + ',' + this.data.options.from + ',' + app.gs('userInfoAll').uid);
         wx.navigateTo({
           url: '/share/carShare/carShare?type=stele'
         });
@@ -84,36 +84,7 @@ Page({
       }
     }
   },
-  setMainSection: function setMainSection(id) {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = this.data.sectionList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var v = _step.value;
-
-        if (v.id === id) {
-          return this.setData({
-            info: v
-          }, this.getDiscuss);
-        }
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
-
+  setMainSection: function setMainSection() {
     this.setData({
       info: this.data.sectionList[0]
     }, this.getDiscuss);
@@ -129,9 +100,7 @@ Page({
     }).then(function (res) {
       that.setData({
         sectionList: res
-      }, function () {
-        that.setMainSection(that.data.options.id);
-      });
+      }, that.setMainSection);
     });
   },
   getDiscuss: function getDiscuss() {
@@ -147,27 +116,27 @@ Page({
       }
     }).then(function (res) {
       if (res.lists.length) {
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (var _iterator2 = res.lists[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var v = _step2.value;
+          for (var _iterator = res.lists[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var v = _step.value;
 
             v.create_at = app.momentFormat(v.create_at * 1000, 'YYYY-MM-DD HH:mm');
           }
         } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-              _iterator2.return();
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
             }
           } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
+            if (_didIteratorError) {
+              throw _iteratorError;
             }
           }
         }
@@ -338,7 +307,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: '' + this.data.info.title,
-          path: '/openShare/index/index?url=' + i + '&q=' + this.data.info.id + ',' + this.data.options.from + ',' + app.gs('userInfoAll').uid,
+          path: '/openShare/index/index?url=' + i + '&q=' + this.data.info.vid + ',' + this.data.options.from + ',' + app.gs('userInfoAll').uid,
           imageUrl: '' + this.data.info.cover_url
         };
       }

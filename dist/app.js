@@ -4,7 +4,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2019-12-31 10:46:27
+ * @Last Modified time: 2020-01-02 10:09:22
  */
 // /*eslint-disable*/
 var useUrl = require('./utils/service2');
@@ -357,11 +357,9 @@ App({
             resolve(res.data.data);
           } else {
             reject(res);
-            that.toast(obj.toast ? !obj.toast.content ? Object.assign(obj.toast, {
+            that.toast(obj.toast ? Object.assign({
               content: res.data.desc || '啊哦~服务器出错了'
-            }) : {
-              content: res.data.desc || '啊哦~服务器出错了'
-            } : {
+            }, obj.toast) : {
               content: res.data.desc || '啊哦~服务器出错了'
             });
           }

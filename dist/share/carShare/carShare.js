@@ -125,7 +125,7 @@ Page({
           height: 603
         }, {
           type: 'image',
-          url: this.data.info.img_name || this.data.info.cover_url,
+          url: this.data.info.img_name || this.data.info.cover_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/4.png',
           top: 150,
           left: 375 / 2 - 110,
           width: 220,

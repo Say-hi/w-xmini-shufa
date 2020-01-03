@@ -1,7 +1,7 @@
 <jwqcapsule capsule="{{ capsule }}">
   <text class="cfff">{{info.title}}</text>
 </jwqcapsule>
-<video wx:if="{{noCheck}}" bindplay="play" class="detailVideo" poster="{{item.cover_url}}" style="top: {{ height }}px;" src="{{info.video_url}}"></video>
+<video wx:if="{{noCheck}}" custom-cache="{{false}}" bindplay="play" class="detailVideo" poster="{{item.cover_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/4.png' }}" style="top: {{ height }}px;" src="{{info.video_url}}"></video>
 <view style="height: 437rpx;"></view>
 <view wx:if="{{ !showColumn && noCheck }}">
   <!--屋檐 s-->
@@ -42,7 +42,7 @@
   <!--评论列表 -s-->
   <view class="comment">
   <view class="commentTop f25 c323232 p20">
-    <text>精彩评论({{commentTotal}}) </text>
+    <text>精彩评论({{commentTotal || 0}}) </text>
   </view>
   <view wx:for="{{comment}}" wx:key="index" class="commentItem bd1">
     <image class="br ciImg" mode="aspectFill" lazy-load="1" src="{{item.uid_avatar_url}}"></image>
@@ -65,6 +65,7 @@
       </view>
     </view>
   </view>
+  <view class='tac f26 c999 p20' wx:if="{{ !comment.length }}">还没有人来评论哦~~</view>
   </view>
   <!--评论列表 -e-->
   <view class="zw100"></view>

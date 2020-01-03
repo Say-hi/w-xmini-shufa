@@ -115,13 +115,25 @@ Page({
     });
   },
   showExpress: function showExpress(e) {
-    this.setData({
-      expressObj: {
-        out_trade_no: this.data.list[e.currentTarget.dataset.index].out_trade_no,
-        order_num: this.data.list[e.currentTarget.dataset.index].order_num,
-        state: this.data.options.from ? 2 : 1
-      }
-    });
+    console.log(e);
+    if (e.currentTarget.dataset.skuorderid) {
+      this.setData({
+        expressObj: {
+          out_trade_no: this.data.list[e.currentTarget.dataset.index].out_trade_no,
+          order_num: e.currentTarget.dataset.skuordernum,
+          state: this.data.options.from ? 2 : 1,
+          sku_order_id: e.currentTarget.dataset.skuorderid
+        }
+      });
+    } else {
+      this.setData({
+        expressObj: {
+          out_trade_no: this.data.list[e.currentTarget.dataset.index].out_trade_no,
+          order_num: this.data.list[e.currentTarget.dataset.index].order_num,
+          state: this.data.options.from ? 2 : 1
+        }
+      });
+    }
   },
   chooseIndex: function chooseIndex(e) {
     var _this3 = this;
@@ -250,7 +262,7 @@ Page({
         page: ++this.data.page,
         uid: app.gs('userInfoAll').uid,
         // 0获取全部 -1未支付 1已支付准备发货 2已发货 3已收货 4收货后删除订单 -2申请退款 -3 退款成功 -4 未支付删除 -5 退款并删除订单 -6拒绝退款
-        status: this.data[this.data.options.from === 'sell' ? 'tabArrSell' : 'tabArr'][this.data.tabIndex].s
+        status: this.data[this.data.options.from === 'sell' ? 'tabArrSell' : 'tabArr'][this.data.tabIndex]['s']
       }
     }).then(function (res) {
       var _iteratorNormalCompletion = true;
@@ -357,7 +369,8 @@ Page({
         oid: this.data.list[e.currentTarget.dataset.op === 'confirm' ? e.currentTarget.dataset.index : this.data.chooseOrderIndex].id,
         uid: app.gs('userInfoAll').uid,
         state: e.currentTarget.dataset.op === 'confirm' ? 3 : -4,
-        remark: e.currentTarget.dataset.op === 'confirm' ? '' : this.data.cancelArr[this.data.cancelIndex]
+        remark: e.currentTarget.dataset.op === 'confirm' ? '' : this.data.cancelArr[this.data.cancelIndex],
+        out_trade_no: this.data.list[e.currentTarget.dataset.op === 'confirm' ? e.currentTarget.dataset.index : this.data.chooseOrderIndex].out_trade_no
       }
     }).then(function () {
       app.toast({
@@ -394,7 +407,7 @@ Page({
   onLoad: function onLoad(options) {
     this.setData({
       options: options,
-      tabIndex: options.type,
+      tabIndex: options.type || 0,
       tabId: options.type
     }, this.shopOrderList);
   },

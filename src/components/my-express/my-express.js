@@ -14,7 +14,7 @@ Component({
       },
       observer (newValue, oldValue, changePath) {
         if (newValue) {
-          this._getData(newValue.out_trade_no, newValue.order_num, newValue.state)
+          this._getData(newValue.out_trade_no, newValue.order_num, newValue.state, newValue.sku_order_id)
         }
       }
     }
@@ -28,13 +28,14 @@ Component({
         showS: !this.data.showS
       })
     },
-    _getData (one, two, three) {
+    _getData (one, two, three, four = null) {
       app.wxrequest({
         url: app.getUrl().logistic,
         data: {
           out_trade_no: one,
           order_num: two,
-          state: three
+          state: three,
+          sku_order_id: four
         }
       }).then(res => {
         this.setData({

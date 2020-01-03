@@ -11,7 +11,8 @@ Page({
   data: {
     capsule: {
       transparent: true,
-      bgc: ''
+      bgc: '',
+      hImg: null
     },
     capsules: app.data.capsule,
     tabIndex: 0,
@@ -39,12 +40,12 @@ Page({
       url: app.getUrl()[this.data.main ? 'videoVideoList' : 'teachVideoList'],
       data: this.data.main ? {
         uid: app.gs('userInfoAll').uid,
-        state: that.data.tabIndex * 1 + 1,
+        state: that.data.tabArr[that.data.tabIndex][1].state,
         page: ++that.data.page
       } : {
         uid: app.gs('userInfoAll').uid,
-        state: that.data.tabIndex < 1 ? 1 : that.data.tabIndex,
-        is_recommend: that.data.tabIndex < 1 ? 1 : 0,
+        state: that.data.tabArr[that.data.tabIndex][1].state,
+        is_recommend: that.data.tabArr[that.data.tabIndex][0].name === '推荐' ? 1 : 0,
         page: ++that.data.page
       }
     }).then(function (res) {
@@ -82,22 +83,33 @@ Page({
       --that.data.page;
     });
   },
+  getConfig: function getConfig() {
+    var _this = this;
+
+    app.wxrequest({
+      url: app.getUrl().homeConfig
+    }).then(function (res) {
+      _this.setData({
+        tabArr: _this.data.main ? res.video_category : res.teach_category
+      }, _this.getList);
+    });
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
-    var _this = this;
+    var _this2 = this;
 
     app.checkPrivier().then(function (res) {
       if (res.check || res.data.data.check) {
         app.toast({ content: '内容根据微信运营规则,禁止展示' });
         return wx.redirectTo({ url: '/pages/index/index' });
       }
-      _this.setData({
+      _this2.setData({
         noCheck: true,
         main: options.from === 'main'
-      }, _this.getList);
+      }, _this2.getConfig);
     }, function (err) {
       console.error(err);
     });

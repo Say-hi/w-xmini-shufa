@@ -26,17 +26,34 @@
       <text>订单编号： {{item.out_trade_no}}</text>
       <text class="cff362c">{{item.status}}</text>
     </view>
-    <navigator wx:if="{{ options.from !== 'sell' }}" url="/shop/detail/index?id={{iitem.id}}" wx:for-item="iitem" wx:for-index="iindex" wx:for="{{item.list}}" wx:key="item" class="goodsItem df">
-      <image mode="aspectFill" lazy-load="1" src='{{iitem.img_url}}'></image>
-      <view class="ml20 flex1">
-        <view class="ell2 f25 c323232">{{iitem.title}}</view>
-        <view class="f22 c646464 mt10">{{iitem.value}}</view>
-      </view>
-      <view class="f22 c323232 tar ">
-        <view>￥ {{iitem.price}}</view>
-        <view>x{{iitem.count}}</view>
+    <navigator wx:if="{{ options.from !== 'sell' }}" 
+    url="/shop/detail/index?id={{iitem.id}}" 
+    wx:for-item="iitem"
+     wx:for-index="iindex"
+      wx:for="{{item.list}}"
+       wx:key="item"
+        class="goodsItem df dfc outItem">
+      <view class='goodsItem df'>
+        <image mode="aspectFill" lazy-load="1" src='{{iitem.img_url}}'></image>
+        <view class="ml20 flex1">
+          <view class="ell2 f25 c323232">{{iitem.title}}</view>
+          <view class="f22 c646464 mt10">{{iitem.value}}</view>
+        </view>
+        <view class="f22 c323232 tar ">
+          <view>￥ {{iitem.price}}</view>
+          <view>x{{iitem.count}}</view>
+          <text class="cff362c mt10">{{iitem.sku_status == 2 ? '已发货' : iitem.sku_status == 3 ? '已收货' : ''}}</text>
+          <!-- <view catchtap='showExpress' data-index='{{index}}' wx:if="{{ iitem.sku_status > 1 && (item.statuss == 2 || item.statuss == 3) }}" class="f25 mt10 c787878 goI">查看物流</view> -->
+          <view catchtap='showExpress' data-skuordernum="{{ iitem.sku_order_num }}" data-skuorderid="{{ iitem.sku_order_id }}" data-index='{{index}}' wx:if="{{ iitem.sku_status > 1 }}" class="f25 mt10 c787878 goI">查看物流</view>
+          <view wx:if="{{ item.statuss == 2 }}" catchtap="orderOperate" data-op="confirm" data-index="{{index}}" data-type="confirmOrder" class="f25 c787878 goI goIB">确定收货</view>
+           <!-- <view wx:if="{{ iitem.sku_status >= 2 }}" class="f25 df dfb c787878 p020 lh60 bgfff">
+              <text></text>
+        
+            </view> -->
+        </view>
       </view>
     </navigator>
+
     <navigator wx:if="{{ options.from === 'sell' }}" url="/shop/detail/index?id={{item.pid}}" class="goodsItem df">
       <image mode="aspectFill" lazy-load="1" src='{{item.imgs_url}}'></image>
       <view class="ml20 flex1">
@@ -48,12 +65,13 @@
         <view>x{{item.count}}</view>
       </view>
     </navigator>
+    
     <view class="f25 c323232 tar p020 bd1 lh50">共{{ item.all_count }}件商品实付：¥{{item.total_fee}}</view>
     <view class="df goodsOp p20">
       <view catchtap="goPJ" data-index="{{index}}" wx:if="{{ item.statuss == 3 }}" class="f25 c787878 goI">评价</view>
       <view wx:if="{{ item.statuss == 1 && item.is_change != 1 }}" catchtap="_toggleMask" data-index="{{ index }}" data-type="changeAdd" class="f25 c787878 goI">修改地址</view>
       <view wx:if="{{ item.statuss == -1 }}" catchtap="_toggleMask" data-op="cancel" data-index="{{index}}" data-type="cancelOrder" class="f25 c787878 goI">取消订单</view>
-      <view catchtap='showExpress' data-index='{{index}}' wx:if="{{ item.statuss == 2 || item.statuss == 3 }}" class="f25 c787878 goI">查看物流</view>
+      <!-- <view catchtap='showExpress' data-index='{{index}}' wx:if="{{ item.statuss == 2 || item.statuss == 3 }}" class="f25 c787878 goI">查看物流</view> -->
       <view wx:if="{{ item.statuss == 3 }}" catchtap="_buyAgain" class="f25 c787878 goI">再次购买</view>
       <view wx:if="{{ item.statuss == 2 }}" catchtap="orderOperate" data-op="confirm" data-index="{{index}}" data-type="confirmOrder" class="f25 c787878 goI goIB">确定收货</view>
       <view catchtap='payAgain' data-index='{{index}}' wx:if="{{ item.statuss == -1 }}" class="f25 c787878 goI goIB">付款</view>

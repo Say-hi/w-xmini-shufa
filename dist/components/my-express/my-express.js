@@ -16,7 +16,7 @@ Component({
       },
       observer: function observer(newValue, oldValue, changePath) {
         if (newValue) {
-          this._getData(newValue.out_trade_no, newValue.order_num, newValue.state);
+          this._getData(newValue.out_trade_no, newValue.order_num, newValue.state, newValue.sku_order_id);
         }
       }
     }
@@ -31,12 +31,15 @@ Component({
     _getData: function _getData(one, two, three) {
       var _this = this;
 
+      var four = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
       app.wxrequest({
         url: app.getUrl().logistic,
         data: {
           out_trade_no: one,
           order_num: two,
-          state: three
+          state: three,
+          sku_order_id: four
         }
       }).then(function (res) {
         _this.setData({
