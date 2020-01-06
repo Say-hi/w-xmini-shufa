@@ -11,7 +11,7 @@
 
   <view class="back-money bgfff mt20 f34">
     <text class="c595757">退款金额</text>
-    <text>￥{{ info.total_fee || '0.00' }}</text>
+    <text>￥{{ backItem >= 0 ? (info.list[backItem].price * info.list[backItem].count) : info.info.total_fee || '0.00' }}</text>
   </view>
 
   <view class="bgfff mt20 back-money f34 c3e3a39">

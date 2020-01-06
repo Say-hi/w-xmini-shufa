@@ -127,6 +127,7 @@
           <image catchtap="showImg" data-index="{{index}}" data-url="{{ iitem }}" wx:for="{{ item.imgs_url.imgs }}" wx:for-item="iitem" wx:key="index" mode="asppectFill" src="{{iitem}}"></image>
         </view>
       </view>
+      <view wx:if='{{ !comment.length }}' class='tac f22 p20 c999'>暂无相关内容</view>
     </scroll-view>
   </view>
 </view>

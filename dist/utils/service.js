@@ -267,6 +267,7 @@ var serviceUrl = {
   videoDiscuss: lqsyBaseDomain + '/video/discuss', // 视频章节下的讨论
   videoVideoStar: lqsyBaseDomain + '/video/video-star', // 对视频点赞
   videoDiscussStar: lqsyBaseDomain + '/video/discuss-star', // 对视频评论点赞
+  orderListOperate: lqsyBaseDomain + '/shop/order-list-operate', // 订单详情单一产品收货api
   videoDiscussSub: lqsyBaseDomain + '/video/discuss-sub', // 提交视频章节的评论
   videoPlay: lqsyBaseDomain + '/video/play', // 视频播放量+1
   videoCollect: lqsyBaseDomain + '/video/collect', // 视频的收藏或者取消收藏

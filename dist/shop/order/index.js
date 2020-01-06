@@ -384,7 +384,21 @@ Page({
       _this6._toggleMask(e);
     });
   },
+  orderListOperate: function orderListOperate(e) {
+    app.wxrequest({
+      url: app.getUrl().orderListOperate,
+      data: {
+        sku_order_id: e.currentTarget.dataset.skuorderid,
+        uid: app.gs('userInfoAll').uid
+      }
+    }).then(function (res) {
+      console.log(res);
+    });
+  },
   backMoney: function backMoney(e) {
+    if (e.currentTarget.dataset.item >= 0) {
+      app.su('backInfoItem', e.currentTarget.dataset.item);
+    }
     app.su('backInfo', this.data.options.from === 'sell' ? Object.assign(this.data.list[e.currentTarget.dataset.index], {
       goodsType: 'sell' // 自售订单用户退款增加类型检测
     }) : this.data.list[e.currentTarget.dataset.index]);
