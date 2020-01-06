@@ -45,10 +45,10 @@
   <text>运费</text>
   <text>￥{{maxFreight}}</text>
 </view>
-<view class="df dfb p20 bt1 bgfff f22 c323232">
+<!-- <view class="df dfb p20 bt1 bgfff f22 c323232">
   <text>优惠券</text>
   <text class="arrow">使用优惠</text>
-</view>
+</view> -->
 <view class="df dfb p20 mt20 bgfff f22 c323232">
   <text>商品金额 </text>
   <text>¥{{goodsMoney}}</text>

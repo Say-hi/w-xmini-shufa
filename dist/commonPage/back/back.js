@@ -8,7 +8,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @Author: Jiang WenQiang
  * @Date: 2019-12-18 17:04:04
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2020-01-06 09:44:48
+ * @Last Modified time: 2020-01-06 14:13:16
  */
 // 获取全局应用程序实例对象
 var app = getApp();
@@ -240,7 +240,7 @@ Page({
       data: this.data.info.goodsType === 'sell' ? {
         uid: app.gs('userInfoAll').uid,
         oid: this.data.info.id,
-        amount: this.data.backItem >= 0 ? this.data.info.list[this.data.backItem].price * this.data.info.list[this.data.backItem].count : this.data.info.total_fee,
+        amount: this.data.backItem >= 0 ? this.data.info.backItemMoney : this.data.info.total_fee,
         out_trade_no: this.data.info.out_trade_no,
         types: this.data.backType[this.data.backTypeIndex].t,
         reason: this.data.backReason[this.data.backReasonIndex].t,
@@ -248,7 +248,7 @@ Page({
       } : {
         uid: app.gs('userInfoAll').uid,
         oid: this.data.info.id,
-        amount: this.data.backItem >= 0 ? this.data.info.list[this.data.backItem].price * this.data.info.list[this.data.backItem].count : this.data.info.total_fee,
+        amount: this.data.backItem >= 0 ? this.data.info.backItemMoney : this.data.info.total_fee,
         out_trade_no: this.data.info.out_trade_no,
         types: this.data.backType[this.data.backTypeIndex].t,
         reason: this.data.backReason[this.data.backReasonIndex].t,
@@ -267,9 +267,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad() {
+    var _this2 = this;
+
     this.setData({
       info: app.gs('backInfo'),
       backItem: app.gs('backInfoItem')
+    }, function () {
+      if (app.gs('backInfoItem') >= 0) {
+        _this2.setData({
+          'info.backItemMoney': (_this2.data.info.list[_this2.data.backItem].price * _this2.data.info.list[_this2.data.backItem].count).toFixed(2)
+        });
+      }
     });
     // TODO: onLoad
   },

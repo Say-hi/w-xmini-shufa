@@ -2,7 +2,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-12-18 17:04:04
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2020-01-06 09:44:48
+ * @Last Modified time: 2020-01-06 14:13:16
  */
 // 获取全局应用程序实例对象
 const app = getApp()
@@ -195,34 +195,32 @@ Page({
     })
   },
   shopUserRefund () {
-    app
-      .wxrequest({
-        url: app.getUrl()[this.data.info.goodsType === 'sell' ? 'sellRefund' : 'shopUserRefund'], // todo 自售订单退款判断参数待定
-        data: this.data.info.goodsType === 'sell' ? {
-          uid: app.gs('userInfoAll').uid,
-          oid: this.data.info.id,
-          amount: this.data.backItem >= 0 ? this.data.info.list[this.data.backItem].price * this.data.info.list[this.data.backItem].count : this.data.info.total_fee,
-          out_trade_no: this.data.info.out_trade_no,
-          types: this.data.backType[this.data.backTypeIndex].t,
-          reason: this.data.backReason[this.data.backReasonIndex].t,
-          explain: this.data.content || '用户未填写申请说明'
-        } : {
-          uid: app.gs('userInfoAll').uid,
-          oid: this.data.info.id,
-          amount: this.data.backItem >= 0 ? this.data.info.list[this.data.backItem].price * this.data.info.list[this.data.backItem].count : this.data.info.total_fee,
-          out_trade_no: this.data.info.out_trade_no,
-          types: this.data.backType[this.data.backTypeIndex].t,
-          reason: this.data.backReason[this.data.backReasonIndex].t,
-          explain: this.data.content || '用户未填写申请说明',
-          refund_type: 2,
-          sku_order_id: this.data.info.list[this.data.backItem].sku_order_id
-        }
+    app.wxrequest({
+      url: app.getUrl()[this.data.info.goodsType === 'sell' ? 'sellRefund' : 'shopUserRefund'], // todo 自售订单退款判断参数待定
+      data: this.data.info.goodsType === 'sell' ? {
+        uid: app.gs('userInfoAll').uid,
+        oid: this.data.info.id,
+        amount: this.data.backItem >= 0 ? this.data.info.backItemMoney : this.data.info.total_fee,
+        out_trade_no: this.data.info.out_trade_no,
+        types: this.data.backType[this.data.backTypeIndex].t,
+        reason: this.data.backReason[this.data.backReasonIndex].t,
+        explain: this.data.content || '用户未填写申请说明'
+      } : {
+        uid: app.gs('userInfoAll').uid,
+        oid: this.data.info.id,
+        amount: this.data.backItem >= 0 ? this.data.info.backItemMoney : this.data.info.total_fee,
+        out_trade_no: this.data.info.out_trade_no,
+        types: this.data.backType[this.data.backTypeIndex].t,
+        reason: this.data.backReason[this.data.backReasonIndex].t,
+        explain: this.data.content || '用户未填写申请说明',
+        refund_type: 2,
+        sku_order_id: this.data.info.list[this.data.backItem].sku_order_id
+      }
+    }).then(() => {
+      this.setData({
+        apply: true
       })
-      .then(() => {
-        this.setData({
-          apply: true
-        })
-      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -231,6 +229,12 @@ Page({
     this.setData({
       info: app.gs('backInfo'),
       backItem: app.gs('backInfoItem')
+    }, () => {
+      if (app.gs('backInfoItem') >= 0) {
+        this.setData({
+          'info.backItemMoney': (this.data.info.list[this.data.backItem].price * this.data.info.list[this.data.backItem].count).toFixed(2)
+        })
+      }
     })
     // TODO: onLoad
   },

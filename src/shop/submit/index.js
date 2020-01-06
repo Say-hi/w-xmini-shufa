@@ -134,8 +134,8 @@ Page({
       goodsMoney += v.count * v.product.price
     }
     this.setData({
-      goodsMoney,
-      totalMoney: goodsMoney + this.data.maxFreight
+      goodsMoney: goodsMoney.toFixed(2),
+      totalMoney: (goodsMoney + this.data.maxFreight).toFixed(2)
     })
   },
   /**
