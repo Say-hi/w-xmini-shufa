@@ -15,6 +15,7 @@ Page({
     height: app.data.height,
     selectAll: -1, // -2 全选中
     totalMoney: 0,
+    totalDiscountMoney: 0,
     totalCount: 0,
     list: [],
     touchIndex: -1
@@ -97,6 +98,7 @@ Page({
       selectAll: -1,
       del: !this.data.del,
       totalMoney: 0,
+      totalDiscountMoney: 0,
       totalCount: 0
     })
   },
@@ -146,14 +148,17 @@ Page({
   calculate () {
     let totalMoney = 0
     let totalCount = 0
+    let totalDiscountMoney = 0
     for (let v of this.data.list) {
       if (v['choose']) {
         totalMoney += v.product.price * v.count
+        totalDiscountMoney += v.product.discount * v.count
         totalCount += v.count * 1
       }
     }
     this.setData({
       totalMoney: (totalMoney).toFixed(2),
+      totalDiscountMoney: totalDiscountMoney.toFixed(2),
       totalCount
     })
   },
@@ -192,6 +197,9 @@ Page({
         uid: app.gs('userInfoAll').uid
       }
     }).then(res => {
+      for (let v of res) {
+        v.product['discount'] = ((v.product.discount || 1) * v.product.price).toFixed(2)
+      }
       this.setData({
         list: res
       }, () => {
@@ -242,13 +250,25 @@ Page({
       })
     })
   },
+  getTopNav (options) {
+    let that = this
+    app.wxrequest({
+      url: app.getUrl().homeConfig
+    }).then(res => {
+      that.setData({
+        discount: res.shop_discount_show > 0
+      }, function () {
+        that.setData({
+          options
+        }, that.shopCarList)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-    this.setData({
-      options
-    }, this.shopCarList)
+    this.getTopNav(options)
     app.checkUser({rank: false})
   },
   /**

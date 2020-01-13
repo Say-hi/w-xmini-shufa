@@ -33,6 +33,7 @@ Page({
       product: {
         title: this.data.info.title,
         price: this.data.info.sku[this.data.skuIndex].price,
+        discount: this.data.info.sku[this.data.skuIndex].discount,
         img_url: this.data.info.sku[this.data.skuIndex].img_url,
         freight: this.data.info.freight,
         value: this.data.info.sku[this.data.skuIndex].value,
@@ -112,9 +113,36 @@ Page({
       }
     }).then(function (res) {
       res.imgs_url = JSON.parse(res.imgs_url);
+      res.new_price_temp = res.new_price;
       res.new_price = res.new_price.split('.');
       res.detail_url = res.detail_url.split(',');
       if (!res.imgs_url.imgs.length) res.imgs_url.imgs[0] = res.img_url;
+      try {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = res.sku[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var v = _step.value;
+
+            v['discount'] = (v.discount * v.price).toFixed(2);
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      } catch (err) {}
       _this.setData({
         info: res
       });
@@ -131,27 +159,27 @@ Page({
         page: ++this.data.page
       }
     }).then(function (res) {
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator = res.lists[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var v = _step.value;
+        for (var _iterator2 = res.lists[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var v = _step2.value;
 
           v.imgs_url = JSON.parse(v.imgs_url);
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
           }
         } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
+          if (_didIteratorError2) {
+            throw _iteratorError2;
           }
         }
       }
@@ -208,14 +236,26 @@ Page({
       _this3._toggleSpec();
     });
   },
+  getTopNav: function getTopNav() {
+    var that = this;
+    app.wxrequest({
+      url: app.getUrl().homeConfig
+    }).then(function (res) {
+      that.setData({
+        discount: res.shop_discount_show > 0
+      }, function () {
+        that.shopProductDetail();
+        that.shopDiscuss();
+      });
+    });
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
     this.data.options = options;
-    this.shopProductDetail();
-    this.shopDiscuss();
+    this.getTopNav();
   },
 
   /**

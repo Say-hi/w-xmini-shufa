@@ -77,7 +77,6 @@ Component({
           that.setFootArr();
         }, function () {
           app.cloud().getShopNav().then(function (res3) {
-            console.log(res3);
             app.su('shop_nav', res3.shop_nav);
             that.setFootArr();
           });

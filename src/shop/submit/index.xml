@@ -33,7 +33,7 @@
       <view class="f22 c646464 mt10">{{item.product.label}}分类: {{ item.product.value }}</view>
     </view>
     <view class="f22 c323232 tar ">
-      <view>￥ {{item.product.price}}</view>
+      <view>￥ {{item.product.price }} {{ discount ? '折后￥' + item.product.discount : '' }}</view>
       <view>x{{item.count}}</view>
     </view>
   </view>

@@ -86,7 +86,7 @@
     <view class="sTop p20 df">
       <image mode="aspectFill" src="{{skuIndex >= 0 ? info.sku[skuIndex].img_url : info.img_url}}"></image>
       <view class="ml20 stInfo df dfc flex1">
-        <view class="cf73650 f33">￥ {{ skuIndex >= 0 ? info.sku[skuIndex].price : info.old_price }}</view>
+        <view class="cf73650 f33">￥ {{ skuIndex >= 0 ? info.sku[skuIndex].price : info.old_price }} <text>{{ skuIndex >= 0 ? '折后￥' + info.sku[skuIndex].discount : '' }}</text></view>
         <view class="f25 c787878">库存{{ skuIndex >= 0 ? info.sku[skuIndex].stock : info.stock }}件</view>
         <view class="f25 c323232 mt20">{{ skuIndex >= 0 ? '已选择 ' + info.sku[skuIndex].value :'选择' + info.label + '分类'}}</view>
       </view>

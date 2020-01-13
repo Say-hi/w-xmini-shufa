@@ -131,22 +131,34 @@ Page({
   getGoodsMoney () {
     let goodsMoney = 0
     for (let v of this.data.info) {
-      goodsMoney += v.count * v.product.price
+      goodsMoney += v.count * (this.data.discount ? v.product.discount : v.product.price)
     }
     this.setData({
       goodsMoney: goodsMoney.toFixed(2),
       totalMoney: (goodsMoney + this.data.maxFreight).toFixed(2)
     })
   },
+  getTopNav (options) {
+    let that = this
+    app.wxrequest({
+      url: app.getUrl().homeConfig
+    }).then(res => {
+      that.setData({
+        discount: res.shop_discount_show > 0
+      }, function () {
+        that.setData({
+          options,
+          info: app.gs('buyInfo'),
+          addressInfo: app.gs('addressInfo')
+        }, that.getMaxFreight)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-    this.setData({
-      options,
-      info: app.gs('buyInfo'),
-      addressInfo: app.gs('addressInfo')
-    }, this.getMaxFreight)
+    this.getTopNav(options)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

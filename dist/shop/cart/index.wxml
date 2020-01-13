@@ -150,11 +150,11 @@
 <view class="bgfff submit bt1 f24 c444 {{ all_screen ? 'all-screen' : '' }}">
   <view catchtap="checkAll"
   data-index="{{ selectAll }}"
-  class="jwqfont {{ selectAll == -2 ? 'jwqgouxuan' : 'jwqwxz' }}">全选</view>
+  class="jwqfont keep {{ selectAll == -2 ? 'jwqgouxuan' : 'jwqwxz' }}">全选</view>
     <view wx:if="{{ !del }}" class="s-r">
       <text>不含运费，</text>
-      <text class="f28 fw7">合计：¥{{ totalMoney }}</text>
-      <button catchtap="{{ totalCount > 0 ? 'submit' : '' }}" class="f28 cfff {{ totalCount == 0 ? 'bgceee' : '' }}">结算({{ totalCount }})</button>
+      <text class="f28 fw7">合计：¥{{ totalMoney }} {{ discount ? '折后￥' + totalDiscountMoney : '' }}</text>
+      <button style='min-width: 179rpx;' catchtap="{{ totalCount > 0 ? 'submit' : '' }}" class="f28 cfff {{ totalCount == 0 ? 'bgceee' : '' }}">结算({{ totalCount }})</button>
     </view>
   <button catchtap="del" wx:else class="f28 del">删除</button>
 </view>

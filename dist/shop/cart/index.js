@@ -19,6 +19,7 @@ Page({
     height: app.data.height,
     selectAll: -1, // -2 全选中
     totalMoney: 0,
+    totalDiscountMoney: 0,
     totalCount: 0,
     list: [],
     touchIndex: -1
@@ -166,6 +167,7 @@ Page({
       selectAll: -1,
       del: !this.data.del,
       totalMoney: 0,
+      totalDiscountMoney: 0,
       totalCount: 0
     });
   },
@@ -256,6 +258,7 @@ Page({
   calculate: function calculate() {
     var totalMoney = 0;
     var totalCount = 0;
+    var totalDiscountMoney = 0;
     var _iteratorNormalCompletion6 = true;
     var _didIteratorError6 = false;
     var _iteratorError6 = undefined;
@@ -266,6 +269,7 @@ Page({
 
         if (v['choose']) {
           totalMoney += v.product.price * v.count;
+          totalDiscountMoney += v.product.discount * v.count;
           totalCount += v.count * 1;
         }
       }
@@ -286,6 +290,7 @@ Page({
 
     this.setData({
       totalMoney: totalMoney.toFixed(2),
+      totalDiscountMoney: totalDiscountMoney.toFixed(2),
       totalCount: totalCount
     });
   },
@@ -346,6 +351,31 @@ Page({
         uid: app.gs('userInfoAll').uid
       }
     }).then(function (res) {
+      var _iteratorNormalCompletion8 = true;
+      var _didIteratorError8 = false;
+      var _iteratorError8 = undefined;
+
+      try {
+        for (var _iterator8 = res[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+          var v = _step8.value;
+
+          v.product['discount'] = ((v.product.discount || 1) * v.product.price).toFixed(2);
+        }
+      } catch (err) {
+        _didIteratorError8 = true;
+        _iteratorError8 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion8 && _iterator8.return) {
+            _iterator8.return();
+          }
+        } finally {
+          if (_didIteratorError8) {
+            throw _iteratorError8;
+          }
+        }
+      }
+
       _this.setData({
         list: res
       }, function () {
@@ -356,27 +386,27 @@ Page({
   },
   getMaxFreight: function getMaxFreight() {
     var maxFreight = 0;
-    var _iteratorNormalCompletion8 = true;
-    var _didIteratorError8 = false;
-    var _iteratorError8 = undefined;
+    var _iteratorNormalCompletion9 = true;
+    var _didIteratorError9 = false;
+    var _iteratorError9 = undefined;
 
     try {
-      for (var _iterator8 = this.data.list[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-        var v = _step8.value;
+      for (var _iterator9 = this.data.list[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+        var v = _step9.value;
 
         maxFreight = maxFreight > v.product.freight ? maxFreight : v.product.freight;
       }
     } catch (err) {
-      _didIteratorError8 = true;
-      _iteratorError8 = err;
+      _didIteratorError9 = true;
+      _iteratorError9 = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion8 && _iterator8.return) {
-          _iterator8.return();
+        if (!_iteratorNormalCompletion9 && _iterator9.return) {
+          _iterator9.return();
         }
       } finally {
-        if (_didIteratorError8) {
-          throw _iteratorError8;
+        if (_didIteratorError9) {
+          throw _iteratorError9;
         }
       }
     }
@@ -419,14 +449,26 @@ Page({
       });
     });
   },
+  getTopNav: function getTopNav(options) {
+    var that = this;
+    app.wxrequest({
+      url: app.getUrl().homeConfig
+    }).then(function (res) {
+      that.setData({
+        discount: res.shop_discount_show > 0
+      }, function () {
+        that.setData({
+          options: options
+        }, that.shopCarList);
+      });
+    });
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
-    this.setData({
-      options: options
-    }, this.shopCarList);
+    this.getTopNav(options);
     app.checkUser({ rank: false });
   },
 

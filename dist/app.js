@@ -4,7 +4,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2020-01-02 10:09:22
+ * @Last Modified time: 2020-01-12 21:02:37
  */
 // /*eslint-disable*/
 var useUrl = require('./utils/service2');
@@ -1031,6 +1031,7 @@ App({
         wx.downloadFile({
           url: that.data.baseInfoActiveUrl + '?' + Math.random(),
           complete: function complete() {
+            // console.log('download success')
             that.getBaseImageInfo();
           }
         });

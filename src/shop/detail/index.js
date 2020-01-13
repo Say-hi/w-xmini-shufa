@@ -31,6 +31,7 @@ Page({
       product: {
         title: this.data.info.title,
         price: this.data.info.sku[this.data.skuIndex].price,
+        discount: this.data.info.sku[this.data.skuIndex].discount,
         img_url: this.data.info.sku[this.data.skuIndex].img_url,
         freight: this.data.info.freight,
         value: this.data.info.sku[this.data.skuIndex].value,
@@ -108,9 +109,15 @@ Page({
       }
     }).then(res => {
       res.imgs_url = JSON.parse(res.imgs_url)
+      res.new_price_temp = res.new_price
       res.new_price = res.new_price.split('.')
       res.detail_url = res.detail_url.split(',')
       if (!res.imgs_url.imgs.length) res.imgs_url.imgs[0] = res.img_url
+      try {
+        for (let v of res.sku) {
+          v['discount'] = (v.discount * v.price).toFixed(2)
+        }
+      } catch (err) {}
       this.setData({
         info: res
       })
@@ -178,13 +185,25 @@ Page({
       this._toggleSpec()
     })
   },
+  getTopNav () {
+    let that = this
+    app.wxrequest({
+      url: app.getUrl().homeConfig
+    }).then(res => {
+      that.setData({
+        discount: res.shop_discount_show > 0
+      }, function () {
+        that.shopProductDetail()
+        that.shopDiscuss()
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
     this.data.options = options
-    this.shopProductDetail()
-    this.shopDiscuss()
+    this.getTopNav()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

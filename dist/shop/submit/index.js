@@ -186,7 +186,7 @@ Page({
       for (var _iterator3 = this.data.info[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
         var v = _step3.value;
 
-        goodsMoney += v.count * v.product.price;
+        goodsMoney += v.count * (this.data.discount ? v.product.discount : v.product.price);
       }
     } catch (err) {
       _didIteratorError3 = true;
@@ -208,16 +208,28 @@ Page({
       totalMoney: (goodsMoney + this.data.maxFreight).toFixed(2)
     });
   },
+  getTopNav: function getTopNav(options) {
+    var that = this;
+    app.wxrequest({
+      url: app.getUrl().homeConfig
+    }).then(function (res) {
+      that.setData({
+        discount: res.shop_discount_show > 0
+      }, function () {
+        that.setData({
+          options: options,
+          info: app.gs('buyInfo'),
+          addressInfo: app.gs('addressInfo')
+        }, that.getMaxFreight);
+      });
+    });
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
-    this.setData({
-      options: options,
-      info: app.gs('buyInfo'),
-      addressInfo: app.gs('addressInfo')
-    }, this.getMaxFreight);
+    this.getTopNav(options);
   },
 
   /**
