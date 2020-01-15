@@ -80,12 +80,17 @@ Page({
       if (start.length < 1) start = e.touches;
       var now = e.touches;
       var scale = (this.getDistance(now[0], now[1]) / this.getDistance(start[0], start[1])).toFixed(1);
-      var rotate = (this.getAngle(now[0], now[1]) - this.getAngle(start[0], start[1])).toFixed(1);
+      var rotate = (this.getAngle(now[0], now[1]) - this.getAngle(start[0], start[1])).toFixed(0);
       this.setData({
         scale: scale > 2 ? 2 : scale < 1 ? 1 : scale,
         rotate: rotate
       });
     }
+  },
+  changeRotate: function changeRotate(e) {
+    this.setData({
+      rotate: e.detail.value - 180
+    });
   },
   getDistance: function getDistance(p1, p2) {
     var x = p2.pageX - p1.pageX;

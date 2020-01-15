@@ -1,0 +1,35 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">开通会员</text>
+</jwqcapsule>
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<view>
+  <!--开通会员图片 -s-->
+  <image class="w100" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/open_vip.png"></image>
+  <!--开通会员图片 -e-->
+  <!--会员权益 -s-->
+  <view class="tac vipEnjoy">
+    <!-- <text class="vipText f23">现在开通仅需￥298终身享受</text> -->
+    <text class="vipText f23">　</text>
+    <view class="vipContent">
+      <view class="vipItem f21 c81511c" wx:for="123" wx:key="index">
+        <image mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_{{ index }}.png"></image>
+        <view class="mt20">{{ index == 0 ? '自用省钱' : index == 1 ? '分享赚钱' : '终身享受' }}</view>
+      </view>
+    </view>
+    <view class="vipBtn f25">
+      <navigator open-type="{{ openType }}" url="/pages/index/index" class="vbItem cf73650">返回首页</navigator>
+      <navigator open-type="redirect" url="../vip/index" class="vbItem cfff">立即开通</navigator>
+    </view>
+    <view>
+
+    </view>
+  </view>
+  <!--会员权益 -e-->
+</view>
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

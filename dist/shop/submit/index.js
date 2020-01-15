@@ -186,7 +186,7 @@ Page({
       for (var _iterator3 = this.data.info[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
         var v = _step3.value;
 
-        goodsMoney += v.count * (this.data.discount ? v.product.discount : v.product.price);
+        goodsMoney += v.count * v.product.discount;
       }
     } catch (err) {
       _didIteratorError3 = true;

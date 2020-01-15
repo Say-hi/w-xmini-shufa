@@ -132,7 +132,7 @@ Page({
             code: loginRes.code,
             avatar_url: e.detail.userInfo.avatarUrl,
             nickname: e.detail.userInfo.nickName,
-            phone: app.gs('userInfoAll').phone || null
+            phone: app.gs('userInfoAll').phone || ''
           }
         }).then(res => {
           app.su(
@@ -163,34 +163,30 @@ Page({
         content: '您尚未登录哦'
       })
     }
-    app
-      .wxrequest({
-        url: app.getUrl().userInfo,
-        data: {
-          uid: app.gs('userInfoAll').uid
-        }
+    app.wxrequest({
+      url: app.getUrl().userInfo,
+      data: {
+        uid: app.gs('userInfoAll').uid
+      }
+    }).then(res => {
+      this.setData({
+        user: res,
+        'uiOp[0].n': res.posts_count,
+        'uiOp[1].n': res.posts_discuss_count,
+        'uiOp[2].n': res.fans
       })
-      .then(res => {
-        this.setData({
-          user: res,
-          'uiOp[0].n': res.posts_count,
-          'uiOp[1].n': res.posts_discuss_count,
-          'uiOp[2].n': res.fans
-        })
+    })
+    app.wxrequest({
+      url: app.getUrl().shopUser,
+      data: {
+        uid: app.gs('userInfoAll').uid
+      }
+    }).then(res => {
+      this.setData({
+        rank: res.rank,
+        rankText: app.gs('rankLv')[res.rank]
       })
-    app
-      .wxrequest({
-        url: app.getUrl().shopUser,
-        data: {
-          uid: app.gs('userInfoAll').uid
-        }
-      })
-      .then(res => {
-        this.setData({
-          rank: res.rank,
-          rankText: app.gs('rankLv')[res.rank]
-        })
-      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载

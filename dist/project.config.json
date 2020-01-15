@@ -1,0 +1,430 @@
+{
+	"description": "Project configuration file",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"enhance": true,
+		"postcss": true,
+		"minified": false,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.8.2",
+	"appid": "wx195cbe7d941fe1c5",
+	"projectname": "%E4%B9%A6%E6%B3%95%E5%B0%8F%E7%A8%8B%E5%BA%8F",
+	"cloudfunctionTemplateRoot": "",
+	"watchOptions": {
+		"ignore": []
+	},
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"scripts": {},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 51,
+			"list": [
+				{
+					"id": 0,
+					"name": "openvip",
+					"pathName": "openvip/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "01百家争鸣",
+					"pathName": "hundred/index/index",
+					"query": "from=nav",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "02百家争鸣详情",
+					"pathName": "hundred/detail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "12个人主页",
+					"pathName": "hundred/userHomePage/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "说一说",
+					"pathName": "commonPage/talk/index",
+					"query": "type=camera&id=1",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "每日一字",
+					"pathName": "dayword/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "书法教学",
+					"pathName": "teaching/index/index",
+					"query": "from=nav",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "书法教学详情",
+					"pathName": "teaching/detail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "会员卡购买界面",
+					"pathName": "openvip/buy/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "碑体",
+					"pathName": "stele/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "碑体详情",
+					"pathName": "stele/detail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "视频",
+					"pathName": "teaching/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 12,
+					"name": "社区",
+					"pathName": "hundred/index/index",
+					"query": "from=main",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "user/index/index",
+					"query": "from=main",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "user/login/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的贴子",
+					"pathName": "user/collect/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 16,
+					"name": "评论",
+					"pathName": "user/comment/index",
+					"query": "type=fans",
+					"scene": null
+				},
+				{
+					"id": 17,
+					"name": "我的室友",
+					"pathName": "user/team/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "资金管理",
+					"pathName": "user/money/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现",
+					"pathName": "user/cashdraw/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "收益",
+					"pathName": "user/profit/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "余额明细",
+					"pathName": "user/detail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商城",
+					"pathName": "shop/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品列表",
+					"pathName": "shop/goodsList/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 24,
+					"name": "商品详情",
+					"pathName": "shop/detail/index",
+					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分类",
+					"pathName": "shop/category/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提交订单",
+					"pathName": "shop/submit/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "购物车",
+					"pathName": "shop/cart/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商城个人中心",
+					"pathName": "shop/user/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单",
+					"pathName": "shop/order/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "退款",
+					"pathName": "commonPage/back/back",
+					"query": "type=comment&id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "积分",
+					"pathName": "shop/score/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "纠错",
+					"pathName": "camera/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "对比页面",
+					"pathName": "camera/detail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 34,
+					"name": "照相机",
+					"pathName": "commonPage/camera/index",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "识字",
+					"pathName": "commonPage/literacy/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 36,
+					"name": "搜搜",
+					"pathName": "search/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分享",
+					"pathName": "share/carShare/carShare",
+					"query": "type=fans",
+					"scene": null
+				},
+				{
+					"id": 38,
+					"name": "图片合成2",
+					"pathName": "commonPage/canvas2/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "装裱选择",
+					"pathName": "commonPage/canvas2/step_one/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "图片处理",
+					"pathName": "commonPage/canvas2/step_two/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "场景选择",
+					"pathName": "commonPage/canvas2/step_three/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "售卖",
+					"pathName": "sell/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 43,
+					"name": "发布商品1",
+					"pathName": "commonPage/release/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "回复",
+					"pathName": "commonPage/reply/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 45,
+					"name": "叠影纠错详情",
+					"pathName": "camera/detail/index",
+					"query": "wid=1&oid=40983",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "评论商品",
+					"pathName": "commonPage/talk/index",
+					"query": "type=comment",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "share/carShare/carShare",
+					"pathName": "share/carShare/carShare",
+					"query": "type=stele",
+					"scene": null
+				},
+				{
+					"id": 48,
+					"name": "openShare/index/index",
+					"pathName": "openShare/index/index",
+					"query": "",
+					"scene": 1012
+				},
+				{
+					"id": -1,
+					"name": "user/cashdraw/index",
+					"pathName": "user/cashdraw/index",
+					"query": "type=shop",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "sell/index/index",
+					"pathName": "sell/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 51,
+					"name": "openvip/vipTwo/index",
+					"pathName": "openvip/vipTwo/index",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

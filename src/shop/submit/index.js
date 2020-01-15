@@ -131,7 +131,7 @@ Page({
   getGoodsMoney () {
     let goodsMoney = 0
     for (let v of this.data.info) {
-      goodsMoney += v.count * (this.data.discount ? v.product.discount : v.product.price)
+      goodsMoney += v.count * v.product.discount
     }
     this.setData({
       goodsMoney: goodsMoney.toFixed(2),

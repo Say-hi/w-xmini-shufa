@@ -83,12 +83,17 @@ Page({
       if (start.length < 1) start = e.touches
       let now = e.touches
       let scale = (this.getDistance(now[0], now[1]) / this.getDistance(start[0], start[1])).toFixed(1)
-      let rotate = (this.getAngle(now[0], now[1]) - this.getAngle(start[0], start[1])).toFixed(1)
+      let rotate = (this.getAngle(now[0], now[1]) - this.getAngle(start[0], start[1])).toFixed(0)
       this.setData({
         scale: scale > 2 ? 2 : scale < 1 ? 1 : scale,
         rotate
       })
     }
+  },
+  changeRotate (e) {
+    this.setData({
+      rotate: e.detail.value - 180
+    })
   },
   getDistance (p1, p2) {
     let x = p2.pageX - p1.pageX

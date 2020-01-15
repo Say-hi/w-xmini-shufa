@@ -90,6 +90,7 @@
       "pages": [
         "index/index",
         "vip/index",
+        "vipTwo/index",
         "buy/index"
       ]
     },

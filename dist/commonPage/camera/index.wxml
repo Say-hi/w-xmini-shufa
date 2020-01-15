@@ -18,7 +18,9 @@
 </view>
 <!--比较区域 -e-->
 
-<slider wx:if="{{ options.type == 1 }}" style="margin: 0 80rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider>
+<!-- <slider wx:if="{{ options.type == 1 }}" style="margin: 0 80rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider> -->
+<slider style="margin: 40rpx 100rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider>
+<slider activeColor="#0094ff" style="margin: 40rpx 100rpx;" value="{{ rotate + 180 }}" min="0" max="360" bindchanging="changeRotate"></slider>
 <!--底格 -s-->
 <view class="bgfff mt20 f18 pr c787878 df typeChoose">
 <view class="df dfc dfac p20">

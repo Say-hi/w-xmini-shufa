@@ -121,7 +121,7 @@ Page({
             code: loginRes.code,
             avatar_url: e.detail.userInfo.avatarUrl,
             nickname: e.detail.userInfo.nickName,
-            phone: app.gs('userInfoAll').phone || null
+            phone: app.gs('userInfoAll').phone || ''
           }
         }).then(function (res) {
           app.su('userInfoAll', Object.assign(app.gs('userInfoAll') || {}, res, {
