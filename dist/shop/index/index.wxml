@@ -39,13 +39,13 @@
   <!-- <navigator url="/shop/detail/index?id={{item.id}}" wx:for="{{  tag1}}" wx:key="index" class="pr hsItem  item-{{ index }}"> -->
   <view class='tag1-top w100 df'>
     <navigator wx:if="{{tag1[0].id}}" url="/shop/detail/index?id={{tag1[0].id}}" class="pr hsItem item-0">
-      <view class="hsItemPrice pa cfff">
+      <!-- <view class="hsItemPrice pa cfff">
         <view class="f14 jia">价</view>
         <view>
           <text class="f14">￥</text>
           <text class="f29">{{tag1[0].new_price || 1}}</text>
         </view>
-      </view>
+      </view> -->
       <image style='height: 432rpx;' mode="aspectFill" src="{{tag1[0].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
     </navigator>  
     <view class='tag1-top-r df dfc'>
@@ -60,26 +60,26 @@
         <image mode="aspectFill" src="{{tag1[1].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
       </navigator> 
       <navigator wx:if="{{tag1[2].id}}" url="/shop/detail/index?id={{tag1[2].id}}" class="pr hsItem  item-2">
-        <view class="hsItemPrice pa cfff">
+        <!-- <view class="hsItemPrice pa cfff">
           <view class="f14 jia">价</view>
           <view>
             <text class="f14">￥</text>
             <text class="f29">{{tag1[2].new_price || 1}}</text>
           </view>
-        </view>
+        </view> -->
         <image mode="aspectFill" src="{{tag1[2].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
       </navigator> 
     </view>
   </view>
   <view wx:if="{{ tag1.length > 2 }}" class='tag1-bottom df mt10'>
     <navigator wx:if="{{ index > 2 }}" url="/shop/detail/index?id={{item.id}}" wx:for="{{tag1}}" wx:key="index" class="pr hsItem">
-      <view class="hsItemPrice pa cfff">
+      <!-- <view class="hsItemPrice pa cfff">
         <view class="f14 jia">价</view>
         <view>
           <text class="f14">￥</text>
           <text class="f29">{{item.new_price || 1}}</text>
         </view>
-      </view>
+      </view> -->
       <image style='height: 267rpx;' mode="aspectFill" src="{{item.img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
     </navigator>
   </view>
@@ -95,46 +95,46 @@
   <view class='tag1-top w100 df'>
     <view class='tag1-top-r df dfc'>
         <navigator wx:if="{{tag2[0].id}}" url="/shop/detail/index?id={{tag2[0].id}}" class="pr hsItem  item-0">
-          <view class="hsItemPrice pa cfff">
+          <!-- <view class="hsItemPrice pa cfff">
             <view class="f14 jia">价</view>
             <view>
               <text class="f14">￥</text>
               <text class="f29">{{tag2[0].new_price || 1}}</text>
             </view>
-          </view>
+          </view> -->
           <image mode="aspectFill" src="{{tag2[0].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
         </navigator> 
         <navigator wx:if="{{tag2[1].id}}" url="/shop/detail/index?id={{tag2[1].id}}" class="pr hsItem  item-1">
-          <view class="hsItemPrice pa cfff">
+          <!-- <view class="hsItemPrice pa cfff">
             <view class="f14 jia">价</view>
             <view>
               <text class="f14">￥</text>
               <text class="f29">{{tag2[1].new_price || 1}}</text>
             </view>
-          </view>
+          </view> -->
           <image mode="aspectFill" src="{{tag2[1].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
         </navigator> 
       </view>
     <navigator wx:if="{{tag2[2].id}}" url="/shop/detail/index?id={{tag2[2].id}}" class="pr hsItem item-2">
-      <view class="hsItemPrice pa cfff">
+      <!-- <view class="hsItemPrice pa cfff">
         <view class="f14 jia">价</view>
         <view>
           <text class="f14">￥</text>
           <text class="f29">{{tag2[2].new_price || 1}}</text>
         </view>
-      </view>
+      </view> -->
       <image style='height: 432rpx;' mode="aspectFill" src="{{tag2[2].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
     </navigator>  
   </view>
   <view wx:if="{{ tag2.length > 2 }}" class='tag1-bottom df mt10'>
     <navigator wx:if="{{ index > 2 }}" url="/shop/detail/index?id={{item.id}}" wx:for="{{6}}" wx:key="index" class="pr hsItem">
-      <view class="hsItemPrice pa cfff">
+      <!-- <view class="hsItemPrice pa cfff">
         <view class="f14 jia">价</view>
         <view>
           <text class="f14">￥</text>
           <text class="f29">{{item.new_price || 1}}</text>
         </view>
-      </view>
+      </view> -->
       <image style='height: 267rpx;' mode="aspectFill" src="{{item.img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
     </navigator>
   </view>

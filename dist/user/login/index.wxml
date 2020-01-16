@@ -30,6 +30,7 @@
 <!--    <view catchtap="_phoneLogin" class="loginConfirm">取消</view>-->
   </form>
 </view>
+<navigator style='position: fixed; bottom: 100rpx;right:10rpx;background: #0094ff; color:#fff; border-radius: 50%; width: 100rpx;height: 100rpx;line-height:100rpx;text-align:center;' url='/pages/index/index' open-type='reLaunch'>首页</navigator>
 <!--账号登陆 -e-->
 <!--错误弹窗-->
 <toast toast="{{ toast }}"></toast>
