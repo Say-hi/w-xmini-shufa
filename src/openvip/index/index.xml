@@ -26,7 +26,11 @@
 <!-- card -s -->
 <view class='asdfasdf' style='padding-top:40rpx;'>
   <image style='width:300rpx;margin:0 auto;' mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_two_logo.png"></image>
-  <image catchtap='goVip' data-index='{{ index }}' style='width:534rpx;height:320rpx; margin:50rpx auto 0;' wx:for='{{ info.sku }}' wx:key="item" src="{{ item.img_url }}"></image>
+  <view wx:for='{{ info.sku }}' wx:key="item">
+    <image catchtap='goVip' data-index='{{ index }}' style='width:534rpx;height:320rpx; margin:30rpx auto 0;'  src="{{ item.img_url }}"></image>
+    <view class='tac cfff f25 mt20'>{{ item.value }}￥{{ item.price }}元</view>
+  </view>
+
   <view class="tac f25 c323232 p20 vipText">
     <image mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_text_left.png"></image>
     <text class='cfff'>会员权益</text>

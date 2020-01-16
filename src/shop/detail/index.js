@@ -119,7 +119,10 @@ Page({
         }
       } catch (err) {}
       this.setData({
-        info: res
+        info: res,
+        capsule: {
+          bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
+        }
       })
     })
   },

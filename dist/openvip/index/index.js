@@ -72,7 +72,7 @@ Page({
   },
   goVip: function goVip(e) {
     if (this.data.system && this.data.checkIos) return app.toast({ content: '苹果端请点击联系官方通过人工进行开通', image: '' });
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../buy/index?index=' + e.currentTarget.dataset.index
     });
   },

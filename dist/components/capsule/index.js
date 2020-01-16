@@ -17,6 +17,29 @@ Component({
         _this.setData({
           capsuleSet: Object.assign(_this.data.capsuleSet, res)
         });
+        var that = _this;
+        var query = wx.createSelectorQuery().in(_this);
+        setTimeout(function () {
+          query.select('#capsule_t').boundingClientRect(function (res) {
+            that.data.capsuleCenterWidth = res.width;
+            // console.log(res.width, that.data.capsuleCenter)
+            if (res.width > that.data.capsuleCenter) {
+              // console.log('getin')
+              timer && clearInterval(timer);
+              timer = setInterval(function () {
+                var animation = wx.createAnimation({
+                  duration: Math.floor((res.width - that.data.capsuleCenter) / 50) * 1000 || 1000,
+                  timingFunction: 'linear'
+                });
+                animation.translateX(-(res.width - that.data.capsuleCenter + 10)).step();
+                animation.translateX(0).step();
+                that.setData({
+                  animationData: animation.export()
+                });
+              }, 2000);
+            }
+          }).exec();
+        }, 100);
         // console.log(this.data.capsuleSet)
       }, 10);
     }
@@ -37,19 +60,19 @@ Component({
     capsuleHeight: app.data.capsuleHeight,
     capsuleCenter: app.data.capsuleCenter
   },
-  behavior: {},
-  created: function created() {
-    // console.log(2)
+  lifetimes: {
+    created: function created() {},
+    ready: function ready() {}
   },
-  ready: function ready() {},
-
   pageLifetimes: {
     show: function show() {
       var that = this;
       var query = wx.createSelectorQuery().in(this);
       query.select('#capsule_t').boundingClientRect(function (res) {
         that.data.capsuleCenterWidth = res.width;
+        // console.log(res.width, that.data.capsuleCenter)
         if (res.width > that.data.capsuleCenter) {
+          timer && clearInterval(timer);
           timer = setInterval(function () {
             var animation = wx.createAnimation({
               duration: Math.floor((res.width - that.data.capsuleCenter) / 50) * 1000 || 1000,
