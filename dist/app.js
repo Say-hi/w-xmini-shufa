@@ -4,7 +4,11 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
+<<<<<<< Updated upstream
  * @Last Modified time: 2020-01-12 21:02:37
+=======
+ * @Last Modified time: 2020-01-12 20:05:48
+>>>>>>> Stashed changes
  */
 // /*eslint-disable*/
 var useUrl = require('./utils/service2');
