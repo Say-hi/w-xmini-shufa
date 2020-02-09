@@ -10,10 +10,20 @@
   <view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="point" data-scroll="x" class="dot dotLeftBottom"></view>
   <view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="point" data-scroll="z" class="dot dotRightBottom"></view>
 </view>
-<view hidden="{{ !img || !img.path }}" class="bottomOp df">
-  <view class="tac" catchtap="go" data-type="back">取消</view>
+<view hidden="{{ !img || !img.path }}" class="bottomOp df bgfff">
+  <!-- <view class="tac" catchtap="go" data-type="back">取消</view>
   <view class="tac" catchtap="go" data-type="init">复位</view>
-  <view class="tac" catchtap="go" data-type="next">下一步</view>
+  <view class="tac" catchtap="go" data-type="next">下一步</view> -->
+  <view wx:if='{{ bottomOpD === "cj" }}' class="cjop df dfb">
+    <view wx:for='{{ cjArr }}' catchtap='setcj' data-index="{{ index }}" wx:key='item' class="cjItem f30 c323232 {{ cjIndex == index ? 'cf73650 pr' : '' }}">{{ item.t }}</view>
+  </view>
+  <view class="choose-operation w100 df bt1">
+    <view catchtap='bottomOp' data-op='back' class="jwqfont jwqcuowu1"></view>
+    <view catchtap='bottomOp' data-op='fd' class="jwqfont {{ bottomOpD === 'fd' ? 'active' : '' }} jwqfangda"></view>
+    <view catchtap='bottomOp' data-op='cj' class="jwqfont {{ bottomOpD === 'cj' ? 'active' : '' }} jwqcaijian"></view>
+    <view catchtap='bottomOp' data-op='xz' class="jwqfont {{ bottomOpD === 'xz' ? 'active' : '' }} jwqxiangyouxuanzhuan"></view>
+    <view catchtap='bottomOp' data-op='confirm' style='color: #ee10b2;' class="jwqfont jwqzhengque"></view>
+  </view>
 </view>
 
 <canvas style="width: 1000px; height: 1000px; position: fixed; bottom: -200%;right:-200%;" canvas-id="outPic"></canvas>

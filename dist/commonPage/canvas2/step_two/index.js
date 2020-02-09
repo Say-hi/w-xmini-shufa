@@ -5,7 +5,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 // 获取全局应用程序实例对象
 // 创建页面实例对象
 var app = getApp();
-var maxSize = app.data.system.windowWidth - 40; // left & right give gap 20
+// const maxSize = app.data.system.windowWidth - 40 // left & right give gap 20
+var maxSize = app.data.system.windowWidth;
 var chooseArea = {};
 var x = null;
 var y = null;
@@ -20,10 +21,27 @@ Page({
     capsule: {
       bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
+    cjIndex: 2,
+    cjArr: [{
+      t: '1:1'
+    }, {
+      t: '3:4'
+    }, {
+      t: '原始比例'
+    }, {
+      t: '3:2'
+    }, {
+      t: '16:9'
+    }],
+    bottomOpD: 'cj',
     single: 'single',
     options: null
   },
-
+  setcj: function setcj(e) {
+    this.setData({
+      cjIndex: e.currentTarget.dataset.index
+    });
+  },
   chooseAreaStart: function chooseAreaStart(e) {
     this.setData({
       cutAreaMove: true
@@ -161,6 +179,21 @@ Page({
     //   [`imgArr[${changeIndex}].zIndex`]: beforeIndex
     // })
   },
+  bottomOp: function bottomOp(e) {
+    switch (e.currentTarget.dataset.op) {
+      case 'back':
+        wx.navigateBack();
+        break;
+      case 'confirm':
+        this.canvasDraw();
+        break;
+      default:
+        this.setData({
+          'bottomOpD': e.currentTarget.dataset.op
+        });
+        break;
+    }
+  },
   getDistance: function getDistance(p1, p2) {
     var x = p2.pageX - p1.pageX;
     var y = p2.pageY - p1.pageY;
@@ -181,7 +214,7 @@ Page({
     var ctx = wx.createCanvasContext('outPic', this);
     // let that = this
     var img = this.data.img;
-    // ctx.setFillStyle('white')
+    ctx.setFillStyle('white');
     ctx.fillRect(0, 0, maxSize * 2, img.height * 2);
     ctx.save();
     ctx.translate(img.x * 2 + img.width, img.y * 2 + img.height);

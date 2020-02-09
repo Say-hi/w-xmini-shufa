@@ -5,35 +5,38 @@
 	},
 	"setting": {
 		"urlCheck": true,
-<<<<<<< Updated upstream
 		"es6": false,
 		"enhance": false,
-=======
-		"es6": true,
->>>>>>> Stashed changes
-		"postcss": true,
+		"postcss": false,
 		"preloadBackgroundData": false,
-		"minified": true,
+		"minified": false,
 		"newFeature": true,
-		"autoAudits": false,
 		"coverView": true,
+		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"bundle": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.10.1",
+	"libVersion": "2.8.2",
 	"appid": "wx195cbe7d941fe1c5",
 	"projectname": "%E4%B9%A6%E6%B3%95",
+	"cloudfunctionTemplateRoot": "",
+	"watchOptions": {
+		"ignore": []
+	},
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
-<<<<<<< Updated upstream
 	"scripts": {},
-=======
-	"isGameTourist": false,
->>>>>>> Stashed changes
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -43,13 +46,19 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
-			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-<<<<<<< Updated upstream
+			"current": 39,
 			"list": [
 				{
 					"id": 0,
@@ -416,9 +425,6 @@
 					"scene": null
 				}
 			]
-=======
-			"list": []
->>>>>>> Stashed changes
 		}
 	}
 }

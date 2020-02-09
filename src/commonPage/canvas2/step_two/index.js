@@ -1,7 +1,8 @@
 // 获取全局应用程序实例对象
 // 创建页面实例对象
 const app = getApp()
-const maxSize = app.data.system.windowWidth - 40 // left & right give gap 20
+// const maxSize = app.data.system.windowWidth - 40 // left & right give gap 20
+const maxSize = app.data.system.windowWidth
 let chooseArea = {}
 let x = null
 let y = null
@@ -16,10 +17,33 @@ Page({
     capsule: {
       bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
+    cjIndex: 2,
+    cjArr: [
+      {
+        t: '1:1'
+      },
+      {
+        t: '3:4'
+      },
+      {
+        t: '原始比例'
+      },
+      {
+        t: '3:2'
+      },
+      {
+        t: '16:9'
+      }
+    ],
+    bottomOpD: 'cj',
     single: 'single',
     options: null
   },
-
+  setcj (e) {
+    this.setData({
+      cjIndex: e.currentTarget.dataset.index
+    })
+  },
   chooseAreaStart (e) {
     this.setData({
       cutAreaMove: true
@@ -170,6 +194,21 @@ Page({
     //   [`imgArr[${changeIndex}].zIndex`]: beforeIndex
     // })
   },
+  bottomOp (e) {
+    switch (e.currentTarget.dataset.op) {
+      case 'back':
+        wx.navigateBack()
+        break
+      case 'confirm':
+        this.canvasDraw()
+        break
+      default:
+        this.setData({
+          'bottomOpD': e.currentTarget.dataset.op
+        })
+        break
+    }
+  },
   getDistance (p1, p2) {
     let x = p2.pageX - p1.pageX
     let y = p2.pageY - p1.pageY
@@ -188,7 +227,7 @@ Page({
     let ctx = wx.createCanvasContext('outPic', this)
     // let that = this
     let img = this.data.img
-    // ctx.setFillStyle('white')
+    ctx.setFillStyle('white')
     ctx.fillRect(0, 0, maxSize * 2, img.height * 2)
     ctx.save()
     ctx.translate(img.x * 2 + img.width, img.y * 2 + img.height)

@@ -15,7 +15,7 @@ Page({
     checkIos: true,
     system: app.data.system.system.indexOf('iOS') >= 0
   },
-  getInfo() {
+  getInfo () {
     let that = this
     app.wxrequest({
       url: app.getUrl().rankCard,
@@ -29,12 +29,12 @@ Page({
       })
     })
   },
-  change(e) {
+  change (e) {
     this.setData({
       rankIndex: e.detail.current
     })
   },
-  checkUser() {
+  checkUser () {
     let info = app.gs('userInfoAll')
     if (!info) {
       app.toast({
@@ -49,11 +49,11 @@ Page({
       }, 2000)
     }
   },
-  getData() {
+  getData () {
     let that = this
     wx.request({
       url: app.getExactlyUrl(app.getUrl().shopIosCheck),
-      success(res) {
+      success (res) {
         if (res.statusCode !== 200) {
           app.cloud().getPermission().then(res2 => {
             that.setData({
@@ -68,11 +68,13 @@ Page({
       }
     })
   },
-  goVip(e) {
-    if (this.data.system && this.data.checkIos) return app.toast({
-      content: '苹果端请点击联系官方通过人工进行开通',
-      image: ''
-    })
+  goVip (e) {
+    if (this.data.system && this.data.checkIos) {
+      return app.toast({
+        content: '苹果端请点击联系官方通过人工进行开通',
+        image: ''
+      })
+    }
     wx.navigateTo({
       url: `../buy/index?index=${e.currentTarget.dataset.index}`
     })
@@ -80,7 +82,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
+  onLoad () {
     let pages = getCurrentPages()
     pages[pages.length - 2 >= 0 ? pages.length - 2 : 0].route === 'pages/index/index' && this.setData({
       openType: 'navigateBack'
@@ -112,13 +114,13 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady() {
+  onReady () {
     // console.log(' ---------- onReady ----------')
   },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {
+  onShow () {
     this.checkUser()
     // this.setKill()
     // console.log(' ---------- onShow ----------')
@@ -126,18 +128,18 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide() {
+  onHide () {
     // clearInterval(timer)
     // console.log(' ---------- onHide ----------')
   },
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload() {
+  onUnload () {
     // clearInterval(timer)
     // console.log(' ---------- onUnload ----------')
   },
-  onShareAppMessage() {
+  onShareAppMessage () {
     // return {
     //   title: app.gs('shareText').t || '绣学问，真纹绣',
     //   path: `/pages/index/index`,
@@ -147,7 +149,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh() {
+  onPullDownRefresh () {
     // this.getCourse()
   }
 })
