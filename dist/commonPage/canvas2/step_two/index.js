@@ -5,8 +5,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 // 获取全局应用程序实例对象
 // 创建页面实例对象
 var app = getApp();
-// const maxSize = app.data.system.windowWidth - 40 // left & right give gap 20
-var maxSize = app.data.system.windowWidth;
+var maxSize = app.data.system.windowWidth - 40; // left & right give gap 20
 var chooseArea = {};
 var x = null;
 var y = null;
@@ -23,15 +22,25 @@ Page({
     },
     cjIndex: 2,
     cjArr: [{
-      t: '1:1'
+      t: '1:1',
+      w: 750,
+      h: 750
     }, {
-      t: '3:4'
+      t: '3:4',
+      w: 540,
+      h: 720
     }, {
-      t: '原始比例'
+      t: '原始比例',
+      w: 0,
+      h: 0
     }, {
-      t: '3:2'
+      t: '3:2',
+      w: 750,
+      h: 500
     }, {
-      t: '16:9'
+      t: '16:9',
+      w: 750,
+      h: 422
     }],
     bottomOpD: 'cj',
     single: 'single',
@@ -40,6 +49,19 @@ Page({
   setcj: function setcj(e) {
     this.setData({
       cjIndex: e.currentTarget.dataset.index
+    });
+    if (e.currentTarget.dataset.index * 1 === 2) {
+      return this.getImageInfo(this.data.img.path);
+    }
+    var cutOx = (maxSize + 40) / 2;
+    var cutOy = this.data.img.cutY + this.data.img.cutH / 2;
+    var cutcW = this.data.cjArr[this.data.cjIndex].w / 750 * maxSize;
+    var cutcH = this.data.cjArr[this.data.cjIndex].h / 750 * maxSize;
+    this.setData({
+      'img.cutW': cutcW,
+      'img.cutH': cutcH,
+      'img.cutX': Math.abs(cutOx - cutcW / 2),
+      'img.cutY': cutOy - cutcH / 2 > 0 ? cutOy - cutcH / 2 : 0
     });
   },
   chooseAreaStart: function chooseAreaStart(e) {
@@ -52,12 +74,20 @@ Page({
     chooseArea.yy = this.data.img.cutY;
     chooseArea.w = this.data.img.cutW;
     chooseArea.h = this.data.img.cutH;
+    // x = e.touches[0].pageX
+    // y = e.touches[0].pageY
+    // moveYT = this.data.img.y
+    // moveXT = this.data.img.x
   },
   chooseAreaMove: function chooseAreaMove(e) {
     if (e.currentTarget.dataset.type === 'img') {
       var _setData;
 
       this.setData((_setData = {}, _defineProperty(_setData, 'img.cutX', chooseArea.xx + (e.touches[0].pageX - chooseArea.x)), _defineProperty(_setData, 'img.cutY', chooseArea.yy + (e.touches[0].pageY - chooseArea.y)), _setData));
+      // this.setData({
+      //   [`img.x`]: moveXT + (e.touches[0].pageX - x),
+      //   [`img.y`]: moveYT + (e.touches[0].pageY - y)
+      // })
     } else if (e.currentTarget.dataset.type === 'point') {
       var width = chooseArea.w + (e.touches[0].pageX - chooseArea.x);
       var height = chooseArea.h + (e.touches[0].pageY - chooseArea.y);
@@ -133,6 +163,16 @@ Page({
       }
     });
   },
+  sliderChange: function sliderChange(e) {
+    this.setData({
+      'img.scale': e.detail.value
+    });
+  },
+  changeRotate: function changeRotate(e) {
+    this.setData({
+      'img.rotate': e.detail.value
+    });
+  },
   go: function go(e) {
     if (e.currentTarget.dataset.type === 'back') wx.navigateBack();else if (e.currentTarget.dataset.type === 'init') {
       this.getImageInfo(this.data.img.path);
@@ -148,13 +188,15 @@ Page({
       y = e.touches[0].pageY;
       moveYT = this.data.img.y;
       moveXT = this.data.img.x;
-    } else if (e.touches.length <= 2) {
-      start = e.touches;
     } else {
       app.toast({
-        content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'
+        // content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'
+        content: '囧，小主人的手指太灵活了，无法识别呢，请单指操作'
       });
     }
+    // else if (e.touches.length <= 2) {
+    //   start = e.touches
+    // }
   },
   touchMove: function touchMove(e) {
     // console.log(2)
@@ -163,16 +205,18 @@ Page({
 
       // console.log(`3-single`)
       this.setData((_setData6 = {}, _defineProperty(_setData6, 'img.x', moveXT + (e.touches[0].pageX - x)), _defineProperty(_setData6, 'img.y', moveYT + (e.touches[0].pageY - y)), _setData6));
-    } else if (e.touches.length <= 2) {
-      var _setData7;
-
-      if (start.length < 1) start = e.touches;
-      var now = e.touches;
-      var scale = (this.getDistance(now[0], now[1]) / this.getDistance(start[0], start[1])).toFixed(1);
-      var rotate = (this.getAngle(now[0], now[1]) - this.getAngle(start[0], start[1])).toFixed(1);
-      // console.log(`3-more`)
-      this.setData((_setData7 = {}, _defineProperty(_setData7, 'img.scale', scale > 2 ? 2 : scale < 1 ? 1 : scale), _defineProperty(_setData7, 'img.rotate', rotate), _setData7));
     }
+    //  else if (e.touches.length <= 2) {
+    //   if (start.length < 1) start = e.touches
+    //   let now = e.touches
+    //   let scale = (this.getDistance(now[0], now[1]) / this.getDistance(start[0], start[1])).toFixed(1)
+    //   let rotate = (this.getAngle(now[0], now[1]) - this.getAngle(start[0], start[1])).toFixed(1)
+    //   // console.log(`3-more`)
+    //   this.setData({
+    //     [`img.scale`]: scale > 2 ? 2 : scale < 1 ? 1 : scale,
+    //     [`img.rotate`]: rotate
+    //   })
+    // }
   },
   touchEnd: function touchEnd() {
     // this.setData({

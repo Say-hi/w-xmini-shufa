@@ -55,6 +55,18 @@ Page({
   chooseImage (e) {
     app.data['userBackImage'] = this.data.list[e.currentTarget.dataset.index].src
     app.su('backImageInfo', this.data.list[e.currentTarget.dataset.index])
+    // app.su('backImageInfo', {
+    //   src: 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/sell/backOne/1w5ItgecfsjaqTV7FbovZEzn0HiYUxXu.jpg',
+    //   zIndex: 11,
+    //   positionItem: [
+    //     {
+    //       height: 483.334,
+    //       width: 483.334,
+    //       x: 375.84,
+    //       y: 310.84
+    //     }
+    //   ]
+    // })
     wx.navigateTo({
       url: `/commonPage/canvas2/index?single=${this.data.single}`
     })

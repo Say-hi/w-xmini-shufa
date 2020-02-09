@@ -18,41 +18,52 @@
 <!--屋檐 e-->
 <!--首页导航 s-->
 <view>
-  <image class="w100" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/4.png"></image>
-  <view class="navTab">
-    <navigator class="ntItem tr3" 
-    style='transition-delay: {{ index * 0.1 }}s; {{ item && showItem ? "opacity: 1;" : "opacity: 0;" }}' 
-    url="{{ item.path_mini }}" wx:for="{{ nav }}" wx:key="index">
-      <image mode="widthFix" src="{{ item.img_url }}"></image>
-    </navigator>
+  <image class="w100" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/5.png"></image>
+  <view class="nav-wrap">
+    <view class="navTab">
+    <!-- <view class="navsb"> -->
+      <navigator class="ntItem tr3" 
+      style='transition-delay: {{ index * 0.1 }}s; {{ item && showItem ? "opacity: 1;" : "opacity: 0;" }}' 
+      url="{{ item.path_mini }}" wx:for="{{ nav }}" wx:key="index">
+        <image src="{{ item.img_url }}"></image>
+      </navigator>
+      <!-- <navigator class="ntItem tr3" 
+      style='transition-delay: {{ index * 0.1 }}s; {{ item && showItem ? "opacity: 1;" : "opacity: 0;" }}' 
+      url="{{ item.path_mini }}" wx:for="{{ nav }}" wx:key="index">
+        <image src="{{ item.img_url }}"></image>
+      </navigator> -->
+    <!-- </view> -->
+  </view>
   </view>
 </view>
 <!--首页导航 e-->
-<!--屋檐 s-->
-<view class="eaves"></view>
-<!--屋檐 e-->
-<!--vip -s-->
-<navigator hidden="{{ !openVipImg }}" url="/openvip/index/index" class="bg-img-bling">
-  <image class="w100 " mode="widthFix" src="{{ openVipImg }}"></image>
-</navigator>
-<!--vip -e-->
-<!--名师文字 -s-->
-<view class="tac p30">
-  <image class="indexText" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/index_text.png"></image>
-</view>
-<!--名师文字 -e-->
-<!--名师列表 -s-->
-<form>
-<view class="teacherList pr">
-  <navigator url="/stele/index/index?id={{ item.id }}&name={{ item.name }}" class="listItem bd1 mt20" wx:for="{{ wordsCategoryList }}" wx:key="index">
-    <button>
-      <image class='tl-img' mode='widthFix' lazy-load="1" src="{{ item.img_url }}"></image>
-      <view wx:if="{{item.name}}" class='tl-text'>{{ item.name }}</view>
-    </button>
+<view class="asdfqewr">
+  <!--屋檐 s-->
+  <view class="eaves"></view>
+  <!--屋檐 e-->
+  <!--vip -s-->
+  <navigator hidden="{{ !openVipImg }}" url="/openvip/index/index" class="bg-img-bling">
+    <image class="w100 " mode="widthFix" src="{{ openVipImg }}"></image>
   </navigator>
+  <!--vip -e-->
+  <!--名师文字 -s-->
+  <view class="tac p30">
+    <image class="indexText" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/index_text.png"></image>
+  </view>
+  <!--名师文字 -e-->
+  <!--名师列表 -s-->
+  <form>
+  <view class="teacherList pr">
+    <navigator url="/stele/index/index?id={{ item.id }}&name={{ item.name }}" class="listItem bd1 mt20" wx:for="{{ wordsCategoryList }}" wx:key="index">
+      <button>
+        <image class='tl-img' mode='widthFix' lazy-load="1" src="{{ item.img_url }}"></image>
+        <view wx:if="{{item.name}}" class='tl-text'>{{ item.name }}</view>
+      </button>
+    </navigator>
+  </view>
+  </form>
+  <!--名师列表 -e-->
 </view>
-</form>
-<!--名师列表 -e-->
 <jwqfoot></jwqfoot>
 
 <!--错误弹窗-->

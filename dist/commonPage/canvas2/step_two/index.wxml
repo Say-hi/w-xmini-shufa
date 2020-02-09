@@ -17,6 +17,10 @@
   <view wx:if='{{ bottomOpD === "cj" }}' class="cjop df dfb">
     <view wx:for='{{ cjArr }}' catchtap='setcj' data-index="{{ index }}" wx:key='item' class="cjItem f30 c323232 {{ cjIndex == index ? 'cf73650 pr' : '' }}">{{ item.t }}</view>
   </view>
+  <view wx:if='{{ bottomOpD === "fd" }}' class="fdop">
+    <slider bindchange="sliderChange" bindchanging="sliderChange" style="margin: 10rpx 100rpx;" class="flex1" step='0.1' show-value='1' block-color="#ff0000" block-size='20' activeColor="#323232" backgroundColor="#323232" value="{{ img.scale }}" min="1" max="2"></slider>
+  </view>
+  <slider wx:if='{{ bottomOpD === "xz" }}' activeColor="#323232" backgroundColor="#323232" block-color="#ff0000" block-size='20' step='1' style="margin: 10rpx 100rpx;" show-value='1' value="{{ img.rotate }}" min="-180" max="180" bindchanging="changeRotate" bindchange="changeRotate"></slider>
   <view class="choose-operation w100 df bt1">
     <view catchtap='bottomOp' data-op='back' class="jwqfont jwqcuowu1"></view>
     <view catchtap='bottomOp' data-op='fd' class="jwqfont {{ bottomOpD === 'fd' ? 'active' : '' }} jwqfangda"></view>

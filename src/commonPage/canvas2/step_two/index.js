@@ -1,8 +1,7 @@
 // 获取全局应用程序实例对象
 // 创建页面实例对象
 const app = getApp()
-// const maxSize = app.data.system.windowWidth - 40 // left & right give gap 20
-const maxSize = app.data.system.windowWidth
+const maxSize = app.data.system.windowWidth - 40 // left & right give gap 20
 let chooseArea = {}
 let x = null
 let y = null
@@ -18,22 +17,31 @@ Page({
       bgc: 'url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png)'
     },
     cjIndex: 2,
-    cjArr: [
-      {
-        t: '1:1'
-      },
-      {
-        t: '3:4'
-      },
-      {
-        t: '原始比例'
-      },
-      {
-        t: '3:2'
-      },
-      {
-        t: '16:9'
-      }
+    cjArr: [{
+      t: '1:1',
+      w: 750,
+      h: 750
+    },
+    {
+      t: '3:4',
+      w: 540,
+      h: 720
+    },
+    {
+      t: '原始比例',
+      w: 0,
+      h: 0
+    },
+    {
+      t: '3:2',
+      w: 750,
+      h: 500
+    },
+    {
+      t: '16:9',
+      w: 750,
+      h: 422
+    }
     ],
     bottomOpD: 'cj',
     single: 'single',
@@ -42,6 +50,19 @@ Page({
   setcj (e) {
     this.setData({
       cjIndex: e.currentTarget.dataset.index
+    })
+    if (e.currentTarget.dataset.index * 1 === 2) {
+      return this.getImageInfo(this.data.img.path)
+    }
+    let cutOx = (maxSize + 40) / 2
+    let cutOy = this.data.img.cutY + this.data.img.cutH / 2
+    let cutcW = this.data.cjArr[this.data.cjIndex].w / 750 * maxSize
+    let cutcH = this.data.cjArr[this.data.cjIndex].h / 750 * maxSize
+    this.setData({
+      'img.cutW': cutcW,
+      'img.cutH': cutcH,
+      'img.cutX': Math.abs(cutOx - cutcW / 2),
+      'img.cutY': cutOy - cutcH / 2 > 0 ? cutOy - cutcH / 2 : 0
     })
   },
   chooseAreaStart (e) {
@@ -54,6 +75,10 @@ Page({
     chooseArea.yy = this.data.img.cutY
     chooseArea.w = this.data.img.cutW
     chooseArea.h = this.data.img.cutH
+    // x = e.touches[0].pageX
+    // y = e.touches[0].pageY
+    // moveYT = this.data.img.y
+    // moveXT = this.data.img.x
   },
   chooseAreaMove (e) {
     if (e.currentTarget.dataset.type === 'img') {
@@ -61,6 +86,10 @@ Page({
         [`img.cutX`]: chooseArea.xx + (e.touches[0].pageX - chooseArea.x),
         [`img.cutY`]: chooseArea.yy + (e.touches[0].pageY - chooseArea.y)
       })
+      // this.setData({
+      //   [`img.x`]: moveXT + (e.touches[0].pageX - x),
+      //   [`img.y`]: moveYT + (e.touches[0].pageY - y)
+      // })
     } else if (e.currentTarget.dataset.type === 'point') {
       let width = chooseArea.w + (e.touches[0].pageX - chooseArea.x)
       let height = chooseArea.h + (e.touches[0].pageY - chooseArea.y)
@@ -145,6 +174,16 @@ Page({
       }
     })
   },
+  sliderChange (e) {
+    this.setData({
+      'img.scale': e.detail.value
+    })
+  },
+  changeRotate (e) {
+    this.setData({
+      'img.rotate': e.detail.value
+    })
+  },
   go (e) {
     if (e.currentTarget.dataset.type === 'back') wx.navigateBack()
     else if (e.currentTarget.dataset.type === 'init') {
@@ -161,13 +200,15 @@ Page({
       y = e.touches[0].pageY
       moveYT = this.data.img.y
       moveXT = this.data.img.x
-    } else if (e.touches.length <= 2) {
-      start = e.touches
     } else {
       app.toast({
-        content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'
+        // content: '囧，小主人的手指太灵活了，无法识别呢，请双指或单指操作'
+        content: '囧，小主人的手指太灵活了，无法识别呢，请单指操作'
       })
     }
+    // else if (e.touches.length <= 2) {
+    //   start = e.touches
+    // }
   },
   touchMove (e) {
     // console.log(2)
@@ -177,17 +218,18 @@ Page({
         [`img.x`]: moveXT + (e.touches[0].pageX - x),
         [`img.y`]: moveYT + (e.touches[0].pageY - y)
       })
-    } else if (e.touches.length <= 2) {
-      if (start.length < 1) start = e.touches
-      let now = e.touches
-      let scale = (this.getDistance(now[0], now[1]) / this.getDistance(start[0], start[1])).toFixed(1)
-      let rotate = (this.getAngle(now[0], now[1]) - this.getAngle(start[0], start[1])).toFixed(1)
-      // console.log(`3-more`)
-      this.setData({
-        [`img.scale`]: scale > 2 ? 2 : scale < 1 ? 1 : scale,
-        [`img.rotate`]: rotate
-      })
     }
+    //  else if (e.touches.length <= 2) {
+    //   if (start.length < 1) start = e.touches
+    //   let now = e.touches
+    //   let scale = (this.getDistance(now[0], now[1]) / this.getDistance(start[0], start[1])).toFixed(1)
+    //   let rotate = (this.getAngle(now[0], now[1]) - this.getAngle(start[0], start[1])).toFixed(1)
+    //   // console.log(`3-more`)
+    //   this.setData({
+    //     [`img.scale`]: scale > 2 ? 2 : scale < 1 ? 1 : scale,
+    //     [`img.rotate`]: rotate
+    //   })
+    // }
   },
   touchEnd () {
     // this.setData({
