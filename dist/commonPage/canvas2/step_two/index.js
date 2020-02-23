@@ -291,6 +291,10 @@ Page({
             wx.navigateTo({
               url: '/commonPage/canvas2/step_three/index?single=single'
             });
+          } else if (_this3.data.single === 'literacy') {
+            wx.redirectTo({
+              url: '/commonPage/literacyShow/index'
+            });
           } else {
             var index = _this3.data.options.index;
             var _this = getCurrentPages()[getCurrentPages().length - 2];

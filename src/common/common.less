@@ -1,18 +1,24 @@
-page {
-  background: url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/bg.png) repeat-y;
-}
+// page {
+//   background: url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/bg.png) repeat-y;
+// }
+
+page {}
+
 .w100 {
   width: 100%;
 }
+
 .h100 {
   height: 100%;
 }
+
 .form-button {
   width: 100%;
   align-items: center;
   display: flex;
   flex-direction: column;
 }
+
 .keep {
   word-break: keep-all;
 }
@@ -24,18 +30,23 @@ image {
 .mt1 {
   margin-top: 1rpx;
 }
+
 .mt5 {
   margin-top: 5rpx;
 }
+
 .mt10 {
   margin-top: 10rpx;
 }
+
 .mt12 {
   margin-top: 12rpx;
 }
+
 .mt30 {
   margin-top: 30rpx;
 }
+
 .mt90 {
   margin-top: 90rpx;
 }
@@ -43,21 +54,27 @@ image {
 .ml0 {
   margin-left: 0;
 }
+
 .ml10 {
   margin-left: 10rpx;
 }
+
 .ml15 {
   margin-left: 15rpx;
 }
+
 .mr15 {
   margin-right: 15rpx;
 }
+
 .ml20 {
   margin-left: 20rpx;
 }
+
 .ml30 {
   margin-left: 30rpx;
 }
+
 .ml60 {
   margin-left: 60rpx;
 }
@@ -65,6 +82,7 @@ image {
 .mr20 {
   margin-right: 20rpx;
 }
+
 .mr30 {
   margin-right: 30rpx;
 }
@@ -77,9 +95,11 @@ image {
 .zw40 {
   height: 40rpx;
 }
+
 .zw60 {
   height: 60rpx;
 }
+
 .zw70 {
   height: 70rpx;
 }
@@ -107,16 +127,21 @@ button {
   margin: 0;
   border: none;
   line-height: inherit;
-  &:before, &:after {
+
+  &:before,
+  &:after {
     border: none;
   }
 }
+
 .mt2 {
   margin-top: 2rpx;
 }
+
 .mt20 {
   margin-top: 20rpx;
 }
+
 .mb20 {
   margin-bottom: 20rpx;
 }
@@ -124,6 +149,7 @@ button {
 .zw {
   height: 120rpx;
 }
+
 .zw-all {
   height: 160rpx;
 }
@@ -163,12 +189,15 @@ button {
 .p030 {
   padding: 0 30rpx;
 }
+
 .p1030 {
   padding: 10rpx 30rpx;
 }
+
 .p3010 {
   padding: 30rpx 10rpx;
 }
+
 .p300 {
   padding: 30rpx 0;
 }
@@ -176,12 +205,15 @@ button {
 .p020 {
   padding: 0rpx 20rpx;
 }
+
 .p2010 {
   padding: 20rpx 10rpx;
 }
+
 .p2030 {
   padding: 20rpx 30rpx;
 }
+
 .p3020 {
   padding: 30rpx 20rpx;
 }
@@ -189,6 +221,7 @@ button {
 .p200 {
   padding: 20rpx 0rpx;
 }
+
 .pl20 {
   padding-left: 20rpx;
 }
@@ -200,6 +233,7 @@ button {
 .br {
   border-radius: 50%;
 }
+
 .br18 {
   border-radius: 18rpx;
 }
@@ -254,6 +288,7 @@ button {
 .arrow {
   position: relative;
 }
+
 .arrow::after {
   content: '';
   position: absolute;
@@ -265,18 +300,23 @@ button {
   border-color: #999 #999 transparent transparent;
   transform: translate(0, -50%) rotate(45deg);
 }
+
 .df {
   display: flex;
 }
+
 .dfb {
   justify-content: space-between;
 }
+
 .dfjca {
   justify-content: space-around;
 }
+
 .dfc {
   flex-direction: column;
 }
+
 .dfac {
   align-items: center;
 }
@@ -289,6 +329,7 @@ button {
   visibility: hidden;
   clear: both;
 }
+
 .clearfix {
   zoom: 1;
 }
@@ -305,26 +346,32 @@ button {
 .tr7 {
   transition: all 0.7s;
 }
+
 .tr3 {
   transition: all 0.3s;
 }
+
 .tr5 {
   transition: all 0.5s;
 }
+
 .tr10 {
   transition: all 1s;
 }
+
 //导航按钮颜色
 .yellow {
   color: #000 !important;
   background-color: #fedb43 !important;
   box-shadow: 0 2rpx 6rpx 2rpx #ffc375;
 }
+
 .blue {
   color: #000 !important;
   background-color: #6fc4fb !important;
   box-shadow: 0 2rpx 6rpx 2rpx #5c8ab7;
 }
+
 .orgin {
   color: #000 !important;
   background-color: #ff9595 !important;
@@ -336,12 +383,14 @@ button {
   background: linear-gradient(90deg, #fcab5c, #ffc90f);
   box-shadow: 0 2rpx 6rpx 2rpx #ce9f62;
 }
+
 .rcl-b-b {
   background: linear-gradient(90deg, #8490ff, #6fc4fb);
   box-shadow: 0 2rpx 6rpx 2rpx #5c8ab7;
 }
+
 .rcl-b-c {
-  background: linear-gradient(90deg, #fd6f6e , #fba665);
+  background: linear-gradient(90deg, #fd6f6e, #fba665);
   box-shadow: 0 2rpx 6rpx 2rpx #ce9f62;
 }
 
@@ -360,14 +409,16 @@ button {
 }
 
 // 弹窗遮罩
-.mask, .mask-t {
+.mask,
+.mask-t {
   position: fixed;
   z-index: 9998;
   bottom: 0;
   left: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
+
   button {
     padding: 0;
     margin: 0;
@@ -375,11 +426,13 @@ button {
     font-size: 30rpx;
     background-color: transparent;
     border: none;
+
     &:after {
       border: none;
       background-color: transparent;
     }
   }
+
   .mask-in {
     position: absolute;
     min-width: 600rpx;
@@ -388,34 +441,40 @@ button {
     background-color: #fff;
     transform: translate(-50%, -50%);
   }
+
   .mask-btn-wrap {
     display: flex;
     border-top: 1rpx solid #eee;
     align-items: center;
     line-height: 80rpx;
+
     .mask-btn {
       flex: 1;
       font-weight: 700;
       border-right: 1rpx solid #eee;
     }
+
     .mask-btn:nth-child(2) {
       border-right: none;
       color: #09bb07;
     }
   }
 }
+
 .user-mask {
   background: #ccc !important;
   z-index: 10000;
 }
+
 .masktr1 {
   background-color: rgba(0, 0, 0, 0.23);
 }
 
 // 模拟maskToast弹窗
 .mask-t {
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   z-index: 10000;
+
   .mask-toast {
     position: absolute;
     top: 50%;
@@ -425,29 +484,35 @@ button {
     padding: 10rpx;
     transform: translate(-50%, -50%);
     text-align: center;
+
     .mask-title {
       line-height: 60rpx;
       font-size: 30rpx;
       color: #333;
     }
+
     .mask-image {
       width: 80rpx;
       height: 80rpx;
     }
+
     .gzh-img {
       width: 500rpx;
       height: 275rpx;
     }
+
     .mask-content {
       line-height: 60rpx;
       font-size: 28rpx;
       color: #333;
     }
+
     .add-qun {
       text-align: left;
       font-size: 26rpx;
       line-height: 40rpx;
     }
+
     .btn {
       text-align: center;
       color: #09ba06;
@@ -458,17 +523,21 @@ button {
       margin: 0 !important;
     }
   }
+
   .gzh-w {
     padding: 0;
     padding-top: 20rpx;
     min-width: 500rpx;
+
     image {
       margin: 34rpx;
     }
+
     .mask-content {
       padding: 0 20rpx;
     }
   }
+
   .code-add {
     input {
       border: 1rpx solid #333;
@@ -478,14 +547,18 @@ button {
     }
   }
 }
+
 .gzh {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
+
 .mask-input {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
+
   .mask-toast {
     min-width: 80%;
     padding-bottom: 90rpx;
+
     input {
       margin: 20rpx 0;
       border: 1rpx solid #eee;
@@ -499,6 +572,7 @@ button {
   display: flex;
   text-align: center;
   line-height: 80rpx;
+
   .mb-item {
     flex: 1;
     line-height: 80rpx;
@@ -506,10 +580,12 @@ button {
     text-align: center;
     border-radius: 0;
   }
+
   .cancel {
     background-color: #eee;
     border-bottom-left-radius: 10rpx;
   }
+
   .confirm {
     background-color: #ff5975;
     border-bottom-right-radius: 10rpx;
@@ -521,6 +597,7 @@ button {
   padding: 10rpx;
   padding-top: 0;
 }
+
 .message-count {
   position: fixed;
   bottom: 20rpx;
@@ -530,6 +607,7 @@ button {
   background-color: #22ac38;
   color: #fff;
 }
+
 .message-count::after {
   content: '';
   width: 20rpx;
@@ -559,6 +637,7 @@ button {
   text-align: center !important;
   display: flex !important;
   align-items: center !important;
+
   button {
     width: 100% !important;
     background: #fff !important;
@@ -592,18 +671,22 @@ button {
 .move {
   animation: 0.5s movein linear forwards;
 }
+
 .moveother {
   width: 0;
   height: 0;
 }
+
 @keyframes movein {
-  from  {
+  from {
     bottom: 0rpx;
     transform: scale(0.1);
   }
+
   80% {
     transform: scale(1.2);
   }
+
   to {
     bottom: 140rpx;
     transform: scale(1);
@@ -613,12 +696,15 @@ button {
 .move-left-in {
   left: 0;
 }
+
 .move-left-out {
   left: -100%;
 }
+
 .move-right-in {
   left: 0;
 }
+
 .move-right-out {
   left: 100%;
 }
@@ -627,6 +713,7 @@ button {
 .peN {
   pointer-events: none;
 }
+
 .peA {
   pointer-events: auto;
 }
@@ -635,20 +722,28 @@ button {
   opacity: 0;
   pointer-events: none;
 }
+
 .o1 {
   opacity: 1;
   pointer-events: auto;
 }
+
 .ws {
-  white-space:pre-wrap;
+  white-space: pre-wrap;
 }
+
 .dbInput {
   line-height: 68rpx !important;
   height: 70rpx !important;
 }
+
 .dbSend {
   padding: 10rpx 30rpx !important;
 }
-.jwqdianzan, .jwqpinglun, .jwqfenxiang, .jwqwujiaoxingkong {
+
+.jwqdianzan,
+.jwqpinglun,
+.jwqfenxiang,
+.jwqwujiaoxingkong {
   padding: 10rpx !important;
 }

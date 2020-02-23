@@ -34,81 +34,89 @@ Page({
     page: 0,
     more: true,
     outList: [],
-    itemIndex: 0
+    itemIndex: 0,
+    literacy: true
   },
   _literacy (e) {
-    // let that = this
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: [e.currentTarget.dataset.index > 0 ? 'album' : 'camera'],
-      success (res1) {
-        app.data.chooseImage = res1.tempFilePaths[0]
-        wx.navigateTo({
-          url: '/commonPage/canvas2/step_two/index?single=literacy'
+    let that = this
+    // wx.chooseImage({
+    //   count: 1,
+    //   sizeType: ['compressed'],
+    //   sourceType: [e.currentTarget.dataset.index > 0 ? 'album' : 'camera'],
+    //   success (res1) {
+    //     app.toast({
+    //       content: '图片上传中',
+    //       mask: true,
+    //       time: 999999
+    //     })
+    //     let FilePath = res1.tempFilePaths[0]
+    //     that.setData({
+    //       imgUrl: FilePath
+    //     })
+    //     app.cloud().getImgCheck(FilePath).then(() => {
+    app.toast({
+      content: '图片上传中',
+      mask: true,
+      time: 999999
+    })
+    this.setData({
+      imgUrl: app.data.userUseImg
+    })
+    wx.uploadFile({
+      url: app.getExactlyUrl(app.getUrl().distinguishKnow),
+      filePath: app.data.userUseImg,
+      name: 'file',
+      formData: {
+        uid: app.gs('userInfoAll').uid,
+        file: app.data.userUseImg
+      },
+      success (res) {
+        wx.hideLoading()
+        app.toast({
+          content: '',
+          image: '',
+          time: 100
         })
-        // app.toast({
-        //   content: '图片上传中',
-        //   mask: true,
-        //   time: 999999
-        // })
-        // let FilePath = res1.tempFilePaths[0]
-        // that.setData({
-        //   imgUrl: FilePath
-        // })
-        // app.data.chooseImage = res1.tempFilePaths[0]
-        // wx.navigateTo({
-        //   url: '/commonPage/canvas2/step_two'
-        // })
-        // // return
-        // app.cloud().getImgCheck(FilePath).then(() => {
-        //   wx.uploadFile({
-        //     url: app.getExactlyUrl(app.getUrl().distinguishKnow),
-        //     filePath: FilePath,
-        //     name: 'file',
-        //     formData: {
-        //       uid: app.gs('userInfoAll').uid,
-        //       file: FilePath
-        //     },
-        //     success (res) {
-        //       wx.hideLoading()
-        //       app.toast({
-        //         content: '',
-        //         image: '',
-        //         time: 100
-        //       })
-        //       that.data.page = 0
-        //       that.data.outList = []
-        //       let list = JSON.parse(res.data).data.words_result
-        //       for (let v of list) {
-        //         v.probability.average = Math.floor(v.probability.average * 100)
-        //         v.words = v.words.slice(0, 1)
-        //       }
-        //       list.sort((a, b) => {
-        //         return b.probability.average - a.probability.average
-        //       })
-        //       that.setData({
-        //         list
-        //       }, () => {
-        //         that._toggleShow()
-        //         list[0] && list[0].words && that.getWordOut(list[0].words)
-        //       })
-        //     },
-        //     fail () {
-        //       wx.hideLoading()
-        //       app.toast({
-        //         content: '上传失败'
-        //       })
-        //     }
-        //   })
-        // }, () => {
-        //   wx.hideLoading()
-        //   app.toast({
-        //     content: '为了营造绿色的网络环境，检测发现您的图片存在违规内容，请更换图片'
-        //   })
-        // })
+        that.data.page = 0
+        that.data.outList = []
+        console.log(res.data)
+        let list = JSON.parse(res.data).data.words_result
+        // console.log(list)
+        for (let v of list) {
+          v.probability.average = Math.floor(v.probability.average * 100)
+          console.log(v.words)
+          v.words = v.words.slice(0, 1)
+        }
+        list.sort((a, b) => {
+          return b.probability.average - a.probability.average
+        })
+        that.setData({
+          list
+        }, () => {
+          that._toggleShow()
+          // console.log(list[0])
+          list[0] && list[0].words && that.getWordOut(list[0].words)
+        })
+      },
+      fail () {
+        wx.hideLoading()
+        app.toast({
+          content: '上传失败',
+          mask: true
+        })
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 1000)
       }
     })
+    //     }, () => {
+    //       wx.hideLoading()
+    //       app.toast({
+    //         content: '为了营造绿色的网络环境，检测发现您的图片存在违规内容，请更换图片'
+    //       })
+    //     })
+    //   }
+    // })
   },
   _toggleShow () {
     this.setData({
@@ -177,7 +185,9 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad (options) {},
+  onLoad (options) {
+    this._literacy()
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -300,6 +300,10 @@ Page({
             wx.navigateTo({
               url: '/commonPage/canvas2/step_three/index?single=single'
             })
+          } else if (this.data.single === 'literacy') {
+            wx.redirectTo({
+              url: '/commonPage/literacyShow/index'
+            })
           } else {
             let index = this.data.options.index
             let _this = getCurrentPages()[getCurrentPages().length - 2]

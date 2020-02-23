@@ -29,6 +29,7 @@ page {
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 3;
+    outline: none;
 
     image {
       width: 100%;
@@ -52,7 +53,7 @@ page {
     border: 8rpx solid #787878;
     width: 0;
     height: 0;
-    border-color: #fff #fff #fff #787878;
+    border-color: #fff #fff #fff #f00;
     position: absolute;
     bottom: 25%;
     left: 75%;
@@ -61,7 +62,7 @@ page {
   &.f21::after {
     bottom: -10rpx;
     left: 45%;
-    border-color: #787878 #fff #fff #fff;
+    border-color: #f00 #fff #fff #fff;
   }
 }
 

@@ -15,6 +15,7 @@ module.exports = {
     noUse: true
   },
   'rules': {
+    // 'space-before-function-paren': 'off',
     'no-unused-vars': 1,
     'no-useless-computed-key': 1
     // "space-before-function-paren": 'off'
