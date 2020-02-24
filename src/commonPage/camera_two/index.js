@@ -331,10 +331,21 @@ Page({
     })
     // app.data['SteleShareImage'] = tempFilePath
   },
+  getData () {
+    app.wxrequest({
+      url: app.getUrl().homeConfig
+    }).then(res => {
+      this.setData({
+        s: res.motto,
+        b: res.ghost_rate
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
+    this.getData()
     // this.getImageInfo('https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom.jpg')
     this.setData({
       options,

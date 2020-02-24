@@ -8,10 +8,10 @@
 <view class='tac f20 c323232' style='margin-top: 43rpx;'>
   <image style='display:inline-block;width: 100rpx;height:100rpx;border-radius: 50%;' src="{{ userInfo.avatar_url }}"/>
   <view>{{ userInfo.nickname }}</view>
-  <view class='f42 mt20 fw7'>冰冻三尺，非一日之寒</view>
+  <view class='f42 mt20 fw7'>{{s || ''}}</view>
   <view class='f25 mt20'>
     <text class='tac cfff' style='padding: 12rpx 120rpx; background: #31a3e1; border: 2rpx solid #31a3e1;'>重影率</text>
-    <text class='tac c31a3e1' style='padding: 12rpx 70rpx; background: #fff; border: 2rpx solid #31a3e1;'>30%</text>
+    <text class='tac c31a3e1' style='padding: 12rpx 70rpx; background: #fff; border: 2rpx solid #31a3e1;'>{{b || ''}}</text>
   </view>
 </view>
 <!-- 头像 -e -->
