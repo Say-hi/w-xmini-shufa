@@ -304,6 +304,10 @@ Page({
             wx.redirectTo({
               url: '/commonPage/literacyShow/index'
             })
+          } else if (this.data.single === 'compare') {
+            wx.redirectTo({
+              url: '/commonPage/camera_two/index'
+            })
           } else {
             let index = this.data.options.index
             let _this = getCurrentPages()[getCurrentPages().length - 2]

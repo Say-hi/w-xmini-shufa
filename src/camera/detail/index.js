@@ -168,6 +168,46 @@ Page({
       }, that.getHundredDiscuss)
     })
   },
+  goCompera (e) {
+    let that = this
+    if (e.currentTarget.dataset.index <= 0) {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url
+      })
+    } else if (e.currentTarget.dataset.index <= 1) {
+      wx.chooseImage({
+        count: 1,
+        sourceType: ['album'],
+        success (res1) {
+          app.data.chooseImage = res1.tempFilePaths[0]
+          wx.navigateTo({
+            url: '/commonPage/canvas2/step_two/index?single=compare'
+          })
+        },
+        fail () {
+          app.toast({
+            content: '您取消了操作~~'
+          })
+        }
+      })
+    } else if (e.currentTarget.dataset.index <= 2) {
+      wx.chooseImage({
+        count: 1,
+        sourceType: ['camera'],
+        success (res1) {
+          app.data.chooseImage = res1.tempFilePaths[0]
+          wx.navigateTo({
+            url: '/commonPage/canvas2/step_two/index?single=compare'
+          })
+        },
+        fail () {
+          app.toast({
+            content: '您取消了操作~~'
+          })
+        }
+      })
+    }
+  },
   getHundredDiscuss () {
     let that = this
     app.wxrequest({

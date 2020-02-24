@@ -65,7 +65,9 @@
       "name": "camera",
       "pages": [
         "index/index",
-        "detail/index"
+        "detail/index",
+        "search/index",
+        "search_choose/index"
       ]
     },
     //    {
@@ -123,6 +125,7 @@
       "pages": [
         "talk/index", // 说一说
         "camera/index",
+        "camera_two/index",
         "canvas/index",
         "canvas2/index",
         "canvas2/step_one/index",

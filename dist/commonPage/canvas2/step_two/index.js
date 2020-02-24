@@ -295,6 +295,10 @@ Page({
             wx.redirectTo({
               url: '/commonPage/literacyShow/index'
             });
+          } else if (_this3.data.single === 'compare') {
+            wx.redirectTo({
+              url: '/commonPage/camera_two/index'
+            });
           } else {
             var index = _this3.data.options.index;
             var _this = getCurrentPages()[getCurrentPages().length - 2];

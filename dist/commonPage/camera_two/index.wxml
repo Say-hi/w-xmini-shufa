@@ -1,6 +1,20 @@
-<jwqcapsule capsule="{{ capsule }}">
+<!-- <jwqcapsule capsule="{{ capsule }}">
   <text class="cfff">叠影纠错</text>
-</jwqcapsule>
+</jwqcapsule> -->
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<!-- 头像 -s -->
+<view class='tac f20 c323232' style='margin-top: 43rpx;'>
+  <image style='display:inline-block;width: 100rpx;height:100rpx;border-radius: 50%;' src="{{ userInfo.avatar_url }}"/>
+  <view>{{ userInfo.nickname }}</view>
+  <view class='f42 mt20 fw7'>冰冻三尺，非一日之寒</view>
+  <view class='f25 mt20'>
+    <text class='tac cfff' style='padding: 12rpx 120rpx; background: #31a3e1; border: 2rpx solid #31a3e1;'>重影率</text>
+    <text class='tac c31a3e1' style='padding: 12rpx 70rpx; background: #fff; border: 2rpx solid #31a3e1;'>30%</text>
+  </view>
+</view>
+<!-- 头像 -e -->
 
 <!--比较区域 -s-->
 <camera hidden="{{ !(options.type == 1 && !cameraMaskAnimate) }}"  class="comCamera pr" style='margin: 50rpx auto;width: 662rpx;height: 662rpx;overflow: hidden;'>
@@ -13,14 +27,14 @@
 <!--比较区域 -s-->
 <view bindtouchstart="touchStart" bindtouchmove="touchMove" wx:if="{{ options.type != 1 }}"  class="comparison pr bgfff">
   <image class="pa bgPic" src="{{bgImg}}"></image>
-  <image style="transform: scale({{ scale }}) rotate({{ rotate }}deg); top: {{ moveY }}rpx; left: {{ moveX }}rpx;"  class="pa mainPic" mode="widthFix" src="{{ main }}"></image>
+  <image style="transform: scale({{ scale }}) rotate({{ rotate }}deg); top: {{ moveY }}rpx; left: {{ moveX }}rpx; opacity: {{ pacity }};"  class="pa mainPic" mode="widthFix" src="{{ main }}"></image>
   <image class="pa bgPic" src="{{ bottomImg[bottomIndex].i }}"></image>
 </view>
 <!--比较区域 -e-->
 
 <!-- <slider wx:if="{{ options.type == 1 }}" style="margin: 0 80rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider> -->
-<slider style="margin: 40rpx 100rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider>
-<slider activeColor="#0094ff" style="margin: 40rpx 100rpx;" value="{{ rotate + 180 }}" min="0" max="360" bindchanging="changeRotate"></slider>
+<!-- <slider style="margin: 40rpx 100rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider> -->
+<slider activeColor="#fcdd99" style="margin: 20rpx 100rpx;" value="{{ pacity }}" step='0.1' min="0" max="1" bindchanging="changePacity"></slider>
 <view class='tac f24 c646464'>请调节临字图片的大小、角度、透明度</view>
 <!--底格 -s-->
 <!-- <view class="bgfff mt20 f18 pr c787878 df typeChoose">
