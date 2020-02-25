@@ -224,6 +224,9 @@ Page({
       }
     });
   },
+  goPage: function goPage(e) {
+    if (e.currentTarget.dataset.url.length > 5) wx.navigateTo({ url: e.currentTarget.dataset.url });
+  },
   getTopNav: function getTopNav() {
     var that = this;
     app.wxrequest({
@@ -231,6 +234,7 @@ Page({
     }).then(function (res) {
       that.setData({
         nav: res.middle_menu,
+        ads: res.home_ad,
         openVipImg: res.page_img.home_page_img || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip.png'
       }, function () {
         setTimeout(function () {

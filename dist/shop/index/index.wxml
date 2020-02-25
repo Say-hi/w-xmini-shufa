@@ -34,7 +34,7 @@
 <view wx:if="{{ tag1.length }}" class="eaves"></view>
 <!--屋檐 e-->
 <!--热销产品 -s-->
-<image wx:if="{{ tag1.length }}" mode="widthFix" class="w100 bg-img-bling" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png"></image>
+<image wx:if="{{ tag1.length }}" mode="widthFix" class="w100 " src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png"></image>
 <view wx:if="{{ tag1.length }}" class="hotSale p30 hsItemT w100">
   <!-- <navigator url="/shop/detail/index?id={{item.id}}" wx:for="{{  tag1}}" wx:key="index" class="pr hsItem  item-{{ index }}"> -->
   <view class='tag1-top w100 df'>
@@ -89,7 +89,7 @@
 <view wx:if="{{ tag2.length }}" class="eaves"></view>
 <!--屋檐 e-->
 <!--热销产品 -s-->
-<image wx:if="{{ tag2.length }}" mode="widthFix" class="w100 bg-img-bling" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop2.png"></image>
+<image wx:if="{{ tag2.length }}" mode="widthFix" class="w100" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop2.png"></image>
 <view wx:if="{{ tag2.length }}" class="hotSale p30 hsItemT w100">
   <!-- <navigator url="/shop/detail/index?id={{item.id}}" wx:for="{{  tag1}}" wx:key="index" class="pr hsItem  item-{{ index }}"> -->
   <view class='tag1-top w100 df'>

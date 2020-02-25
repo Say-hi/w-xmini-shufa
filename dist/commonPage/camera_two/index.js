@@ -163,6 +163,7 @@ Page({
           success: function success(res2) {
             that.data.imageWidth = 165.5;
             that.data.imageHeight = 165.5 * res2.height / res2.width;
+            that.compare();
           }
         });
         that.setData({
@@ -333,6 +334,101 @@ Page({
         b: res.ghost_rate
       });
     });
+  },
+  searchImage2: function searchImage2(image1, tmplw, tmplh) {
+    var that = this;
+    return new Promise(function (resolve, reject) {
+      wx.getImageInfo({
+        src: image1,
+        success: function success(imageinfo) {
+          image1 = imageinfo.path;
+          var ctx = wx.createCanvasContext('compare-canvas-1');
+          // let sw = image1.width  // 原图宽度
+          // let sh = image1.height  // 原图高度
+          var tw = tmplw || 8; // 模板宽度
+          var th = tmplh || 8; // 模板高度
+          ctx.drawImage(image1, 0, 0, tw, th);
+          var pixels = null;
+          ctx.draw(false, function () {
+            wx.canvasGetImageData({
+              canvasId: 'compare-canvas-1',
+              x: 0,
+              y: 0,
+              width: tw,
+              height: th,
+              success: function success(res) {
+                // console.log('res', res)
+                pixels = res.data;
+                pixels = that.toGrayBinary(pixels, true, null, true);
+                resolve(pixels);
+              }
+            });
+          });
+        }
+      });
+    });
+  },
+  compare: function compare() {
+    var _this3 = this;
+
+    var that = this;
+    var pixels = null;
+    var pixels2 = null;
+    this.searchImage2(that.data.main).then(function (res) {
+      pixels = res;
+      return that.searchImage2(app.gs('alphaImg'));
+    }).then(function (res2) {
+      pixels2 = res2;
+      var similar = 0;
+      for (var i = 0, len = 64; i < len; i++) {
+        // console.log('pixels[i]', pixels[i])
+        if (pixels[i] === pixels2[i]) similar++;
+      }
+      // console.log(similar)
+      similar = similar / 64 * 100;
+      // console.log(similar)
+      _this3.setData({
+        b: similar.toFixed(2) + '%'
+      });
+    });
+  },
+
+
+  // 像素数据，是否二值化（bool），二值化闵值（0-255），是否返回二值化后序列（bool）
+  toGrayBinary: function toGrayBinary(pixels, binary, value, sn) {
+    var r = null;
+    var g = null;
+    var b = null;
+    // let g = null
+    console.log(pixels);
+    var avg = 0;
+    var len = pixels.length;
+    var s = '';
+    for (var i = 0; i < len; i += 4) {
+      avg += 0.299 * pixels[i] + 0.587 * pixels[i + 1] + 0.114 * pixels[i + 2];
+    }
+    avg /= len / 4;
+    for (var _i = 0; _i < len; _i += 4) {
+      r = 0.299 * pixels[_i];
+      g = 0.587 * pixels[_i + 1];
+      b = 0.114 * pixels[_i + 2];
+      if (binary) {
+        if (r + g + b >= (value || avg)) {
+          g = 255;
+          if (sn) s += '1';
+        } else {
+          g = 0;
+          if (sn) s += '0';
+        }
+        g = r + g + b > (value || avg) ? 255 : 0;
+      } else {
+        g = r + g + b;
+      }
+      pixels[_i] = g;
+      pixels[_i + 1] = g;
+      pixels[_i + 2] = g;
+    }
+    if (sn) return s;else return pixels;
   },
 
   /**

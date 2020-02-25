@@ -9,7 +9,7 @@
   <image style='display:inline-block;width: 100rpx;height:100rpx;border-radius: 50%;' src="{{ userInfo.avatar_url }}"/>
   <view>{{ userInfo.nickname }}</view>
   <view class='f42 mt20 fw7'>{{s || ''}}</view>
-  <view class='f25 mt20'>
+  <view catchtap='compare' class='f25 mt20'>
     <text class='tac cfff' style='padding: 12rpx 120rpx; background: #31a3e1; border: 2rpx solid #31a3e1;'>重影率</text>
     <text class='tac c31a3e1' style='padding: 12rpx 70rpx; background: #fff; border: 2rpx solid #31a3e1;'>{{b || ''}}</text>
   </view>
@@ -97,6 +97,8 @@
 
 <!--<image mode="widthFix" class="w100" src="{{ temp }}"></image>-->
 <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"></canvasdrawer>
+<canvas style='width: 8px; height: 8px;' canvas-id='compare-canvas-1'></canvas>
+<!-- <canvas style='width: 8px; height: 8px;' canvas-id='compare-canvas-2'></canvas> -->
 <view></view>
 <!--错误弹窗-->
 <toast toast="{{ toast }}"></toast>

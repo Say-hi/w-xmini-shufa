@@ -18,7 +18,11 @@
 <!--屋檐 e-->
 <!--首页导航 s-->
 <view>
-  <image class="w100" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/5.png"></image>
+  <swiper autoplay='1' circular='1' style='height: 222px;'>
+    <swiper-item catchtap='goPage' data-url='{{ item.path_mini }}' wx:for='{{ads}}' wx:key='item'>
+      <image class="w100" mode="widthFix" src="{{item.img_url}}"></image>
+    </swiper-item>
+  </swiper>
   <view class="nav-wrap">
     <view class="navTab">
     <!-- <view class="navsb"> -->
@@ -42,7 +46,7 @@
   <view class="eaves"></view>
   <!--屋檐 e-->
   <!--vip -s-->
-  <navigator hidden="{{ !openVipImg }}" url="/openvip/index/index" class="bg-img-bling">
+  <navigator hidden="{{ !openVipImg }}" url="/openvip/index/index" class="">
     <image class="w100 " mode="widthFix" src="{{ openVipImg }}"></image>
   </navigator>
   <!--vip -e-->

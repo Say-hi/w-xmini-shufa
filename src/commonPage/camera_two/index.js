@@ -166,6 +166,7 @@ Page({
           success (res2) {
             that.data.imageWidth = 165.5
             that.data.imageHeight = 165.5 * res2.height / res2.width
+            that.compare()
           }
         })
         that.setData({
@@ -340,6 +341,100 @@ Page({
         b: res.ghost_rate
       })
     })
+  },
+  searchImage2 (image1, tmplw, tmplh) {
+    let that = this
+    return new Promise((resolve, reject) => {
+      wx.getImageInfo({
+        src: image1,
+        success (imageinfo) {
+          image1 = imageinfo.path
+          let ctx = wx.createCanvasContext('compare-canvas-1')
+          // let sw = image1.width  // 原图宽度
+          // let sh = image1.height  // 原图高度
+          let tw = tmplw || 8  // 模板宽度
+          let th = tmplh || 8 // 模板高度
+          ctx.drawImage(image1, 0, 0, tw, th)
+          let pixels = null
+          ctx.draw(false, function () {
+            wx.canvasGetImageData({
+              canvasId: 'compare-canvas-1',
+              x: 0,
+              y: 0,
+              width: tw,
+              height: th,
+              success (res) {
+                // console.log('res', res)
+                pixels = res.data
+                pixels = that.toGrayBinary(pixels, true, null, true)
+                resolve(pixels)
+              }
+            })
+          })
+        }
+      })
+    })
+  },
+
+  compare () {
+    let that = this
+    let pixels = null
+    let pixels2 = null
+    this.searchImage2(that.data.main).then((res) => {
+      pixels = res
+      return that.searchImage2(app.gs('alphaImg'))
+    }).then(res2 => {
+      pixels2 = res2
+      let similar = 0
+      for (let i = 0, len = 64; i < len; i++) {
+        // console.log('pixels[i]', pixels[i])
+        if (pixels[i] === pixels2[i]) similar++
+      }
+      // console.log(similar)
+      similar = (similar / 64) * 100
+      // console.log(similar)
+      this.setData({
+        b: similar.toFixed(2) + '%'
+      })
+    })
+  },
+
+// 像素数据，是否二值化（bool），二值化闵值（0-255），是否返回二值化后序列（bool）
+  toGrayBinary (pixels, binary, value, sn) {
+    let r = null
+    let g = null
+    let b = null
+    // let g = null
+    console.log(pixels)
+    let avg = 0
+    let len = pixels.length
+    let s = ''
+    for (let i = 0; i < len; i += 4) {
+      avg += (0.299 * pixels[i] + 0.587 * pixels[i + 1] + 0.114 * pixels[i + 2])
+    }
+    avg /= (len / 4)
+    for (let i = 0; i < len; i += 4) {
+      r = 0.299 * pixels[i]
+      g = 0.587 * pixels[i + 1]
+      b = 0.114 * pixels[i + 2]
+      if (binary) {
+        if ((r + g + b) >= (value || avg)) {
+          g = 255
+          if (sn) s += '1'
+        } else {
+          g = 0
+          if (sn) s += '0'
+        }
+        g = (r + g + b) > (value || avg) ? 255 : 0
+      } else {
+        g = r + g + b
+      }
+      pixels[i] = g
+      pixels[i + 1] = g
+      pixels[i + 2] = g
+    }
+    if (sn) return s
+    else return pixels
   },
   /**
    * 生命周期函数--监听页面加载
