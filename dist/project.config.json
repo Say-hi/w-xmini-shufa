@@ -35,6 +35,8 @@
 		"hidedInDevtools": []
 	},
 	"scripts": {},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -462,6 +464,13 @@
 					"name": "3165465465",
 					"pathName": "commonPage/camera_two/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 58,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "from=nav",
 					"scene": null
 				}
 			]
