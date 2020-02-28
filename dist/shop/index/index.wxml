@@ -26,7 +26,7 @@
 <view class="shopNav df">
   <navigator url="/shop/category/index?id={{item.id}}" wx:for="{{category}}" wx:key="index" class="shopNavItem f22 c323232 tac">
     <image class="br" src="{{item.img_url}}"></image>
-    <view class="mt10 f24">{{item.name}}</view>
+    <view class="mt10 f24 fw7">{{item.name}}</view>
   </navigator>
 </view>
 <!--商城导航 -e-->
