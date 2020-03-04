@@ -162,7 +162,7 @@ Page({
     });
   },
   goCompera: function goCompera(e) {
-    var that = this;
+    // let that = this
     if (e.currentTarget.dataset.index <= 0) {
       wx.navigateTo({
         url: e.currentTarget.dataset.url

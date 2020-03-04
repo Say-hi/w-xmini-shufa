@@ -55,6 +55,9 @@ Page({
         page: ++that.data.page
       }
     }).then(res => {
+      for (let v of res.lists) {
+        if (!v.img_url) v.img_url = JSON.parse(v.imgs_url)[0].img_url
+      }
       that.setData({
         list: that.data.list.concat(res.lists)
       })

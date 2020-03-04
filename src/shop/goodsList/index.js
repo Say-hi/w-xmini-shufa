@@ -28,7 +28,11 @@ Page({
       }
     }).then(res => {
       for (let v of res.lists) {
-        v.new_price = v.new_price.split('.')
+        if (v.new_price) v.new_price = v.new_price.split('.')
+        else v.new_price = v.price.split('.')
+        if (!v.img_url) {
+          v.img_url = JSON.parse(v.imgs_url)[0].img_url
+        }
       }
       that.setData({
         list: that.data.list.concat(res.lists)

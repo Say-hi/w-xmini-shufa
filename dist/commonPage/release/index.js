@@ -1,5 +1,7 @@
 'use strict';
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // 获取全局应用程序实例对象
@@ -17,9 +19,237 @@ Page({
     },
     now: true,
     upImgType: 'img',
+    // swiperImg: [],
     swiperImg: [],
+    step: 60,
+    move_index: -1,
+    X: -1,
     desImg: [],
     derationImg: ['https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png']
+  },
+  del: function del() {
+    if (this.data.swiperImg.length <= 1) {
+      return app.toast({ content: '至少保留一张图片哦' });
+    }
+    var temp = [];
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = this.data.swiperImg[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var v = _step.value;
+
+        if (!v.active) temp.push(v);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+      for (var _iterator2 = temp.entries()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        var _step2$value = _slicedToArray(_step2.value, 2),
+            i = _step2$value[0],
+            _v = _step2$value[1];
+
+        _v['x'] = 60 * i + 10;
+        _v['s'] = i;
+        _v['active'] = false;
+        // console.log(this.data.swiperImgX[i])
+      }
+    } catch (err) {
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+          _iterator2.return();
+        }
+      } finally {
+        if (_didIteratorError2) {
+          throw _iteratorError2;
+        }
+      }
+    }
+
+    temp[0]['active'] = true;
+    this.setData({
+      swiperImg: temp
+    });
+  },
+  changeImage: function changeImage() {
+    if (!this.data.toggle) {
+      // let max = this.data.swiperImg.length
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = this.data.swiperImg.entries()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var _step3$value = _slicedToArray(_step3.value, 2),
+              i = _step3$value[0],
+              v = _step3$value[1];
+
+          v['x'] = 60 * i + 10;
+          v['s'] = i;
+          v['active'] = false;
+          // console.log(this.data.swiperImgX[i])
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
+      }
+
+      this.data.swiperImg[0]['active'] = true;
+      this.setData({
+        swiperImg: this.data.swiperImg
+      });
+    }
+    this.setData({
+      toggle: !this.data.toggle
+    });
+  },
+  start: function start(e) {
+    var _iteratorNormalCompletion4 = true;
+    var _didIteratorError4 = false;
+    var _iteratorError4 = undefined;
+
+    try {
+      for (var _iterator4 = this.data.swiperImg[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+        var v = _step4.value;
+
+        v['active'] = false;
+      }
+    } catch (err) {
+      _didIteratorError4 = true;
+      _iteratorError4 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion4 && _iterator4.return) {
+          _iterator4.return();
+        }
+      } finally {
+        if (_didIteratorError4) {
+          throw _iteratorError4;
+        }
+      }
+    }
+
+    this.data.swiperImg[e.currentTarget.dataset.index]['active'] = true;
+    this.setData({
+      animation: true,
+      move_index: this.data.swiperImg[e.currentTarget.dataset.index].s * 1,
+      swiperImg: this.data.swiperImg
+    });
+    this.data.X = this.data.swiperImg[e.currentTarget.dataset.index].s * 1;
+  },
+  movechange: function movechange(e) {
+    if (e.detail.source === 'touch') {
+      var change = Math.floor(e.detail.x / this.data.step);
+      if (this.data.X === change) return;
+      var _iteratorNormalCompletion5 = true;
+      var _didIteratorError5 = false;
+      var _iteratorError5 = undefined;
+
+      try {
+        for (var _iterator5 = this.data.swiperImg.entries()[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+          var _step5$value = _slicedToArray(_step5.value, 2),
+              i = _step5$value[0],
+              v = _step5$value[1];
+
+          if (v.s === change) {
+            var temp2 = this.data.swiperImg[this.data.move_index].x;
+            this.data.swiperImg[this.data.move_index].x = this.data.swiperImg[i].x;
+            this.setData(_defineProperty({}, 'swiperImg[' + i + '].x', temp2));
+            var temp = this.data.swiperImg[i].s;
+            this.data.swiperImg[i].s = this.data.swiperImg[this.data.move_index].s;
+            this.data.swiperImg[this.data.move_index].s = temp;
+            this.data.X = change;
+            return;
+          }
+        }
+      } catch (err) {
+        _didIteratorError5 = true;
+        _iteratorError5 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion5 && _iterator5.return) {
+            _iterator5.return();
+          }
+        } finally {
+          if (_didIteratorError5) {
+            throw _iteratorError5;
+          }
+        }
+      }
+    }
+  },
+  end: function end() {
+    this.setData({
+      animation: false
+    });
+    var that = this;
+    this.data.X = -1;
+    var s = that.data.swiperImg.sort(function (a, b) {
+      return a.x - b.x;
+    });
+    var _iteratorNormalCompletion6 = true;
+    var _didIteratorError6 = false;
+    var _iteratorError6 = undefined;
+
+    try {
+      for (var _iterator6 = s.entries()[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+        var _step6$value = _slicedToArray(_step6.value, 2),
+            i = _step6$value[0],
+            v = _step6$value[1];
+
+        v.s = i;
+      }
+    } catch (err) {
+      _didIteratorError6 = true;
+      _iteratorError6 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion6 && _iterator6.return) {
+          _iterator6.return();
+        }
+      } finally {
+        if (_didIteratorError6) {
+          throw _iteratorError6;
+        }
+      }
+    }
+
+    this.setData({
+      swiperImg: s,
+      move_index: -1,
+      active_index: -1
+    });
   },
   _toggleSpec: function _toggleSpec(e) {
     if (e.currentTarget.dataset.type === 'showSpec2') {
@@ -104,13 +334,13 @@ Page({
       });
     }
     var imgsUrl = [];
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+    var _iteratorNormalCompletion7 = true;
+    var _didIteratorError7 = false;
+    var _iteratorError7 = undefined;
 
     try {
-      for (var _iterator = this.data.swiperImg[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var v = _step.value;
+      for (var _iterator7 = this.data.swiperImg[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+        var v = _step7.value;
 
         if (!v.real) {
           return app.toast({
@@ -122,16 +352,16 @@ Page({
         });
       }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+      _didIteratorError7 = true;
+      _iteratorError7 = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
+        if (!_iteratorNormalCompletion7 && _iterator7.return) {
+          _iterator7.return();
         }
       } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
+        if (_didIteratorError7) {
+          throw _iteratorError7;
         }
       }
     }

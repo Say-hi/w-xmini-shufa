@@ -37,7 +37,10 @@ Page({
         for (var _iterator = res.lists[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var v = _step.value;
 
-          v.new_price = v.new_price.split('.');
+          if (v.new_price) v.new_price = v.new_price.split('.');else v.new_price = v.price.split('.');
+          if (!v.img_url) {
+            v.img_url = JSON.parse(v.imgs_url)[0].img_url;
+          }
         }
       } catch (err) {
         _didIteratorError = true;

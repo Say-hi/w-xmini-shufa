@@ -1,10 +1,11 @@
 <jwqcapsule capsule="{{ capsule }}">
   <text class="cfff fw7">发布拍品</text>
 </jwqcapsule>
+<view hidden='{{ toggle }}'>
 <view style="height: {{ swiperImg.length >= 1 ? 540 : 300 }}rpx;" class="pr">
   <swiper hidden="{{ swiperImg.length < 1 }}" class="swiperArea">
     <swiper-item wx:for="{{ swiperImg }}" wx:key="item">
-      <image mode="aspectFill" src="{{ item.temp }}"></image>
+      <image catchtap='changeImage' mode="aspectFill" src="{{ item.temp }}"></image>
     </swiper-item>
   </swiper>
   <view catchtap="chooseType" data-type='img' class="pa tr5 upLoadBtn c006bff jwqfont jwqzhaoxiangji {{ swiperImg.length < 1 ? 'big' : 'mini' }}"></view>
@@ -41,6 +42,7 @@
   <text>联系方式：</text>
   <input bindinput='inputValue' data-type='phone' type="number" style="border:none;" class="inputMoney flex1" />
 </view>
+</view>
 
 <!--描述 -s-->
 <view class="mask"
@@ -58,10 +60,11 @@
   </view>
 </view>
 <!--描述 -e-->
-<view style="height: 90rpx;"></view>
+<view hidden="{{ toggle }}" style="height: 90rpx;"></view>
 <view class="f34 c646464 lh90 tac df dfac releaseBtn">
-  <view catchtap="_toggleSpec" data-up='-1' data-type='showSpec2' class="flex1">放入仓库</view>
-  <view catchtap="_toggleSpec" data-up='1' data-type='showSpec2' class="flex1 cfff">立即发布</view>
+  <view catchtap="changeImage" hidden="{{ !toggle }}" class='flex1 cfff'>确认</view>
+  <view hidden="{{ toggle }}" catchtap="_toggleSpec" data-up='-1' data-type='showSpec2' class="flex1">放入仓库</view>
+  <view hidden="{{ toggle }}" catchtap="_toggleSpec" data-up='1' data-type='showSpec2' class="flex1 cfff">立即发布</view>
 </view>
 
 <view class="mask"
@@ -76,7 +79,31 @@
     <view catchtap="_toggleSpec" data-type='showSpec2' data-confirm='confirm' class="tac cfff f33 specConfirm p2030">知道了</view>
   </view>
 </view>
-
+<!-- 修改图片顺序 -->
+<view hidden="{{ !toggle }}">
+    <view class='pr'>
+      <view catchtap='del' class='pa jwqfont jwqshanchu tac br cfff'></view>
+      <image hidden="{{ !item.active }}" wx:for="{{ swiperImg }}" wx:key='item' mode='aspectFill' style='height: 540rpx; width:100%;' class='w100' src="{{ item.temp }}"></image>
+    </view>
+    <movable-area class="wrap mt20">
+                <!-- style="height: {{ swiperImg.length * 40 }}px;"> -->
+      <movable-view bindtouchstart='start'
+                    catchtap="tap"
+                    animation="{{ animation }}"
+                    bindchange='movechange'
+                    catchtouchend='end'
+                    catchlongpress="longpress"
+                    data-index="{{ index }}"
+                    direction='horizontal'
+                    class='item bgfff {{ move_index >= 0 ? move_index == item.s ? "move-item" : "no-move" : "" }}'
+                    x="{{ item.x }}"
+                    wx:for="{{ swiperImg }}"
+                    wx:key='item'>
+        <image style='width: 100%; height: 100%; {{ item.active ? "outline:#f00 solid 2rpx;" : "" }}' src="{{ item.temp }}"></image>
+      </movable-view>
+    </movable-area>
+    <view style='margin-top: 160rpx;' class='tac f21 c646464'>按住小图拖动可调整顺序</view>
+</view>
 <!--错误弹窗-->
 <toast toast="{{ toast }}"></toast>
 <!--<import src="/template/template"></import>-->

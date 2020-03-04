@@ -44,7 +44,7 @@ Page({
     moveX: 166,
     moveY: 166,
     height: app.data.height,
-    main: app.gs('alphaImg'),
+    main: '',
     bgImg: app.gs('alphaImg2'),
     cameraType: [{
       i: 'jwqshequ',
@@ -142,6 +142,12 @@ Page({
   },
   choosePhoto: function choosePhoto() {
     var that = this;
+    app.toast({
+      content: '图片处理中',
+      image: '',
+      time: 9999,
+      mask: true
+    });
     wx.uploadFile({
       url: app.getExactlyUrl(app.getUrl().stackingImg),
       filePath: app.data.userUseImg,
@@ -153,9 +159,9 @@ Page({
       success: function success(res) {
         wx.hideLoading();
         app.toast({
-          content: '',
+          content: '处理成功',
           image: '',
-          time: 20
+          time: 1000
         });
         // let data = JSON.parse(res.data).data
         wx.getImageInfo({
@@ -163,7 +169,7 @@ Page({
           success: function success(res2) {
             that.data.imageWidth = 165.5;
             that.data.imageHeight = 165.5 * res2.height / res2.width;
-            that.compare();
+            // that.compare()
           }
         });
         that.setData({
@@ -440,7 +446,8 @@ Page({
     this.setData({
       options: options,
       bgImg: app.gs('alphaImg2'),
-      main: app.gs('alphaImg')
+      main: ''
+      // main: app.gs('alphaImg')
     }, this.choosePhoto);
     // if (options.type > 1) {
     //   canvas = wx.createCanvasContext('cOne')

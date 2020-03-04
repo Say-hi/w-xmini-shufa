@@ -13,7 +13,11 @@ Page({
     },
     now: true,
     upImgType: 'img',
+    // swiperImg: [],
     swiperImg: [],
+    step: 60,
+    move_index: -1,
+    X: -1,
     desImg: [],
     derationImg: [
       'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png',
@@ -35,6 +39,91 @@ Page({
       'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png',
       'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png'
     ]
+  },
+  del () {
+    if (this.data.swiperImg.length <= 1) {
+      return app.toast({content: '至少保留一张图片哦'})
+    }
+    let temp = []
+    for (let v of this.data.swiperImg) {
+      if (!v.active) temp.push(v)
+    }
+    for (let [i, v] of temp.entries()) {
+      v['x'] = 60 * i + 10
+      v['s'] = i
+      v['active'] = false
+      // console.log(this.data.swiperImgX[i])
+    }
+    temp[0]['active'] = true
+    this.setData({
+      swiperImg: temp
+    })
+  },
+  changeImage () {
+    if (!this.data.toggle) {
+      // let max = this.data.swiperImg.length
+      for (let [i, v] of this.data.swiperImg.entries()) {
+        v['x'] = 60 * i + 10
+        v['s'] = i
+        v['active'] = false
+        // console.log(this.data.swiperImgX[i])
+      }
+      this.data.swiperImg[0]['active'] = true
+      this.setData({
+        swiperImg: this.data.swiperImg
+      })
+    }
+    this.setData({
+      toggle: !this.data.toggle
+    })
+  },
+  start (e) {
+    for (let v of this.data.swiperImg) {
+      v['active'] = false
+    }
+    this.data.swiperImg[e.currentTarget.dataset.index]['active'] = true
+    this.setData({
+      animation: true,
+      move_index: this.data.swiperImg[e.currentTarget.dataset.index].s * 1,
+      swiperImg: this.data.swiperImg
+    })
+    this.data.X = this.data.swiperImg[e.currentTarget.dataset.index].s * 1
+  },
+  movechange (e) {
+    if (e.detail.source === 'touch') {
+      let change = Math.floor(e.detail.x / this.data.step)
+      if (this.data.X === change) return
+      for (let [i, v] of this.data.swiperImg.entries()) {
+        if (v.s === change) {
+          let temp2 = this.data.swiperImg[this.data.move_index].x
+          this.data.swiperImg[this.data.move_index].x = this.data.swiperImg[i].x
+          this.setData({
+            [`swiperImg[${i}].x`]: temp2
+          })
+          let temp = this.data.swiperImg[i].s
+          this.data.swiperImg[i].s = this.data.swiperImg[this.data.move_index].s
+          this.data.swiperImg[this.data.move_index].s = temp
+          this.data.X = change
+          return
+        }
+      }
+    }
+  },
+  end () {
+    this.setData({
+      animation: false
+    })
+    let that = this
+    this.data.X = -1
+    let s = that.data.swiperImg.sort((a, b) => { return a.x - b.x })
+    for (let [i, v] of s.entries()) {
+      v.s = i
+    }
+    this.setData({
+      swiperImg: s,
+      move_index: -1,
+      active_index: -1
+    })
   },
   _toggleSpec (e) {
     if (e.currentTarget.dataset.type === 'showSpec2') {
