@@ -4,7 +4,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2020-02-25 00:42:17
+ * @Last Modified time: 2020-03-06 00:54:56
  */
 // /*eslint-disable*/
 var useUrl = require('./utils/service2');
@@ -39,6 +39,7 @@ Moment.updateLocale('en', {
 });
 App({
   data: {
+    optionsCamera: '',
     fix: system.model.indexOf('X') >= 0 || system.screenHeight - system.safeArea.height >= 35,
     capsule: capsule,
     system: system,

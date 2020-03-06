@@ -367,6 +367,15 @@ Page({
     })
     // app.data['SteleShareImage'] = tempFilePath
   },
+  goShare () {
+    app.su('shareCardInfo', {
+      img_name: this.data.SteleShareImage,
+      word: this.data.options.word
+    })
+    wx.navigateTo({
+      url: '/share/carShare/carShare?type=camera'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

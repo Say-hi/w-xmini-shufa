@@ -442,14 +442,24 @@ Page({
     if (sn) return s
     else return pixels
   },
+  goShare () {
+    app.su('shareCardInfo', {
+      img_name: this.data.SteleShareImage,
+      word: this.data.options.word
+    })
+    wx.navigateTo({
+      url: '/share/carShare/carShare?type=camera'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
+    // options = app.data.optionsCamera
     this.getData()
     // this.getImageInfo('https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom.jpg')
     this.setData({
-      options,
+      options: app.data.optionsCamera,
       bgImg: app.gs('alphaImg2'),
       main: ''
       // main: app.gs('alphaImg')

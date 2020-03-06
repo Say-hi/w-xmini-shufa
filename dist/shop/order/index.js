@@ -262,7 +262,7 @@ Page({
         page: ++this.data.page,
         uid: app.gs('userInfoAll').uid,
         // 0获取全部 -1未支付 1已支付准备发货 2已发货 3已收货 4收货后删除订单 -2申请退款 -3 退款成功 -4 未支付删除 -5 退款并删除订单 -6拒绝退款
-        status: this.data[this.data.options.from === 'sell' ? 'tabArrSell' : 'tabArr'][this.data.tabIndex]['s']
+        status: this.data[this.data.options.from === 'sellShop' ? 'tabArrSell' : 'tabArr'][this.data.tabIndex]['s']
       }
     }).then(function (res) {
       var _iteratorNormalCompletion = true;
@@ -274,7 +274,7 @@ Page({
           var v = _step.value;
 
           // v.order_num = '544629261291'
-          v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, _this5.data.options.from === 'sell' ? 'MM月DD日 HH:mm' : 'YYYY-MM-DD HH:mm') : '时间不详';
+          v.create_at = v.create_at ? app.momentFormat(v.create_at * 1000, _this5.data.options.from === 'sellShop' ? 'MM月DD日 HH:mm' : 'YYYY-MM-DD HH:mm') : '时间不详';
           v.statuss = v.status;
           switch (v.status * 1) {
             case 0:

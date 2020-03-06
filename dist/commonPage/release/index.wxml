@@ -15,7 +15,7 @@
 
 
 <view class="money f25 c323232 p3010 df dfac bgfff bd1 mt20">
-  <text>价格：</text>
+  <text>价格：</text>|
   <input bindinput='inputValue' data-type='price' class="inputMoney" />
   <text>元</text>
 </view>
@@ -25,6 +25,7 @@
   <text>元</text>
 </view>
 <view catchtap="_toggleSpec" class="arrow f25 c323232 bgfff mt20 p10">宝贝描述</view>
+<!-- <navigator url='/commonPage/release-editor/index' class="arrow f25 c323232 bgfff mt20 p10">宝贝描述</navigator> -->
 <view class="arrow f25 df dfac dfb c323232 bgfff mt20 p10 warehouse">
   <text>发货地</text>
   <picker mode="region" bindchange="pickerChoose" data-type="wareHouse" class="flex1 tar">{{ wareHouse || '广东省 广州市 海珠区' }}</picker>

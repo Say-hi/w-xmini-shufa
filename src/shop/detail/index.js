@@ -28,6 +28,7 @@ Page({
       pid: this.data.info.sku[this.data.skuIndex].pid,
       sku_id: this.data.info.sku[this.data.skuIndex].id,
       count: this.data.num,
+      is_baby: this.data.info.is_baby,
       product: {
         title: this.data.info.title,
         price: this.data.info.sku[this.data.skuIndex].price,
@@ -101,13 +102,17 @@ Page({
       }
     }
   },
-  shopProductDetail () {
+  shopProductDetail (flag = false) {
     app.wxrequest({
-      url: app.getUrl().shopProductDetail,
-      data: {
+      url: flag ? app.getUrl().shopProductDetail : app.getUrl().shopProductDetail,
+      data: flag ? {
+        pid: this.data.options.id,
+        cid: 3
+      } : {
         pid: this.data.options.id
       }
     }).then(res => {
+      if (res.is_baby * 1 === 1 && !flag) return this.shopProductDetail(true)
       res.imgs_url = JSON.parse(res.imgs_url)
       res.new_price_temp = res.new_price
       res.new_price = res.new_price.split('.')

@@ -49,6 +49,7 @@
 <!--评论 -e-->
 <!--商品详情 -s-->
 <view class="tac f30 p20">产品介绍</view>
+<view wx:if="{{ info.detail_text.length > 2 }}">{{ info.detail_text }}</view>
 <image wx:for="{{info.detail_url}}" wx:key="index" class="w100" mode="widthFix" lazy-load="1" src="{{item}}"></image>
 <!--商品详情 -e-->
 
@@ -57,11 +58,11 @@
 <view wx:if="{{ fix }}" class="zw40"></view>
 <view class="bt1 df dfac detailBtn w100 bgfff f33 p10" style="padding-bottom: {{fix?50:10}}rpx;">
   <navigator url="/shop/index/index" open-type="reLaunch" class="jwqfont jwqshouye df dfc dfac f22">首页</navigator>
-  <jwqnav url="/shop/cart/index">
+  <jwqnav wx:if="{{ info.is_baby == 2 }}" url="/shop/cart/index">
     <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/cart.png"></image>
   </jwqnav>
   <view class="dbBtn br10 cfff tac flex1 df">
-    <view catchtap="_toggleSpec" data-type="car" class="flex1">加入购物车</view>
+    <view style='{{ info.is_baby == 1 ? "display: none;" : "" }}' catchtap="_toggleSpec" data-type="car" class="flex1">加入购物车</view>
     <view catchtap="_toggleSpec" data-type="buy" class="flex1">立即购买</view>
   </view>
 </view>

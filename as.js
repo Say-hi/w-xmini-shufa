@@ -6,6 +6,6 @@ function getCodeUrl (url) {
   }
   console.log(num)
 }
-getCodeUrl('/shop/order-list-operate')
+getCodeUrl('/sell/product-detial')
 // ' + Select id,pid,username,state,comment from book_community_discuss
 // '+%df/ and 1 = 1

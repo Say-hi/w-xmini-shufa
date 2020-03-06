@@ -29,22 +29,41 @@
 <!--商城我的消息 -e-->
 
 <!--商城我的评价 -s-->
-<view wx:for="{{list}}" wx:key="index" class="bgfff {{ index > 0 ? 'mt20' : '' }}" wx:if="{{ options.type == 'shopcomment' }}">
-  <view class="goodsInfo df p20">
-    <image mode="aspectFill" lazy-load="1" src="{{item.img_url}}"></image>
-    <view class="commentGoods ml20 f21 c646464">
-      <view class="ell2 f24 c323232">{{item.title || '未知商品名'}}</view>
-      <view class="mt10">{{item.value}}</view>
-      <view class="mt20">评价时间：{{item.create_at}}</view>
+<view wx:for="{{list}}" wx:key="index"  class="bgfff p200 {{ index > 0 ? 'mt20' : '' }}" wx:if="{{ options.type == 'shopcomment' }}">
+  <view class="goodsInfo p20">
+    <view class='df' style='align-items: center;'>
+      <image style='width: 76rpx; height: 76rpx;' class='br ' src='{{ item.avatar_url }}'></image>
+      <view style='margin-left:12rpx;' class='f19 c323232'>
+        <view>{{ item.username }}</view>
+        <view>微信昵称</view>
+      </view>
+    </view>
+    <view class="f25 p020 c323232 mt20">
+      {{item.comment}}
+    </view>
+    <view class="p020 commentImage df">
+      <image wx:for="{{item.imgs_url.imgs}}" wx:key="index"  lazy-load="1" mode="aspectFill" src="{{item}}"></image>
     </view>
   </view>
-  <view class="f24 c323232 p20 left-pillar">评论内容</view>
-  <view class="f22 p020 c646464">
+  <view style='background: #f1f1f1;padding: 5rpx 20rpx;' class='df'>
+    <image style='width: 128rpx; height: 128rpx;' mode="aspectFill" lazy-load="1" src="{{item.img_url}}"></image>
+    <view class="commentGoods ml20 f21 c787878 flex1">
+      <view class="ell2 f24 c3e3a39">{{item.title || '未知商品名'}}</view>
+      <view class="mt10">{{ item.label }}:{{item.value}}</view>
+      <view class="mt20">评价时间:{{item.create_at}}</view>
+    </view>
+    <view class='f22 c3e3a39 tar'>
+      <view>{{ item.new_price }}</view>
+      <view>x{{ item.count }}</view>
+    </view>
+  </view>
+  <!-- <view class="f24 c323232 p20 left-pillar">评论内容</view> -->
+  <!-- <view class="f22 p020 c646464">
     {{item.comment}}
-  </view>
-  <view class="p020 commentImage df">
+  </view> -->
+  <!-- <view class="p020 commentImage df">
     <image wx:for="{{item.imgs_url.imgs}}" wx:key="index"  lazy-load="1" mode="aspectFill" src="{{item}}"></image>
-  </view>
+  </view> -->
 </view>
 <!--商城我的评价 -e-->
 

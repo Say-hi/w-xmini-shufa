@@ -63,6 +63,7 @@ Page({
   },
   userCamera (e) {
     let that = this
+    app.data.optionsCamera = Object.assign(this.data.options, {word: this.data.info.word})
     wx.authorize({
       scope: 'scope.camera',
       success () {

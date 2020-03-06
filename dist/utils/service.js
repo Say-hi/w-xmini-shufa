@@ -183,6 +183,7 @@ var serviceUrl = {
   shopTeamList: lqsyBaseDomain + '/shop/team-list', // 我的团队列表
   shopShow: lqsyBaseDomain + '/shop/show', // 获取热销and人气产品
   shopAd: lqsyBaseDomain + '/shop/ad', // 获取商城头部广告
+  sellProductDetail: lqsyBaseDomain + '/sell/product-detial', // 获取商城头部广告
   shopDiscussSub: lqsyBaseDomain + '/shop/discuss-sub', // 用户提交商品评价
   shopScoreList: lqsyBaseDomain + '/shop/score-list', // 积分记录列表
   shareUrl: lqsyTestDomain + '/lqsy/shareUrl.json', // 修改购物车的数量2

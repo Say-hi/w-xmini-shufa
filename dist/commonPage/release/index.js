@@ -25,7 +25,8 @@ Page({
     move_index: -1,
     X: -1,
     desImg: [],
-    derationImg: ['https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png', 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png']
+    des: '',
+    derationImg: []
   },
   del: function del() {
     if (this.data.swiperImg.length <= 1) {
@@ -278,6 +279,7 @@ Page({
     });
   },
   uploadSingleImg: function uploadSingleImg(url) {
+    console.log(this.data.upImgType);
     new UpLoad({
       imgArr: this.data.upImgType === 'img' ? 'swiperImg' : 'desImg',
       this: this
@@ -287,6 +289,7 @@ Page({
     this.data['' + e.currentTarget.dataset.type] = e.detail.value;
   },
   chooseType: function chooseType(e) {
+    var that = this;
     this.data.upImgType = e.currentTarget.dataset.type;
     wx.showActionSheet({
       itemList: ['拍照', '作品装裱', '从手机相册选择'],
@@ -294,7 +297,7 @@ Page({
         switch (e.tapIndex) {
           case 0:
             new UpLoad({
-              imgArr: 'swiperImg',
+              imgArr: that.data.upImgType === 'img' ? 'swiperImg' : 'desImg',
               sourceType: ['camera']
             }).chooseImage();
             break;
@@ -305,7 +308,7 @@ Page({
             break;
           case 2:
             new UpLoad({
-              imgArr: 'swiperImg',
+              imgArr: that.data.upImgType === 'img' ? 'swiperImg' : 'desImg',
               sourceType: ['album']
             }).chooseImage();
             break;
@@ -366,6 +369,38 @@ Page({
       }
     }
 
+    var detailUrl = '';
+    var _iteratorNormalCompletion8 = true;
+    var _didIteratorError8 = false;
+    var _iteratorError8 = undefined;
+
+    try {
+      for (var _iterator8 = this.data.desImg[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+        var _v2 = _step8.value;
+
+        if (!_v2.real) {
+          return app.toast({
+            content: '图片上传中，请稍后尝试'
+          });
+        }
+        detailUrl += _v2.real + ',';
+      }
+    } catch (err) {
+      _didIteratorError8 = true;
+      _iteratorError8 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion8 && _iterator8.return) {
+          _iterator8.return();
+        }
+      } finally {
+        if (_didIteratorError8) {
+          throw _iteratorError8;
+        }
+      }
+    }
+
+    var ss = JSON.stringify({ detail_url: detailUrl, detail_text: this.data.des });
     app.wxrequest({
       url: app.getUrl().sellProductSub,
       data: {
@@ -373,7 +408,7 @@ Page({
         title: this.data.title,
         price: this.data.price,
         freight: this.data.freight,
-        des: this.data.des || '',
+        des: ss || '',
         phone: this.data.phone,
         is_up: this.data.up,
         delivery: this.data.wareHouse || '广东省 广州市 海珠区',

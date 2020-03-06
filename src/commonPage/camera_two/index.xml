@@ -64,24 +64,24 @@
 
 <!--分享 -s-->
 <view class="mask cameraMask o0 {{ cameraMaskAnimate ? 'o1' : '' }} tr5">
-<view class="bgfff br10 mask-in ">
+<view class="bgfff br10 mask-in p200">
   <view class="f30 tac lh60 fw7 c323232">分享</view>
   <view data-type="cameraMask" class="df dfac dfb p30">
     <navigator catchtap='_toggleMask' data-type="cameraMask" url="../talk/index?type=camera&url={{ SteleShareImage }}" class="df dfc dfac f25 c323232">
-      <text style="color: #cfa972;" class="jwqfont jwqshequ"></text>
+      <text style="color: #cfa972; font-size: 100rpx;" class="jwqfont jwqshequ"></text>
       <text class="mt10">社区</text>
     </navigator>
     <button open-type="share" class="df dfc dfac f25 c323232">
-      <text style="color: #3eb135;" class="jwqfont jwqweixin"></text>
+      <text style="color: #3eb135; font-size: 100rpx;" class="jwqfont jwqweixin"></text>
       <text class="mt10">微信好友</text>
     </button>
-    <navigator url="/share/carShare/carShare?type=8" class="df dfc dfac f25 c323232">
-      <text style="color: #3eb135;" class="jwqfont jwqpengyouquan"></text>
+    <view catchtap='goShare' data-url="/share/carShare/carShare?type=camera" class="df dfc dfac f25 c323232">
+      <text style="color: #3eb135; font-size: 100rpx;" class="jwqfont jwqpengyouquan"></text>
       <text class="mt10">朋友圈</text>
-    </navigator>
+    </view>
   </view>
   <view class="mask-btn bt1">
-    <view class="flex1 tac" catchtap="_toggleMask" data-type="cameraMask" >取消</view>
+    <view class="flex1 tac" catchtap="_toggleMask" data-type="cameraMask">取消</view>
   </view>
 </view>
 </view>

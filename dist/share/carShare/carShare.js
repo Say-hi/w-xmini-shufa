@@ -332,7 +332,7 @@ Page({
         }];
         break;
     }
-
+    console.log('view', views);
     this.setData({
       painting: {
         width: 375,

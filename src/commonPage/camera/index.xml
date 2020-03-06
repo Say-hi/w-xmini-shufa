@@ -21,9 +21,9 @@
 <!-- <slider wx:if="{{ options.type == 1 }}" style="margin: 0 80rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider> -->
 <slider style="margin: 40rpx 100rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider>
 <slider activeColor="#0094ff" style="margin: 40rpx 100rpx;" value="{{ rotate + 180 }}" min="0" max="360" bindchanging="changeRotate"></slider>
-<view class='tac f24 c646464'>请调节临字图片的大小、角度、透明度</view>
+<!-- <view class='tac f24 c646464'>请调节临字图片的大小、角度、透明度</view> -->
 <!--底格 -s-->
-<!-- <view class="bgfff mt20 f18 pr c787878 df typeChoose">
+<view class="bgfff mt20 f18 pr c787878 df typeChoose">
 <view class="df dfc dfac p20">
   <text class="jwqfont jwqyanjing"></text>
   <text class="mt10">字格</text>
@@ -37,10 +37,10 @@
   <image wx:else src="{{ item.i }}"></image>
   <text class="mt10 {{ index == bottomIndex ? 'cff362c' : '' }}">{{ item.t }}</text>
 </view>
-</view> -->
+</view>
 <!--底格 -e-->
 
-<view class="cameraSe df p20 pr">
+<view class="cameraSe df p020 pr">
   <view>
     <image catchtap="eventDraw" data-type="cameraMask" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_share.png"></image>
     <view class='f24 c646464 tac'>直接分享</view>
@@ -50,21 +50,21 @@
 
 <!--分享 -s-->
 <view class="mask cameraMask o0 {{ cameraMaskAnimate ? 'o1' : '' }} tr5">
-<view class="bgfff br10 mask-in ">
+<view class="bgfff br10 mask-in p200">
   <view class="f30 tac lh60 fw7 c323232">分享</view>
   <view data-type="cameraMask" class="df dfac dfb p30">
     <navigator catchtap='_toggleMask' data-type="cameraMask" url="../talk/index?type=camera&url={{ SteleShareImage }}" class="df dfc dfac f25 c323232">
-      <text style="color: #cfa972;" class="jwqfont jwqshequ"></text>
+      <text style="color: #cfa972; font-size: 100rpx;" class="jwqfont jwqshequ"></text>
       <text class="mt10">社区</text>
     </navigator>
     <button open-type="share" class="df dfc dfac f25 c323232">
-      <text style="color: #3eb135;" class="jwqfont jwqweixin"></text>
+      <text style="color: #3eb135; font-size: 100rpx;" class="jwqfont jwqweixin"></text>
       <text class="mt10">微信好友</text>
     </button>
-    <navigator url="/share/carShare/carShare?type=8" class="df dfc dfac f25 c323232">
-      <text style="color: #3eb135;" class="jwqfont jwqpengyouquan"></text>
+    <view catchtap='goShare' url="/share/carShare/carShare?type=8" class="df dfc dfac f25 c323232">
+      <text style="color: #3eb135; font-size: 100rpx;" class="jwqfont jwqpengyouquan"></text>
       <text class="mt10">朋友圈</text>
-    </navigator>
+    </view>
   </view>
   <view class="mask-btn bt1">
     <view class="flex1 tac" catchtap="_toggleMask" data-type="cameraMask" >取消</view>

@@ -134,6 +134,7 @@
         "literacy/index",
         "literacyShow/index",
         "release/index",
+        "release-editor/index",
         "reply/index",
         "back/back"
       ]

@@ -45,8 +45,9 @@ Page({
     var _this2 = this;
 
     app.wxrequest({
-      url: app.getUrl(),
+      url: app.getUrl().shopProducts,
       data: {
+        cid: 3,
         uid: app.gs('userInfoAll').uid,
         page: ++this.data.page
       }

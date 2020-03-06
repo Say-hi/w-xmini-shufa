@@ -62,7 +62,7 @@ Page({
     });
   },
   pay: function pay() {
-    if (this.data.oid) return this.payAgain();
+    if (this.data.oid && this.data.info[0].is_baby * 1 !== 1) return this.payAgain();
     if (!this.data.addressInfo || !this.data.addressInfo.telNumber) {
       return app.toast({
         content: '请填写收货地址信息'
@@ -101,8 +101,16 @@ Page({
     }
 
     app.wxrequest({
-      url: app.getUrl().payShop,
-      data: {
+      url: app.getUrl()[this.data.info[0].is_baby * 1 === 1 ? 'paySell' : 'payShop'],
+      data: this.data.info[0].is_baby * 1 === 1 ? {
+        name: this.data.addressInfo.userName,
+        phone: this.data.addressInfo.telNumber,
+        uid: app.gs('userInfoAll').uid,
+        openid: app.gs('userInfoAll').openid,
+        address: '' + this.data.addressInfo.provinceName + this.data.addressInfo.cityName + this.data.addressInfo.countyName + this.data.addressInfo.detailInfo,
+        pid: this.data.info[0].pid,
+        count: this.data.info[0].count
+      } : {
         name: this.data.addressInfo.userName,
         phone: this.data.addressInfo.telNumber,
         uid: app.gs('userInfoAll').uid,
