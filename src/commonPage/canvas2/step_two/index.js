@@ -331,6 +331,11 @@ Page({
       mask: true
     })
     let that = this
+
+    // that.data.single = options.single
+    // that.data.options = options
+    // that.getImageInfo(app.data.chooseImage)
+
     app.cloud().getImgCheck(app.data.chooseImage).then(() => {
       that.data.single = options.single
       that.data.options = options

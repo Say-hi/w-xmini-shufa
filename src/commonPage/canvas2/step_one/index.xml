@@ -8,3 +8,4 @@
   <navigator url="/commonPage/canvas2/step_three/index?single=more" hover-class="none" class="type_choose" data-text="多幅装裱"></navigator>
 </view>
 <toast toast="{{ toast }}"></toast>
+<!-- <navigator url='/commonPage/canvas_share/index'>123</navigator> -->

@@ -321,6 +321,11 @@ Page({
       mask: true
     });
     var that = this;
+
+    // that.data.single = options.single
+    // that.data.options = options
+    // that.getImageInfo(app.data.chooseImage)
+
     app.cloud().getImgCheck(app.data.chooseImage).then(function () {
       that.data.single = options.single;
       that.data.options = options;
