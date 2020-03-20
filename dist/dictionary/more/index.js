@@ -231,13 +231,13 @@ Page({
     }).then(function (res) {
       if (res.total < 1) {
         app.toast({
-          content: '未搜索到相关内容'
+          content: '未搜索到相关书法字帖内容'
         });
       }
       that.setData({
         list: that.data.list ? that.data.list.concat(res.lists) : [].concat(res.lists)
       });
-      that.data.more = res.lists.length >= res.pre_page;
+      that.data.more = res.total_page > res.page;
     });
   },
   getW: function getW(options) {
@@ -302,14 +302,14 @@ Page({
     // clearInterval(timer)
     // console.log(' ---------- onUnload ----------')
   },
-  onShareAppMessage: function onShareAppMessage() {
-    // return {
-    //   title: app.gs('shareText').t || '绣学问，真纹绣',
-    //   path: `/pages/index/index`,
-    //   imageUrl: app.gs('shareText').g
-    // }
-  },
 
+  // onShareAppMessage () {
+  //   // return {
+  //   //   title: app.gs('shareText').t || '绣学问，真纹绣',
+  //   //   path: `/pages/index/index`,
+  //   //   imageUrl: app.gs('shareText').g
+  //   // }
+  // },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

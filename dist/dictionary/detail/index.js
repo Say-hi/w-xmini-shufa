@@ -301,14 +301,14 @@ Page({
     // clearInterval(timer)
     // console.log(' ---------- onUnload ----------')
   },
-  onShareAppMessage: function onShareAppMessage() {
-    // return {
-    //   title: app.gs('shareText').t || '绣学问，真纹绣',
-    //   path: `/pages/index/index`,
-    //   imageUrl: app.gs('shareText').g
-    // }
-  },
 
+  // onShareAppMessage () {
+  //   // return {
+  //   //   title: app.gs('shareText').t || '绣学问，真纹绣',
+  //   //   path: `/pages/index/index`,
+  //   //   imageUrl: app.gs('shareText').g
+  //   // }
+  // },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
