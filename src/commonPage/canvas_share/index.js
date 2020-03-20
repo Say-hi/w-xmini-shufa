@@ -21,25 +21,28 @@ Page({
       }
     })
   },
-  onShareAppMessage () {
-    return {
-      path: 'commonPage/canvas2/step_one/index'
-    }
-  },
   goPage (e) {
     wx.redirectTo({
       url: e.currentTarget.dataset.url
+    })
+  },
+  getImg (options) {
+    app.wxrequest({
+      url: app.getUrl().commonImg,
+      data: {
+        name: options.name
+      }
+    }).then(res => {
+      this.setData({
+        simg: res.url
+      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-    if (options.from === 'sell_release') {
-      app.data.sell_release = true
-    } else {
-      app.data.sell_release = false
-    }
+    this.getImg(options)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -51,7 +54,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow () {
-    app.checkUser({login: false})
+    // app.checkUser({login: false})
     // this.setKill()
     // console.log(' ---------- onShow ----------')
   },

@@ -128,10 +128,14 @@
       </view>
     </view>
     <view style="padding: 50rpx;">
-      <view catchtap="shareType" data-index="{{index}}" class="shareChoose df dfc dfac" wx:for="{{ shareArr }}" wx:key="index">
+      <view wx:if="{{ index <= 2 }}" catchtap="shareType" data-index="{{index}}" class="shareChoose df dfc dfac" wx:for="{{ shareArr }}" wx:key="item">
         <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_{{ index }}.png"></image>
         <view class="mt20 tac f28 c646464">{{ item }}</view>
       </view>
+      <button wx:if="{{ index >= 3 }}" open-type='share' wx:for="{{ shareArr }}" class="shareChoose df dfc dfac" wx:key="item">
+        <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_{{ index }}.png"></image>
+        <view class="mt20 tac f28 c646464">{{ item }}</view>
+      </button>
     </view>
     <view catchtap="_toggleSpec" class="tac cfff f33 specConfirm p2030">取消</view>
   </view>

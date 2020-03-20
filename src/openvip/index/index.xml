@@ -45,6 +45,7 @@
 
 <!--权益信息 -e-->
 <button style='border-radius: 20rpx; position:fixed; bottom: 100rpx;right:10rpx; background: #fff;border: 2rpx solid #eee;text-align: center; width: 100rpx;' open-type='contact'>客服</button>
+<navigator style='position: fixed; bottom: 200rpx;right:10rpx;background: #0094ff; color:#fff; border-radius: 50%; width: 100rpx;height: 100rpx;line-height:100rpx;text-align:center;' url='/pages/index/index' open-type='reLaunch'>首页</navigator>
 <!--错误弹窗-->
 <toast toast="{{ toast }}"></toast>
 <!--<import src="/template/template"></import>-->

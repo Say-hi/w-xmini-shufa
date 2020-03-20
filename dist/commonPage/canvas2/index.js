@@ -146,15 +146,21 @@ Page({
         break;
     }
   },
+  onShareAppMessage: function onShareAppMessage() {
+    return {
+      title: '\u6211\u5206\u4EAB\u4E86\u4E00\u4E2A\u88C5\u88F1\u4F5C\u54C1',
+      imageUrl: this.data.shareImageSrc,
+      path: '/commonPage/canvas_share/index?name=' + this.data.name
+    };
+  },
   _toggleSpec: function _toggleSpec() {
-    this.canvasDraw();
-    if (this.data.sell_release) {
-      // this.canvasDraw()
-    } else {
-      this.setData({
-        showSpec: !this.data.showSpec
-      });
+    // this.canvasDraw()
+    if (!this.data.showSpec) {
+      this.canvasDraw();
     }
+    this.setData({
+      showSpec: !this.data.showSpec
+    });
   },
   chooseImage: function chooseImage(e) {
     if (this.data.single === 'single') return;
@@ -536,9 +542,10 @@ Page({
           // that.setData({
           //   showImgSrc: res.tempFilePath
           // })
-          wx.hideLoading();
+
           // 发布拍品
           if (_this6.data.sell_release) {
+            wx.hideLoading();
             var pages = getCurrentPages();
             var _iteratorNormalCompletion4 = true;
             var _didIteratorError4 = false;
@@ -572,7 +579,22 @@ Page({
               }
             }
           } else {
-            _this6.data.shareImageSrc = res.tempFilePath;
+            wx.uploadFile({
+              url: app.getExactlyUrl(app.getUrl().commonUpload),
+              filePath: res.tempFilePath,
+              name: 'file',
+              formData: {
+                uid: app.gs('userInfoAll').id || 1,
+                file: res.tempFilePath
+              },
+              success: function success(res2) {
+                // console.log(res)
+                wx.hideLoading();
+                var parseData = JSON.parse(res2.data);
+                that.data.name = parseData.data.name;
+              }
+            });
+            that.data.shareImageSrc = res.tempFilePath;
           }
           // wx.saveImageToPhotosAlbum({
           //   filePath: res.tempFilePath,

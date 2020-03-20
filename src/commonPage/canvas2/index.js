@@ -169,15 +169,21 @@ Page({
         break
     }
   },
-  _toggleSpec () {
-    this.canvasDraw()
-    if (this.data.sell_release) {
-      // this.canvasDraw()
-    } else {
-      this.setData({
-        showSpec: !this.data.showSpec
-      })
+  onShareAppMessage () {
+    return {
+      title: `我分享了一个装裱作品`,
+      imageUrl: this.data.shareImageSrc,
+      path: `/commonPage/canvas_share/index?name=${this.data.name}`
     }
+  },
+  _toggleSpec () {
+    // this.canvasDraw()
+    if (!this.data.showSpec) {
+      this.canvasDraw()
+    }
+    this.setData({
+      showSpec: !this.data.showSpec
+    })
   },
   chooseImage (e) {
     if (this.data.single === 'single') return
@@ -492,9 +498,10 @@ Page({
           // that.setData({
           //   showImgSrc: res.tempFilePath
           // })
-          wx.hideLoading()
+
           // 发布拍品
           if (this.data.sell_release) {
+            wx.hideLoading()
             let pages = getCurrentPages()
             for (let [i, v] of pages.entries()) {
               if (v.route === 'commonPage/release/index') {
@@ -505,7 +512,22 @@ Page({
               }
             }
           } else {
-            this.data.shareImageSrc = res.tempFilePath
+            wx.uploadFile({
+              url: app.getExactlyUrl(app.getUrl().commonUpload),
+              filePath: res.tempFilePath,
+              name: 'file',
+              formData: {
+                uid: app.gs('userInfoAll').id || 1,
+                file: res.tempFilePath
+              },
+              success (res2) {
+                // console.log(res)
+                wx.hideLoading()
+                let parseData = JSON.parse(res2.data)
+                that.data.name = parseData.data.name
+              }
+            })
+            that.data.shareImageSrc = res.tempFilePath
           }
           // wx.saveImageToPhotosAlbum({
           //   filePath: res.tempFilePath,

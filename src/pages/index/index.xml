@@ -2,14 +2,15 @@
   <text class="cfff fw7">流谦书苑</text>
 </jwqcapsule>
 <!--搜索 s-->
+<!-- url="/search/index/index?type=shop" -->
 <navigator hover-class="none"
-           url="/search/index/index?type=shop"
+           url="/dictionary/search/index"
            class="search"
            style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png);transform: translateY({{ moveY || 0 }}px); {{ moveY > 0 ? 'position: relative; z-index: 800' : '' }}">
   <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
   <view style="height: 80rpx; padding:0 30rpx;" class="pr f24">
     <view class="jwqfont jwqsousuo1 f40"></view>
-    <input disabled="1" style="background: #fff;border-radius: 20rpx; padding: 10rpx 10rpx 10rpx 60rpx;" placeholder="搜索书法或商品" />
+    <input disabled="1" style="background: #fff;border-radius: 20rpx; padding: 10rpx 10rpx 10rpx 60rpx;" placeholder="字典搜索" />
   </view>
 </navigator>
 <!--搜索 e-->
@@ -40,6 +41,7 @@
   </view>
   </view>
 </view>
+
 <!--首页导航 e-->
 <view class="asdfqewr">
   <!--屋檐 s-->

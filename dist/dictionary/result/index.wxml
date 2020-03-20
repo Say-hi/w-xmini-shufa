@@ -1,0 +1,61 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">搜索结果</text>
+</jwqcapsule>
+<view class='result-wrap'>
+  <view class="result-top df bgfff br5">
+    <view>
+      <image style='width: 134rpx; height: 135rpx;' src='{{info.img_name}}'></image>
+    </view>
+    <view class='c787878 flex1 f26 df rw-center'>
+      <view>书体：{{ options.type }}</view>
+      <view catchtap='audio' style='margin-left: 2rpx;' class='mt10 df dfac f36'>{{wInfo.pinyin}}
+      <!-- <view style='margin-left:8rpx;' class='jwqfont jwqtianchongxing- cd81e06'></view> -->
+      </view>
+    </view>
+    <navigator url='/dictionary/detail/index?word={{ options.word }}&cid={{ options.cid }}' class='cf00 f24 df top-detail'>
+      详细解释<view class='angle'></view>
+    </navigator>
+  </view>
+
+  <view class='explain bgfff br5 mt10'>
+    <view class='explain-title f26 c787878 bd2'>说文解字</view>
+    <view class='f23 c646464 ws' style='padding: 24rpx 42rpx 24rpx 21rpx;letter-spacing: 2rpx; line-height: 35rpx;'>
+      <text class='cff362c'>【说文解字】</text>
+      {{wInfo.explain[0].content}}
+    </view>
+    <navigator url='/dictionary/more/index?type=说文解字&word={{ options.word }}&cid={{ options.cid }}' class='cf00 tac f19' style='padding: 10rpx 0 23rpx;'>－－查看更多－－</navigator>
+  </view>
+
+
+  <!-- <view class='explain bgfff br5 mt10'>
+    <view class='explain-title f26 c787878 bd2'>字源演变</view>
+    <view class='f23 c646464 ws' style='padding: 24rpx 42rpx 24rpx 21rpx;letter-spacing: 2rpx; line-height: 35rpx;'>
+      <text class='cff362c'>【字源演变】</text>
+      文字解释文字解释文字解释文字解释文字解释
+      文字解释文字解释文字解释文字解释文字解释文字解释文字
+      文字解释文字解释文字解释文字解释文字解释文字解释文字
+      文字解释文字解释文字解释文字解释文字解释
+      文字解释文字解释文字解释文字解释文字解释文字解释文字
+      文字解释文字解释文字解释文字解释文字解释文字解释文字
+      文字解释文字解释文字解释文字解释文字解释文字解释文字
+    </view>
+    <navigator url='/dictionary/more/index?type=字源演变' class='cf00 tac f19' style='padding: 10rpx 0 23rpx;'>－－查看更多－－</navigator>
+  </view> -->
+
+
+  <view class='explain bgfff br5 mt10'>
+    <view class='explain-title f26 c787878 bd2'>书法字帖</view>
+    <block wx:for='{{list}}'  wx:key='item'>
+      <view class='f24 c646464 zt-title'>{{item.path}}</view>
+      <view class='zt-img df'>
+        <view class='zti' wx:for='{{item.data}}' wx:for-item='iItem'  wx:key='item' >
+          <image style='width: 139rpx; height: 140rpx;' src='{{iItem.img_name}}'></image>
+        </view>
+      </view>
+    </block>
+    <navigator url='/dictionary/more/index?type=书法字帖&word={{ options.word }}&cid={{ options.cid }}' class='cf00 tac f19 mt10' style='padding: 10rpx 0 23rpx;'>－－查看更多－－</navigator>
+  </view>
+</view>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+ 

@@ -23,14 +23,23 @@ Page({
       }
     });
   },
-  onShareAppMessage: function onShareAppMessage() {
-    return {
-      path: 'commonPage/canvas2/step_one/index'
-    };
-  },
   goPage: function goPage(e) {
     wx.redirectTo({
       url: e.currentTarget.dataset.url
+    });
+  },
+  getImg: function getImg(options) {
+    var _this = this;
+
+    app.wxrequest({
+      url: app.getUrl().commonImg,
+      data: {
+        name: options.name
+      }
+    }).then(function (res) {
+      _this.setData({
+        simg: res.url
+      });
     });
   },
 
@@ -38,11 +47,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
-    if (options.from === 'sell_release') {
-      app.data.sell_release = true;
-    } else {
-      app.data.sell_release = false;
-    }
+    this.getImg(options);
   },
 
   /**
@@ -56,7 +61,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function onShow() {
-    app.checkUser({ login: false });
+    // app.checkUser({login: false})
     // this.setKill()
     // console.log(' ---------- onShow ----------')
   },

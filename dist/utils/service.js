@@ -189,6 +189,7 @@ var serviceUrl = {
   shareUrl: lqsyTestDomain + '/lqsy/shareUrl.json', // 修改购物车的数量2
   shopUser: lqsyBaseDomain + '/shop/user', // 商城用户中心获取用户信息
   shopUserRefund: lqsyBaseDomain + '/shop/user-refund', // 用户申请退款
+  commonUpload: lqsyBaseDomain + '/common/upload', // 用户申请退款
   shopOrderOperate: lqsyBaseDomain + '/shop/order-operate', // 用户对订单收货|取消| 删除操作
   shopOrderUpdate: lqsyBaseDomain + '/shop/order-update', // 修改一次订单收货地址
   shopRemind: lqsyBaseDomain + '/shop/remind', // 提醒发货( 当订单status = 1时)
@@ -280,6 +281,9 @@ var serviceUrl = {
   wordsDiscuss: lqsyBaseDomain + '/words/discuss', // 具体作品下的评论获取
   wordsDiscussSub: lqsyBaseDomain + '/words/discuss-sub', // 插入一条碑帖评论
   wordsDiscussStar: lqsyBaseDomain + '/words/discuss-star', // 碑帖评论点赞或者取消点赞
+  commonImg: lqsyBaseDomain + '/common/img', // 碑帖评论点赞或者取消点赞
+  dictionaryCategory: lqsyBaseDomain + '/dictionary/category', // 碑帖评论点赞或者取消点赞
+  dictionarySearch: lqsyBaseDomain + '/dictionary/search', // 碑帖评论点赞或者取消点赞
   wordsCategory: lqsyBaseDomain + '/words/category' // 碑帖分类
 };
 module.exports = serviceUrl;

@@ -146,6 +146,16 @@
       "pages": [
         "carShare/carShare"
       ]
+    },
+    {
+      "root": "dictionary", // 字典
+      "name": "dictionary",
+      "pages": [
+        "search/index",
+        "result/index",
+        "detail/index",
+        "more/index"
+      ]
     }
   ],
   "preloadRule": {
@@ -155,6 +165,7 @@
         "hundred",
         "dayword",
         "teaching",
+        "dictionary",
         "user",
         "shop",
         "camera",
@@ -168,6 +179,7 @@
         "hundred",
         "dayword",
         "teaching",
+        "dictionary",
         "user",
         "shop",
         "camera",

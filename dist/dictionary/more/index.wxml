@@ -1,0 +1,46 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">{{ options.type }}</text>
+</jwqcapsule>
+<view class='result-wrap'>
+  <view wx:if='{{ options.type == "说文解字" }}' class='explain bgfff br5 mt10'>
+    <view class='explain-title f26 c787878 bd2'>说文解字</view>
+    <view class='f23 c646464 ws' style='padding: 24rpx 42rpx 24rpx 21rpx;letter-spacing: 2rpx; line-height: 35rpx;'>
+      <text class='cff362c'>【说文解字】</text>
+      <view wx:for='{{wInfo.explain}}' wx:key='item'>{{item.content}}</view>
+    </view>
+    
+  </view>
+
+
+  <view wx:if='{{ options.type == "字源演变" }}' class='explain bgfff br5 mt10'>
+    <view class='explain-title f26 c787878 bd2'>字源演变</view>
+    <view class='f23 c646464 ws' style='padding: 24rpx 42rpx 24rpx 21rpx;letter-spacing: 2rpx; line-height: 35rpx;'>
+      <text class='cff362c'>【字源演变】</text>
+      文字解释文字解释文字解释文字解释文字解释
+      文字解释文字解释文字解释文字解释文字解释文字解释文字
+      文字解释文字解释文字解释文字解释文字解释文字解释文字
+      文字解释文字解释文字解释文字解释文字解释
+      文字解释文字解释文字解释文字解释文字解释文字解释文字
+      文字解释文字解释文字解释文字解释文字解释文字解释文字
+      文字解释文字解释文字解释文字解释文字解释文字解释文字
+    </view>
+    
+  </view>
+
+
+  <view wx:if='{{ options.type == "书法字帖" }}' class='explain bgfff br5 mt10'>
+    <view class='explain-title f26 c787878 bd2'>书法字帖</view>
+    <block wx:for='{{list}}'  wx:key='item'>
+      <view class='f24 c646464 zt-title'>{{item.path}}</view>
+      <view class='zt-img df'>
+        <view class='zti' wx:for='{{item.data}}' wx:for-item='iItem'  wx:key='item' >
+          <image catchtap='showImg' data-src="{{iItem.img_name}}" style='width: 139rpx; height: 140rpx;' src='{{iItem.img_name}}'></image>
+        </view>
+      </view>
+    </block>
+    
+  </view>
+</view>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+ 
