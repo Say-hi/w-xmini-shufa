@@ -2,7 +2,8 @@
   <text class="cfff fw7">详细解释</text>
 </jwqcapsule>
 <view class="result-top bgfff br5 ce7840e f29">
-    <image style='width: 390rpx; height: 391rpx;margin: 0 auto;' src="{{ info.img_name }}"></image>
+    <!-- <image style='width: 390rpx; height: 391rpx;margin: 0 auto;' src="{{ info.img_name }}"></image> -->
+    <view style='font-size: 200rpx;text-align: center;'>{{options.word}}</view>
     <view class='df dfac info mt20'>
        <view class='flex1'>部　首:<text class='c787878'>　{{wInfo.bushou}}</text></view>
        <view class='flex1'>结　构:<text class='c787878'>　{{wInfo.jiegou}}</text></view>

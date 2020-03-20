@@ -154,12 +154,8 @@ Page({
     });
   },
   onReachBottom: function onReachBottom() {
-    // if (!this.data.more) return app.toast({content: '没有更多内容'})
-    // this.doSearch({
-    //   detail: {
-    //     value: this.data.text
-    //   }
-    // })
+    if (!this.data.more) return app.toast({ content: '没有更多内容' });
+    this.search(this.data.options);
   },
   goSearch: function goSearch() {
     wx.navigateTo({
@@ -241,7 +237,7 @@ Page({
       that.setData({
         list: that.data.list ? that.data.list.concat(res.lists) : [].concat(res.lists)
       });
-      // that.data.more = res.lists.length >= res.pre_page
+      that.data.more = res.lists.length >= res.pre_page;
     });
   },
   getW: function getW(options) {

@@ -4,7 +4,8 @@
 <view class='result-wrap'>
   <view class="result-top df bgfff br5">
     <view>
-      <image style='width: 134rpx; height: 135rpx;' src='{{info.img_name}}'></image>
+      <!-- <image wx:if="{{ info.img_name }}" style='width: 134rpx; height: 135rpx;' src='{{info.img_name}}'></image> -->
+      <view style='font-size: 100rpx;'>{{ options.word }}</view>
     </view>
     <view class='c787878 flex1 f26 df rw-center'>
       <view>书体：{{ options.type }}</view>
