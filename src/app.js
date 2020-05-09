@@ -2,7 +2,7 @@
  * @Author: Jiang WenQiang
  * @Date: 2019-09-01 10:29:30
  * @Last Modified by: Jiang WenQiang
- * @Last Modified time: 2020-03-06 00:54:56
+ * @Last Modified time: 2020-04-21 16:41:11
  */
 // /*eslint-disable*/
 const useUrl = require('./utils/service2')
@@ -874,7 +874,7 @@ App({
             console.log(e)
           }
         }
-        if (res.rank < 0 && rank) {
+        if (res.rank < 1 && rank) {
           this.toast({
             content: '您还未成为会员,无法继续享受服务哦~~',
             mask: true
@@ -971,6 +971,36 @@ App({
     })
   },
   onLaunch () {
+    let that = this
+    if (!this.gs('userInfoAll') || !this.gs('userInfoAll').uid || !this.gs('userInfoAll').openid) {
+      wx.login({
+        success (res) {
+          wx.request({
+            url: 'https://lq.yifengshuyuan.com/books/api/web/index.php/wechat/openid',
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+              code: res.code
+            },
+            success (res2) {
+              console.log(res2)
+              if (res2.data.status * 1 === 400 && res2.data.data.id) {
+                res2.data.data['access_token'] = null
+                res2.data.data['openid'] = res2.data.data.openid_mini
+                that.su('userInfoAll', res2.data.data)
+              } else {
+                // res.data['uid'] = res.data.id
+                res2.data.data['access_token'] = null
+                res2.data.data['openid'] = res2.data.data.openid_mini
+                that.su('userInfoAll', res2.data.data)
+              }
+            }
+          })
+        }
+      })
+    }
     wx.removeStorageSync('canvasImgArr')
     this.mapInfo()
     this.getShareUrl()

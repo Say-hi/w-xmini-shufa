@@ -1,0 +1,50 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">{{ options.type === 'fans' ? '粉丝':'评论'}}</text>
+</jwqcapsule>
+<!--分类 -s-->
+<scroll-view wx:if="{{ options.type == 'comment' }}" class="tab-scroll"
+             scroll-with-animation="1"
+             scroll-x="1"
+             scroll-into-view="tab{{ tabId - 1 }}">
+<view class="tab-inside">
+  <button hover-class="none" class="tab-item f25 cfff {{ tabIndex == index ? 'active' : '' }}"
+          id="tab{{ index }}"
+          catchtap="chooseIndex"
+          data-index="{{ index }}"
+          wx:key="item"
+          wx:for="{{ tabArr }}">{{ item }}</button>
+</view>
+</scroll-view>
+<!--分类 -e-->
+<!--评论列表 -s-->
+<view class="comment">
+  <view wx:if="{{ options.type == 'comment' }}" catchtap='goDetail' data-index='{{index}}' wx:for="{{list}}" wx:key="item" class="commentItem">
+    <image class="br ciImg" mode="aspectFill" lazy-load="1" src="{{item.uid_avatar_url}}"></image>
+    <view class="df flex1 bd1 p200">
+      <view class="ciRight flex1">
+        <text class="f22 c787878">{{item.uid_username || item.uid_nickname || '游客'}}</text>
+        <text class="f25 c000">{{item.comment}}</text>
+        <view class="f22 mt10 ciBottom">
+          <text class="flex1">{{item.create_at}}</text>
+        </view>
+      </view>
+      <!-- <image class="replyImg" lazy-load="1" mode="aspectFill" src="https://c.jiangwenqiang.com/api/logo.jpg"></image> -->
+    </view>
+  </view>
+  <view wx:if="{{ options.type == 'fans' }}" wx:for="{{list}}" wx:key="item" class="commentItem">
+    <image class="br ciImg" mode="aspectFill" lazy-load="1" src="{{item.uid_avatar_url}}"></image>
+    <view class="df flex1 bd1 p200">
+      <view class="ciRight flex1">
+        <text class="f22 c787878">{{item.uid_username || '游客'}}</text>
+        <text class="f25 c323232">{{item.sign}}</text>
+      </view>
+      <view catchtap='follow' data-index='{{ index }}' class="tac f28 unfollow {{ item.is_each_other < 0 ? '' : 'follow' }}">{{ item.is_each_other < 0 ? '关注' : '互相关注' }}</view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{!list.length}}" class='tac f22 p20 c999'>暂无相关内容</view>
+<!--评论列表 -e-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

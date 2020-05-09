@@ -1,0 +1,86 @@
+.address {
+  background-color: #fff;
+  position: relative;
+  margin-bottom: 20rpx;
+  image {
+    width: 100%;
+  }
+  .address-s {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    padding: 0 20rpx;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 120rpx;
+    .a-s-t {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  .open-setting {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    transform: translate(0, 0);
+    button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80% !important;
+    }
+  }
+}
+
+
+.goodsItem {
+  image {
+    width: 190rpx;
+    height: 195rpx;
+  }
+}
+.arrow {
+  padding-right: 20rpx;
+  &:after {
+    width: 10rpx;
+    height: 10rpx;
+    right: 0;
+  }
+}
+
+.pay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  .cfff {
+    background: #23ac3a;
+  }
+}
+
+.pay-mask {
+  z-index: 96;
+  background: #fff;
+  padding: 20rpx 60rpx;
+  .pItem {
+    flex: 1;
+    margin-left: 20rpx;
+    border: 2rpx solid #22ac38;
+    border-radius: 10rpx;
+    color: #22ac38;
+    &:nth-child(2) {
+      color: #fff;
+      background-color: #22ac38;
+    }
+  }
+}

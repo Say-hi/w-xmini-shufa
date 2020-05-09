@@ -1,0 +1,73 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">{{ !noCheck ? '流谦书院' : main ? '视频' : '书法教学' }}</text>
+</jwqcapsule>
+<!--搜索 s-->
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
+  <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+<!--  <view style="height: 80rpx; padding:0 30rpx;" class="pr f24">-->
+<!--    <view class="jwqfont jwqsousuo1 f40"></view>-->
+<!--    <input style="background: #fff;border-radius: 20rpx; padding: 10rpx 10rpx 10rpx 60rpx;" placeholder="请输入搜索视频名称" />-->
+<!--  </view>-->
+</view>
+<!--搜索 e-->
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<!--分类 -s-->
+<scroll-view class="tab-scroll p200"
+             wx:if="{{noCheck}}"
+             scroll-with-animation="1"
+             scroll-x="1"
+             scroll-into-view="tab{{ tabId - 3 }}">
+  <view class="tab-inside">
+    <button hover-class="none" class="tab-item f25 cfff {{ tabIndex == index ? 'active' : '' }}"
+            id="tab{{ index }}"
+            catchtap="chooseIndex"
+            data-index="{{ index }}"
+            wx:key="index"
+            wx:for="{{ tabArr }}">{{ item[0].name }}</button>
+  </view>
+</scroll-view>
+<!--分类 -e-->
+<!--轮播图 -s-->
+<!--<swiper autoplay="1" circular="1">-->
+<!--  <swiper-item wx:for="1234" wx:key="index">-->
+<!--    <image class="w100" src="https://c.jiangwenqiang.com/api/logo.jpg"></image>-->
+<!--  </swiper-item>-->
+<!--</swiper>-->
+<!--轮播图 -e-->
+<view wx:if="{{ !main && noCheck }}" class="bd1 p20 f25 c323232">精品课程</view>
+
+<!--课程列表 -s-->
+<view wx:if="{{ !main }}" class="teachingList">
+  <navigator url="../detail/index?id={{item.id}}" class="tlItem bd1" wx:for="{{list}}" wx:key="index">
+    <view class="tliTop pr tac">
+      <image mode="aspectFill" lazy-load="1" class="tlitImg" src="{{item.cover_url}}"></image>
+      <view class="playIcon pa cfff"></view>
+    </view>
+    <view class="f25 c323232 tliTil">{{item.title}}</view>
+    <view class="c787878 f19 tliTil">{{item.des}}</view>
+    <view class="c787878 f16">已更新{{item.section_count || 1}}期 | {{item.hits}}人已学</view>
+  </navigator>
+</view>
+<!--课程列表 -e-->
+<!--课程列表 -s-->
+<navigator wx:if="{{ main }}" url="../detail/index?id={{item.id}}{{ main ? '&from=main' : '' }}" class="tlItem tlItem2" wx:for="{{list}}" wx:key="index">
+  <view class="tliTop pr">
+    <image mode="aspectFill" lazy-load="1" class="tlitImg" src="{{item.cover_url}}"></image>
+    <view class="playIcon pa cfff"></view>
+  </view>
+  <view class="tliR flex1">
+    <view class="f25 c323232 tliTil ell1">{{item.title}}</view>
+    <view class="c646464 f18 tliTil ell3 mt10">{{item.des}}</view>
+    <view class="c646464 f17 pr df mt20">
+      <view class="playIcon2"></view>
+      <text>　{{item.hits}}</text>
+    </view>
+  </view>
+</navigator>
+<view wx:if="{{!list.length}}" class='tac f22 p20 c999'>暂无相关内容</view>
+<!--课程列表 -e-->
+<jwqfoot wx:if="{{ main }}"></jwqfoot>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

@@ -6,6 +6,6 @@ function getCodeUrl (url) {
   }
   console.log(num)
 }
-getCodeUrl('/dictionary/search')
+getCodeUrl('https://c.jiangwenqiang.com/lqsy/lq-shop.json')
 // ' + Select id,pid,username,state,comment from book_community_discuss
 // '+%df/ and 1 = 1

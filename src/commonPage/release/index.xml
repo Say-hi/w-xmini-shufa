@@ -15,7 +15,7 @@
 
 
 <view class="money f25 c323232 p3010 df dfac bgfff bd1 mt20">
-  <text>价格：</text>|
+  <text>价格：</text>
   <input bindinput='inputValue' data-type='price' class="inputMoney" />
   <text>元</text>
 </view>

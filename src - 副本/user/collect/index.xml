@@ -1,0 +1,44 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">{{ options.type === 'zan' ? '我的点赞' : '我的帖子' }}</text>
+</jwqcapsule>
+<!--发布&收藏 -s-->
+<view wx:if="{{ options.type != 'zan' }}" class="bd1 topNav bgfff lh60 f29 c646464">
+  <view catchtap="_tnChoose" wx:for="{{ tnArr }}" wx:key="item" data-index="{{ index }}" class="flex1 tac tnItem {{ tnIndex == index ? 'active' : '' }}">{{ item.t }}</view>
+</view>
+<!--发布&收藏 -e-->
+<!--列表 -s-->
+<view class="hundredListItem bgfff" wx:for="{{list}}" wx:key="item">
+<view class="df dfb">
+  <view url="/hundred/userHomePage/index?id={{ item.uid }}">
+    <view class="hliTop">
+      <image class="br hliTopImg" lazy-load="true" mode="aspectFill" src="{{item.avatar_url}}"></image>
+      <view class="hliTopName f21 c323232">
+        <text>{{item.username || item.nickname}}</text>
+        <text class="f18 c646464 mt10">{{item.create_at}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<jwqnav url="{{tnArr[tnIndex].url}}{{item.id}}" >
+  <view wx:if="{{!item.cover_url || item.cover_url.length < 10}}">
+    <view class="hliTitle mt20 f30 c323232">
+      <image class="hlitImg" mode="widthFix" wx:if="{{ item.label.length }}" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/essence.png"></image>
+      <text>{{ item.title }}</text>
+    </view>
+    <view class="hliContent f28 c787878 mt20 ell3">
+      {{item.comment}}
+    </view>
+    <view class="hliImg">
+      <image class="hliiItem mt10" wx:for="{{item.imgs_url.imgs}}" wx:for-item='iitme' wx:key="iitme" src="{{iitme}}" mode="aspectFill" lazy-load="1"  show-menu-by-longpress="1"></image>
+    </view>
+  </view>
+  <view class="mt20 pr" wx:else>
+    <image class="videoImg" mode="widthFix" lazy-load="1" src="{{item.cover_url}}"></image>
+    <view class="playIcon pa cfff"></view>
+  </view>
+</jwqnav>
+</view>
+<view wx:if="{{ !list.length }}" class='tac p20 c999 f30'>- 暂无相关内容 -</view>
+<!--列表 -e-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

@@ -1,0 +1,36 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">{{name}}</text>
+</jwqcapsule>
+<!--搜索 s-->
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
+  <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+  <view style="height: 80rpx; padding:0 30rpx;" class="pr f24">
+    <view class="jwqfont jwqsousuo1 f40"></view>
+    <input bindconfirm="search" confirm-type="search" style="background: #fff;border-radius: 20rpx; padding: 10rpx 10rpx 10rpx 60rpx;" placeholder="搜索书法或商品" />
+  </view>
+</view>
+<!--搜索 e-->
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<view class="p20 goods">
+  <navigator url="/shop/detail/index?id={{item.id}}" wx:for="{{list}}" wx:key="index" class="goodsItem bgfff">
+    <image lazy-load="1" class="w100" mode="aspectFill" src="{{item.img_url}}"></image>
+    <view class="ell2 f22 mt10 c646464 p10">{{ item.title }}</view>
+    <view class="p10 mt10 df dfac">
+      <view>
+        <text class="f22 cff362c">￥</text>
+        <text class="f29 cff362c">{{item.new_price[0]}}</text>
+        <text class="f26 cff362c">{{'.' + item.new_price[1] || '00'}}</text>
+      </view>
+      <text class="f19 c787878 ml20 ">已售{{item.sale_count}}件</text>
+    </view>
+  </navigator>
+  <view wx:if="{{!list.length}}" class='tac f22 p20 c999'>暂无相关内容</view>
+</view>
+
+<navigator open-type='reLaunch' url='/shop/cart/index' class="goCart">
+  <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/cart.png"></image>
+</navigator>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

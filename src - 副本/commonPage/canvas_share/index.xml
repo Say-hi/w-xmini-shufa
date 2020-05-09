@@ -1,0 +1,9 @@
+<!-- <jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">作品欣赏</text>
+</jwqcapsule> -->
+<view class='showImg df'>
+  <image style="width: 100%;display:inline-block;" mode="widthFix" src="{{simg}}"></image>
+</view>
+<image catchtap='goPage' data-url='/pages/index/index' class='op_img img1' src='https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_img_1.png'></image>
+<image catchtap='goPage' data-url='/commonPage/canvas2/step_one/index' class='op_img img2' src='https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_img_2.png'></image>
+<toast toast="{{ toast }}"></toast>

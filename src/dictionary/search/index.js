@@ -156,6 +156,7 @@ Page({
         page: ++that.data.authorPage
       }
     }).then(res => {
+      app.su('searchAuthor', res)
       that.setData({
         authorArr: res
       })

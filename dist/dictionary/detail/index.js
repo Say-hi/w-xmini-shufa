@@ -265,7 +265,7 @@ Page({
     this.setData({
       options: options
     });
-    this.search(options);
+    // this.search(options)
     this.getW(options);
   },
 

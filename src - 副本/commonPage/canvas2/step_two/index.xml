@@ -1,0 +1,34 @@
+<!-- <jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">修剪图片</text>
+</jwqcapsule> -->
+<image style="position: fixed; top: {{ img.y }}px; left: {{ img.x }}px; width: {{ img.width }}px;height: {{ img.height }}px; transform: scale({{ img.scale }}) rotate({{ img.rotate }}deg);z-index: -1; transition: all {{ time }}s;" src="{{ img.path }}"></image>
+<view catchtouchstart="touchStart"
+      catchtouchmove="touchMove" style="position:fixed; width:100%;height:80%;background:transparent; top:0;left:0;"></view>
+<view hidden="{{ !img || !img.path }}" catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="img" class="cutArea {{ cutAreaMove ? 'cutMove' : '' }}" style="transition: all {{ time }}s;position: fixed; top: {{ img.cutY}}px; left: {{ img.cutX }}px; width: {{ img.cutW }}px;height: {{ img.cutH }}px;">
+  <view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="point" data-scroll="xy" class="dot dotLeftTop"></view>
+  <view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="point" data-scroll="y" class="dot dotRightTop"></view>
+  <view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="point" data-scroll="x" class="dot dotLeftBottom"></view>
+  <view catchtouchstart="chooseAreaStart" catchtouchend="chooseAreaEnd" catchtouchmove="chooseAreaMove" data-type="point" data-scroll="z" class="dot dotRightBottom"></view>
+</view>
+<view hidden="{{ !img || !img.path }}" class="bottomOp df bgfff">
+  <!-- <view class="tac" catchtap="go" data-type="back">取消</view>
+  <view class="tac" catchtap="go" data-type="init">复位</view>
+  <view class="tac" catchtap="go" data-type="next">下一步</view> -->
+  <view wx:if='{{ bottomOpD === "cj" }}' class="cjop df dfb">
+    <view wx:for='{{ cjArr }}' catchtap='setcj' data-index="{{ index }}" wx:key='item' class="cjItem f30 c323232 {{ cjIndex == index ? 'cf73650 pr' : '' }}">{{ item.t }}</view>
+  </view>
+  <view wx:if='{{ bottomOpD === "fd" }}' class="fdop">
+    <slider bindchange="sliderChange" bindchanging="sliderChange" style="margin: 10rpx 100rpx;" class="flex1" step='0.1' show-value='1' block-color="#ff0000" block-size='20' activeColor="#323232" backgroundColor="#323232" value="{{ img.scale }}" min="1" max="2"></slider>
+  </view>
+  <slider wx:if='{{ bottomOpD === "xz" }}' activeColor="#323232" backgroundColor="#323232" block-color="#ff0000" block-size='20' step='1' style="margin: 10rpx 100rpx;" show-value='1' value="{{ img.rotate }}" min="-180" max="180" bindchanging="changeRotate" bindchange="changeRotate"></slider>
+  <view class="choose-operation w100 df bt1">
+    <view catchtap='bottomOp' data-op='back' class="jwqfont jwqcuowu1"></view>
+    <view catchtap='bottomOp' data-op='fd' class="jwqfont {{ bottomOpD === 'fd' ? 'active' : '' }} jwqfangda"></view>
+    <view catchtap='bottomOp' data-op='cj' class="jwqfont {{ bottomOpD === 'cj' ? 'active' : '' }} jwqcaijian"></view>
+    <view catchtap='bottomOp' data-op='xz' class="jwqfont {{ bottomOpD === 'xz' ? 'active' : '' }} jwqxiangyouxuanzhuan"></view>
+    <view catchtap='bottomOp' data-op='confirm' style='color: #ee10b2;' class="jwqfont jwqzhengque"></view>
+  </view>
+</view>
+
+<canvas style="width: 1000px; height: 1000px; position: fixed; bottom: -200%;right:-200%;" canvas-id="outPic"></canvas>
+<toast toast="{{ toast }}"></toast>

@@ -1,0 +1,22 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">我的积分</text>
+</jwqcapsule>
+<view class="pr bgfff p20 scoreTop">
+  <view class="df dfb f22 c646464">
+    <text>可用积分</text>
+    <text class="c033d68">使用帮助</text>
+  </view>
+  <view class="cff362c">{{total_score}}</view>
+  <view class="pa jwqfont jwqjifenshangcheng"></view>
+</view>
+<view class="bd1 f25 c323232 p20 bgfff mt30">积分明细</view>
+<view wx:for="{{list}}" wx:key="index" class="p20 bd1 bgfff">
+  <view class="f28 c323232">{{item.des}}</view>
+  <view class="mt10 df dfb">
+    <text class="f20 c646464">{{item.des}}</text>
+    <text class="f30 {{ index > 2 ? 'c323232' : 'cff362c' }}">{{item.score}}</text>
+  </view>
+  <view class="f20 c646464">{{item.create_at}}</view>
+</view>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

@@ -1,0 +1,63 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">提交订单</text>
+</jwqcapsule>
+<view wx:if="{{ !success }}">
+  <!--卡卷信息 -s-->
+  <view class="mt10 topInfo">
+    <image mode="widthFix" src="{{ info.sku[rankIndex].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_open.png' }}"></image>
+    <view class="f21 flex1">
+      <view class="f25 c323232">{{info.sku[rankIndex].title || info.title}}</view>
+      <view class="c787878">
+        <text>{{ info.sku[rankIndex].rankText }}</text>
+        <text>×1</text>
+      </view>
+      <view class="cff362c">¥{{info.sku[rankIndex].price}}</view>
+    </view>
+  </view>
+  <!--卡卷信息 -e-->
+  <!--优惠券 -s-->
+  <!-- <view class="f22 p2030 mt10 c323232 df dfb bgfff">
+    <text>优惠券</text>
+    <text>使用优惠　></text>
+  </view> -->
+  <!--优惠券 -e-->
+  <view class="f22 p2030 mt10 c323232 df dfb bgfff">
+    <text>商品金额</text>
+    <text>￥{{info.sku[rankIndex].price}}</text>
+  </view>
+  <view class="f22 p2030 mt10 c323232 df dfb bgfff">
+    <text></text>
+    <view>
+      <text>合计：</text>
+      <text class="cff362c">¥{{info.sku[rankIndex].price}}</text>
+    </view>
+  </view>
+  <view class="tac f21 cff362c mt20">注：你将购买的是虚拟内容服务，购买后不支持退订、转让、退换</view>
+
+  <!--购买按钮 -s-->
+  <view class="f29 c323232 buyBtn" style="padding-bottom: {{ fix ? 40:0 }}rpx;">
+    <view class="flex1 tar p20">
+      <text>合计：</text>
+      <text class="cff362c">¥{{info.sku[rankIndex].price}}</text>
+    </view>
+    <view catchtap="buy" class="ce5e5e5 f29 p20">
+      提交订单
+    </view>
+  </view>
+  <!--购买按钮 -e-->
+</view>
+
+<view wx:if="{{ success }}" class="tac bgfff">
+  <view style="padding-top: 70rpx;" class="f42 c323232 fw7">恭喜您</view>
+  <view class="f33 c323232 mt20 fw7">成为流谦书苑会员</view>
+  <image style="width: 182rpx;display: inline-block; margin-top: 70rpx;" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/buy_success.png"></image>
+  <view class="vipBtn f25">
+    <navigator open-type="navigateBack" class="vbItem cf73650">返回</navigator>
+    <navigator open-type="redirect" url="../vip/index" class="vbItem">查看我的权益</navigator>
+  </view>
+</view>
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

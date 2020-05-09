@@ -1,0 +1,46 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">{{ showSpec ? '筛选场景' : '选择场景' }}</text>
+</jwqcapsule>
+<view style="position:fixed; top: {{ height }}px;z-index: 800;" class="bgfff p20 df dfac tips">
+  <view class="c323232 f28 flex1">请选择一幅您喜欢的场景，确认后点击场景区域将跳转到完善作品信息界面</view>
+  <view style="background: #f00;" catchtap="_toggleSpec" class="cfff ml20 f30 p1030 br10">刷选</view>
+</view>
+<view style="height: 120rpx;"></view>
+<!-- <image catchtap="chooseImage" lazy-load='1' data-index="{{ index }}" wx:for="{{ list }}" wx:key="item" mode="widthFix" class="w100 choose {{ index > 0 ? 'mt20' : '' }}" src="{{item.src}}"></image> -->
+
+<view wx:for="{{ list }}" wx:key="item">
+<image catchtap="chooseImage" lazy-load='1' data-index="{{ index }}"  mode="widthFix" class="w100 choose {{ index > 0 ? 'mt20' : '' }}" src="{{item.src}}"></image>
+</view>
+
+
+<!--规格选择 -s-->
+<view class="mask"
+      wx:if="{{ showSpec }}">
+  <view class="specs bgfff w100 animated slideInUp am5">
+    <scroll-view class="specScroll bb f28 c646464 p30"
+                 scroll-y="1">
+      <view wx:for="{{ chooseArr }}"
+            style="padding-bottom: 20rpx;"
+            class="{{ index < chooseArr.length - 1 ? 'bd1' : '' }}"
+            wx:key="item">
+        <view class="f30 c323232 mt20">{{ item.t }}</view>
+        <view class="iItemWrap df dfac">
+          <view wx:for="{{ item.items }}"
+                wx:key="iItem"
+                data-oindex="{{ index }}"
+                data-iindex="{{ iIndex }}"
+                catchtap="itemChoose"
+                class="iItem p1030 tr5 {{ iIndex == item.tIndex ? 'active' : '' }}"
+                wx:for-item="iItem"
+                wx:for-index="iIndex">{{ iItem }}</view>
+        </view>
+      </view>
+      <view style="height: 80rpx;"></view>
+    </scroll-view>
+    <view class="tac cfff f33 specConfirm df">
+      <view style="color: #333; background: #eee; border-radius: 50rpx 0 0 50rpx;" class="flex1 tac p2030" catchtap="_toggleSpec" >取消</view>
+      <view class="flex1 tac p2030" catchtap="confirmSceneChange" >确定</view>
+    </view>
+  </view>
+</view>
+<!--规格选择 -e-->

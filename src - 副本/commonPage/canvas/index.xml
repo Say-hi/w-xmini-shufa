@@ -1,0 +1,89 @@
+<view style="width: {{ backImageInfo.showWidth }}px; height: {{ backImageInfo.showHeight }}px;"
+      bindtouchstart="touchStart"
+      bindtouchmove="touchMove"
+      bindtouchend="touchEnd"
+      class="comparison pr bgfff">
+  <image style="z-index: {{ backImageInfo.zIndex }}"
+         class="pa bgPic peN"
+         src="{{ backImageInfo.path }}"></image>
+  <view wx:for="{{ imgArr }}"
+        wx:key="index"
+        data-index="{{ index }}"
+        bindtouchstart="itemStart"
+        class="pa {{ reload ? 'tr5' : '' }}"
+        style="transform: scale({{ item.scale }}) rotate({{ item.rotate }}deg); top: {{ item.top }}px; left: {{ item.left }}px; width: {{ item.showWidth }}px; height: {{ item.showHeight }}px; z-index: {{ item.zIndex }}"
+        bindtouchend="itemEnd">
+    <image wx:if="{{ item.border }}" style="position:absolute; top: -{{ item.border.width / 2 }}px; left: -{{ item.border.width / 2 }}px; width:{{ item.border.width }}px; height:{{ item.border.width }}px; transform:rotate(45deg);" src="{{ item.border.path }}"></image>
+    <image wx:if="{{ item.border }}" style="position:absolute; top: -{{ item.border.width / 2 }}px; right: -{{ item.border.width / 2 }}px; width:{{ item.border.width }}px; height:{{ item.border.width }}px; transform:rotate(135deg);" src="{{ item.border.path }}"></image>
+    <image wx:if="{{ item.border }}" style="position:absolute; bottom: -{{ item.border.width / 2 }}px; left:-{{ item.border.width / 2 }}px; width:{{ item.border.width }}px; height:{{ item.border.width }}px; transform:rotate(315deg);" src="{{ item.border.path }}"></image>
+    <image wx:if="{{ item.border }}" style="position:absolute; bottom: -{{ item.border.width / 2 }}px; right:-{{ item.border.width / 2 }}px; width:{{ item.border.width }}px; height:{{ item.border.width }}px; transform:rotate(225deg);" src="{{ item.border.path }}"></image>
+    <image style="width: 100%; height: 100%; position:absolute; top: 0; left:0;" src="{{ item.path }}"></image>
+  </view>
+</view>
+
+<view class="mask" wx:if="{{ cutImg }}">
+  <view class="pa mask-out" style="width: {{ chooseAreaInfo.imgW }}px; height: {{ chooseAreaInfo.imgH }}px; z-index: 90;">
+    <image src="{{ chooseAreaInfo.path }}" style="width: 100%; height: 100%;"></image>
+    <view catchtouchstart="chooseAreaStart" catchtouchmove="chooseAreaMove" data-type="img" class="pa chooseArea" style="width: {{ chooseAreaInfo.w }}px;height: {{ chooseAreaInfo.h }}px; top: {{ chooseAreaInfo.y || 0 }}px;left: {{ chooseAreaInfo.x || 0 }}px;">
+      <view catchtouchstart="chooseAreaStart" catchtouchmove="chooseAreaMove" data-type="point" class="tapPoint pa"></view>
+    </view>
+  </view>
+  <view catchtap="canvasCut" class="cut tac f30 c323232 pa">裁切图片</view>
+</view>
+
+
+<view class="tac lh80 cff362c br10 bgfff" catchtap="canvasDraw">保存图片</view>
+<!--<view class="tac lh80 cff362c br10 bgfff" catchtap="setBorder">setBorder</view>-->
+<canvas style="width: 1000px; height: 1000px; position: fixed; bottom: -200%;right:-200%;" canvas-id="outPic"></canvas>
+
+
+<!--底图-->
+<scroll-view class="tab-scroll bb"
+             scroll-with-animation="1"
+             scroll-x="1"
+             scroll-into-view="tab{{ tabIndex - 1 }}">
+<view class="tab-inside">
+  <view class="tab-item f25 br5 cfff {{ tabIndex == index ? 'active' : '' }} tr5"
+          id="tab{{ index }}"
+          catchtap="chooseIndex"
+          data-type="bgc"
+          data-index="{{ index }}"
+          wx:key="index"
+          wx:for="{{ tabArr }}">
+    <view class="borderChoose pa animated {{ tabIndex == index ? 'zoomIn' : 'opa0' }}">
+      <view catchtap="_toggleMask" data-type="border">挑选边框</view>
+    </view>
+    <image mode="widthFix" style="max-height: 100rpx;" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom_{{ index }}.jpg"></image>
+  </view>
+</view>
+</scroll-view>
+
+<!--边框-->
+<scroll-view class="tab-scroll bb borderScroll animated {{ borderAnimate ? 'slideInUp' : 'o0' }} tr5"
+scroll-with-animation="1"
+scroll-x="1"
+scroll-into-view="tab{{ tabBorderIndex - 1 }}">
+  <view class="tab-inside">
+    <button hover-class="none"
+            class="tab-item f25 cfff {{ tabBorderIndex == -1 ? 'active' : '' }} tr5 cff362c fw7"
+            id="tab-1"
+            catchtap="chooseIndex"
+            data-type="border"
+            data-index="-1">
+      无边框
+    </button>
+    <button hover-class="none"
+      class="tab-item f25 cfff {{ tabBorderIndex == index ? 'active' : '' }} tr5"
+      id="tab{{ index }}"
+      catchtap="chooseIndex"
+      data-type="border"
+      data-index="{{ index }}"
+      wx:key="index"
+      wx:for="{{ tabBorderArr }}">
+      <image mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_border_{{ index }}.jpg"></image>
+    </button>
+  </view>
+</scroll-view>
+<!--<image class="w100" mode="widthFix" src="{{ showImgSrc }}"></image>-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

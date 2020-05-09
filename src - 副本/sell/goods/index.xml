@@ -1,0 +1,23 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">{{ op.type == 'sell' ? '发布的商品' : '仓库中的商品' }}</text>
+</jwqcapsule>
+<block wx:for="{{ list }}" wx:key="item">
+  <!-- <view wx:if="{{ op.type == 'sell' }}" style="background: {{ item.pass ? '#ff362c' : '#016bff' }}; padding: 10rpx 20rpx;" class="cfff f22 mt20">{{ item.pass ? '审核通过' : '审核中' }}</view> -->
+  <view class="{{ op.type == 'warehouse' ? 'mt20' : '' }} df bd1 bgfff f25 c323232 p20">
+    <image src='{{ item.img_url }}' style="width: 190rpx; height: 190rpx;" mode="aspectFit"></image>
+    <view class="flex1 df dfb dfc">
+      <view>{{ item.title }}</view>
+      <view class="f20 {{ item.pass ? 'cff362c' : 'c016bff' }}">￥{{item.price}}</view>
+    </view>
+  </view>
+  <view class="goodsBottom bgfff">
+    <view catchtap='goodsOperation' data-index="{{ index }}" data-type='del' class="gbItem">删除</view>
+    <view wx:if="{{ item.is_up != 1 }}" catchtap='goodsOperation' data-index="{{ index }}" data-type='up' class="gbItem">上架</view>
+    <view wx:if="{{ item.is_up == 1 }}" catchtap='goodsOperation' data-index="{{ index }}" data-type='down' class="gbItem">下架</view>
+    <!-- <view catchtap='goodsOperation' data-index="{{ index }}" data-type='edit' class="gbItem">编辑</view> -->
+  </view>
+</block>
+<view class="tac lh80 f21 c646464">没有更多内容</view>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+

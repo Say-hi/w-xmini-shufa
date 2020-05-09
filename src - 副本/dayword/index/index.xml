@@ -1,0 +1,42 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">每日一字</text>
+</jwqcapsule>
+<!--搜索 s-->
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
+  <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+  <view style="height: 80rpx; padding:0 30rpx;" class="pr f24">
+    <view class="jwqfont jwqsousuo1 f40"></view>
+    <input bindconfirm="getList" confirm-type="search" style="background: #fff;border-radius: 20rpx; padding: 10rpx 10rpx 10rpx 60rpx;" placeholder="搜索书法或商品" />
+  </view>
+</view>
+<!--搜索 e-->
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<!--轮播图 -s-->
+<!-- <swiper autoplay="1" circular="1">
+  <swiper-item wx:for="1234" wx:key="index">
+    <image class="w100" src="https://c.jiangwenqiang.com/api/logo.jpg"></image>
+  </swiper-item>
+</swiper> -->
+<!--轮播图 -e-->
+<view wx:if="{{ !showColumn }}" catchtap="_showColumn" class="bd1 p20 f25 c323232 df dfb">栏目简介 <text class="angle">></text></view>
+<!--栏目详情 -s-->
+<view wx:if="{{ showColumn }}" class="p20 columnDetail f28 c3e3a39">
+  <view catchtap="_showColumn" class="tac pr bd1 p200">栏目详情<text class="pa cdClose">X</text></view>
+  <view class="p200 ws">{{ des }}</view>
+</view>
+<!--栏目详情 -e-->
+<!--名师列表 -s-->
+<view wx:if="{{ !showColumn }}" class="teacherList">
+  <navigator url="../detail/index?id={{item.id}}" class="listItem mt20 f19 c787878" wx:for="{{list}}" wx:key="index">
+    <image lazy-load="1" src="{{item.img_url}}"></image>
+    <view class="f29 c323232 tal w100 fw7">{{item.title}}</view>
+    <view class="tal w100 ws">{{item.des_text || item.des}}</view>
+    <view class="tal w100">{{item.create_at}} {{item.hits}}次阅读</view>
+  </navigator>
+</view>
+<view wx:if="{{!list.length}}" class='tac f22 p20 c999'>暂无相关内容</view>
+<!--名师列表 -e-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

@@ -1,0 +1,147 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">流谦书苑商城</text>
+</jwqcapsule>
+<!--搜索 s-->
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
+  <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+  <navigator url="/search/index/index?type=shop" style="height: 80rpx; padding:0 30rpx;" class="pr f24">
+    <view class="jwqfont jwqsousuo1 f40"></view>
+    <input disabled="1" style="background: #fff;border-radius: 20rpx; padding: 10rpx 10rpx 10rpx 60rpx;" placeholder="搜索书法或商品" />
+  </navigator>
+</view>
+<!--搜索 e-->
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<!--轮播图 -s-->
+<swiper style="height: 390rpx;" autoplay="1" circular="1">
+  <swiper-item wx:for="{{ad}}" wx:key="index">
+    <navigator style="width: 100%; height: 100%;" url="{{ item.path_mini }}">
+      <image style="height: 100%;" class="w100" src="{{item.img_url}}"></image>
+    </navigator>
+  </swiper-item>
+</swiper>
+<!--轮播图 -e-->
+<!--商城导航 -s-->
+<view class="shopNav df">
+  <navigator url="/shop/category/index?id={{item.id}}" wx:for="{{category}}" wx:key="index" class="shopNavItem f22 c323232 tac">
+    <image class="br" src="{{item.img_url}}"></image>
+    <view class="mt10 f24 fw7">{{item.name}}</view>
+  </navigator>
+</view>
+<!--商城导航 -e-->
+<!--屋檐 s-->
+<view wx:if="{{ tag1.length }}" class="eaves"></view>
+<!--屋檐 e-->
+<!--热销产品 -s-->
+<image wx:if="{{ tag1.length }}" mode="widthFix" class="w100 " src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png"></image>
+<view wx:if="{{ tag1.length }}" class="hotSale p30 hsItemT w100">
+  <!-- <navigator url="/shop/detail/index?id={{item.id}}" wx:for="{{  tag1}}" wx:key="index" class="pr hsItem  item-{{ index }}"> -->
+  <view class='tag1-top w100 df'>
+    <navigator wx:if="{{tag1[0].id}}" url="/shop/detail/index?id={{tag1[0].id}}" class="pr hsItem item-0">
+      <!-- <view class="hsItemPrice pa cfff">
+        <view class="f14 jia">价</view>
+        <view>
+          <text class="f14">￥</text>
+          <text class="f29">{{tag1[0].new_price || 1}}</text>
+        </view>
+      </view> -->
+      <image style='height: 432rpx;' mode="aspectFill" src="{{tag1[0].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
+    </navigator>  
+    <view class='tag1-top-r df dfc'>
+      <navigator wx:if="{{tag1[1].id}}" url="/shop/detail/index?id={{tag1[1].id}}" class="pr hsItem  item-1">
+        <view class="hsItemPrice pa cfff">
+          <view class="f14 jia">价</view>
+          <view>
+            <text class="f14">￥</text>
+            <text class="f29">{{tag1[1].new_price || 1}}</text>
+          </view>
+        </view>
+        <image mode="aspectFill" src="{{tag1[1].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
+      </navigator> 
+      <navigator wx:if="{{tag1[2].id}}" url="/shop/detail/index?id={{tag1[2].id}}" class="pr hsItem  item-2">
+        <!-- <view class="hsItemPrice pa cfff">
+          <view class="f14 jia">价</view>
+          <view>
+            <text class="f14">￥</text>
+            <text class="f29">{{tag1[2].new_price || 1}}</text>
+          </view>
+        </view> -->
+        <image mode="aspectFill" src="{{tag1[2].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
+      </navigator> 
+    </view>
+  </view>
+  <view wx:if="{{ tag1.length > 2 }}" class='tag1-bottom df mt10'>
+    <navigator wx:if="{{ index > 2 }}" url="/shop/detail/index?id={{item.id}}" wx:for="{{tag1}}" wx:key="index" class="pr hsItem">
+      <!-- <view class="hsItemPrice pa cfff">
+        <view class="f14 jia">价</view>
+        <view>
+          <text class="f14">￥</text>
+          <text class="f29">{{item.new_price || 1}}</text>
+        </view>
+      </view> -->
+      <image style='height: 267rpx;' mode="aspectFill" src="{{item.img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
+    </navigator>
+  </view>
+</view>
+<!--热销产品 -e-->
+<!--屋檐 s-->
+<view wx:if="{{ tag2.length }}" class="eaves"></view>
+<!--屋檐 e-->
+<!--热销产品 -s-->
+<image wx:if="{{ tag2.length }}" mode="widthFix" class="w100" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop2.png"></image>
+<view wx:if="{{ tag2.length }}" class="hotSale p30 hsItemT w100">
+  <!-- <navigator url="/shop/detail/index?id={{item.id}}" wx:for="{{  tag1}}" wx:key="index" class="pr hsItem  item-{{ index }}"> -->
+  <view class='tag1-top w100 df'>
+    <view class='tag1-top-r df dfc'>
+        <navigator wx:if="{{tag2[0].id}}" url="/shop/detail/index?id={{tag2[0].id}}" class="pr hsItem  item-0">
+          <!-- <view class="hsItemPrice pa cfff">
+            <view class="f14 jia">价</view>
+            <view>
+              <text class="f14">￥</text>
+              <text class="f29">{{tag2[0].new_price || 1}}</text>
+            </view>
+          </view> -->
+          <image mode="aspectFill" src="{{tag2[0].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
+        </navigator> 
+        <navigator wx:if="{{tag2[1].id}}" url="/shop/detail/index?id={{tag2[1].id}}" class="pr hsItem  item-1">
+          <!-- <view class="hsItemPrice pa cfff">
+            <view class="f14 jia">价</view>
+            <view>
+              <text class="f14">￥</text>
+              <text class="f29">{{tag2[1].new_price || 1}}</text>
+            </view>
+          </view> -->
+          <image mode="aspectFill" src="{{tag2[1].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
+        </navigator> 
+      </view>
+    <navigator wx:if="{{tag2[2].id}}" url="/shop/detail/index?id={{tag2[2].id}}" class="pr hsItem item-2">
+      <!-- <view class="hsItemPrice pa cfff">
+        <view class="f14 jia">价</view>
+        <view>
+          <text class="f14">￥</text>
+          <text class="f29">{{tag2[2].new_price || 1}}</text>
+        </view>
+      </view> -->
+      <image style='height: 432rpx;' mode="aspectFill" src="{{tag2[2].img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
+    </navigator>  
+  </view>
+  <view wx:if="{{ tag2.length > 2 }}" class='tag1-bottom df mt10'>
+    <navigator wx:if="{{ index > 2 }}" url="/shop/detail/index?id={{item.id}}" wx:for="{{6}}" wx:key="index" class="pr hsItem">
+      <!-- <view class="hsItemPrice pa cfff">
+        <view class="f14 jia">价</view>
+        <view>
+          <text class="f14">￥</text>
+          <text class="f29">{{item.new_price || 1}}</text>
+        </view>
+      </view> -->
+      <image style='height: 267rpx;' mode="aspectFill" src="{{item.img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/shop1.png'}}"></image>
+    </navigator>
+  </view>
+</view>
+<!--热销产品 -e-->
+
+<jwqfoot></jwqfoot>
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

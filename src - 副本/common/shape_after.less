@@ -1,0 +1,32 @@
+@import "variable";
+// 左侧柱子形状
+.left-pillar {
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0rpx;
+    transform: translate(0, -50%);
+    width: 4rpx;
+    height: 26rpx;
+    background-color: #0068b7;
+  }
+}
+//教师标记
+.teacher-tag {
+  position: relative;
+  padding-right: 65rpx;
+}
+.teacher-tag::after {
+  content: '老师';
+  font-size: 20rpx;
+  color: #fff;
+  border-radius: 18rpx;
+  padding: 3rpx 10rpx;
+  background-color: #ff3b5b;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+}

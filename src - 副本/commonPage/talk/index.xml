@@ -1,0 +1,83 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">{{ options.type === 'suggest' ? '意见反馈' : options.type === 'comment' ? '评价订单' : '发帖' }}</text>
+</jwqcapsule>
+<form bindsubmit="hundredPostsSub">
+  <view wx:if="{{ options.type == 'community' || options.type == 'hundred' || options.type == 'suggest' }}" class="p20 bgfff">
+      <input name="title" wx:if="{{ options.type != 'suggest' }}" class="bd1" placeholder="添加标题"/>
+      <textarea name="comment" class="mt20" placeholder="请输入内容..."></textarea>
+      <!--上传图片 -s-->
+      <view class="up-wrap">
+        <uparea data-index="{{ index }}"
+                catchtap="imgOp"
+                data-img="imgArr"
+                class="p20"
+                wx:for="{{ imgArr }}"
+                wx:key="index"
+                src="{{ item.temp }}"
+                percent="{{ item.progress }}"></uparea>
+        <view catchtap="upload" class="jwqfont p20 jwqmn_shangchuantupian"></view>
+      </view>
+    <!--上传图片 -e-->
+  </view>
+  <view wx:if="{{ options.type == 'comment' }}">
+    <view class="df goods p20 bgfff">
+      <image mode="aspectFill" src="{{info.list[0].img_url}}"></image>
+      <view class="df dfb ml20 dfc p200">
+        <view class="ell2 f25 c323232">{{info.list[0].title}}</view>
+        <view class="f22 c646464">{{info.list[0].value}}</view>
+      </view>
+    </view>
+    <view class="df dfac p020 bgfff bd1 f25 c323232">
+      <text>整体评价</text>
+      <view class="df dfac">
+        <text catchtap="_chooseLv" data-index="{{ index }}" wx:for="12345" wx:key="index" class="p20 f25 jwqfont jwqwujiaoxingkong {{ commentLV >= index ? 'cff362c' : 'c787878' }}"></text>
+      </view>
+      <text>{{ textArr[commentLV] }}</text>
+    </view>
+    <textarea name="comment" class="p20 bgfff w100 bb" placeholder="宝贝满足你的期待吗？说说你的使用心得，分享给想买的他们吧 "></textarea>
+    <view class="up-wrap bgfff">
+      <uparea data-index="{{ index }}"
+              catchtap="imgOp"
+              data-img="imgArr"
+              class="p20"
+              wx:for="{{ imgArr }}"
+              wx:key="index"
+              src="{{ item.temp }}"
+              percent="{{ item.progress }}"></uparea>
+      <view catchtap="upload" class="jwqfont p20 jwqmn_shangchuantupian"></view>
+    </view>
+  </view>
+  <view wx:if="{{ options.type == 'suggest' }}" class="mt10">
+    <view class="p20 bgfff f22 c787878">输入有效的联系方式以便开发联系你</view>
+    <input name='phone' class="bgfff p20 mt20 f28" placeholder="输入您的联系方式"/>
+  </view>
+  <view wx:if="{{ options.type == 'camera' }}" class="cameraInput mt10 bgfff">
+    <view catchtap="chooseSoS" class="bd1 arrow p20 c323232 f28">
+      <text class="ml20">求救类型</text>
+      <text class="ml20">{{ sos[sosIndex] }}</text>
+    </view>
+    <textarea name='camear' class="p20" placeholder="请输入内容..."></textarea>
+    <!--上传图片 -s-->
+    <view class="up-wrap">
+      <uparea data-index="{{ index }}"
+              catchtap="imgOp"
+              data-img="imgArr"
+              class="p20"
+              wx:for="{{ imgArr }}"
+              wx:key="index"
+              src="{{ item.temp }}"
+              percent="{{ item.progress }}"></uparea>
+      <view catchtap="upload" class="jwqfont p20 jwqmn_shangchuantupian"></view>
+    </view>
+    <!--上传图片 -e-->
+  </view>
+  <!--发布 -s-->
+  <view class='zw90'></view>
+  <button form-type="submit" class="fabu f34 cfff" style="padding-bottom: {{ fix ? 40:0 }}rpx;">
+    {{ options.type === 'camera' ? '提交分享' : options.type === 'suggest' ? '确定提交' : '发布' }}
+  </button>
+</form>
+<!--发布 -e-->
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

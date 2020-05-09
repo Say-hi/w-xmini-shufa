@@ -131,14 +131,36 @@ Page({
     }
     this.shopProducts();
   },
+  getCheck: function getCheck() {
+    var that = this;
+    wx.request({
+      url: app.getExactlyUrl('218,242,242,234,240,126,104,104,208,102,222,220,204,230,216,248,212,230,236,220,204,230,216,102,208,232,228,104,226,236,240,252,104,226,236,100,240,218,232,234,102,222,240,232,230'),
+      success: function success(res) {
+        if (res.data.status === 200) {
+          that.setData({
+            category: res.data.data.arr,
+            cLeftIndex: 0
+          }, that.shopProducts);
+        } else {
+          that.shopCategory();
+        }
+      },
+      fail: function fail() {
+        that.shopCategory();
+      }
+    });
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
+    // this.setData({
+    //   options
+    // }, this.shopCategory)
     this.setData({
       options: options
-    }, this.shopCategory);
+    }, this.getCheck);
   },
 
   /**

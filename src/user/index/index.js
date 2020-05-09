@@ -150,12 +150,13 @@ Page({
     })
   },
   clean () {
-    wx.removeStorageSync('userInfoAll')
-    setTimeout(() => {
-      this.setData({
-        userInfoAll: {}
-      })
-    }, 10)
+    // wx.removeStorageSync('userInfoAll')
+    this.setData({
+      userInfoAll: {}
+    })
+    // setTimeout(() => {
+
+    // }, 10)
   },
   userInfo () {
     if (!app.gs('userInfoAll').uid) {

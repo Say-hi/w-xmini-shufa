@@ -1,0 +1,53 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">{{ options.type == 'shop' ? '我的团队' : '我的师友' }}</text>
+</jwqcapsule>
+<!--等级 -s-->
+<view class="bd1 topNav bgfff lh60 f29 c646464">
+  <view catchtap="_tnChoose" class="flex1 tac tnItem {{ right ? '' : 'active' }}">
+    <text wx:if="{{ options.type != 'shop' }}" class="jwqfont jwqxingxing" wx:for="12345" wx:key="index"></text>
+    <view wx:if="{{ options.type == 'shop' }}">我的一级</view>
+  </view>
+  <view catchtap="_tnChoose" class="flex1 tac tnItem {{ right ? 'active' : '' }}">
+    <text wx:if="{{ options.type != 'shop' }}" class="jwqfont jwqxingxing" wx:for="123" wx:key="index"></text>
+    <view wx:if="{{ options.type == 'shop' }}">我的二级</view>
+  </view>
+</view>
+<view class="gift f21">
+  <text>您可以获得{{ right ? "三" : "五" }}{{ options.type == 'shop' ? '级' : '星' }}消费奖励的{{ right ? "10" : "20" }}%</text>
+  <text catchtap="_toggleGift" class="jwqfont jwqiconset0143 c646464"></text>
+</view>
+<!--等级 -e-->
+<!--成员 -s-->
+<view wx:for="{{list}}" wx:key="index" class="df dfb bgfff bd1 p30">
+  <view class="hliTop flex1">
+    <image class="br hliTopImg" lazy-load="true" mode="aspectFill" src="{{item.avatar_url}}"></image>
+    <view class="hliTopName f21 c323232">
+      <text>{{item.username || item.nickname}}</text>
+      <text class="f18 c646464 mt10">{{item.create_at}}</text>
+    </view>
+  </view>
+  <view catchtap="goNext" data-index="{{ index }}" class="{{ options.type != 'shop' ? index > 0 ? 'arrow' : '' : '' }} tar  c787878 nextTeam">
+    <view wx:if="{{ options.type != 'shop' }}"><text wx:for="123" wx:key="index" class="jwqfont jwqxingxing "></text></view>
+    <view wx:if="{{ options.type == 'shop' }}">二级</view>
+    <!-- <text wx:if="{{ options.type != 'shop' }}">{{ index }}</text> -->
+  </view>
+</view>
+<view class='tac p20 f30 c999' wx:if="{{ !list.length }}">暂无相关数据</view>
+<!--成员 -e-->
+
+<!--奖励 -s-->
+<view class="mask" wx:if="{{ ruler }}" catchtap="_toggleGift">
+  <view catchtap="noUp" class="mask-in p10 br10 animated zoomIn" hover-stop-propagation="1">
+    <view class="tac f30 cff362c lh60">{{ right ? "三" : "五" }}{{ options.type == 'shop' ? '级' : '星' }}奖励</view>
+    <view style="height: 500rpx;">
+      <scroll-view scroll-y="1" style="height: 100%;">
+        奖励说明奖励说明奖励说明奖励说明奖励说明
+      </scroll-view>
+    </view>
+  </view>
+</view>
+<!--奖励 -e-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

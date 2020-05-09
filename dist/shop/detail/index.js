@@ -17,7 +17,7 @@ Page({
     more: true,
     page: 0,
     comment: [],
-    skuIndex: -1
+    skuIndex: 0
   },
   _submit: function _submit() {
     if (this.data.skuIndex < 0) {
@@ -48,6 +48,7 @@ Page({
   },
   _numOp: function _numOp(e) {
     if (e.currentTarget.dataset.type === 'add') {
+      if (this.data.num >= this.data.info.sku[this.data.skuIndex].stock) return app.toast({ content: '超出库存上限' });
       this.data.num++;
     } else {
       this.data.num > 1 && this.data.num-- || app.toast({
@@ -96,7 +97,7 @@ Page({
     var url = getCurrentPages()[getCurrentPages().length - 1].route;
     for (var i in temps) {
       if (temps[i].indexOf(url) >= 0) {
-        app.su('scene', i + '*' + this.data.info.id + ',' + app.gs('userInfoAll').uid);
+        app.su('scene', i + '*' + this.data.info.id + ',' + app.gs('userInfoAll').uid + ',' + this.data.info.cid);
         wx.navigateTo({
           url: '/share/carShare/carShare?type=shop'
         });
@@ -110,30 +111,28 @@ Page({
     var flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
     app.wxrequest({
-      url: flag ? app.getUrl().shopProductDetail : app.getUrl().shopProductDetail,
-      data: flag ? {
+      url: app.getUrl().shopProductDetail,
+      data: {
         pid: this.data.options.id,
-        cid: 3
-      } : {
-        pid: this.data.options.id
+        cid: this.data.options.cid
       }
     }).then(function (res) {
-      if (res.is_baby * 1 === 1 && !flag) return _this.shopProductDetail(true);
+      // if (res.is_baby * 1 === 1 && !flag) return this.shopProductDetail(true)
       res.imgs_url = JSON.parse(res.imgs_url);
-      res.new_price_temp = res.new_price;
-      res.new_price = res.new_price.split('.');
-      res.detail_url = res.detail_url.split(',');
-      if (!res.imgs_url.imgs.length) res.imgs_url.imgs[0] = res.img_url;
-      try {
+      if (res.imgs_url instanceof Array) {
+        // let temp = res.imgs_url[0].img_url
+        // res.imgs_url = {}
+        // res.imgs_url['imgs'] = temp
+        var temp = [];
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
         var _iteratorError = undefined;
 
         try {
-          for (var _iterator = res.sku[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (var _iterator = res.imgs_url[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var v = _step.value;
 
-            v['discount'] = (v.discount * v.price).toFixed(2);
+            temp.push(v.img_url);
           }
         } catch (err) {
           _didIteratorError = true;
@@ -146,6 +145,58 @@ Page({
           } finally {
             if (_didIteratorError) {
               throw _iteratorError;
+            }
+          }
+        }
+
+        res.imgs_url = {
+          imgs: temp
+        };
+        res.img_url = temp[0];
+        res.label = '墨宝';
+        res.old_price = res.price;
+        res.sku = [{
+          id: res.id,
+          pid: res.id,
+          value: '墨宝真迹',
+          stock: res.stock,
+          price: res.price,
+          discount: '1.00',
+          old_price: res.price,
+          img_url: res.imgs_url.imgs[0] || 'https://c.jiangwenqiang.com/api/logo.jpg'
+        }];
+      }
+      res.new_price_temp = res.new_price || res.price;
+      res.new_price = res.new_price ? res.new_price.split('.') : res.price.split('.');
+      if (res.des) {
+        res.detail_url = JSON.parse(res.des).detail_url.split(',');
+        res.detail_text = JSON.parse(res.des).detail_text;
+      } else {
+        res.detail_url = res.detail_url.split(',');
+      }
+      if (!res.imgs_url.imgs.length) res.imgs_url.imgs[0] = res.img_url;
+      try {
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = res.sku[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var _v = _step2.value;
+
+            _v['discount'] = (_v.discount * _v.price).toFixed(2);
+          }
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+              _iterator2.return();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
             }
           }
         }
@@ -169,27 +220,27 @@ Page({
         page: ++this.data.page
       }
     }).then(function (res) {
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (var _iterator2 = res.lists[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var v = _step2.value;
+        for (var _iterator3 = res.lists[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var v = _step3.value;
 
           v.imgs_url = JSON.parse(v.imgs_url);
         }
       } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return) {
-            _iterator2.return();
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
           }
         } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
+          if (_didIteratorError3) {
+            throw _iteratorError3;
           }
         }
       }
@@ -305,7 +356,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: '' + this.data.info.title,
-          path: '/openShare/index/index?url=' + i + '&q=' + this.data.info.id + ',' + app.gs('userInfoAll').uid,
+          path: '/openShare/index/index?url=' + i + '&q=' + this.data.info.id + ',' + app.gs('userInfoAll').uid + ',' + this.data.info.cid,
           imageUrl: '' + this.data.info.img_url
         };
       }

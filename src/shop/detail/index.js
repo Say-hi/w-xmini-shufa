@@ -15,7 +15,7 @@ Page({
     more: true,
     page: 0,
     comment: [],
-    skuIndex: -1
+    skuIndex: 0
   },
   _submit () {
     if (this.data.skuIndex < 0) {
@@ -46,6 +46,7 @@ Page({
   },
   _numOp (e) {
     if (e.currentTarget.dataset.type === 'add') {
+      if (this.data.num >= this.data.info.sku[this.data.skuIndex].stock) return app.toast({content: '超出库存上限'})
       this.data.num++
     } else {
       this.data.num > 1 && this.data.num-- || app.toast({
@@ -94,7 +95,7 @@ Page({
     let url = getCurrentPages()[getCurrentPages().length - 1].route
     for (let i in temps) {
       if (temps[i].indexOf(url) >= 0) {
-        app.su('scene', `${i}*${this.data.info.id},${app.gs('userInfoAll').uid}`)
+        app.su('scene', `${i}*${this.data.info.id},${app.gs('userInfoAll').uid},${this.data.info.cid}`)
         wx.navigateTo({
           url: '/share/carShare/carShare?type=shop'
         })
@@ -104,19 +105,49 @@ Page({
   },
   shopProductDetail (flag = false) {
     app.wxrequest({
-      url: flag ? app.getUrl().shopProductDetail : app.getUrl().shopProductDetail,
-      data: flag ? {
+      url: app.getUrl().shopProductDetail,
+      data: {
         pid: this.data.options.id,
-        cid: 3
-      } : {
-        pid: this.data.options.id
+        cid: this.data.options.cid
       }
     }).then(res => {
-      if (res.is_baby * 1 === 1 && !flag) return this.shopProductDetail(true)
+      // if (res.is_baby * 1 === 1 && !flag) return this.shopProductDetail(true)
       res.imgs_url = JSON.parse(res.imgs_url)
-      res.new_price_temp = res.new_price
-      res.new_price = res.new_price.split('.')
-      res.detail_url = res.detail_url.split(',')
+      if (res.imgs_url instanceof Array) {
+        // let temp = res.imgs_url[0].img_url
+        // res.imgs_url = {}
+        // res.imgs_url['imgs'] = temp
+        let temp = []
+        for (let v of res.imgs_url) {
+          temp.push(v.img_url)
+        }
+        res.imgs_url = {
+          imgs: temp
+        }
+        res.img_url = temp[0]
+        res.label = '墨宝'
+        res.old_price = res.price
+        res.sku = [
+          {
+            id: res.id,
+            pid: res.id,
+            value: '墨宝真迹',
+            stock: res.stock,
+            price: res.price,
+            discount: '1.00',
+            old_price: res.price,
+            img_url: res.imgs_url.imgs[0] || 'https://c.jiangwenqiang.com/api/logo.jpg'
+          }
+        ]
+      }
+      res.new_price_temp = res.new_price || res.price
+      res.new_price = res.new_price ? res.new_price.split('.') : res.price.split('.')
+      if (res.des) {
+        res.detail_url = JSON.parse(res.des).detail_url.split(',')
+        res.detail_text = JSON.parse(res.des).detail_text
+      } else {
+        res.detail_url = res.detail_url.split(',')
+      }
       if (!res.imgs_url.imgs.length) res.imgs_url.imgs[0] = res.img_url
       try {
         for (let v of res.sku) {
@@ -247,7 +278,7 @@ Page({
       if (temps[i].indexOf(url) >= 0) {
         return {
           title: `${this.data.info.title}`,
-          path: `/openShare/index/index?url=${i}&q=${this.data.info.id},${app.gs('userInfoAll').uid}`,
+          path: `/openShare/index/index?url=${i}&q=${this.data.info.id},${app.gs('userInfoAll').uid},${this.data.info.cid}`,
           imageUrl: `${this.data.info.img_url}`
         }
       }

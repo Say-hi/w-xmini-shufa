@@ -1,0 +1,111 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">发布拍品</text>
+</jwqcapsule>
+<view hidden='{{ toggle }}'>
+<view style="height: {{ swiperImg.length >= 1 ? 540 : 300 }}rpx;" class="pr">
+  <swiper hidden="{{ swiperImg.length < 1 }}" class="swiperArea">
+    <swiper-item wx:for="{{ swiperImg }}" wx:key="item">
+      <image catchtap='changeImage' mode="aspectFill" src="{{ item.temp }}"></image>
+    </swiper-item>
+  </swiper>
+  <view catchtap="chooseType" data-type='img' class="pa tr5 upLoadBtn c006bff jwqfont jwqzhaoxiangji {{ swiperImg.length < 1 ? 'big' : 'mini' }}"></view>
+</view>
+<textarea hidden="{{ showSpec }}" bindinput='inputValue' data-type='title' auto-height="1" style="min-height: 100rpx;" class="w100 f30 bgfff p10 bb" maxlength='60' placeholder="输入商品标题"></textarea>
+<view class="bt1 p10 f25 c323232 bgfff">类目：墨宝真迹</view>
+
+
+<view class="money f25 c323232 p3010 df dfac bgfff bd1 mt20">
+  <text>价格：</text>|
+  <input bindinput='inputValue' data-type='price' class="inputMoney" />
+  <text>元</text>
+</view>
+<view class="money f25 c323232 p3010 df dfac bgfff">
+  <text>运费设置：</text>
+  <input bindinput='inputValue' data-type='freight' class="inputMoney" />
+  <text>元</text>
+</view>
+<view catchtap="_toggleSpec" class="arrow f25 c323232 bgfff mt20 p10">宝贝描述</view>
+<!-- <navigator url='/commonPage/release-editor/index' class="arrow f25 c323232 bgfff mt20 p10">宝贝描述</navigator> -->
+<view class="arrow f25 df dfac dfb c323232 bgfff mt20 p10 warehouse">
+  <text>发货地</text>
+  <picker mode="region" bindchange="pickerChoose" data-type="wareHouse" class="flex1 tar">{{ wareHouse || '广东省 广州市 海珠区' }}</picker>
+</view>
+
+<!-- <view class="df p10 bgfff f25 c323232 mt20">
+  <view>开始时间：</view>
+  <view class="df dfc">
+    <view catchtap="toggleTime" class="jwqfont p10 {{ now ? 'jwqgouxuan cff362c' : 'jwqwxz' }}" style="padding-top: 0;">　立刻</view>
+    <view catchtap="toggleTime" class="jwqfont p10 {{ now ? 'jwqwxz' : 'jwqgouxuan cff362c' }} df dfac">　设定　<picker bindchange="pickerChoose" data-type="sellDate" mode="date">{{ sellDate || '选择日期'}}</picker>__<picker bindchange="pickerChoose" data-type="sellTime" mode="time">{{ sellTime || '选择时间' }}</picker></view>
+  </view>
+</view> -->
+
+<view class="money f25 c323232 p10 mt20 df dfac bgfff">
+  <text>联系方式：</text>
+  <input bindinput='inputValue' data-type='phone' type="number" style="border:none;" class="inputMoney flex1" />
+</view>
+</view>
+
+<!--描述 -s-->
+<view class="mask"
+      hidden="{{ !showSpec }}">
+  <view class="specs bgfff w100 animated slideInUp am5 p30">
+    <scroll-view scroll-y="1" style="max-height: 1000rpx;">
+      <textarea bindinput='inputValue' data-type='des' auto-height="1" class="w100" placeholder="添加图片和文字让你的宝贝看起来更加诱人" style="min-height: 400rpx;"></textarea>
+      <image mode="widthFix" class="w100" wx:for="{{ desImg }}" wx:key="index" src="{{ item.temp }}"></image>
+    </scroll-view>
+    <view class="df p200">
+      <view catchtap="chooseType" data-type='des' class="jwqfont flex1 jwqtupian">上传图片</view>
+      <!-- <view catchtap="_toggleSpec" class="tac flex1 ceee f33">取消</view> -->
+      <view catchtap="_toggleSpec" class="tac flex1 cff362c f33">完成</view>
+    </view>
+  </view>
+</view>
+<!--描述 -e-->
+<view hidden="{{ toggle }}" style="height: 90rpx;"></view>
+<view class="f34 c646464 lh90 tac df dfac releaseBtn">
+  <view catchtap="changeImage" hidden="{{ !toggle }}" class='flex1 cfff'>确认</view>
+  <view hidden="{{ toggle }}" catchtap="_toggleSpec" data-up='-1' data-type='showSpec2' class="flex1">放入仓库</view>
+  <view hidden="{{ toggle }}" catchtap="_toggleSpec" data-up='1' data-type='showSpec2' class="flex1 cfff">立即发布</view>
+</view>
+
+<view class="mask"
+      wx:if="{{ showSpec2 }}">
+  <view class="specs bgfff w100 animated slideInUp am5 p30">
+    <scroll-view class="p30 bb tac" scroll-y="1" style="max-height: 600rpx;">
+      简介介绍简介介绍简介介绍简介介绍
+      简介介绍简介介绍简介介绍简介介绍
+      简介介绍简介介绍简介介绍简介介绍
+      简介介绍简介介绍简介介绍简介介绍
+    </scroll-view>
+    <view catchtap="_toggleSpec" data-type='showSpec2' data-confirm='confirm' class="tac cfff f33 specConfirm p2030">知道了</view>
+  </view>
+</view>
+<!-- 修改图片顺序 -->
+<view hidden="{{ !toggle }}">
+    <view class='pr'>
+      <view catchtap='del' class='pa jwqfont jwqshanchu tac br cfff'></view>
+      <image hidden="{{ !item.active }}" wx:for="{{ swiperImg }}" wx:key='item' mode='aspectFill' style='height: 540rpx; width:100%;' class='w100' src="{{ item.temp }}"></image>
+    </view>
+    <movable-area class="wrap mt20">
+                <!-- style="height: {{ swiperImg.length * 40 }}px;"> -->
+      <movable-view bindtouchstart='start'
+                    catchtap="tap"
+                    animation="{{ animation }}"
+                    bindchange='movechange'
+                    catchtouchend='end'
+                    catchlongpress="longpress"
+                    data-index="{{ index }}"
+                    direction='horizontal'
+                    class='item bgfff {{ move_index >= 0 ? move_index == item.s ? "move-item" : "no-move" : "" }}'
+                    x="{{ item.x }}"
+                    wx:for="{{ swiperImg }}"
+                    wx:key='item'>
+        <image style='width: 100%; height: 100%; {{ item.active ? "outline:#f00 solid 2rpx;" : "" }}' src="{{ item.temp }}"></image>
+      </movable-view>
+    </movable-area>
+    <view style='margin-top: 160rpx;' class='tac f21 c646464'>按住小图拖动可调整顺序</view>
+</view>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

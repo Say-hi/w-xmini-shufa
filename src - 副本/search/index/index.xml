@@ -1,0 +1,30 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">流谦书苑</text>
+</jwqcapsule>
+<!--搜索 s-->
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
+  <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+  <view style="height:  {{ searchHeight }}px;"></view>
+  <view style="height: {{ searchHeight }}px; top: {{ searchPosTop }}px; left: 0; padding: 0 {{ searchPosPad }}px;" class="f24 searchPos">
+    <input focus="1" confirm-type="search" bindconfirm="doSearch" value="{{searchValue}}" placeholder-style="color: {{ inputColor }};" style="background: {{ inputbg }}; color: {{ inputColor }}; border-radius: 50rpx; padding: 10rpx 10rpx 10rpx 60rpx; border:1px solid #fff;" placeholder="搜索书法或商品" />
+  </view>
+</view>
+<!--搜索 e-->
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<jwqnav wx:if="{{ options.type !== 'camera' && options.type !== 'cameraIndex' }}" wx:for="{{ list }}" wx:key="index" url="{{ item.url }}">
+  <view class="bd1 bgfff f24 c323232 p20">
+    <view class="ell2">{{item.title}}</view>
+    <image class="searchImg mt10" src="{{ item.img_url }}"></image>
+  </view>
+</jwqnav>
+<view wx:if="{{ options.type === 'camera' || options.type === 'cameraIndex' }}">
+  <view wx:for="{{ list }}" wx:key="index" class="bd1 bgfff f24 c323232 p20">
+    <view class="ell2">{{item.path}}</view>
+    <image style="display: inline-block; margin: 5rpx;" catchtap="goCamera" data-index="{{ index }}" data-iindex="{{ iindex }}" wx:for-index="iindex" wx:for="{{ item.data }}" wx:for-item="iitem" wx:key="iindex" lazy-load="1" class="searchImg mt10" src="{{iitem.img_name}}"></image>
+  </view>
+</view>
+<view wx:if="{{ !list.length }}" class="tac p20 f30 c999">无相关内容</view>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

@@ -1,0 +1,59 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">评论</text>
+</jwqcapsule>
+
+<view class="comment">
+  <view class="commentItem bd1">
+    <image class="br ciImg" mode="aspectFill" lazy-load="1" src="{{ info.uid_avatar_url }}"></image>
+    <view class="ciRight flex1">
+      <text class="f22 c787878">{{info.uid_username}}</text>
+      <text class="f25 c000">{{info.comment}}</text>
+      <view class="f22 mt10 ciBottom">
+        <text class="flex1">{{info.create_at}}</text>
+        <view class="c787878">
+          <text catchtap="_writeComment" data-index="-1" data-type="in" class="jwqfont jwqpinglun f28"></text>
+          <text catchtap="changeStar" data-index="-1" class="jwqfont jwqdianzan f28 {{ info.is_star > 0 ? 'cff362c' : '' }}"> {{info.star}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!--评论列表 -s-->
+<view class="comment">
+  <view wx:for="{{comment}}" wx:key="index" class="commentItem bd1">
+    <image class="br ciImg" mode="aspectFill" lazy-load="1" src="{{ item.uid_avatar_url }}"></image>
+    <view class="ciRight flex1">
+      <text class="f22 c787878">{{item.uid_username}}</text>
+      <text class="f25 c000">{{item.comment}}</text>
+<!--      <view class="p20 ciReply mt20 f22 c646464">-->
+<!--        <view wx:for="123" wx:key="*6">-->
+<!--          <text>小哥哥：</text>-->
+<!--          <text class="c323232">回复评语回复评语回复评语回复评语回复评语回复评语回复评语回复评语回复评语回复评语回复评语回复评语</text>-->
+<!--        </view>-->
+<!--      </view>-->
+      <text class="f22 mt10" wx:if="{{item.discuss > 0}}">共{{ item.discuss }}条回复</text>
+      <view class="f22 mt10 ciBottom">
+        <text class="flex1">{{item.create_at}}</text>
+        <view class="c787878">
+          <text catchtap="goReply" data-index="{{ index }}" data-type="in" class="jwqfont jwqpinglun f28"></text>
+          <text catchtap="changeStar" data-index="{{index}}" class="jwqfont jwqdianzan f28 {{ item.is_star > 0 ? 'cff362c' : '' }}"> {{item.star}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="tac p20 f22 c999" wx:if="{{ !comment }}">暂无相关内容</view>
+</view>
+<!--评论列表 -e-->
+<view class="zw100"></view>
+<view wx:if="{{ fix }}" class="zw40"></view>
+<!--底部评论发表区域 -s-->
+<form bindsubmit="sendWordsDiscussSub">
+  <view class="detailBottom" style="padding-bottom: {{ fix ? 55:15 }}rpx;">
+    <input value="{{commentValue}}" name="comment" focus="{{ focus }}" bindblur="_writeComment" data-type="out" class="dbInput" cursor-spacing="10" placeholder="请输入评论内容"/>
+    <button form-type="submit" class="dbSend">发送</button>
+  </view>
+</form>
+<!--底部评论发表区域 -e-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+

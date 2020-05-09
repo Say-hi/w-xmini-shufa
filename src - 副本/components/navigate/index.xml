@@ -1,0 +1,5 @@
+<form>
+  <view hover-class="hasTap" catchtap="_navigateTo">
+    <slot></slot>
+  </view>
+</form>

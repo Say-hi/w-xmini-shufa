@@ -1,0 +1,92 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">{{ theme }}</text>
+</jwqcapsule>
+
+<!--列表 -s-->
+<view wx:if="{{ options.type == 'user' }}" wx:for="123" wx:key="index" class="p30 bgfff bd1 messageList df">
+  <image mode="aspectFill" lazy-load="1" src="https://c.jiangwenqiang.com/api/logo.jpg"></image>
+  <view class="f24 c646464 flex1">
+    <view>
+      反馈意见：adsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadfadsfasdfasfasfsadf
+    </view>
+    <view class="f25 c323232">
+      系统回复：
+    </view>
+  </view>
+  <text class="f16">2019-08-06 23:03</text>
+</view>
+<!--列表 -e-->
+
+<!--商城我的消息 -s-->
+<view wx:if="{{ options.type == 'shop' }}" wx:for="{{list}}" wx:key="index" class="mt10 p20">
+  <view class="f23 c646464 tac">{{item.create_at}}</view>
+  <view class="bgfff p20 br10 mt10">
+    <image wx:if="{{ item.img_name }}" class="w100 br10" lazy-load="1" mode="widthFix" src="{{item.img_name}}"></image>
+    <view class="f24 c323232 mt10">{{ item.title }}</view>
+    <view class="f21 c646464">{{item.content}} ></view>
+  </view>
+</view>
+<!--商城我的消息 -e-->
+
+<!--商城我的评价 -s-->
+<view wx:for="{{list}}" wx:key="index"  class="bgfff p200 {{ index > 0 ? 'mt20' : '' }}" wx:if="{{ options.type == 'shopcomment' }}">
+  <view class="goodsInfo p20">
+    <view class='df' style='align-items: center;'>
+      <image style='width: 76rpx; height: 76rpx;' class='br ' src='{{ item.avatar_url }}'></image>
+      <view style='margin-left:12rpx;' class='f19 c323232'>
+        <view>{{ item.username }}</view>
+        <view>微信昵称</view>
+      </view>
+    </view>
+    <view class="f25 p020 c323232 mt20">
+      {{item.comment}}
+    </view>
+    <view class="p020 commentImage df">
+      <image wx:for="{{item.imgs_url.imgs}}" wx:key="index"  lazy-load="1" mode="aspectFill" src="{{item}}"></image>
+    </view>
+  </view>
+  <view style='background: #f1f1f1;padding: 5rpx 20rpx;' class='df'>
+    <image style='width: 128rpx; height: 128rpx;' mode="aspectFill" lazy-load="1" src="{{item.img_url}}"></image>
+    <view class="commentGoods ml20 f21 c787878 flex1">
+      <view class="ell2 f24 c3e3a39">{{item.title || '未知商品名'}}</view>
+      <view class="mt10">{{ item.label }}:{{item.value}}</view>
+      <view class="mt20">评价时间:{{item.create_at}}</view>
+    </view>
+    <view class='f22 c3e3a39 tar'>
+      <view>{{ item.new_price }}</view>
+      <view>x{{ item.count }}</view>
+    </view>
+  </view>
+  <!-- <view class="f24 c323232 p20 left-pillar">评论内容</view> -->
+  <!-- <view class="f22 p020 c646464">
+    {{item.comment}}
+  </view> -->
+  <!-- <view class="p020 commentImage df">
+    <image wx:for="{{item.imgs_url.imgs}}" wx:key="index"  lazy-load="1" mode="aspectFill" src="{{item}}"></image>
+  </view> -->
+</view>
+<!--商城我的评价 -e-->
+
+<!-- 销售评价 -s -->
+<view wx:if="{{ options.type == 'sellcomment' }}" class='p20 df bgfff' wx:key="item" wx:for="{{list}}">
+  <image style='width: 90rpx;height:90rpx;border-radius: 50%;' lazy-load='1' src='{{ item.avatar_url }}'></image>
+  <view style='flex: 1;'  class='df bd1 p20'>
+    <view style='flex: 0 0 50%'>
+      <view class='f24 c646464'>{{item.nickname}}</view>
+      <view class='f25 c323232'>{{item.comment}}</view>
+      <image style='display:inline-block; width: 70rpx;height: 70rpx;' lazy-load='1' src="{{iitem}}" wx:key='iitem' wx:for-item="iitem" wx:for="{{ item.img_url }}"></image>
+      <view class="f25 c323232 mt10">
+        评论:<text class='cf73650'>{{textArr[item.star]}}</text>
+      </view>
+      <view class='f16 c646464 mt10'>{{item.create_at}}</view>
+    </view>
+    <view class='c3e3a39' style='flex: 0 0 50%'>
+      <view class='f24 ell3'>{{item.title}}</view>
+      <view class='f22 mt20'>￥{{item.price}}</view>
+    </view>
+  </view>
+</view>
+<!-- 销售评价 -e -->
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

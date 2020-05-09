@@ -1,0 +1,68 @@
+<jwqcapsule capsule="{{ capsule }}"></jwqcapsule>
+<!--信息 -s-->
+<view class="userInfo">
+  <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+  <view class="userTop p2030">
+    <image mode="aspectFill" class="br" src="{{userInfo.avatar_url || 'https://c.jiangwenqiang.com/api/logo.jpg'}}"></image>
+    <view class="utName flex1">
+      <view class="f28 cfff">{{userInfo.nickname || '未登录'}}</view>
+      <view class="f22 cece696 mt10">{{userInfo.rank > 0 ? '会员'+userInfo.rankText : '非会员'}}</view>
+    </view>
+    <navigator url="/user/message/index?type=shop" class="f21 cfff jwqfont jwqtianchongxing- tar"></navigator>
+  </view>
+  <view class='uiBottom p20 df dfb f25 cfff'>
+    <view>
+      <text>余额￥{{userInfo.appear_money}}</text>
+      <navigator style="display: inline-block;" url="/user/detail/index?type=shop" class="cff362c">明细</navigator>
+    </view>
+    <navigator url="/user/cashdraw/index?type=shop" class="arrow">立即提现</navigator>
+  </view>
+</view>
+<!--信息 -e-->
+
+<!--金额信息 -s-->
+<view class="p20 bgfff">
+  <view class="f25 c646464 left-pillar">我的订单奖励</view>
+  <view class="f21 df mt20">
+    <navigator url="/user/profit/index?from=shop&type=0" class="df dfc dfac flex1 money-left">
+      <text class="f29 cff362c">{{userInfo.stay_money}}元</text>
+      <text class="c323232">待入帐</text>
+      <text class="c646464">今日＋{{userInfo.today_stay_money}}元</text>
+    </navigator>
+    <navigator url="/user/profit/index?from=shop&type=1" class="df dfc dfac flex1">
+      <text class="f29 cff362c">{{userInfo.already_money}}元</text>
+      <text class="c323232">累计入帐</text>
+      <text class="c646464">今日＋{{userInfo.today_count_money}}元</text>
+    </navigator>
+  </view>
+</view>
+<!--金额信息 -e-->
+
+<!--用户操作导航 -s-->
+<view class="p20 bgfff mt20">
+  <view class="f25 c646464 left-pillar">我的流谦书苑</view>
+  <view class="df dfac dfb c323232 shopTab">
+    <view catchtap='goUrl' data-index="{{ index }}" wx:for="{{ userNav }}" wx:key="index" class="df mt20 dfc dfac f24 stItem">
+      <image mode="widthFix" class="tabImg" src="{{ item.i }}"></image>
+      <text class="mt10">{{ item.t }}</text>
+    </view>
+  </view>
+</view>
+<!--用户操作导航 -e-->
+
+<!--操作 -s-->
+<navigator url="/user/message/index?type=shopcomment" class="arrow p2030 f25 bgfff bd1 jwqfont jwqpinglun1 mt20">　<text class="c323232 ml10">我的评价</text></navigator>
+<!--<navigator url="/user/message/index?type=shopcomment" class="arrow p2030 f25 bgfff bd1 jwqfont jwqshangcheng">　<text class="c323232 ml10">我的墨宝真迹</text></navigator>-->
+<navigator url="/sell/index/index?type=shopcomment" class="arrow p2030 f25 bgfff bd1 jwqfont jwqshangcheng">　<text class="c323232 ml10">我的墨宝真迹</text></navigator>
+<button open-type="contact">
+  <view class="arrow p2030 f25 bgfff jwqfont df jwqiconset0270">　<text class="c323232 ml10">联系客服</text></view>
+</button>
+
+<!--操作 -e-->
+<navigator url="/user/login/index" class="f29 fw7 tac br10 bgfff login">退出登陆</navigator>
+
+<jwqfoot></jwqfoot>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

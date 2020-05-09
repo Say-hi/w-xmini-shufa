@@ -1,0 +1,174 @@
+page {
+  background-color: #f1f1f1;
+}
+.tab-scroll {
+  width: 100%;
+  background: url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;
+  padding: 10rpx 0;
+}
+.tab-inside {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding-bottom: 10rpx;
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 4rpx;
+    background-color: transparent;
+  }
+}
+.active {
+  color: #f30;
+  &:before {
+    background-color: #f00;
+  }
+}
+
+
+.goodsItem {
+  background: #f2f2f2;
+  padding: 10rpx 20rpx;
+  image {
+    width: 128rpx;
+    height: 128rpx;
+  }
+  &.outItem {
+    padding: 0;
+    margin-top: 10rpx;
+  }
+}
+.goI {
+  padding: 10rpx 20rpx;
+  border-radius: 5rpx;
+  border: 2rpx solid #666;
+  margin-left: 10rpx;
+}
+.goodsOp {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  .goI {
+    padding: 10rpx 20rpx;
+    border-radius: 5rpx;
+    border: 2rpx solid #666;
+    margin-left: 10rpx;
+  }
+  .goIB {
+    background: #f00;
+    color: #fff;
+    border-color: #f00;
+  }
+}
+
+
+.cancel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+  .cancelBtn {
+    margin: 30rpx auto;
+    width: 80%;
+    border-radius: 50rpx;
+    .btnCancel {
+      background: #ff7515;
+      border-top-left-radius: 50rpx;
+      border-bottom-left-radius: 50rpx;
+    }
+    .btnConfirm {
+      background: #ff2e3b;
+      border-top-right-radius: 50rpx;
+      border-bottom-right-radius: 50rpx;
+    }
+  }
+}
+
+.pay-mask {
+  background: #fff;
+  padding: 20rpx 60rpx;
+  .pItem {
+    flex: 1;
+    margin-left: 20rpx;
+    border: 2rpx solid #22ac38;
+    border-radius: 10rpx;
+    color: #22ac38;
+    &:nth-child(2) {
+      color: #fff;
+      background-color: #22ac38;
+    }
+  }
+}
+
+.addMask {
+  padding: 20rpx 0rpx;
+}
+
+.address {
+  background-color: #fff;
+  position: relative;
+  margin-bottom: 20rpx;
+  image {
+    width: 100%;
+  }
+  .address-s {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    padding: 0 20rpx;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 120rpx;
+    .a-s-t {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  .open-setting {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    transform: translate(0, 0);
+    button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80% !important;
+    }
+  }
+}
+
+.addBtn {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  .adbItem {
+    background: #ff362c;
+    &:nth-child(1) {
+      background: #d2d2d2;
+    }
+  }
+}
+

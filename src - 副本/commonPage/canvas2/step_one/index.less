@@ -1,0 +1,25 @@
+
+.type_choose_wrap {
+  padding: 30rpx 100rpx;
+}
+.type_choose {
+  width: 164rpx;
+  height: 220rpx;
+  background-image: url("https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/type_single.png");
+  background-size: 164rpx 164rpx;
+  background-repeat: no-repeat;
+  margin: 20rpx;
+  position: relative;
+  &:nth-child(2) {
+    background-image: url("https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/type_many.png");
+  }
+  &:after {
+    position: absolute;
+    content: attr(data-text);
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 28rpx;
+    color: #323232;
+  }
+}

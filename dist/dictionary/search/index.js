@@ -180,6 +180,7 @@ Page({
         page: ++that.data.authorPage
       }
     }).then(function (res) {
+      app.su('searchAuthor', res);
       that.setData({
         authorArr: res
       });

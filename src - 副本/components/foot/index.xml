@@ -1,0 +1,14 @@
+<form>
+  <view wx:if="{{ footArr.length }}" style="background: url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/bottom_nav.png) center;" class="foot {{ fix ? 'fix' : '' }}">
+    <button wx:for="{{ footArr }}"
+            wx:key="index"
+            catchtap="footOp"
+            hover-class="none"
+            data-index="{{ index }}"
+            class="foot-item {{ fix ? 'fix' : '' }}">
+      <image mode="widthFix" class="footImg" src="{{ item.active ? item.img_url_active : item.img_url }}"></image>
+      <view style='{{ item.color ? item.active ? "color:" + item.activeColor : "color:"+item.color : "" }}; {{ item.fontSize ? "font-size:" + item.fontSize : "" }}' class="foot-title {{ item.active ? 'active' : '' }}">{{ item.title }}</view>
+    </button>
+  </view>
+  <view class="stance {{ fix ? 'fix' : '' }}"></view>
+</form>

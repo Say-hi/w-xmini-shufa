@@ -1,0 +1,43 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">{{ options.type === 'shop' ? '查看下级' : '查看三星' }}</text>
+</jwqcapsule>
+
+<!--成员 -s-->
+<view class="df dfb bd1 p30">
+  <view class="hliTop flex1">
+    <image class="br hliTopImg" lazy-load="true" mode="aspectFill" src="{{info.avatar_url}}"></image>
+    <view class="hliTopName f21 c323232">
+      <text>{{info.username || info.nickname}}</text>
+      <text class="f18 c646464 mt10">{{info.create_at}}</text>
+    </view>
+  </view>
+</view>
+<text class="f22 c787878 p20">{{ options.type === 'shop' ? '以下为TA的一级' : '以下为TA的三星' }}</text>
+<view wx:for="{{list}}" wx:key="index" class="df dfb bgfff bd1 p30">
+  <view class="hliTop flex1">
+    <image class="br hliTopImg" lazy-load="true" mode="aspectFill" src="{{item.avatar_url}}"></image>
+    <view class="hliTopName f21 c323232">
+      <text>{{item.username || item.nickname}}</text>
+      <text class="f18 c646464 mt10">{{item.create_at}}</text>
+    </view>
+  </view>
+</view>
+<view class='tac p20 f30 c999' wx:if="{{ !list.length }}">暂无相关数据</view>
+<!--成员 -e-->
+
+<!--奖励 -s-->
+<view class="mask" wx:if="{{ ruler }}" catchtap="_toggleGift">
+  <view catchtap="noUp" class="mask-in p10 br10 animated zoomIn" hover-stop-propagation="1">
+    <view class="tac f30 cff362c lh60">五星奖励</view>
+    <view style="height: 500rpx;">
+      <scroll-view scroll-y="1" style="height: 100%;">
+        adsfasfasdfasdfsadfsdf
+      </scroll-view>
+    </view>
+  </view>
+</view>
+<!--奖励 -e-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

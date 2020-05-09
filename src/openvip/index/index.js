@@ -71,7 +71,7 @@ Page({
   goVip (e) {
     if (this.data.system && this.data.checkIos) {
       return app.toast({
-        content: '苹果端请点击联系官方通过人工进行开通',
+        content: '苹果端暂不支持线上购买服务，如需服务请更换【安卓版】微信继续使用',
         image: ''
       })
     }

@@ -11,7 +11,7 @@
     <jwqnav url="../userHomePage/index?id={{info.uid}}{{ options.from === 'main' ? '&from=main' : '' }}"><image class="br hliTopImg" lazy-load="true" mode="aspectFill" src="{{info.avatar_url}}"></image></jwqnav>
     <jwqnav url="../userHomePage/index?id=1" class="flex1">
       <view class="hliTopName f21 c323232">
-        <text>{{info.username}}</text>
+        <text>{{info.username || '游客'}}</text>
         <text class="f18 c646464 mt10">{{info.create_at || '未知时间'}}　{{info.hits || 0}}次阅读</text>
       </view>
     </jwqnav>

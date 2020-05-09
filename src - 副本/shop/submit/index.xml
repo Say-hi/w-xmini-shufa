@@ -1,0 +1,91 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">提交订单</text>
+</jwqcapsule>
+<!--地址 -s-->
+<view catchtap="chooseAddress"
+      class="address pr">
+  <image lazy-load="{{true}}"
+       mode="widthFix"
+       src="https://teach-1258261086.cos.ap-guangzhou.myqcloud.com/image/admin/background/add_address1.png"></image>
+  <view wx:if="{{ addressInfo }}"
+        class="address-s f26 c3a3a3a">
+    <view class="a-s-t">
+      <text class="iconfont icon-dizhi f26">收货人: {{ addressInfo.userName }}</text>
+      <text class="f26">{{ addressInfo.telNumber }}</text>
+    </view>
+    <view class="ell2">
+      收货地址: {{ addressInfo.provinceName }}{{ addressInfo.cityName }}{{ addressInfo.countyName }}{{ addressInfo.detailInfo }}
+    </view>
+  </view>
+  <view wx:if="{{ needSetting }}"
+        class="open-setting">
+    <button catchtap="openSetting">开启授权</button>
+  </view>
+</view>
+<!--地址 -e-->
+
+<!--商品 -s-->
+<scroll-view scroll-y="1" style="max-height: 500rpx;" class="bd1 bgfff mt10 bb">
+  <view wx:for="{{info}}" wx:key="index" class="goodsItem df p20">
+    <image mode="aspectFill" lazy-load="1" src='{{ item.product.img_url }}'></image>
+    <view class="ml20 flex1">
+      <view class="ell2 f25 c323232">{{item.product.title}}</view>
+      <view class="f22 c646464 mt10">{{item.product.label}}分类: {{ item.product.value }}</view>
+    </view>
+    <view class="f22 c323232 tar ">
+      <view>{{ discount ? '￥' + item.product.price + '折后￥' + item.product.discount : '￥' + item.product.discount }}</view>
+      <view>x{{item.count}}</view>
+    </view>
+  </view>
+</scroll-view>
+<!--商品 -e-->
+
+<!--金额相关 -s-->
+<view class="df dfb p20 bt1 bgfff f22 c323232">
+  <text>运费</text>
+  <text>￥{{maxFreight}}</text>
+</view>
+<!-- <view class="df dfb p20 bt1 bgfff f22 c323232">
+  <text>优惠券</text>
+  <text class="arrow">使用优惠</text>
+</view> -->
+<view class="df dfb p20 mt20 bgfff f22 c323232">
+  <text>商品金额 </text>
+  <text>¥{{goodsMoney}}</text>
+</view>
+<view class="df dfb bt1 p20 bgfff f22 c323232">
+  <text></text>
+  <view>
+    <text>合计: <text class="cff362c">￥{{ totalMoney }}</text></text>
+  </view>
+</view>
+<!--金额相关 -e-->
+
+<!--支付操作 -s-->
+<view class="pay w100 f29 bgfff tac lh90">
+  <view>
+    <text class="c323232">合计:</text>
+    <text class="cff362c">￥{{totalMoney}}</text>
+  </view>
+  <view catchtap="pay" class="cfff">
+    微信支付
+  </view>
+  <view wx:if="{{fix}}" class="zw40"></view>
+</view>
+<!--支付操作 -e-->
+
+<!--支付成功 -s-->
+<view wx:if="{{ paySuccess }}" class="mask pay-mask tac">
+  <view class="zw120"></view>
+  <view wx:if="{{fix}}" class="zw40"></view>
+  <icon type="success" class="mt20" size="120"></icon>
+  <view class="f40 fw7 f323232 mt20">支付成功</view>
+  <view class="df dfac lh80 mt20 f25">
+    <navigator open-type="reLaunch" url="/shop/index/index" class="pItem bgfff">继续购买</navigator>
+    <jwqnav class="pItem" url="/shop/order/index?type=2"><view>查看订单</view></jwqnav>
+  </view>
+</view>
+<!--支付成功 -e-->
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

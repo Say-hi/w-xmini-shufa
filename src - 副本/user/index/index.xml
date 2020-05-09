@@ -1,0 +1,60 @@
+<jwqcapsule capsule="{{ capsule }}"></jwqcapsule>
+<!--信息 -s-->
+<view class="userInfo">
+<view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+<view class="userTop p2030">
+  <button class="loginBtn" open-type="getUserInfo" bindgetuserinfo="_getUserInfo">
+    <image mode="aspectFill" class="br" src="{{ userInfoAll.avatar_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/login1.png'}}"></image>
+    <view class="utName">
+      <view class="f28 cfff">{{ userInfoAll.nickname || '点击授权个人信息' }}</view>
+      <view class="f22 cece696 mt10">{{ rank > 0 ? '会员:'+rankText : '非会员' }}</view>
+    </view>
+  </button>
+  <view wx:if='{{ userInfoAll.openid }}' catchtap="_toggleSign" class="f21 cfff jwqfont jwqic_pen flex1 tar">{{ user.signature || '个性签名' }}</view>
+</view>
+<view wx:if='{{ userInfoAll.openid }}' class='uiOperation cfff tac'>
+  <navigator url="{{ item.url }}" wx:for="{{ uiOp }}" wx:key="index">
+    <view class="f28">{{ item.n }}</view>
+    <view class="f22 mt10">{{ item.t }}</view>
+  </navigator>
+</view>
+</view>
+<!--信息 -e-->
+<!--导航 -s-->
+<view wx:if='{{ userInfoAll.openid }}' class="pr" style="height: 190rpx">
+  <view class="pa userTab tac f23 cfff br10">
+    <view class="utitem" data-index="{{index}}" catchtap='goUrl' wx:for="{{ tabArr }}" wx:key="index">
+      <image mode="widthFix" src="{{ item.i || 'https://c.jiangwenqiang.com/api/logo.jpg' }}"></image>
+      <view class="mt10">{{ item.t }}</view>
+    </view>
+  </view>
+</view>
+<!--导航 -e-->
+<!--操作 -s-->
+<navigator wx:if='{{ userInfoAll.openid }}' url="{{ item.url }}" wx:for="{{ op }}" wx:key="index" class="arrow p2030 f25 bgfff df bd1 jwqfont {{ item.i }}" style="color: {{ item.c }};">　<text class="c323232　ml10">{{ item.t }}</text></navigator>
+<button open-type="contact">
+  <view class="arrow p2030 f25 bgfff jwqfont df jwqqunfengkefujingli" style="color: #31cf2d;"><text class="c323232 ml10">　联系客服</text></view>
+</button>
+<!--操作 -e-->
+<navigator catchtap="clean" url="../login/index" class="f29 fw7 tac br10 bgfff login">{{ userInfoAll.access_token ? '退出登陆' : '现在登陆'  }}</navigator>
+
+<!--个性签名 -s-->
+<view class="mask masktr1" wx:if="{{ sign }}">
+<form bindsubmit="_sign">
+  <view class="mask-in br10 animated zoomIn">
+    <view class="tac f30 c323232 fw7 mt20">我的个性签名</view>
+    <input name="sign" class="p20 " placeholder="请输入签名" />
+    <view class="df">
+      <view catchtap="_toggleSign" class="lh80 flex1 tac t30 bt1">取消</view>
+      <button form-type="submit" class="lh80 flex1 tac t30 bt1 cff362c">确定</button>
+    </view>
+  </view>
+</form>
+</view>
+<!--个性签名 -e-->
+
+<jwqfoot></jwqfoot>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

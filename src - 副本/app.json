@@ -1,0 +1,247 @@
+{
+  //  群信息小程序页面分布
+  "pages": [
+    "pages/index/index" // 首页
+  ],
+  "subPackages": [{
+      "root": "hundred", // 百家争鸣
+      "name": "hundred",
+      "pages": [
+        "index/index", // 百家 & 社区 from=main
+        "userHomePage/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "dayword", // 每日一字
+      "name": "dayword",
+      "pages": [
+        "index/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "teaching", // 书法教学 & 视频
+      "name": "teaching",
+      "pages": [
+        "index/index", // 书法教学 & 视频 form=main
+        "detail/index"
+      ]
+    },
+    {
+      "root": "user", // 个人中心
+      "name": "user",
+      "pages": [
+        "index/index",
+        "login/index",
+        "comment/index", // 评论 & 粉丝
+        "team/index",
+        "tnext/index",
+        "message/index", // type=user 用户信息 & type=shop 来自商城的信息 & type=shopcomment 我的评价 & type=sellcomment 销售评价
+        "detail/index",
+        "money/index",
+        "profit/index",
+        "cashdraw/index",
+        "collect/index" // 帖子 & 赞
+      ]
+    },
+    {
+      "root": "shop", // 商城
+      "name": "shop",
+      "pages": [
+        "index/index",
+        "category/index",
+        "detail/index",
+        "goodsList/index",
+        "cart/index",
+        "order/index",
+        "user/index",
+        "score/index",
+        "submit/index"
+      ]
+    },
+    {
+      "root": "camera", // 叠影
+      "name": "camera",
+      "pages": [
+        "index/index",
+        "detail/index",
+        "search/index",
+        "search_choose/index"
+      ]
+    },
+    //    {
+    //      "root": "video", // 视频
+    //      "name": "video",
+    //      "pages": [
+    //        "index/index",
+    //        "detail/index"
+    //      ]
+    //    },
+    {
+      "root": "stele", // 碑体
+      "name": "stele",
+      "pages": [
+        "index/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "openvip", // 开通会员
+      "name": "openvip",
+      "pages": [
+        "index/index",
+        "vip/index",
+        "vipTwo/index",
+        "buy/index"
+      ]
+    },
+    {
+      "root": "search", // 搜索
+      "name": "search",
+      "pages": [
+        "index/index"
+      ]
+    },
+    {
+      "root": "openShare", // 分享进入
+      "name": "openShare",
+      "pages": [
+        "index/index"
+      ]
+    },
+    {
+      "root": "sell", // 个人售卖
+      "name": "sell",
+      "pages": [
+        "index/index",
+        "goods/index",
+        "notice/index"
+      ]
+    },
+    {
+      "root": "commonPage", // 公共页面
+      "name": "common",
+      "pages": [
+        "talk/index", // 说一说
+        "camera/index",
+        "camera_two/index",
+        "canvas/index",
+        "canvas_share/index",
+        "canvas2/index",
+        "canvas2/step_one/index",
+        "canvas2/step_two/index",
+        "canvas2/step_three/index",
+        "literacy/index",
+        "literacyShow/index",
+        "release/index",
+        "release-editor/index",
+        "reply/index",
+        "back/back"
+      ]
+    },
+    {
+      "root": "share", // 海报图
+      "name": "carShare",
+      "pages": [
+        "carShare/carShare"
+      ]
+    },
+    {
+      "root": "dictionary", // 字典
+      "name": "dictionary",
+      "pages": [
+        "search/index",
+        "result/index",
+        "detail/index",
+        "more/index"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/index/index": {
+      "network": "all",
+      "packages": [
+        "hundred",
+        "dayword",
+        "teaching",
+        "dictionary",
+        "user",
+        "shop",
+        "camera",
+        "stele",
+        "common"
+      ]
+    },
+    "openShare/index/index": {
+      "network": "all",
+      "packages": [
+        "hundred",
+        "dayword",
+        "teaching",
+        "dictionary",
+        "user",
+        "shop",
+        "camera",
+        "stele",
+        "common"
+      ]
+    }
+  },
+  // Window configuration
+  "window": {
+    // 顶部导航栏
+    //    "navigationStyle": "custom",
+    // 类型：HexColor；默认值：#000000
+    // 导航栏背景颜色，如"#000000"
+    "navigationBarBackgroundColor": "#ffffff",
+    // 类型：String；默认值：white
+    // 导航栏标题颜色，仅支持 black/white
+    "navigationBarTextStyle": "black",
+    // 类型：String；默认值：无
+    // 导航栏标题文字内容
+    "navigationBarTitleText": "流谦书苑",
+    // 类型：HexColor；默认值：#ffffff
+    // 窗口的背景色
+    "backgroundColor": "#eeeeee",
+    // 类型：String；默认值：dark
+    // 下拉背景字体、loading 图的样式，仅支持 dark/light
+    "backgroundTextStyle": "light",
+    //    "navigationStyle": "custom",
+    // 类型：Boolean；默认值：false
+    // 是否开启下拉刷新，详见页面相关事件处理函数。
+    // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/page.html?t=1476197491005#页面相关事件处理函数
+    "enablePullDownRefresh": false
+  },
+  "usingComponents": {
+    //    "my-add": "/components/my-add/add",
+    //    "my-tip": "/components/my-tip/my-tip",
+    //    "my-login": "/components/my-login/my-login",
+    "my-express": "/components/my-express/my-express",
+    "my-navigator-tab": "/components/my-navigator-tab/my-navigator-tab",
+    "canvasdrawer": "/components/canvasdrawer/canvasdrawer",
+    //    "my-back": "/components/my-back/back",
+    //    "my-ng": "/components/my-ng/ng",
+    //    "my-top-tab": "/components/my-top-tab/my-top-tab",
+    "jwqcapsule": "/components/capsule/index",
+    "jwqfoot": "/components/foot/index",
+    "uparea": "/components/uparea/index",
+    "toast": "/components/toast/index",
+    "jwqnav": "/components/navigate/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息用于获取附近的服务"
+    }
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxd5a3fb6958597360",
+    "wx9f5e0a4d343331a4"
+  ],
+  // Debug log to console
+  "debug": false
+}

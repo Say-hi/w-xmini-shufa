@@ -1,0 +1,36 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">帐户登陆</text>
+</jwqcapsule>
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<image class="before-logo {{ logo }}" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/home/img/public/eiyxnaeasd_20190902104914.jpg"></image>
+
+<!--登录选择 -s-->
+<!-- <view wx:if="{{ phoneLogin }}">
+  <view class="tac">
+    <button open-type="getUserInfo" getUserInfo="_getUserInfo" class="loginBtn">微信一键登陆</button>
+  </view>
+  <view class="tac">
+    <view catchtap="_phoneLogin" class="loginBtn">手机验证码登陆</view>
+  </view>
+</view> -->
+<!--登录选择 -e-->
+<!--账号登陆 -s-->
+<view class="p30 f25 phoneArea animated {{ bounceInUp }}" style='animation-fill-mode:forwards;'>
+  <form bindsubmit="phoneLogin">
+    <view class="bd1 pb20">
+      <input id="phone" bindinput="inputValue" name="phone" maxlength="11" type="number" placeholder="请输入手机号"/>
+    </view>
+    <view class="codeArea bd1 mt20 pb20">
+      <input id="code" bindinput="inputValue" name="code" class="flex1" maxlength="6" type="number" placeholder="请输入手机验证码"/>
+      <button id="code" form-type="submit" class="time tac">{{ codeText }}</button>
+    </view>
+    <button id="login" open-type="getUserInfo" bindgetuserinfo="_getUserInfo" class="loginConfirm">确定</button>
+<!--    <view catchtap="_phoneLogin" class="loginConfirm">取消</view>-->
+  </form>
+</view>
+<navigator style='position: fixed; bottom: 100rpx;right:10rpx;background: #0094ff; color:#fff; border-radius: 50%; width: 100rpx;height: 100rpx;line-height:100rpx;text-align:center;' url='/pages/index/index' open-type='reLaunch'>首页</navigator>
+<!--账号登陆 -e-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

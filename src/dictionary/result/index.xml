@@ -3,14 +3,14 @@
 </jwqcapsule>
 <view class='result-wrap'>
   <view class="result-top df bgfff br5">
-    <view>
+    <view style='background: url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_mi.png);background-size: 100%; width:150rpx;height:150rpx;position: relative;'>
       <!-- <image wx:if="{{ info.img_name }}" style='width: 134rpx; height: 135rpx;' src='{{info.img_name}}'></image> -->
-      <view style='font-size: 100rpx;'>{{ options.word }}</view>
+      <view style='font-size: 100rpx;position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);'>{{ options.word }}</view>
     </view>
     <view class='c787878 flex1 f26 df rw-center'>
-      <view>书体：{{ options.type }}</view>
+      <picker bindchange='pickerChange2' data-index='0' range-key="name" range="{{ searchAuthor }}">书体：{{ options.type }} ▼</picker>
       <view catchtap='audio' style='margin-left: 2rpx;' class='mt10 df dfac f36'>{{wInfo.pinyin}}
-      <!-- <view style='margin-left:8rpx;' class='jwqfont jwqtianchongxing- cd81e06'></view> -->
+      <view style='margin-left:8rpx;' class='jwqfont jwqtianchongxing- cd81e06'></view>
       </view>
     </view>
     <navigator url='/dictionary/detail/index?word={{ options.word }}&cid={{ options.cid }}' class='cf00 f24 df top-detail'>
@@ -50,7 +50,7 @@
       <view class='f24 c646464 zt-title'>{{item.path}}</view>
       <view class='zt-img df'>
         <view class='zti' wx:for='{{item.data}}' wx:for-item='iItem'  wx:key='item' >
-          <image style='width: 139rpx; height: 140rpx;' src='{{iItem.img_name}}'></image>
+          <image catchtap='showImg' data-src="{{iItem.img_name}}" style='width: 139rpx; height: 140rpx;' src='{{iItem.img_name}}'></image>
         </view>
       </view>
     </block>

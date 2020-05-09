@@ -1,0 +1,74 @@
+.arrow::after {
+  width: 10rpx;
+  height: 10rpx;
+}
+page {
+  background-color: #f1f1f1;
+}
+.userInfo {
+  background: url('https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png');
+  .userTop {
+    display: flex;
+    align-items: center;
+    image  {
+      width:  124rpx;
+      height: 124rpx;
+      margin-right: 24rpx;
+    }
+  }
+  .uiBottom {
+    width: 90%;
+    background: url('https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/user.png') center;
+    margin: 0 auto;
+    margin-top: 20rpx;
+    border-top-left-radius: 15rpx;
+    border-top-right-radius: 15rpx;
+    .cff362c {
+      border-bottom: 2rpx solid #ff362c;
+    }
+    .arrow {
+      padding-right: 20rpx;
+      &:after {
+        right: 0;
+        border-color: #fff #fff transparent transparent;
+      }
+    }
+  }
+}
+
+.left-pillar {
+  padding-left: 20rpx;
+  &:after {
+    background: #ff362c;
+  }
+}
+.shopTab {
+  flex-wrap: wrap;
+  .stItem {
+    flex: 0 0 25%;
+
+  }
+}
+.tabImg {
+  width: 55rpx;
+}
+
+.money-left {
+  border-right: 2rpx solid #e5e5e5;
+}
+
+.jwqfont {
+  &.df {
+    display: flex;
+    align-items: center;
+  }
+  &:before{
+    font-size: 40rpx;
+  }
+}
+
+.login {
+  color: #f00;
+  margin: 30rpx;
+  line-height: 80rpx;
+}

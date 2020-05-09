@@ -1,0 +1,70 @@
+page {
+  background-color: #f1f1f1;
+}
+.userInfo {
+  background: url('https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png');
+  .userTop {
+    display: flex;
+    align-items: flex-start;
+    image  {
+      width:  124rpx;
+      height: 124rpx;
+      margin-right: 24rpx;
+    }
+  }
+  .uiOperation {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 80rpx;
+  }
+}
+
+.userTab {
+  background: url("https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/user.png");
+  background-size: 682rpx 190rpx;
+  display: flex;
+  width: 682rpx;
+  height: 190rpx;
+  align-items: center;
+  justify-content: space-around;
+  top: -40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  image {
+    width: 65rpx;
+    display: inline-block;
+  }
+  .utitem {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 100rpx;
+  }
+}
+
+.jwqfont {
+  &.df {
+    display: flex;
+    align-items: center;
+  }
+  &:before{
+    font-size: 40rpx;
+  }
+}
+
+.login {
+  color: #f00;
+  margin: 30rpx;
+  line-height: 80rpx;
+}
+
+.loginBtn {
+  display: flex;
+}
+
+.arrow::after {
+  width: 16rpx;
+  height: 16rpx;
+}

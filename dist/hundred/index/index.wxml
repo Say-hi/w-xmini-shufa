@@ -42,7 +42,7 @@
       <view class="hliTop">
         <image class="br hliTopImg" lazy-load="true" mode="aspectFill" src="{{item.avatar_url}}"></image>
         <view class="hliTopName f21 c323232">
-          <text>{{item.username}}</text>
+          <text>{{item.username || '游客'}}</text>
           <text class="f18 c646464 mt10">{{item.create_at || '未知时间'}}　{{item.hits || 0}}次阅读</text>
         </view>
       </view>

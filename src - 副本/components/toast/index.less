@@ -1,0 +1,106 @@
+.toast {
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.5s;
+  background-color: transparent;
+  &.hides {
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+  }
+  &.shows {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+//ssssssssssssssssssss
+.center {
+  bottom: 0;
+  left: 0;
+  .toast-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 500;
+    border-radius: 10rpx;
+  }
+  .toast-image {
+    width: 100rpx;
+    height: 100rpx;
+  }
+}
+//eeeeeeeeeeeeeeee
+
+//sssssssssssssssssssss
+.ontop {
+  transition: all 0.5s;
+  top: 0;
+  left: 0;
+  &.hides {
+    height: 0;
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: none;
+  }
+  &.shows {
+    height: 100%;
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .toast-content {
+    width: 100%;
+    border-radius: 0;
+    border-bottom: 2rpx solid #eee;
+  }
+  .toast-image {
+    width: 100rpx;
+    height: 100rpx;
+  }
+}
+//eeeeeeeeeeeeeeeeeeeee
+
+//sssssssssss
+.leftIn {
+  bottom: 0;
+  left: 0;
+  &.hides {
+    left: -100%;
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: none;
+  }
+  &.shows {
+    left: 0;
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .toast-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 500;
+    border-radius: 10rpx;
+  }
+  .toast-image {
+    width: 100rpx;
+    height: 100rpx;
+  }
+}
+//eeeeeeeeeee
+.df {
+  display: flex;
+}
+.dfc {
+  flex-direction: column;
+}
+.dftac {
+  align-items: center;
+}

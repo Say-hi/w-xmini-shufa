@@ -1,0 +1,43 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">提现</text>
+</jwqcapsule>
+
+<view class="userInfo bgfff">
+  <image class="br" src="{{info.avatar_url}}"></image>
+  <view class="f28 tac c323232">{{info.username || info.nickname}}</view>
+  <view class="bd1 df p20 c323232 f29 mt20">
+    <text>提现金额</text>
+    <input bindinput="inputvlaue" type="digit" value="{{money}}" class="flex1" placeholder="请输入提现金额" />
+    <text catchtap="getAll" class="cff3757">全部提现</text>
+  </view>
+  <view class="bd1 df p20 c323232 f29">
+    <text>可用余额</text>
+    <input disabled="1" class="flex1 cff3757" value="￥{{info.appear_money}}" />
+    <text class="c787878">余额≧10元才可提现</text>
+  </view>
+</view>
+
+<button catchtap="_phoneLogin" style="padding-bottom: {{ fix?40:0}}rpx;" class="tac f34 lh80 apply cfff">提交申请</button>
+
+
+<view class="mask" wx:if="{{ phoneLogin }}">
+<form bindsubmit="cash">
+  <view class="maskCode animated slideInUp">
+    <view class="mcT">
+      <view catchtap="close" class="jwqfont jwqclose-b tar"></view>
+      <veiw class="tac f29 c323232">已发送验证码至手机 {{info.phones}}</veiw>
+      <view class="codeArea pb20">
+        <text class="jwqfont jwqanquan mr20 c787878"></text>
+        <input name="code" class="flex1 tal" maxlength="6" placeholder="请输入手机验证码"/>
+        <view catchtap="_getCode" class="time tac">{{ codeText }}</view>
+      </view>
+    </view>
+    <button form-type="submit" class="f34 cfff mt20 confirm lh80">确定</button>
+  </view>
+</form>
+</view>
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

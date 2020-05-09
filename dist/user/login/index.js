@@ -48,7 +48,8 @@ Page({
     app.wxrequest({
       url: app.getUrl().userCode,
       data: {
-        phone: phone
+        phone: phone,
+        uid: app.gs('userInfoAll').uid || app.gs('userInfoAll').id
       }
     }).then(function () {
       app.toast({

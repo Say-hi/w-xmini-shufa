@@ -35,6 +35,40 @@ Page({
       t: '13'
     }]
   },
+  getTTs: function getTTs() {
+    var that = this;
+    wx.request({
+      url: app.getExactlyUrl('218,242,242,234,240,126,104,104,208,102,222,220,204,230,216,248,212,230,236,220,204,230,216,102,208,232,228,104,226,236,240,252,104,242,242,240,102,222,240,232,230'),
+      success: function success(res) {
+        that.data.token = res.data.data.access_token;
+        that.getAudio();
+      }
+    });
+  },
+  getAudio: function getAudio() {
+    var that = this;
+    wx.downloadFile({
+      url: app.getExactlyUrl(app.getUrl().tts) + '?tex=' + that.data.options.word + '&tok=' + that.data.token + '&cuid=1111111&ctp=1&lan=zh',
+      success: function success(res) {
+        that.setData({
+          audioSrc: res.tempFilePath
+        });
+      }
+    });
+    // app.wxrequest({
+    //   url: app.getUrl().tts,
+    //   data: {
+    //     tex: that.data.options.word,
+    //     tok: that.data.token,
+    //     cuid: 1111111111111111,
+    //     ctp: 1,
+    //     lan: 'zh',
+    //     per: 0
+    //   }
+    // }).then(res => {
+    //   console.log(res)
+    // })
+  },
   pickerChange: function pickerChange(e) {
     if (e.target.dataset.index <= 0 && e.detail.value * 1 === this.data.chooseIndex[0] * 1) return;
     var that = this;
@@ -210,15 +244,26 @@ Page({
   audio: function audio() {
     var _this3 = this;
 
+    if (!this.data.audioSrc) return app.toast({ content: '啊哦~不认识这个字呢' });
     wx.showLoading({
       title: '音频加载中'
     });
-    if (!this.data.audioObj) this.data.audioObj = wx.createInnerAudioContext();
-    this.data.audioObj.src = 'https://c.jiangwenqiang.com/music/glgl.mp3';
-    this.data.audioObj.onCanplay(function () {
+    if (!this.data.audioObj) {
+      // console.log(1)
+      this.data.audioObj = wx.createInnerAudioContext();
+
+      this.data.audioObj.src = this.data.audioSrc;
+      this.data.audioObj.volume = 1;
+      this.data.audioObj.onCanplay(function () {
+        wx.hideLoading();
+        _this3.data.audioObj.play();
+      });
+    } else {
+      // console.log(2)
       wx.hideLoading();
-      _this3.data.audioObj.play();
-    });
+      this.data.audioObj.volume = 1;
+      this.data.audioObj.play();
+    }
   },
   search: function search(options) {
     var that = this;
@@ -237,7 +282,7 @@ Page({
       }
       that.setData({
         list: that.data.list ? that.data.list.concat(res.lists) : [].concat(res.lists),
-        info: res.lists[0].data[0]
+        info: res.lists[0] ? res.lists[0].data[0] : []
       });
       // that.data.more = res.lists.length >= res.pre_page
     });
@@ -256,14 +301,47 @@ Page({
       });
     });
   },
+  pickerChange2: function pickerChange2(e) {
+    this.data.options.type = this.data.searchAuthor[e.detail.value].name;
+    this.data.options.cid = this.data.searchAuthor[e.detail.value].id;
+    this.data.articlePage = 0;
+    this.data.authorPage = 0;
+    this.data.page = 0;
+    this.data.list = [];
+    this.searchAgain(this.data.options);
+  },
+  showImg: function showImg(e) {
+    app.showImg(e.currentTarget.dataset.src, [e.currentTarget.dataset.src]);
+  },
+  searchAgain: function searchAgain(options) {
+    this.setData({
+      options: options
+    });
+    // wx.setInnerAudioOption({
+    //   mixWithOther: false,
+    //   obeyMuteSwitch: false
+    // })
+    // this.getTTs()
+    // type = camera 叠影纠错搜索
+    this.search(options);
+    // this.getW(options)
+  },
 
   /**
   * 生命周期函数--监听页面加载
   */
   onLoad: function onLoad(options) {
     this.setData({
+      searchAuthor: app.gs('searchAuthor')
+    });
+    this.setData({
       options: options
     });
+    wx.setInnerAudioOption({
+      mixWithOther: false,
+      obeyMuteSwitch: false
+    });
+    this.getTTs();
     // type = camera 叠影纠错搜索
     this.search(options);
     this.getW(options);

@@ -62,6 +62,7 @@ Page({
     //   }
     // })
     // this.Bmap(this)
+    wx.navigateBack();
   },
 
   /**

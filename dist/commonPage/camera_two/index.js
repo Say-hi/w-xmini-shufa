@@ -41,8 +41,8 @@ Page({
     bottomIndex: 0,
     rotate: 0,
     scale: 1,
-    moveX: 166,
-    moveY: 166,
+    moveX: 83,
+    moveY: 83,
     height: app.data.height,
     main: '',
     bgImg: app.gs('alphaImg2'),
@@ -58,6 +58,7 @@ Page({
     }]
   },
   touchStart: function touchStart(e) {
+    console.log(e);
     start = e.touches;
     if (e.touches.length <= 1) {
       x = e.touches[0].pageX;
@@ -169,6 +170,7 @@ Page({
           success: function success(res2) {
             that.data.imageWidth = 165.5;
             that.data.imageHeight = 165.5 * res2.height / res2.width;
+            that.data.mainPath = res2.path;
             // that.compare()
           }
         });
@@ -319,6 +321,157 @@ Page({
     });
     this._toggleMask(e);
   },
+  canvasDraw: function canvasDraw(e) {
+    var _this2 = this;
+
+    if (this.data.SteleShareImage) {
+      this._toggleMask(e);
+      return;
+    }
+    wx.showLoading({
+      title: '图片生成中',
+      mask: true
+    });
+    var ctx = wx.createCanvasContext('outPic', this);
+    var that = this;
+    var _data = this.data,
+        moveX = _data.moveX,
+        moveY = _data.moveY,
+        scale = _data.scale,
+        rotate = _data.rotate;
+
+    ctx.setFillStyle('white');
+    ctx.fillRect(0, 0, 331 * 2, 331 * 2);
+    // if (that.data.backImageInfo.zIndex <= 1) {
+    ctx.drawImage(that.data.bgPath, 0, 0, 331 * 2, 331 * 2);
+    // }
+    // for (let v of that.data.upImgArr) {
+    ctx.save();
+    // 移动坐标点到图片中心位置
+    ctx.translate(moveX * 2 + 331 / 2 * 1, moveY * 2 + 331 / 2 * 1);
+    // 旋转画布对应的角度
+    ctx.rotate(rotate * scale * Math.PI / 180);
+    // 画图
+    ctx.drawImage(that.data.mainPath, -(331 / 2 * scale), -(331 / 2 * scale), 331 / 2 * scale * 2, 331 / 2 * scale * 2);
+    // 边框 ---s
+    // if (v.borderImageInfo) {
+    //   // 上边框
+    //   let count = 0
+    //   while (count < v.borderImageInfo.x) {
+    //     ctx.translate(((v.borderImageInfo.x - 1 - count) * v.borderImageInfo.width * that.data.slideScale - v.startWidth) * v.scale, -v.startHeight * v.scale)
+    //     ctx.rotate(45 * Math.PI / 180 * that.data.slideScale)
+    //     ctx.drawImage(v.borderImageInfo.path, -(v.borderImageInfo.width * v.scale), -(v.borderImageInfo.width * v.scale), v.borderImageInfo.width * v.scale * 2, v.borderImageInfo.width * v.scale * 2)
+    //     ctx.rotate(-45 * Math.PI / 180)
+    //     ctx.translate(-((v.borderImageInfo.x - 1 - count) * v.borderImageInfo.width - v.startWidth) * v.scale, v.startHeight * v.scale)
+    //     count++
+    //   }
+    //   // 右边框
+    //   count = 0
+    //   while (count < v.borderImageInfo.y) {
+    //     // (v.borderImageInfo.width * v.scale * (v.borderImageInfo.x - 1 - count)) - v.startWidth
+    //     ctx.translate(v.startWidth * v.scale, ((v.borderImageInfo.y - 1 - count) * v.borderImageInfo.width * that.data.slideScale - v.startHeight) * v.scale)
+    //     ctx.rotate(135 * Math.PI / 180 * that.data.slideScale)
+    //     ctx.drawImage(v.borderImageInfo.path, -(v.borderImageInfo.width * v.scale), -(v.borderImageInfo.width * v.scale), v.borderImageInfo.width * v.scale * 2, v.borderImageInfo.width * v.scale * 2)
+    //     ctx.rotate(-135 * Math.PI / 180)
+    //     ctx.translate(-v.startWidth * v.scale, -((v.borderImageInfo.y - 1 - count) * v.borderImageInfo.width - v.startHeight) * v.scale)
+    //     count++
+    //   }
+    //   // 下边框
+    //   count = 0
+    //   while (count < v.borderImageInfo.x) {
+    //     // (v.borderImageInfo.width * v.scale * (v.borderImageInfo.x - 1 - count)) - v.startWidth
+    //     ctx.translate((-(v.borderImageInfo.x - 1 - count) * v.borderImageInfo.width * that.data.slideScale + v.startWidth * 1) * v.scale, v.startHeight * v.scale)
+    //     ctx.rotate(225 * Math.PI / 180 * that.data.slideScale)
+    //     ctx.drawImage(v.borderImageInfo.path, -(v.borderImageInfo.width * v.scale), -(v.borderImageInfo.width * v.scale), v.borderImageInfo.width * v.scale * 2, v.borderImageInfo.width * v.scale * 2)
+    //     ctx.rotate(-225 * Math.PI / 180)
+    //     ctx.translate(-(-(v.borderImageInfo.x - 1 - count) * v.borderImageInfo.width + v.startWidth * 1) * v.scale, -v.startHeight * v.scale)
+    //     count++
+    //   }
+    //   // 右边框
+    //   count = 0
+    //   while (count < v.borderImageInfo.y) {
+    //     // (v.borderImageInfo.width * v.scale * (v.borderImageInfo.x - 1 - count)) - v.startWidth
+    //     ctx.translate(-v.startWidth * v.scale, (-(v.borderImageInfo.y - 1 - count) * v.borderImageInfo.width * that.data.slideScale + v.startHeight * 1) * v.scale)
+    //     ctx.rotate(315 * Math.PI / 180 * that.data.slideScale)
+    //     ctx.drawImage(v.borderImageInfo.path, -(v.borderImageInfo.width * v.scale), -(v.borderImageInfo.width * v.scale), v.borderImageInfo.width * v.scale * 2, v.borderImageInfo.width * v.scale * 2)
+    //     ctx.rotate(-315 * Math.PI / 180)
+    //     ctx.translate(v.startWidth * v.scale, -(-(v.borderImageInfo.y - 1 - count) * v.borderImageInfo.width + v.startHeight * 1) * v.scale)
+    //     count++
+    //   }
+    // }
+    // 边框 ---e
+    // 卡纸 ---s
+    // ctx.setFillStyle(v.bgc)
+    // ctx.fillRect(-(v.startWidth * v.scale), -(v.startHeight * v.scale), v.startWidth * v.scale * 2, v.startHeight * v.scale * 2)
+    // 卡纸 ---e
+    // 局条 ---s
+    // if (v.border) {
+    //   ctx.setFillStyle(v.border.color)
+    //   ctx.fillRect(-(v.border.width * v.scale), -(v.border.height * v.scale), v.border.width * v.scale * 2, v.border.height * v.scale * 2)
+    // }
+    // 局条 ---e
+    // 图片 ---s
+
+    // 图片 ---e
+    ctx.restore();
+    // }
+
+    // 图片 ---e
+    // if (that.data.backImageInfo.zIndex >= 10) {
+    //   ctx.drawImage(that.data.backImageInfo.path, 0, 0, that.data.backImageInfo.fixWidth * 2 * that.data.slideScale, that.data.backImageInfo.fixHeight * 2 * that.data.slideScale)
+    // }
+    ctx.draw();
+    setTimeout(function () {
+      _this2.outImageDouble();
+    }, 300);
+  },
+  outImageDouble: function outImageDouble() {
+    var that = this;
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: 331 * 2,
+      height: 331 * 2,
+      destWidth: 331 * 2,
+      destHeight: 331 * 2,
+      canvasId: 'outPic',
+      success: function success(res) {
+        if (res.errMsg === 'canvasToTempFilePath:ok') {
+          that.data.SteleShareImage = res.tempFilePath;
+          wx.hideLoading();
+          // if (this.data.sell_release) {
+          //   wx.hideLoading()
+          //   let pages = getCurrentPages()
+          //   for (let [i, v] of pages.entries()) {
+          //     if (v.route === 'commonPage/release/index') {
+          //       v.uploadSingleImg(res.tempFilePath)
+          //       wx.navigateBack({
+          //         delta: pages.length - 1 - i
+          //       })
+          //     }
+          //   }
+          // } else {
+          //   wx.uploadFile({
+          //     url: app.getExactlyUrl(app.getUrl().commonUpload),
+          //     filePath: res.tempFilePath,
+          //     name: 'file',
+          //     formData: {
+          //       uid: app.gs('userInfoAll').id || 1,
+          //       file: res.tempFilePath
+          //     },
+          //     success (res2) {
+          //       // console.log(res)
+          //       wx.hideLoading()
+          //       let parseData = JSON.parse(res2.data)
+          //       that.data.name = parseData.data.name
+          //     }
+          //   })
+          //   that.data.SteleShareImage = res.tempFilePath
+          // }
+        }
+      }
+    });
+  },
   eventGetImage: function eventGetImage(event) {
     // console.log(1)
     wx.hideLoading();
@@ -330,12 +483,12 @@ Page({
     // app.data['SteleShareImage'] = tempFilePath
   },
   getData: function getData() {
-    var _this2 = this;
+    var _this3 = this;
 
     app.wxrequest({
       url: app.getUrl().homeConfig
     }).then(function (res) {
-      _this2.setData({
+      _this3.setData({
         s: res.motto,
         b: res.ghost_rate
       });
@@ -375,7 +528,7 @@ Page({
     });
   },
   compare: function compare() {
-    var _this3 = this;
+    var _this4 = this;
 
     var that = this;
     var pixels = null;
@@ -393,7 +546,7 @@ Page({
       // console.log(similar)
       similar = similar / 64 * 100;
       // console.log(similar)
-      _this3.setData({
+      _this4.setData({
         b: similar.toFixed(2) + '%'
       });
     });
@@ -446,12 +599,32 @@ Page({
     });
   },
 
+  // getImageInfo (src, name) {
+  //   let that = this
+  //   wx.getImageInfo({
+  //     src,
+  //     success (res) {
+  //       wx.hideLoading()
+  //       that.setData({
+  //         [`${name}`]: res
+  //       })
+  //     }
+  //   })
+  // },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(options) {
     // options = app.data.optionsCamera
     this.getData();
+    var that = this;
+    wx.getImageInfo({
+      src: app.gs('alphaImg2'),
+      success: function success(res) {
+        that.data.bgPath = res.path;
+      }
+    });
+    // this.getImageInfo(app.gs('alphaImg2'), 'backImageInfo')
     // this.getImageInfo('https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_bottom.jpg')
     this.setData({
       options: app.data.optionsCamera,

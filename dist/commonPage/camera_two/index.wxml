@@ -18,7 +18,8 @@
 
 <!--比较区域 -s-->
 <camera hidden="{{ !(options.type == 1 && !cameraMaskAnimate) }}"  class="comCamera pr" style='margin: 50rpx auto;width: 662rpx;height: 662rpx;overflow: hidden;'>
-  <cover-image bindtouchstart="touchStart" bindtouchmove="touchMove" style="transform: scale({{ scale }}) rotate({{ rotate }}deg);  top: {{ moveY }}rpx; left: {{ moveX }}rpx;" class="pa mainPic" mode="widthFix" src="{{ main }}"></cover-image>
+  <!-- <cover-image bindtouchstart="touchStart" bindtouchmove="touchMove" style="transform: scale({{ scale }}) rotate({{ rotate }}deg);  top: {{ moveY }}rpx; left: {{ moveX }}rpx;" class="pa mainPic" mode="widthFix" src="{{ main }}"></cover-image> -->
+  <cover-image bindtouchstart="touchStart" bindtouchmove="touchMove" style="transform: scale({{ scale }}) rotate({{ rotate }}deg);  top: {{ moveY }}rpx; left: {{ moveX }}rpx;" class="pa mainPic" src="{{ main }}"></cover-image>
   <cover-image bindtouchstart="touchStart" bindtouchmove="touchMove" wx:if="{{ bottomImg[bottomIndex].i }}" class="pa bgPic" src="{{ bottomImg[bottomIndex].i }}"></cover-image>
 </camera>
 <view hidden="{{ !(options.type == 1 && cameraMaskAnimate) }}" class="camerZw"></view>
@@ -27,7 +28,8 @@
 <!--比较区域 -s-->
 <view bindtouchstart="touchStart" bindtouchmove="touchMove" wx:if="{{ options.type != 1 }}"  class="comparison pr bgfff">
   <image class="pa bgPic" src="{{bgImg}}"></image>
-  <image style="transform: scale({{ scale }}) rotate({{ rotate }}deg); top: {{ moveY }}rpx; left: {{ moveX }}rpx; opacity: {{ pacity }};"  class="pa mainPic" mode="widthFix" src="{{ main }}"></image>
+  <!-- <image style="transform: scale({{ scale }}) rotate({{ rotate }}deg); top: {{ moveY }}rpx; left: {{ moveX }}rpx; opacity: {{ pacity }};"  class="pa mainPic" mode="widthFix" src="{{ main }}"></image> -->
+  <image style="transform: scale({{ scale }}) rotate({{ rotate }}deg); top: {{ moveY }}px; left: {{ moveX }}px; opacity: {{ pacity }};"  class="pa mainPic"  src="{{ main }}"></image>
   <image class="pa bgPic" src="{{ bottomImg[bottomIndex].i }}"></image>
 </view>
 <!--比较区域 -e-->
@@ -35,7 +37,7 @@
 <!-- <slider wx:if="{{ options.type == 1 }}" style="margin: 0 80rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider> -->
 <!-- <slider style="margin: 40rpx 100rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider> -->
 <slider activeColor="#fcdd99" style="margin: 20rpx 100rpx;" value="{{ pacity }}" step='0.1' min="0" max="1" bindchanging="changePacity"></slider>
-<view class='tac f24 c646464'>请调节临字图片的大小、角度、透明度</view>
+<view class='tac f24 c646464'>请调节图片的大小、角度、透明度</view>
 <!--底格 -s-->
 <!-- <view class="bgfff mt20 f18 pr c787878 df typeChoose">
 <view class="df dfc dfac p20">
@@ -57,7 +59,7 @@
 <view class="cameraSe df p20 pr">
   <view>
     <image catchtap="eventDraw" data-type="cameraMask" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_share.png"></image>
-    <view class='f24 c646464 tac'>直接分享</view>
+    <view catchtap='canvasDraw'  data-type="cameraMask" class='f24 c646464 tac'>直接分享</view>
   </view>
   <navigator open-type="navigateBack"><image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_back.png"></image><view class='f24 c646464 tac'>返回</view></navigator>
 </view>
@@ -98,6 +100,7 @@
 <!--<image mode="widthFix" class="w100" src="{{ temp }}"></image>-->
 <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"></canvasdrawer>
 <canvas style='width: 8px; height: 8px;' canvas-id='compare-canvas-1'></canvas>
+<canvas style="width: 1000px; height: 1000px; position: fixed; bottom: -200%;right:-200%;" canvas-id="outPic"></canvas>
 <!-- <canvas style='width: 8px; height: 8px;' canvas-id='compare-canvas-2'></canvas> -->
 <view></view>
 <!--错误弹窗-->

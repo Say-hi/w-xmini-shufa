@@ -1,0 +1,23 @@
+<view hidden="{{ type != 'center' }}" bindtouchstart="_touchStart" class="toast {{ toastInfo.toastType }} {{ show ? 'shows' : 'hides' }}">
+  <view class="toast-content p20 df dfc dftac" style="background: {{ toastInfo.bgc }};">
+    <view wx:if="{{ toastInfo.title }}" style="color: {{ toastInfo.color }};" class="tac f32 fw7 c444">{{ toastInfo.title }}</view>
+    <image wx:if="{{ toastInfo.image }}" mode="aspectFill" class="toast-image p20" src="{{ toastInfo.image }}"></image>
+    <view class="mask-content tac f28" style="color: {{ toastInfo.color }};">{{ toastInfo.content }}</view>
+  </view>
+</view>
+
+<view hidden="{{ type != 'ontop' }}" bindtouchstart="_touchStart" class="toast {{ toastInfo.toastType }} {{ show ? 'shows' : 'hides' }}">
+  <view class="toast-content bb p20 df dftac" style="background: {{ toastInfo.bgc }};padding-top: {{ height + 5 }}px;">
+    <view wx:if="{{ toastInfo.title }}" style="color: {{ toastInfo.color }};" class="tac f32 fw7 c444">{{ toastInfo.title }}</view>
+    <image wx:if="{{ toastInfo.image }}" mode="aspectFill" class="toast-image mr10" src="{{ toastInfo.image }}"></image>
+    <view class="mask-content tal f28" style="color: {{ toastInfo.color }};">{{ toastInfo.content }}</view>
+  </view>
+</view>
+
+<view hidden="{{ type != 'leftIn' }}" bindtouchstart="_touchStart" class="toast {{ toastInfo.toastType }} {{ show ? 'shows' : 'hides' }}">
+  <view class="toast-content p20 df dfc dftac" style="background: {{ toastInfo.bgc }};">
+    <view wx:if="{{ toastInfo.title }}" style="color: {{ toastInfo.color }};" class="tac f32 fw7 c444">{{ toastInfo.title }}</view>
+    <image wx:if="{{ toastInfo.image }}" mode="aspectFill" class="toast-image p20" src="{{ toastInfo.image }}"></image>
+    <view class="mask-content tac f28" style="color: {{ toastInfo.color }};">{{ toastInfo.content }}</view>
+  </view>
+</view>

@@ -1,0 +1,37 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">商品分类</text>
+</jwqcapsule>
+<!--搜索 s-->
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
+  <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+  <navigator url="/search/index/index?type=shop" style="height: 40px; padding:0 30rpx;" class="pr f24">
+    <view class="jwqfont jwqsousuo1 f40"></view>
+    <input disabled="1" style="background: #fff;border-radius: 20rpx; padding: 10rpx 10rpx 10rpx 60rpx;" placeholder="搜索书法或商品" />
+  </navigator>
+</view>
+<!--搜索 e-->
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<view class="category" style="height: {{ scrollHeight }}px;">
+  <scroll-view scroll-y="1" scroll-with-animation="1" scroll-into-view="l{{ cLeftIndex }}" class="cLeft h100">
+    <view wx:key="index" catchtap='_leftChoose' id="l{{ index }}" data-index="{{ index }}" class="f22 c323232 tac lh94 bd1 {{ cLeftIndex == index ? 'bgfff active' : '' }}" wx:for="{{ category }}">{{ item.name }}</view>
+  </scroll-view>
+  <view class="h100 flex1 df dfc crr pr">
+    <view wx:if="{{ !list.length }}" class='tac p20 c999 f30'>- 暂无相关产品 -</view>
+    <navigator wx:if="{{ list.length }}" url="/shop/goodsList/index?id={{ category[cLeftIndex].id }}&name={{ category[cLeftIndex].name }}" class="bgfff arrow w100 fixps fw7">{{ category[cLeftIndex].name }}</navigator>
+    <scroll-view bindscrolltolower="moreShopProducts" scroll-y="1" style='height: 100%;' class="flex1 fixsc">
+      <view class="cRight ">
+        <navigator url="/shop/detail/index?id={{ item.id }}" class="goodsItem tac mt20" wx:for="{{ list }}" wx:key="index">
+          <image mode="aspectFill" lazy-load="1" src="{{item.img_url}}"></image>
+          <text class="f21 c646464 tac ell1">{{item.title}}</text>
+        </navigator>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<jwqfoot></jwqfoot>
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

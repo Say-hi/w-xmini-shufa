@@ -1,0 +1,52 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">开通会员</text>
+</jwqcapsule>
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<!--开通会员图片 -s-->
+
+<!--开通会员图片 -e-->
+<!--会员权益 -s-->
+<!-- <view class="tac vipEnjoy"> -->
+  <!-- <swiper bindchange='change' class='rank-swiper' previous-margin='40rpx' next-margin='40rpx'> -->
+  <!-- <swiper bindchange='change' class='rank-swiper' previous-margin='20px' next-margin='20px'> -->
+    <!-- <swiper-item wx:key="item" wx:for="{{info.sku}}"> -->
+      <!-- <view style='width: 100%;height:100%;'  > -->
+      <!-- <image class="{{ rankIndex == index ? 'active' : '' }} tr5 swiperIg" mode="aspectFill" src="{{ item.img_url || 'https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_open.png' }}"></image> -->
+      <!-- </view> -->
+    <!-- </swiper-item>
+  </swiper>
+  <view class="vipBtn f25">
+   <button wx:if="{{ system && checkIos }}" open-type="contact" class="vbItem cfff f22">苹果端请点击联系官方通过人工进行开通</button>
+    <navigator wx:else url="../buy/index?index={{rankIndex}}" open-type="redirect" class="vbItem cfff">立即开通</navigator>
+  </view>
+</view> -->
+<!--会员权益 -e-->
+<!-- card -s -->
+<view class='asdfasdf' style='padding-top:40rpx;'>
+  <image style='width:300rpx;margin:0 auto;' mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_two_logo.png"></image>
+  <view wx:for='{{ info.sku }}' wx:key="item">
+    <image catchtap='goVip' data-index='{{ index }}' style='width:534rpx;height:320rpx; margin:30rpx auto 0;'  src="{{ item.img_url }}"></image>
+    <view class='tac cfff f25 mt20'>{{ item.value }}￥{{ item.price }}元</view>
+  </view>
+
+  <view class="tac f25 c323232 p20 vipText">
+    <image mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_text_left.png"></image>
+    <text class='cfff'>会员权益</text>
+    <image mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/vip_text_left.png"></image>
+  </view>
+  <view class="p20 f22 cfff ws">
+  {{info.sku[rankIndex].detail_text || info.detail_text || '暂无权益'}}
+  </view>
+</view>
+<!-- card -e -->
+<!--权益信息 -s-->
+
+<!--权益信息 -e-->
+<button style='border-radius: 20rpx; position:fixed; bottom: 100rpx;right:10rpx; background: #fff;border: 2rpx solid #eee;text-align: center; width: 100rpx;' open-type='contact'>客服</button>
+<navigator style='position: fixed; bottom: 200rpx;right:10rpx;background: #0094ff; color:#fff; border-radius: 50%; width: 100rpx;height: 100rpx;line-height:100rpx;text-align:center;' url='/pages/index/index' open-type='reLaunch'>首页</navigator>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

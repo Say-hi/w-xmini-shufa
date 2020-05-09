@@ -1,0 +1,96 @@
+
+.jwqsousuo1 {
+  position: absolute;
+  top: 50%;
+  left: 40rpx;
+  color: #eee;
+  transform: translateY(-75%);
+}
+
+.tab-scroll {
+  width: 100%;
+  padding: 10rpx;
+}
+.tab-inside {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+.tab-item {
+  flex: 0 0 20%;
+  text-align: center;
+  padding: 10rpx;
+  background: #fff;
+  margin-right: 10rpx;
+  border: 2rpx solid #fff;
+  border-radius: 0;
+  position: relative;
+  &:before {
+    transition: all 0.5s;
+    content: '';
+    border: 1rpx solid transparent;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  image {
+    width: 122rpx;
+    height: 118rpx;
+  }
+}
+.active {
+  border: 2rpx solid #ff362c;
+  position: relative;
+  &:before {
+    content: '';
+    border: 8rpx solid #ff362c;
+    border-color: transparent #ff362c #ff362c transparent;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.secondNav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  .snItem {
+    max-width: 30%;
+    margin: 10rpx;
+    background: #c1c1c1;
+    border: 2rpx solid #c1c1c1;
+    padding: 0 10rpx;
+  }
+  .active {
+    color: #ff362c;
+    border-color: #ff362c;
+    background: #fff;
+  }
+}
+
+.teacherList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  //justify-content: space-around;
+  .listItem {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  image {
+    width: 215rpx;
+    height: 215rpx;
+
+  }
+  text {
+    font-size: 36rpx;
+    color: #323232;
+    line-height: 80rpx;
+  }
+}

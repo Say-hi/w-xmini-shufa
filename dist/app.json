@@ -1,1 +1,216 @@
-{"pages":["pages/index/index"],"subPackages":[{"root":"hundred","name":"hundred","pages":["index/index","userHomePage/index","detail/index"]},{"root":"dayword","name":"dayword","pages":["index/index","detail/index"]},{"root":"teaching","name":"teaching","pages":["index/index","detail/index"]},{"root":"user","name":"user","pages":["index/index","login/index","comment/index","team/index","tnext/index","message/index","detail/index","money/index","profit/index","cashdraw/index","collect/index"]},{"root":"shop","name":"shop","pages":["index/index","category/index","detail/index","goodsList/index","cart/index","order/index","user/index","score/index","submit/index"]},{"root":"camera","name":"camera","pages":["index/index","detail/index","search/index","search_choose/index"]},{"root":"stele","name":"stele","pages":["index/index","detail/index"]},{"root":"openvip","name":"openvip","pages":["index/index","vip/index","vipTwo/index","buy/index"]},{"root":"search","name":"search","pages":["index/index"]},{"root":"openShare","name":"openShare","pages":["index/index"]},{"root":"sell","name":"sell","pages":["index/index","goods/index","notice/index"]},{"root":"commonPage","name":"common","pages":["talk/index","camera/index","camera_two/index","canvas/index","canvas_share/index","canvas2/index","canvas2/step_one/index","canvas2/step_two/index","canvas2/step_three/index","literacy/index","literacyShow/index","release/index","release-editor/index","reply/index","back/back"]},{"root":"share","name":"carShare","pages":["carShare/carShare"]},{"root":"dictionary","name":"dictionary","pages":["search/index","result/index","detail/index","more/index"]}],"preloadRule":{"pages/index/index":{"network":"all","packages":["hundred","dayword","teaching","dictionary","user","shop","camera","stele","common"]},"openShare/index/index":{"network":"all","packages":["hundred","dayword","teaching","dictionary","user","shop","camera","stele","common"]}},"window":{"navigationBarBackgroundColor":"#ffffff","navigationBarTextStyle":"black","navigationBarTitleText":"流谦书苑","backgroundColor":"#eeeeee","backgroundTextStyle":"light","enablePullDownRefresh":false},"usingComponents":{"my-express":"/components/my-express/my-express","my-navigator-tab":"/components/my-navigator-tab/my-navigator-tab","canvasdrawer":"/components/canvasdrawer/canvasdrawer","jwqcapsule":"/components/capsule/index","jwqfoot":"/components/foot/index","uparea":"/components/uparea/index","toast":"/components/toast/index","jwqnav":"/components/navigate/index"},"permission":{"scope.userLocation":{"desc":"您的位置信息用于获取附近的服务"}},"networkTimeout":{"request":10000,"downloadFile":10000},"navigateToMiniProgramAppIdList":["wxd5a3fb6958597360","wx9f5e0a4d343331a4"],"debug":false}
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "subPackages": [
+    {
+      "root": "hundred",
+      "name": "hundred",
+      "pages": [
+        "index/index",
+        "userHomePage/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "dayword",
+      "name": "dayword",
+      "pages": [
+        "index/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "teaching",
+      "name": "teaching",
+      "pages": [
+        "index/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "user",
+      "name": "user",
+      "pages": [
+        "index/index",
+        "login/index",
+        "comment/index",
+        "team/index",
+        "tnext/index",
+        "message/index",
+        "detail/index",
+        "money/index",
+        "profit/index",
+        "cashdraw/index",
+        "collect/index"
+      ]
+    },
+    {
+      "root": "shop",
+      "name": "shop",
+      "pages": [
+        "index/index",
+        "category/index",
+        "detail/index",
+        "goodsList/index",
+        "cart/index",
+        "order/index",
+        "user/index",
+        "score/index",
+        "submit/index"
+      ]
+    },
+    {
+      "root": "camera",
+      "name": "camera",
+      "pages": [
+        "index/index",
+        "detail/index",
+        "search/index",
+        "search_choose/index"
+      ]
+    },
+    {
+      "root": "stele",
+      "name": "stele",
+      "pages": [
+        "index/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "openvip",
+      "name": "openvip",
+      "pages": [
+        "index/index",
+        "vip/index",
+        "vipTwo/index",
+        "buy/index"
+      ]
+    },
+    {
+      "root": "search",
+      "name": "search",
+      "pages": [
+        "index/index"
+      ]
+    },
+    {
+      "root": "openShare",
+      "name": "openShare",
+      "pages": [
+        "index/index"
+      ]
+    },
+    {
+      "root": "sell",
+      "name": "sell",
+      "pages": [
+        "index/index",
+        "goods/index",
+        "notice/index"
+      ]
+    },
+    {
+      "root": "commonPage",
+      "name": "common",
+      "pages": [
+        "talk/index",
+        "camera/index",
+        "camera_two/index",
+        "canvas/index",
+        "canvas_share/index",
+        "canvas2/index",
+        "canvas2/step_one/index",
+        "canvas2/step_two/index",
+        "canvas2/step_three/index",
+        "literacy/index",
+        "literacyShow/index",
+        "release/index",
+        "release-editor/index",
+        "reply/index",
+        "back/back"
+      ]
+    },
+    {
+      "root": "share",
+      "name": "carShare",
+      "pages": [
+        "carShare/carShare"
+      ]
+    },
+    {
+      "root": "dictionary",
+      "name": "dictionary",
+      "pages": [
+        "search/index",
+        "result/index",
+        "detail/index",
+        "more/index"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/index/index": {
+      "network": "all",
+      "packages": [
+        "hundred",
+        "dayword",
+        "teaching",
+        "dictionary",
+        "user",
+        "shop",
+        "camera",
+        "stele",
+        "common"
+      ]
+    },
+    "openShare/index/index": {
+      "network": "all",
+      "packages": [
+        "hundred",
+        "dayword",
+        "teaching",
+        "dictionary",
+        "user",
+        "shop",
+        "camera",
+        "stele",
+        "common"
+      ]
+    }
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "流谦书苑",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  },
+  "usingComponents": {
+    "my-express": "/components/my-express/my-express",
+    "my-navigator-tab": "/components/my-navigator-tab/my-navigator-tab",
+    "canvasdrawer": "/components/canvasdrawer/canvasdrawer",
+    "jwqcapsule": "/components/capsule/index",
+    "jwqfoot": "/components/foot/index",
+    "uparea": "/components/uparea/index",
+    "toast": "/components/toast/index",
+    "jwqnav": "/components/navigate/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息用于获取附近的服务"
+    }
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxd5a3fb6958597360",
+    "wx9f5e0a4d343331a4"
+  ],
+  "debug": false,
+  "sitemapLocation": "sitemap.json"
+}

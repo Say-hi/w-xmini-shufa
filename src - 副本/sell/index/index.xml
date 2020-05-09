@@ -1,0 +1,53 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">我的墨宝真迹</text>
+</jwqcapsule>
+<!--信息 -s-->
+<view class="userInfo">
+<view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<view class="userTop p2030 df dfac">
+  <image mode="aspectFill" class="br" src="{{userInfo.avatar_url}}"></image>
+  <view class="utName flex1">
+    <view class="f28 cfff">{{userInfo.nickname}}</view>
+    <view class="f22 cece696 mt10">{{ userInfo.rank > 0 ? '会员:'+userInfo.rankText : '非会员' }}</view>
+  </view>
+  <navigator url="/commonPage/release/index?from=release" class="f21 df dfac c006bff jwqfont jwqzhifeiji tal">　发布商品</navigator>
+</view>
+<view class='uiOperation cfff tac'>
+  <navigator url="{{ item.url }}" wx:for="{{ uiOp }}" wx:key="index">
+    <view class="f28">{{ item.n }}</view>
+    <view class="f22 mt10">{{ item.t }}</view>
+  </navigator>
+</view>
+</view>
+<!--信息 -e-->
+<!--导航 -s-->
+<view class="lh80 mt20 bd1 f25 c323232 p030 bgfff">卖在流谦</view>
+<view class="userTab tac f23 c787878 bgfff">
+  <navigator class='orderNav' data-num='{{ item.n }}' hidden="{{ item.t === '待付款' }}" url="{{ item.url }}" wx:for="{{ tabArr }}" wx:key="index">
+    <image mode="widthFix" src="{{ item.i || 'https://c.jiangwenqiang.com/api/logo.jpg' }}"></image>
+    <view>{{ item.t }}</view>
+  </navigator>
+</view>
+<!--导航 -e-->
+<!--操作 -s-->
+<navigator url="{{ item.url }}"
+           wx:for="{{ op }}"
+           wx:key="index"
+           class="{{ index < 1 ? 'mt20' : 'mt2' }} arrow p2030 f25 bgfff df jwqfont"
+           style="color: {{ item.c }};">
+<view class="df dfac">
+  <image class="opImg" mode="widthFix" src="{{ item.i }}"></image>
+  <text class="c323232　pl20">{{ item.t }}</text>
+</view>
+</navigator>
+<!--操作 -e-->
+<!--<navigator url="../login/index" class="f29 fw7 tac br10 bgfff login">退出登陆</navigator>-->
+
+<!--<jwqfoot></jwqfoot>-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

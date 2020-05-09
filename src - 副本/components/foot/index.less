@@ -1,0 +1,45 @@
+@height: 50px;
+.foot {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: @height;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 10rpx 0;
+  &.fix {
+    height: @height + 20px;
+    padding-bottom: 25px;
+  }
+}
+
+.foot-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
+  .footImg {
+    width: 42rpx;
+    height: 42rpx;
+  }
+  .foot-title {
+    font-size: 22rpx;
+    transition: all .2s;
+    &.active {
+      color: #f00;
+    }
+  }
+}
+
+.stance {
+  height: @height;
+  background-color: transparent;
+  &.fix {
+    height: @height + 20px;
+  }
+}

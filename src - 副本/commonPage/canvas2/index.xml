@@ -1,0 +1,145 @@
+<view  class="position: relative;">
+  <!--底图-->
+  <image class="backImage pa"
+         wx:if="{{ backImageInfo.zIndex <= 9 }}"
+         src="{{ backImageInfo.path }}"
+         style="top: 0;left:0; width: {{ backImageInfo.fixWidth }}px; height: {{ backImageInfo.fixHeight }}px;"></image>
+
+  <!--单张图片-->
+  <view wx:for="{{ upImgArr }}"
+        wx:key="index"
+        catchtap="chooseImage"
+        data-index="{{ index }}"
+        class="backImage pa"
+        style="transform: scale({{ item.scale }}); top: {{ item.y }}px; left: {{ item.x }}px; width: {{ item.startWidth }}px; height: {{ item.startHeight }}px;">
+`
+    <!--四边-->
+    <!--上边-->
+    <image wx:for="{{ item.borderImageInfo.x }}"
+           wx:if="{{ item.borderImageInfo }}"
+           src="{{ item.borderImageInfo.path }}"
+           class="pa"
+           style="transform: rotate(45deg); top: {{ -item.borderImageInfo.width / 2 }}px; left: {{ (item.borderImageInfo.x - 1 - bIndex) * (item.borderImageInfo.width / 2) - (item.borderImageInfo.width / 2) }}px; width: {{ item.borderImageInfo.width }}px; height: {{ item.borderImageInfo.width }}px;"
+           wx:key="index"
+           wx:for-item="bItem"
+           wx:for-index="bIndex"></image>
+    <!--右边-->
+    <image wx:for="{{ item.borderImageInfo.y }}"
+           wx:if="{{ item.borderImageInfo }}"
+           src="{{ item.borderImageInfo.path }}"
+           class="pa"
+           style="transform: rotateX(180deg) rotateZ(225deg); top: {{ (item.borderImageInfo.y - 1 - bIndex) * (item.borderImageInfo.width / 2) - (item.borderImageInfo.width / 2) }}px; right: {{ -item.borderImageInfo.width / 2 }}px; width: {{ item.borderImageInfo.width }}px; height: {{ item.borderImageInfo.width }}px;"
+           wx:key="index"
+           wx:for-item="bItem"
+           wx:for-index="bIndex"></image>
+    <!--底边-->
+    <image wx:for="{{ item.borderImageInfo.x }}"
+           wx:if="{{ item.borderImageInfo }}"
+           src="{{ item.borderImageInfo.path }}"
+           class="pa"
+           style="transform: rotate(225deg); bottom: {{ -item.borderImageInfo.width / 2 }}px; right: {{ (item.borderImageInfo.x - 1 - bIndex) * (item.borderImageInfo.width / 2) - (item.borderImageInfo.width / 2) }}px; width: {{ item.borderImageInfo.width }}px; height: {{ item.borderImageInfo.width }}px;"
+           wx:key="index"
+           wx:for-item="bItem"
+           wx:for-index="bIndex"></image>
+    <!--左边-->
+    <image wx:for="{{ item.borderImageInfo.y }}"
+           wx:if="{{ item.borderImageInfo }}"
+           src="{{ item.borderImageInfo.path }}"
+           class="pa"
+           style="transform: rotateX(180deg) rotateZ(45deg); bottom: {{ (item.borderImageInfo.y - 1 - bIndex) * (item.borderImageInfo.width / 2) - (item.borderImageInfo.width / 2) }}px; left: {{ -item.borderImageInfo.width / 2 }}px; width: {{ item.borderImageInfo.width }}px; height: {{ item.borderImageInfo.width }}px;"
+           wx:key="index"
+           wx:for-item="bItem"
+           wx:for-index="bIndex"></image>
+    <!--卡纸-->
+    <view class="pa" style="top:0; left:0; width: 100%; height: 100%; background: {{ item.bgc }};"></view>
+    <!--局条-->
+    <view class="pa" style="top: {{ item.border.y }}px; left: {{ item.border.x }}px; width: {{ item.border.width }}px; height: {{ item.border.height }}px; background: {{ item.border.color }};"></view>
+    <!--显示的图片-->
+    <image src="{{ item.path }}"
+           class="pa"
+           style="display:inline-block; top: {{ item.yy }}px; left: {{ item.xx }}px; width: {{ item.width }}px; height: {{ item.height }}px;"></image>
+  </view>
+  <image class="backImage pa sdfsdfasdfasdf"
+         wx:if="{{ backImageInfo.zIndex > 9 }}"
+         src="{{ backImageInfo.path }}"
+         style="top: 0;left:0; width: {{ backImageInfo.fixWidth }}px; height: {{ backImageInfo.fixHeight }}px;"></image>
+</view>
+
+<canvas style="width: 1000px; height: 1000px; position: fixed; bottom: -200%;right:-200%;" canvas-id="outPic"></canvas>
+
+<view class="bottomOp">
+  <view wx:if="{{ single == 'single' }}" class="sliderArea df">
+    <view class="cfff f28">{{ operationArr.tab[operationArr.chooseIndex].sliderText }}: {{ operationArr.tab[operationArr.chooseIndex].currentSlider }}</view>
+    <slider bindchange="sliderChange" bindchanging="sliderChange" class="flex1" block-color="#ff0000" activeColor="#f1f1f1" backgroundColor="#a68f80" value="{{ operationArr.tab[operationArr.chooseIndex].currentSlider }}" min="{{ operationArr.tab[operationArr.chooseIndex].minSlider }}" max="{{ operationArr.tab[operationArr.chooseIndex].maxSlider }}"></slider>
+  </view>
+  <scroll-view wx:if="{{ single == 'single' }}" class="tab-scroll bb borderScroll"
+    scroll-with-animation="1"
+    scroll-x="1"
+    scroll-into-view="tab{{ tabBorderIndex - 1 }}">
+      <view class="tab-inside">
+        <button hover-class="none"
+          class="tab-item br10 f25 cfff {{ (operationArr.chooseIndex <= 0 ? tabBorderArr.i : operationArr.chooseIndex <= 1 ? bgColorArr.i : borderColorArr.i) == -1 ? 'active' : '' }} tr5 cff362c fw7"
+          id="tab-1"
+          wx:if="{{ operationArr.chooseIndex <= 0 }}"
+          catchtap="chooseIndex"
+          data-type="type{{ operationArr.chooseIndex }}"
+          data-index="-1">
+        无画框
+        </button>
+        <button hover-class="none"
+          class="tab-item f25 br10 cfff {{ (operationArr.chooseIndex <= 0 ? tabBorderArr.i : operationArr.chooseIndex <= 1 ? bgColorArr.i : borderColorArr.i) == index ? 'active' : '' }} tr5"
+          id="tab{{ index }}"
+          catchtap="chooseIndex"
+          data-type="type{{ operationArr.chooseIndex }}"
+          data-index="{{ index }}"
+          style="background: {{ operationArr.chooseIndex <= 0 ? '#ffffff' : item }};"
+          wx:key="index"
+          wx:for="{{ operationArr.chooseIndex <= 0 ? tabBorderArr.item : operationArr.chooseIndex <= 1 ? bgColorArr.item : borderColorArr.item }}">
+        <image wx:if="{{ operationArr.chooseIndex <= 0 }}"
+               class="borderImg"
+               mode="aspectFill"
+               src="{{ item }}?1234"></image>
+        </button>
+      </view>
+  </scroll-view>
+  <view wx:if="{{ single == 'single' }}" class="df tac p20 bgfff">
+    <view wx:for="{{ operationArr.tab }}"
+          wx:key="index"
+          data-type="type"
+          catchtap="chooseIndex"
+          data-index="{{ index }}"
+          class="df flex1 bottomOpType">
+      <image class="typeImg" src="{{ operationArr.chooseIndex == index ? item.imgChoose : item.img }}"></image>
+      <text class="f33 mt10 {{ operationArr.chooseIndex == index ? 'c323232' : 'caaa' }}">{{ item.t }}</text>
+    </view>
+  </view>
+  <view catchtap="_toggleSpec" class="f34 lh90 cfff fw7 bottomOpSend tac">{{ sell_release ? '使用图片' : '直接分享' }}</view>
+</view>
+
+<!--分享选择 -s-->
+<view class="mask"
+      wx:if="{{ showSpec }}">
+  <view class="specs bgfff w100 animated slideInUp am5 p30">
+    <view class="">
+      <view class="df dfac">
+        <image style="transform: rotateZ(180deg) rotateX(180deg);" class="flex1" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_line.png"></image>
+        <view class="c646464 f38"> 分享作品到 </view>
+        <image class="flex1" mode="widthFix" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_line.png"></image>
+      </view>
+    </view>
+    <view style="padding: 50rpx;">
+      <view wx:if="{{ index <= 2 }}" catchtap="shareType" data-index="{{index}}" class="shareChoose df dfc dfac" wx:for="{{ shareArr }}" wx:key="item">
+        <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_{{ index }}.png"></image>
+        <view class="mt20 tac f28 c646464">{{ item }}</view>
+      </view>
+      <button wx:if="{{ index >= 3 }}" open-type='share' wx:for="{{ shareArr }}" class="shareChoose df dfc dfac" wx:key="item">
+        <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/canvas_share_{{ index }}.png"></image>
+        <view class="mt20 tac f28 c646464">{{ item }}</view>
+      </button>
+    </view>
+    <view catchtap="_toggleSpec" class="tac cfff f33 specConfirm p2030">取消</view>
+  </view>
+</view>
+<!--分享选择 -e-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

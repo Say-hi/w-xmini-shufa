@@ -236,7 +236,7 @@ Page({
     this.setData({
       options
     })
-    this.search(options)
+    // this.search(options)
     this.getW(options)
   },
   /**

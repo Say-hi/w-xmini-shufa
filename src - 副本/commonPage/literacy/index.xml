@@ -1,0 +1,71 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">{{ literacy ? '解析结果' : '拍照识字' }}</text>
+</jwqcapsule>
+<!--选择图片 -s-->
+<view hidden="{{ literacy }}">
+  <view class="bgfff p30 f28 c323232 tab df">
+    <view catchtap="_literacy" data-index="{{index}}" wx:for="{{ tab }}" wx:key="index" class="df dfc dfac">
+      <image src="{{ item.i }}"></image>
+      <view class="mt20">{{ item.t }}</view>
+    </view>
+  </view>
+  <view class="bgfff mt20 f21 c787878 p20">使用说明</view>
+  <view class="bgfff f22 c323223 p020">建议您选取图片后通过【预览】--【编辑】将图片裁剪为【正方形】以体验更佳的识字效果</view>
+</view>
+<!--选择图片 -e-->
+<!--结果展示 -s-->
+<view hidden="{{ !literacy }}">
+  <view class="resTop">
+    <view class="item0 item bgfff">
+      <image mode="aspectFit" src="{{imgUrl}}"></image>
+    </view>
+    <view catchtap="getShiYi" data-type="jiexi" data-index="{{ index }}" wx:for="{{list}}" wx:key="index" class="tac {{ index < 1 ? 'item1' : 'item'+ index + 2 }} item p10  df dfc dfb bgfff">
+      <text class="c39adf8 {{ index < 1 ? 'f24' : 'f21' }}">未知读音</text>
+      <text class="{{ index < 1 ? 'f50 cff3b5b' : 'f33 c323232' }}">{{ item.words }}</text>
+      <text wx:if="{{ index < 1 }}" class="f28 c646464">{{ item.probability.average }}%</text>
+      <text wx:if="{{ index < 1 }}" class="f28 c646464">可信度</text>
+      <text wx:if="{{ index >= 1 }}" class="f16 c646464 keep mt10">可信度: {{ item.probability.average }}%</text>
+      <text class="{{ index < 1 ? 'f21' : 'f15' }} c646464 mt10 jiexi">解析</text>
+    </view>
+  </view>
+  <view catchtap="_toggleShow" class="p20 bgfff f22 cfff tac refresh">重新识字</view>
+  <view class="df dfac outWhere bgfff mt20">
+    <image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/literacy.png"></image>
+    <text class="f33 c646464 p20">出处参考</text>
+    <image style="transform: rotate(180deg);" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/literacy.png"></image>
+  </view>
+  <view class="f33 c646464 bgfff p20 bd1" wx:for="{{outList}}" wx:key="index">
+    <view>{{item.path}}</view>
+    <view class="iitemImg df f33 c323232">
+      <view wx:for="{{item.data}}" wx:for-item="iitem" wx:key="index" class="df dfc">
+        <image src="{{iitem.img_name}}"></image>
+        <text>{{iitem.word}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="tac f22 p20 c999" wx:if="{{ !outList.length }}">暂无相关出处</view>
+</view>
+<!--结果展示 -e-->
+
+
+<view class="mask o0 {{ jiexiAnimate ? 'o1' : '' }} tr5" >
+  <view class="jiexiText p20 br10 bgfff" style="width: 600rpx;">
+    <view class="jiexiTextT df">
+      <image style="width: 200rpx;height: 200rpx;" src="{{ imgUrl }}"></image>
+      <view class="df dfc f20 c323232 ml20 dfb p200">
+        <text>拼音: {{shiYiInfo.pinyin}}</text>
+        <text>部首: {{shiYiInfo.bushou}}</text>
+        <text>笔画: {{shiYiInfo.bihua}}</text>
+      </view>
+    </view>
+    <scroll-view scroll-y="1" style="max-height: 400rpx;margin-top: 20rpx;">
+      <text class="cff362c f18">【详细释义】</text>
+      <text wx:key="index"
+            wx:for="{{shiYiInfo.explain}}" class="f18 c323232 ws">{{ item.content }}</text>
+    </scroll-view>
+    <view catchtap="_toggleMask" data-type="jiexi" class="lh80 tac br10 f22 cfff mt20" style="background: #f00;">知道了</view>
+  </view>
+</view>
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

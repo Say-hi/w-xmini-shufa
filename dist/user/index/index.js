@@ -136,17 +136,16 @@ Page({
     });
   },
   clean: function clean() {
-    var _this = this;
+    // wx.removeStorageSync('userInfoAll')
+    this.setData({
+      userInfoAll: {}
+    });
+    // setTimeout(() => {
 
-    wx.removeStorageSync('userInfoAll');
-    setTimeout(function () {
-      _this.setData({
-        userInfoAll: {}
-      });
-    }, 10);
+    // }, 10)
   },
   userInfo: function userInfo() {
-    var _this2 = this;
+    var _this = this;
 
     if (!app.gs('userInfoAll').uid) {
       return app.toast({
@@ -159,7 +158,7 @@ Page({
         uid: app.gs('userInfoAll').uid
       }
     }).then(function (res) {
-      _this2.setData({
+      _this.setData({
         user: res,
         'uiOp[0].n': res.posts_count,
         'uiOp[1].n': res.posts_discuss_count,
@@ -172,7 +171,7 @@ Page({
         uid: app.gs('userInfoAll').uid
       }
     }).then(function (res) {
-      _this2.setData({
+      _this.setData({
         rank: res.rank,
         rankText: app.gs('rankLv')[res.rank]
       });

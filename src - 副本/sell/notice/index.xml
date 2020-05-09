@@ -1,0 +1,18 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">我的提醒</text>
+</jwqcapsule>
+<block wx:for="{{ list }}" wx:key="item">
+  <view style="background: {{ item.pass ? '#ff362c' : '#016bff' }}; padding: 10rpx 20rpx;" class="cfff f22 mt20">{{ item.status }}</view>
+  <view class="df bgfff f25 c323232 p20">
+    <image style="width: 190rpx; height: 190rpx;" src="{{ item.imgs_url }}" mode="aspectFit"></image>
+    <view class="flex1 df dfb dfc">
+      <view>{{item.title}}</view>
+      <view>{{item.des}}</view>
+      <view class="f20 {{ item.pass ? 'cff362c' : 'c016bff' }}">￥{{item.price}}</view>
+    </view>
+  </view>
+</block>
+<view wx:if="{{!list.length}}" class='tac f22 p20 c999'>暂无相关内容</view>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+

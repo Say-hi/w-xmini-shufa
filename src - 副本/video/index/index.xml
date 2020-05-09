@@ -1,0 +1,61 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">视频</text>
+</jwqcapsule>
+<!--搜索 s-->
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
+  <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+  <view style="height: 80rpx; padding:0 30rpx;" class="pr f24">
+    <view class="jwqfont jwqsousuo1 f40"></view>
+    <input style="background: #fff;border-radius: 20rpx; padding: 10rpx 10rpx 10rpx 60rpx;" placeholder="请输入搜索视频名称" />
+  </view>
+</view>
+<!--搜索 e-->
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<!--分类 -s-->
+<scroll-view class="tab-scroll p200"
+             scroll-with-animation="1"
+             scroll-x="1"
+             scroll-into-view="tab{{ tabId - 3 }}">
+  <view class="tab-inside">
+    <button hover-class="none" class="tab-item f25 cfff {{ tabIndex == index ? 'active' : '' }}"
+            id="tab{{ index }}"
+            catchtap="chooseIndex"
+            data-index="{{ index }}"
+            wx:key
+            wx:for="{{ tabArr }}">{{ item }}</button>
+  </view>
+</scroll-view>
+<!--分类 -e-->
+<!--轮播图 -s-->
+<swiper autoplay="1" circular="1">
+  <swiper-item wx:for="1234" wx:key="*3">
+    <image class="w100" src="https://c.jiangwenqiang.com/api/logo.jpg"></image>
+  </swiper-item>
+</swiper>
+<!--轮播图 -e-->
+<!--课程列表 -s-->
+<view class="teachingList bgfff">
+  <navigator url="../detail/index?id=123" class="tlItem" wx:for="12312312" wx:key="*11">
+    <view class="tliTop pr">
+      <image mode="aspectFill" lazy-load="1" class="tlitImg" src="https://c.jiangwenqiang.com/api/logo.jpg"></image>
+      <view class="playIcon pa cfff"></view>
+    </view>
+    <view class="tliR">
+      <view class="f25 c323232 tliTil ell1">书法必修课：临帖书法必修课：临帖书法必修课：临帖书法必修课：临帖书法必修课：临帖</view>
+      <view class="c646464 f18 tliTil ell3 mt10">17节课，教你系统掌···17节课，教你系统掌···17节课，教你系统掌···17节课，教你系统掌···</view>
+      <view class="c646464 f17 pr df mt20">
+        <view class="playIcon2"></view>
+        <text>　231654</text>
+      </view>
+    </view>
+  </navigator>
+</view>
+<!--课程列表 -e-->
+
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
+<!--<import src="/template/template"></import>-->
+<!--<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>-->

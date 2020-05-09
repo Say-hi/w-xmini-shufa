@@ -1,0 +1,120 @@
+page {
+  background: #fff;
+}
+
+.jwqsousuo1 {
+  position: absolute;
+  top: 50%;
+  left: 40rpx;
+  color: #eee;
+  transform: translateY(-75%);
+}
+
+.tab-scroll {
+  width: 100%;
+  background: url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/2.png);
+}
+.tab-inside {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.tab-item {
+  flex: 0 0 15%;
+  text-align: center;
+  padding-bottom: 10rpx;
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 4rpx;
+    background-color: transparent;
+  }
+}
+.active {
+  color: #f30;
+  &:before {
+    background-color: #f00;
+  }
+}
+
+.bd1 {
+  border-bottom-style: dashed;
+}
+
+.teachingList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tlItem {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 10rpx;
+  border-bottom: 10rpx solid #f2f2f2;
+  &.bd1 {
+    border-bottom-style: solid;
+  }
+  .tliR {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .tlitImg {
+    width: 344rpx;
+    height: 163rpx;
+    margin-right: 10rpx;
+  }
+  .playIcon {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 69rpx;
+    height: 69rpx;
+    border-radius: 50%;
+    background: rgba(107, 107, 107, 0.47);
+    &:after {
+      content: '';
+      border: 20rpx solid #fff;
+      border-color: transparent transparent transparent #fff;
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-25%, -50%);
+      display: inline-block;
+    }
+  }
+  .tliTil {
+    text-align: left;
+  }
+  .playIcon2 {
+    width: 26rpx;
+    height: 26rpx;
+    border-radius: 50%;
+    border: 2rpx solid #646464;
+    text-align: center;
+    position: relative;
+    &:after {
+      content: '';
+      border: 8rpx solid #646464;
+      border-color: transparent transparent transparent #646464;
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-25%, -50%);
+      display: inline-block;
+    }
+  }
+
+}

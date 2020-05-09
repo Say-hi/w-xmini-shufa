@@ -1,0 +1,76 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">流谦书苑</text>
+</jwqcapsule>
+<!--搜索 s-->
+<!-- url="/search/index/index?type=shop" -->
+<navigator hover-class="none"
+           url="/dictionary/search/index"
+           class="search"
+           style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png);transform: translateY({{ moveY || 0 }}px); {{ moveY > 0 ? 'position: relative; z-index: 800' : '' }}">
+  <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+  <view style="height: 80rpx; padding:0 30rpx;" class="pr f24">
+    <view class="jwqfont jwqsousuo1 f40"></view>
+    <input disabled="1" style="background: #fff;border-radius: 20rpx; padding: 10rpx 10rpx 10rpx 60rpx;" placeholder="字典搜索" />
+  </view>
+</navigator>
+<!--搜索 e-->
+<!--屋檐 s-->
+<view catchtap='showLog' class="eaves"></view>
+<!--屋檐 e-->
+<!--首页导航 s-->
+<view>
+  <swiper autoplay='1' circular='1' style='height: 222px;'>
+    <swiper-item catchtap='goPage' data-url='{{ item.path_mini }}' wx:for='{{ads}}' wx:key='item'>
+      <image class="w100" mode="widthFix" src="{{item.img_url}}"></image>
+    </swiper-item>
+  </swiper>
+  <view class="nav-wrap">
+    <view class="navTab">
+    <!-- <view class="navsb"> -->
+      <navigator class="ntItem tr3" 
+      style='transition-delay: {{ index * 0.1 }}s; {{ item && showItem ? "opacity: 1;" : "opacity: 0;" }}' 
+      url="{{ item.path_mini }}" wx:for="{{ nav }}" wx:key="index">
+        <image src="{{ item.img_url }}"></image>
+      </navigator>
+      <!-- <navigator class="ntItem tr3" 
+      style='transition-delay: {{ index * 0.1 }}s; {{ item && showItem ? "opacity: 1;" : "opacity: 0;" }}' 
+      url="{{ item.path_mini }}" wx:for="{{ nav }}" wx:key="index">
+        <image src="{{ item.img_url }}"></image>
+      </navigator> -->
+    <!-- </view> -->
+  </view>
+  </view>
+</view>
+
+<!--首页导航 e-->
+<view class="asdfqewr">
+  <!--屋檐 s-->
+  <view class="eaves"></view>
+  <!--屋檐 e-->
+  <!--vip -s-->
+  <navigator hidden="{{ !openVipImg }}" url="/openvip/index/index" class="">
+    <image class="w100 " mode="widthFix" src="{{ openVipImg }}"></image>
+  </navigator>
+  <!--vip -e-->
+  <!--名师文字 -s-->
+  <view class="tac p30">
+    <image class="indexText" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/index_text.png"></image>
+  </view>
+  <!--名师文字 -e-->
+  <!--名师列表 -s-->
+  <form>
+  <view class="teacherList pr">
+    <navigator url="/stele/index/index?id={{ item.id }}&name={{ item.name }}" class="listItem bd1 mt20" wx:for="{{ wordsCategoryList }}" wx:key="index">
+      <button>
+        <image class='tl-img' mode='widthFix' lazy-load="1" src="{{ item.img_url }}"></image>
+        <view wx:if="{{item.name}}" class='tl-text'>{{ item.name }}</view>
+      </button>
+    </navigator>
+  </view>
+  </form>
+  <!--名师列表 -e-->
+</view>
+<jwqfoot></jwqfoot>
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

@@ -1,0 +1,7 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">分享进入</text>
+</jwqcapsule>
+<view catchtap='checkRank' class='loginSuccess'>已完成登录操作,点击进入</view>
+
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

@@ -1,0 +1,52 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff fw7">叠影纠错</text>
+</jwqcapsule>
+<!--搜索 s-->
+<view class="search" style="background:url(https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/3.png) ;">
+  <view style="height: {{ capsules.bottom + capsules.top / 2 }}px;"></view>
+  <navigator url="/search/index/index?type=cameraIndex" style="height: 80rpx; padding:0 30rpx;" class="pr f24">
+    <view class="jwqfont jwqsousuo1 f40"></view>
+    <input disabled="1" style="background: #fff;border-radius: 20rpx; padding: 10rpx 10rpx 10rpx 60rpx;" placeholder="请输入要搜索的单字" />
+  </navigator>
+</view>
+<!--搜索 e-->
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<!--分类 -s-->
+<scroll-view class="tab-scroll bb"
+             scroll-with-animation="1"
+             scroll-x="1"
+             bindscrolltolower="getTabOneScroll"
+             scroll-into-view="tab{{ tabId - 2 }}">
+<view class="tab-inside">
+  <button hover-class="none" class="tab-item f25 cfff {{ tabIndex == index ? 'active' : '' }} tr5"
+          id="tab{{index}}"
+          catchtap="chooseIndex"
+          data-index="{{ index }}"
+          wx:key="index"
+          wx:for="{{ oneList }}">
+    <image lazy-load="1" src="{{item.img_url}}"></image>
+  </button>
+</view>
+</scroll-view>
+<!--分类 -e-->
+<!--二级类别 -s-->
+<view class="bgfff secondNav">
+  <view catchtap="_secondChoose"
+        data-index="{{ index }}"
+        wx:for="{{twoList}}"
+        wx:key="index"
+        class="snItem tr5 f21 ell1 {{ secondIndex == index ? 'active' : '' }}">{{item.name}}</view>
+</view>
+<!--二级类别 -e-->
+<!--名师列表 -s-->
+<view class="teacherList">
+  <navigator url="/camera/detail/index?wid={{item.wid}}&oid={{item.id}}" class="listItem bd1 mt20" wx:for="{{threeList}}" wx:key="index">
+    <image src="{{item.img_name}}"></image>
+    <text>{{item.word}}</text>
+  </navigator>
+</view>
+<!--名师列表 -e-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

@@ -22,7 +22,7 @@
     <navigator wx:if="{{ list.length }}" url="/shop/goodsList/index?id={{ category[cLeftIndex].id }}&name={{ category[cLeftIndex].name }}" class="bgfff arrow w100 fixps fw7">{{ category[cLeftIndex].name }}</navigator>
     <scroll-view bindscrolltolower="moreShopProducts" scroll-y="1" style='height: 100%;' class="flex1 fixsc">
       <view class="cRight ">
-        <navigator url="/shop/detail/index?id={{ item.id }}" class="goodsItem tac mt20" wx:for="{{ list }}" wx:key="index">
+        <navigator url="/shop/detail/index?id={{ item.id }}&&cid={{item.cid}}" class="goodsItem tac mt20" wx:for="{{ list }}" wx:key="index">
           <image mode="aspectFill" lazy-load="1" src="{{item.img_url}}"></image>
           <text class="f21 c646464 tac ell1">{{item.title}}</text>
         </navigator>

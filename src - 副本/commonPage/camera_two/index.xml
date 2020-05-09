@@ -1,0 +1,104 @@
+<!-- <jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">叠影纠错</text>
+</jwqcapsule> -->
+<!--屋檐 s-->
+<view class="eaves"></view>
+<!--屋檐 e-->
+<!-- 头像 -s -->
+<view class='tac f20 c323232' style='margin-top: 43rpx;'>
+  <image style='display:inline-block;width: 100rpx;height:100rpx;border-radius: 50%;' src="{{ userInfo.avatar_url }}"/>
+  <view>{{ userInfo.nickname }}</view>
+  <view class='f42 mt20 fw7'>{{s || ''}}</view>
+  <view catchtap='compare' class='f25 mt20'>
+    <text class='tac cfff' style='padding: 12rpx 120rpx; background: #31a3e1; border: 2rpx solid #31a3e1;'>重影率</text>
+    <text class='tac c31a3e1' style='padding: 12rpx 70rpx; background: #fff; border: 2rpx solid #31a3e1;'>{{b || ''}}</text>
+  </view>
+</view>
+<!-- 头像 -e -->
+
+<!--比较区域 -s-->
+<camera hidden="{{ !(options.type == 1 && !cameraMaskAnimate) }}"  class="comCamera pr" style='margin: 50rpx auto;width: 662rpx;height: 662rpx;overflow: hidden;'>
+  <cover-image bindtouchstart="touchStart" bindtouchmove="touchMove" style="transform: scale({{ scale }}) rotate({{ rotate }}deg);  top: {{ moveY }}rpx; left: {{ moveX }}rpx;" class="pa mainPic" mode="widthFix" src="{{ main }}"></cover-image>
+  <cover-image bindtouchstart="touchStart" bindtouchmove="touchMove" wx:if="{{ bottomImg[bottomIndex].i }}" class="pa bgPic" src="{{ bottomImg[bottomIndex].i }}"></cover-image>
+</camera>
+<view hidden="{{ !(options.type == 1 && cameraMaskAnimate) }}" class="camerZw"></view>
+<!--比较区域 -e-->
+
+<!--比较区域 -s-->
+<view bindtouchstart="touchStart" bindtouchmove="touchMove" wx:if="{{ options.type != 1 }}"  class="comparison pr bgfff">
+  <image class="pa bgPic" src="{{bgImg}}"></image>
+  <image style="transform: scale({{ scale }}) rotate({{ rotate }}deg); top: {{ moveY }}rpx; left: {{ moveX }}rpx; opacity: {{ pacity }};"  class="pa mainPic" mode="widthFix" src="{{ main }}"></image>
+  <image class="pa bgPic" src="{{ bottomImg[bottomIndex].i }}"></image>
+</view>
+<!--比较区域 -e-->
+
+<!-- <slider wx:if="{{ options.type == 1 }}" style="margin: 0 80rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider> -->
+<!-- <slider style="margin: 40rpx 100rpx;" value="{{ scale * 100 }}" min="100" max="200" bindchanging="changeSlider"></slider> -->
+<slider activeColor="#fcdd99" style="margin: 20rpx 100rpx;" value="{{ pacity }}" step='0.1' min="0" max="1" bindchanging="changePacity"></slider>
+<view class='tac f24 c646464'>请调节临字图片的大小、角度、透明度</view>
+<!--底格 -s-->
+<!-- <view class="bgfff mt20 f18 pr c787878 df typeChoose">
+<view class="df dfc dfac p20">
+  <text class="jwqfont jwqyanjing"></text>
+  <text class="mt10">字格</text>
+</view>
+<view catchtap="chooseType"
+      data-index="{{ index }}"
+      wx:for="{{ bottomImg }}"
+      wx:key="index"
+      class="df dfc dfac p20 {{ index == bottomIndex ? 'active' : '' }} tr5">
+  <text wx:if="{{ !item.i }}" class="jwqfont jwqwu tac"></text>
+  <image wx:else src="{{ item.i }}"></image>
+  <text class="mt10 {{ index == bottomIndex ? 'cff362c' : '' }}">{{ item.t }}</text>
+</view>
+</view> -->
+<!--底格 -e-->
+
+<view class="cameraSe df p20 pr">
+  <view>
+    <image catchtap="eventDraw" data-type="cameraMask" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_share.png"></image>
+    <view class='f24 c646464 tac'>直接分享</view>
+  </view>
+  <navigator open-type="navigateBack"><image src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/camera_back.png"></image><view class='f24 c646464 tac'>返回</view></navigator>
+</view>
+
+<!--分享 -s-->
+<view class="mask cameraMask o0 {{ cameraMaskAnimate ? 'o1' : '' }} tr5">
+<view class="bgfff br10 mask-in p200">
+  <view class="f30 tac lh60 fw7 c323232">分享</view>
+  <view data-type="cameraMask" class="df dfac dfb p30">
+    <navigator catchtap='_toggleMask' data-type="cameraMask" url="../talk/index?type=camera&url={{ SteleShareImage }}" class="df dfc dfac f25 c323232">
+      <text style="color: #cfa972; font-size: 100rpx;" class="jwqfont jwqshequ"></text>
+      <text class="mt10">社区</text>
+    </navigator>
+    <button open-type="share" class="df dfc dfac f25 c323232">
+      <text style="color: #3eb135; font-size: 100rpx;" class="jwqfont jwqweixin"></text>
+      <text class="mt10">微信好友</text>
+    </button>
+    <view catchtap='goShare' data-url="/share/carShare/carShare?type=camera" class="df dfc dfac f25 c323232">
+      <text style="color: #3eb135; font-size: 100rpx;" class="jwqfont jwqpengyouquan"></text>
+      <text class="mt10">朋友圈</text>
+    </view>
+  </view>
+  <view class="mask-btn bt1">
+    <view class="flex1 tac" catchtap="_toggleMask" data-type="cameraMask">取消</view>
+  </view>
+</view>
+</view>
+<!--分享 -e-->
+
+<!--<view bindtouchstart="touchStart" bindtouchmove="touchMove" wx:if="{{ options.type != 1 }}" style="width: {{  systemWidth}}px; height: {{ backImageHeight }}px;"  class="bgfff pr">-->
+  <!--<image class="pa" style="width: {{ systemWidth }}px; height: {{ backImageHeight }}px;top:0;left:0;z-index: 10" src="{{ backImageInfo.path }}"></image>-->
+  <!--<image style="width: {{ chooseImageInfo.width }}px; height: {{ chooseImageInfo.height }}px; transform: scale({{ scale }}) rotate({{ rotate }}deg); top: {{ moveY }}px; left: {{ moveX }}px;"  class="pa" src="{{ chooseImageInfo.path }}"></image>-->
+<!--</view>-->
+        <!--&lt;!&ndash;transform-origin:(0,0);&ndash;&gt;-->
+<!--<view catchtap="canvasDraw" class="lh80">save</view>-->
+<!-- <canvas style="width: {{ systemWidth }}px; height: {{ backImageHeight }}px;display:none;" class="cameraCanvas" canvas-id="cOne"></canvas> -->
+
+<!--<image mode="widthFix" class="w100" src="{{ temp }}"></image>-->
+<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"></canvasdrawer>
+<canvas style='width: 8px; height: 8px;' canvas-id='compare-canvas-1'></canvas>
+<!-- <canvas style='width: 8px; height: 8px;' canvas-id='compare-canvas-2'></canvas> -->
+<view></view>
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>

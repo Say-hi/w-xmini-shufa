@@ -47,7 +47,8 @@ Page({
       .wxrequest({
         url: app.getUrl().userCode,
         data: {
-          phone
+          phone,
+          uid: app.gs('userInfoAll').uid || app.gs('userInfoAll').id
         }
       })
       .then(() => {

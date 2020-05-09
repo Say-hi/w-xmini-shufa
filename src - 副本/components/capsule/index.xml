@@ -1,0 +1,17 @@
+<form>
+  <view data-a="{{ capsuleSet.backShow }}" class="capsule capsule-wrap" style="height: {{ height }}px; background: {{ capsuleSet.bgc }};">
+    <button hover-class="none" class="capsule-btn" style="height: {{ capsuleHeight }}px; top: {{ capsuleTop }}px; line-height: {{ capsuleHeight }}px;">
+      <view class="capsule-center-content" style="width: {{ capsuleCenter }}px;">
+        <view id="capsule_t" animation="{{ animationData }}" style="display: inline-block;word-break: keep-all;">
+          <slot></slot>
+        </view>
+      </view>
+    </button>
+    <view class="capsule-img" style="top: {{ capsuleTop }}px; height: {{ capsules.height }}px;">
+      <image wx:if="{{ capsuleSet.backShow }}" catchtap="_back" style="height: {{ capsules.height }}px; width: {{ capsules.height }}px;" src="{{ capsuleSet.backImg }}"></image>
+      <image wx:if="{{ capsuleSet.op }}" catchtap="_op" style="height: {{ capsules.height }}px; width: {{ capsules.height }}px;" src="{{ capsuleSet.opImg }}"></image>
+      <image wx:if="{{ !capsuleSet.backShow && capsuleSet.hImg }}" catchtap="_home" style="height: {{ capsules.height }}px; width: {{ capsules.height }}px;" src="{{ capsuleSet.hImg }}"></image>
+    </view>
+  </view>
+</form>
+<view wx:if="{{ !capsuleSet.transparent }}" style="height: {{ height }}px;"></view>

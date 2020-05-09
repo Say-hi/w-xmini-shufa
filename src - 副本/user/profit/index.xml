@@ -1,0 +1,51 @@
+<jwqcapsule capsule="{{ capsule }}">
+  <text class="cfff">{{ options.from == 'shop' ? '团队订单' : '收益明细' }}</text>
+</jwqcapsule>
+<!--类别 -s-->
+<view class="topNav tt bgfff lh60 f29 c646464">
+  <view wx:for="{{ options.from == 'shop' ? tabShop : tab }}" wx:key="index" catchtap="_tnBChoose" data-index="{{ index }}" class="flex1 tac tnItem {{ tabIndex == index ? 'active' : '' }}">{{ item.t }}</view>
+</view>
+<!--类别 -e-->
+<!--等级 -s-->
+<view wx:if="{{ options.from != 'shop'}}" class="bd1 topNav bgfff lh60 f29 c646464">
+  <view catchtap="_tnChoose" class="flex1 tac tnItem {{ right ? '' : 'active' }}">
+    <text class="jwqfont jwqxingxing" wx:for="12345" wx:key="index"></text>
+  </view>
+  <view catchtap="_tnChoose" class="flex1 tac tnItem {{ right ? 'active' : '' }}">
+    <text class="jwqfont jwqxingxing" wx:for="123" wx:key="index"></text>
+  </view>
+</view>
+<view wx:else class="bd1 topNav bgfff lh60 f29 c646464">
+  <view catchtap="_tnChoose" class="flex1 tac tnItem {{ right ? '' : 'active' }}">一级订单</view>
+  <view catchtap="_tnChoose" class="flex1 tac tnItem {{ right ? 'active' : '' }}">二级订单</view>
+</view>
+<!--<view class="gift f21">您今日新增待收入帐¥0.00，购买会员7天后奖励到帐</view>-->
+<!--等级 -e-->
+<!--成员 -s-->
+<view wx:for="{{list}}" wx:key="index" class="df dfc dfb bgfff {{ index > 0 ? 'mt20' : '' }} pr">
+  <view class="hliTop flex1 p1030">
+    <image class="br hliTopImg" lazy-load="true" mode="aspectFill" src="{{item.avatar_url}}"></image>
+    <text class="c323232 f18">{{item.username}}</text>
+  </view>
+  <view class="df dfb f18 c646464 p1030">
+    <text>创建日期：{{item.create_at}}</text>
+    <text wx:if="{{ tabIndex == 1 }}">结算日期：{{item.finish_at}}</text>
+  </view>
+  <view wx:if="{{ options.from == 'shop' && tabIndex > 0 }}" class="df dfb f18 c646464 p1030 bd1">
+    <text>订单编号：{{item.out_trade_no}}</text>
+    <text wx:if="{{ tabIndex == 1 }}">奖励结算：{{item.finish_at}}</text>
+  </view>
+  <view wx:if="{{ options.from == 'shop' }}" class="df dfb f21 c323232 p1030">
+    <view>{{right ? '二级':'一级'}}消费金额：¥{{item.total}}</view>
+    <view>奖励：<text class="cf73650">¥{{item.amount}}</text></view>
+  </view>
+  <view wx:else class="df dfb f21 c323232 p1030">
+    <view>五星消费金额：¥298</view>
+    <view>奖励：<text class="cf73650">¥122.9</text></view>
+  </view>
+  <image wx:if="{{ tabIndex > 1 }}" mode="widthFix" class="orderBackImg" src="https://book-1258261086.cos.ap-guangzhou.myqcloud.com/lqsy/order_back.png" lazy-load="1"></image>
+</view>
+<view wx:if="{{!list.length}}" class='tac f22 p20 c999'>暂无相关内容</view>
+<!--成员 -e-->
+<!--错误弹窗-->
+<toast toast="{{ toast }}"></toast>
